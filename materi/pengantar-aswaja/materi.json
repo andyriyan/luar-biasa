@@ -1,0 +1,44 @@
+{
+  "title": "Pengantar Aswaja",
+  "description": "Memahami konsep dasar Ahlussunnah wal Jama'ah An-Nahdliyyah.",
+  "theme": "aswaja",
+  "concepts": [
+    {
+      "id": "konsep-1",
+      "title": "Apa itu Aswaja?",
+      "icon": "mosque",
+      "content": "Aswaja adalah singkatan dari Ahlussunnah wal Jama'ah. Secara etimologis, terdiri dari tiga kata: Ahl (keluarga/golongan), As-Sunnah (jalan Nabi Muhammad SAW), dan Al-Jama'ah (mayoritas umat Islam).",
+      "steps": [
+        "Ahl: Berarti pengikut atau golongan.",
+        "As-Sunnah: Segala sesuatu yang diajarkan oleh Nabi Muhammad SAW (perkataan, perbuatan, dan ketetapan).",
+        "Al-Jama'ah: Golongan mayoritas umat Islam yang mengikuti para Sahabat Nabi."
+      ],
+      "summary": "Aswaja adalah golongan mayoritas umat Islam yang teguh mengikuti ajaran Nabi Muhammad SAW dan para Sahabatnya."
+    },
+    {
+      "id": "konsep-2",
+      "title": "Prinsip Dasar Aswaja",
+      "icon": "balance",
+      "content": "Aswaja An-Nahdliyyah memiliki 4 pilar prinsip dasar (Fikrah Nahdliyyah) yang menjaga keseimbangan dalam beragama dan bermasyarakat.",
+      "steps": [
+        "Tawassut (Moderat): Bersikap tengah-tengah, tidak ekstrem kanan maupun kiri.",
+        "Tasamuh (Toleran): Menghargai perbedaan pendapat dan menghormati keyakinan orang lain.",
+        "Tawazun (Seimbang): Menyeimbangkan antara dalil naqli (Al-Qur'an & Hadits) dan aqli (akal).",
+        "I'tidal (Adil/Tegak lurus): Berlaku adil dan proporsional dalam segala hal."
+      ],
+      "summary": "Tawassut, Tasamuh, Tawazun, dan I'tidal adalah prinsip utama yang menjadi ciri khas sikap warga NU."
+    },
+    {
+      "id": "konsep-3",
+      "title": "Sanad Keilmuan Aswaja",
+      "icon": "menu_book",
+      "content": "Dalam Aswaja An-Nahdliyyah, sanad (rantai transmisi) keilmuan sangat penting. NU mengikuti manhaj (metode) dalam tiga bidang utama.",
+      "steps": [
+        "Bidang Akidah: Mengikuti rumusan Imam Abu Hasan Al-Asy'ari dan Imam Abu Mansur Al-Maturidi.",
+        "Bidang Fikih: Mengikuti salah satu dari 4 madzhab (Hanafi, Maliki, Syafi'i, Hambali).",
+        "Bidang Tasawuf: Mengikuti Imam Al-Ghazali dan Imam Junaid Al-Baghdadi."
+      ],
+      "summary": "Aswaja memiliki pijakan yang jelas dan bersanad dalam Akidah, Fikih, dan Tasawuf."
+    }
+  ]
+}

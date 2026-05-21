@@ -1,0 +1,605 @@
+{
+  "quizTitle": "Kuis Akbar: 50 Soal Bangun Datar Segiempat",
+  "questions": [
+    {
+      "id": 1,
+      "question": "<img src='./images/Square_1.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Hitung keliling dan luas persegi pada gambar di atas jika panjang sisinya 6 cm!",
+      "options": [
+        "K=24 cm; L=30 cm²",
+        "K=24 cm; L=36 cm²",
+        "K=36 cm; L=24 cm²",
+        "K=12 cm; L=36 cm²"
+      ],
+      "answer": "K=24 cm; L=36 cm²",
+      "explanation": "Keliling = 4 x s = 4 x 6 = 24 cm. Luas = s x s = 6 x 6 = 36 cm²."
+    },
+    {
+      "id": 2,
+      "question": "Sebuah persegi luasnya 49 cm². Berapakah panjang sisi dan kelilingnya?",
+      "options": [
+        "s=7 cm; K=14 cm",
+        "s=7 cm; K=49 cm",
+        "s=7 cm; K=28 cm",
+        "s=14 cm; K=28 cm"
+      ],
+      "answer": "s=7 cm; K=28 cm",
+      "explanation": "Sisi = √49 = 7 cm. Keliling = 4 x 7 = 28 cm."
+    },
+    {
+      "id": 3,
+      "question": "Luas sebuah persegi adalah 64 cm². Hitunglah kelilingnya!",
+      "options": [
+        "16 cm",
+        "32 cm",
+        "64 cm",
+        "24 cm"
+      ],
+      "answer": "32 cm",
+      "explanation": "Sisi = √64 = 8 cm. Keliling = 4 x 8 = 32 cm."
+    },
+    {
+      "id": 4,
+      "question": "<img src='./images/Rectangle.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Sebuah persegi panjang berukuran 5 cm x 8 cm. Hitung keliling dan luasnya!",
+      "options": [
+        "K=13 cm; L=40 cm²",
+        "K=26 cm; L=40 cm²",
+        "K=40 cm; L=26 cm²",
+        "K=26 cm; L=13 cm²"
+      ],
+      "answer": "K=26 cm; L=40 cm²",
+      "explanation": "Keliling = 2(5+8) = 26 cm. Luas = 5 x 8 = 40 cm²."
+    },
+    {
+      "id": 5,
+      "question": "Luas sebuah persegi panjang adalah 30 cm² dengan panjang 10 cm. Berapakah lebarnya?",
+      "options": [
+        "2 cm",
+        "3 cm",
+        "5 cm",
+        "10 cm"
+      ],
+      "answer": "3 cm",
+      "explanation": "Lebar = Luas / Panjang = 30 / 10 = 3 cm."
+    },
+    {
+      "id": 6,
+      "question": "<img src='./images/Parallelogram.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Jika alas jajargenjang di atas 12 cm dan tingginya 7 cm, hitunglah luasnya!",
+      "options": [
+        "19 cm²",
+        "42 cm²",
+        "84 cm²",
+        "94 cm²"
+      ],
+      "answer": "84 cm²",
+      "explanation": "Luas Jajargenjang = alas x tinggi = 12 x 7 = 84 cm²."
+    },
+    {
+      "id": 7,
+      "question": "Jajargenjang dengan luas 60 cm² memiliki alas 15 cm. Berapakah tingginya?",
+      "options": [
+        "4 cm",
+        "5 cm",
+        "10 cm",
+        "15 cm"
+      ],
+      "answer": "4 cm",
+      "explanation": "Tinggi = Luas / Alas = 60 / 15 = 4 cm."
+    },
+    {
+      "id": 8,
+      "question": "<img src='./images/Trapezoid.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Trapesium dengan sisi sejajar 10 cm dan 14 cm, serta tinggi 6 cm. Hitung luasnya!",
+      "options": [
+        "144 cm²",
+        "72 cm²",
+        "60 cm²",
+        "24 cm²"
+      ],
+      "answer": "72 cm²",
+      "explanation": "Luas = 1/2 x (10+14) x 6 = 1/2 x 24 x 6 = 72 cm²."
+    },
+    {
+      "id": 9,
+      "question": "Luas trapesium 100 cm², jumlah sisi sejajar 25 cm. Berapakah tingginya?",
+      "options": [
+        "4 cm",
+        "8 cm",
+        "10 cm",
+        "20 cm"
+      ],
+      "answer": "8 cm",
+      "explanation": "Tinggi = (2 x Luas) / Jumlah sisi sejajar = (2 x 100) / 25 = 8 cm."
+    },
+    {
+      "id": 10,
+      "question": "<img src='./images/Rhombus.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Belah ketupat dengan diagonal 10 cm dan 12 cm. Berapakah luasnya?",
+      "options": [
+        "120 cm²",
+        "60 cm²",
+        "22 cm²",
+        "44 cm²"
+      ],
+      "answer": "60 cm²",
+      "explanation": "Luas = 1/2 x d1 x d2 = 1/2 x 10 x 12 = 60 cm²."
+    },
+    {
+      "id": 11,
+      "question": "Belah ketupat memiliki luas 48 cm². Jika d1 = 8 cm, berapakah d2?",
+      "options": [
+        "6 cm",
+        "12 cm",
+        "16 cm",
+        "24 cm"
+      ],
+      "answer": "12 cm",
+      "explanation": "d2 = (2 x Luas) / d1 = (2 x 48) / 8 = 12 cm."
+    },
+    {
+      "id": 12,
+      "question": "<img src='./images/GeometricKite.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Layang-layang dengan diagonal 9 cm dan 40 cm. Hitung luasnya!",
+      "options": [
+        "360 cm²",
+        "180 cm²",
+        "49 cm²",
+        "90 cm²"
+      ],
+      "answer": "180 cm²",
+      "explanation": "Luas = 1/2 x 9 x 40 = 180 cm²."
+    },
+    {
+      "id": 13,
+      "question": "Keliling belah ketupat adalah 52 cm. Berapakah panjang satu sisinya?",
+      "options": [
+        "10 cm",
+        "13 cm",
+        "26 cm",
+        "52 cm"
+      ],
+      "answer": "13 cm",
+      "explanation": "Sisi = Keliling / 4 = 52 / 4 = 13 cm."
+    },
+    {
+      "id": 14,
+      "question": "Berapakah besar salah satu sudut pada persegi?",
+      "options": [
+        "45°",
+        "60°",
+        "90°",
+        "180°"
+      ],
+      "answer": "90°",
+      "explanation": "Semua sudut pada persegi adalah sudut siku-siku (90°)."
+    },
+    {
+      "id": 15,
+      "question": "Bangun datar yang memiliki dua pasang sisi sejajar dan semua sisinya sama panjang adalah...",
+      "options": [
+        "Persegi Panjang",
+        "Trapesium",
+        "Belah Ketupat",
+        "Layang-layang"
+      ],
+      "answer": "Belah Ketupat",
+      "explanation": "Belah ketupat memiliki dua pasang sisi sejajar dan keempat sisinya sama panjang."
+    },
+    {
+      "id": 16,
+      "question": "Jumlah sudut yang berdekatan pada jajargenjang adalah...",
+      "options": [
+        "90°",
+        "180°",
+        "270°",
+        "360°"
+      ],
+      "answer": "180°",
+      "explanation": "Sudut-sudut yang berdekatan di antara dua garis sejajar pada jajargenjang berjumlah 180°."
+    },
+    {
+      "id": 17,
+      "question": "Manakah yang merupakan sifat trapesium sama kaki?",
+      "options": [
+        "Semua sisi sama",
+        "Diagonalnya sama panjang",
+        "Semua sudut 90°",
+        "Tidak punya sisi sejajar"
+      ],
+      "answer": "Diagonalnya sama panjang",
+      "explanation": "Trapesium sama kaki memiliki sepasang sisi miring yang sama panjang dan diagonal yang juga sama panjang."
+    },
+    {
+      "id": 18,
+      "question": "Luas persegi panjang 100 cm², lebarnya 5 cm. Berapakah kelilingnya?",
+      "options": [
+        "20 cm",
+        "25 cm",
+        "50 cm",
+        "70 cm"
+      ],
+      "answer": "50 cm",
+      "explanation": "Panjang = 100/5 = 20 cm. Keliling = 2(20+5) = 50 cm."
+    },
+    {
+      "id": 19,
+      "question": "Sebuah layang-layang memiliki luas 120 cm² dan d1 = 10 cm. Berapakah d2?",
+      "options": [
+        "12 cm",
+        "24 cm",
+        "36 cm",
+        "48 cm"
+      ],
+      "answer": "24 cm",
+      "explanation": "d2 = (2 x 120) / 10 = 24 cm."
+    },
+    {
+      "id": 20,
+      "question": "Segiempat yang diagonalnya saling memotong tegak lurus tetapi tidak semua sisinya sama panjang adalah...",
+      "options": [
+        "Persegi",
+        "Belah Ketupat",
+        "Layang-layang",
+        "Jajargenjang"
+      ],
+      "answer": "Layang-layang",
+      "explanation": "Layang-layang memiliki diagonal yang tegak lurus, namun hanya dua pasang sisi yang sama panjang (bukan semua)."
+    },
+    {
+      "id": 21,
+      "question": "(HOTS) Belah ketupat memiliki keliling 100 cm dan rasio diagonal 3:4. Berapakah luasnya?",
+      "options": [
+        "300 cm²",
+        "400 cm²",
+        "600 cm²",
+        "1200 cm²"
+      ],
+      "answer": "600 cm²",
+      "explanation": "Sisi=25 cm. Pythagoras: (1.5x)²+(2x)²=25² -> x=10. d1=30, d2=40. Luas=1/2*30*40=600 cm²."
+    },
+    {
+      "id": 22,
+      "question": "Jika panjang sisi persegi diperbesar menjadi 2 kali lipat, maka luasnya menjadi...",
+      "options": [
+        "2 kali",
+        "4 kali",
+        "8 kali",
+        "Tetap"
+      ],
+      "answer": "4 kali",
+      "explanation": "(2s)² = 4s². Jadi luasnya menjadi 4 kali lipat."
+    },
+    {
+      "id": 23,
+      "question": "Trapesium siku-siku memiliki sisi sejajar 4 cm dan 7 cm, serta tinggi 4 cm. Kelilingnya adalah...",
+      "options": [
+        "15 cm",
+        "20 cm",
+        "22 cm",
+        "25 cm"
+      ],
+      "answer": "20 cm",
+      "explanation": "Sisi miring = √(3²+4²) = 5 cm. Keliling = 4+7+4+5 = 20 cm."
+    },
+    {
+      "id": 24,
+      "question": "Sudut-sudut yang berhadapan pada jajargenjang adalah...",
+      "options": [
+        "Berbeda",
+        "Sama besar",
+        "Berjumlah 90°",
+        "Berjumlah 180°"
+      ],
+      "answer": "Sama besar",
+      "explanation": "Salah satu sifat jajargenjang adalah sudut-sudut yang berhadapan sama besar."
+    },
+    {
+      "id": 25,
+      "question": "Sebuah ubin berbentuk persegi dengan sisi 30 cm. Berapa banyak ubin untuk menutup lantai luas 9 m²?",
+      "options": [
+        "10 buah",
+        "100 buah",
+        "1000 buah",
+        "900 buah"
+      ],
+      "answer": "100 buah",
+      "explanation": "Luas ubin = 900 cm². Luas lantai = 90.000 cm². Jumlah ubin = 90.000 / 900 = 100 buah."
+    },
+    {
+      "id": 26,
+      "question": "<img src='./images/Square_1.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Perhatikan gambar. Jika ini adalah persegi dengan diagonal 10√2 cm, berapakah luasnya?",
+      "options": [
+        "50 cm²",
+        "100 cm²",
+        "200 cm²",
+        "400 cm²"
+      ],
+      "answer": "100 cm²",
+      "explanation": "Diagonal persegi = s√2. Maka s = 10 cm. Luas = 10 x 10 = 100 cm²."
+    },
+    {
+      "id": 27,
+      "question": "Diagonal-diagonal pada belah ketupat adalah...",
+      "options": [
+        "Sama panjang",
+        "Saling tegak lurus",
+        "Sejajar",
+        "Tidak berpotongan"
+      ],
+      "answer": "Saling tegak lurus",
+      "explanation": "Diagonal belah ketupat saling membagi dua sama panjang dan berpotongan tegak lurus (90°)."
+    },
+    {
+      "id": 28,
+      "question": "Andi lari mengelilingi lapangan 100m x 50m sebanyak 3 kali. Berapa jarak totalnya?",
+      "options": [
+        "300 m",
+        "450 m",
+        "900 m",
+        "15000 m"
+      ],
+      "answer": "900 m",
+      "explanation": "Keliling = 2(100+50) = 300 m. Total = 3 x 300 = 900 m."
+    },
+    {
+      "id": 29,
+      "question": "Bangun datar yang memiliki simetri putar tingkat 2 dan tidak memiliki simetri lipat adalah...",
+      "options": [
+        "Persegi",
+        "Jajargenjang",
+        "Lingkaran",
+        "Trapesium"
+      ],
+      "answer": "Jajargenjang",
+      "explanation": "Jajargenjang umum memiliki simetri putar tingkat 2 tetapi tidak memiliki garis simetri (simetri lipat)."
+    },
+    {
+      "id": 30,
+      "question": "Trapesium dengan tinggi 10 cm dan luas 150 cm². Berapakah jumlah sisi sejajarnya?",
+      "options": [
+        "15 cm",
+        "30 cm",
+        "45 cm",
+        "60 cm"
+      ],
+      "answer": "30 cm",
+      "explanation": "Jumlah sisi sejajar = (2 x Luas) / t = (2 x 150) / 10 = 30 cm."
+    },
+    {
+      "id": 31,
+      "question": "Layang-layang memiliki d1=16 cm dan d2=21 cm. Berapakah luasnya?",
+      "options": [
+        "168 cm²",
+        "336 cm²",
+        "37 cm²",
+        "100 cm²"
+      ],
+      "answer": "168 cm²",
+      "explanation": "Luas = 1/2 x 16 x 21 = 168 cm²."
+    },
+    {
+      "id": 32,
+      "question": "Persegi panjang memiliki keliling 40 cm. Jika lebarnya 8 cm, berapakah luasnya?",
+      "options": [
+        "12 cm²",
+        "32 cm²",
+        "96 cm²",
+        "160 cm²"
+      ],
+      "answer": "96 cm²",
+      "explanation": "Panjang = (40/2) - 8 = 12 cm. Luas = 12 x 8 = 96 cm²."
+    },
+    {
+      "id": 33,
+      "question": "Berapakah jumlah simetri lipat pada persegi?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": "4",
+      "explanation": "Persegi memiliki 4 garis simetri (horizontal, vertikal, dan dua diagonal)."
+    },
+    {
+      "id": 34,
+      "question": "Salah satu sifat belah ketupat yang juga dimiliki oleh layang-layang adalah...",
+      "options": [
+        "Semua sisi sama",
+        "Diagonal tegak lurus",
+        "Sudut semua 90°",
+        "Diagonal sama panjang"
+      ],
+      "answer": "Diagonal tegak lurus",
+      "explanation": "Baik belah ketupat maupun layang-layang memiliki diagonal yang saling berpotongan tegak lurus."
+    },
+    {
+      "id": 35,
+      "question": "Sisi-sisi sejajar trapesium adalah 13 cm dan 17 cm. Jika tingginya 8 cm, luasnya adalah...",
+      "options": [
+        "120 cm²",
+        "240 cm²",
+        "30 cm²",
+        "60 cm²"
+      ],
+      "answer": "120 cm²",
+      "explanation": "Luas = 1/2 x (13+17) x 8 = 120 cm²."
+    },
+    {
+      "id": 36,
+      "question": "Luas jajargenjang 48 cm² dan tingginya 6 cm. Alasnya adalah...",
+      "options": [
+        "8 cm",
+        "12 cm",
+        "14 cm",
+        "24 cm"
+      ],
+      "answer": "8 cm",
+      "explanation": "Alas = Luas / Tinggi = 48 / 6 = 8 cm."
+    },
+    {
+      "id": 37,
+      "question": "Keliling persegi 60 cm. Luasnya adalah...",
+      "options": [
+        "15 cm²",
+        "125 cm²",
+        "225 cm²",
+        "600 cm²"
+      ],
+      "answer": "225 cm²",
+      "explanation": "Sisi = 60/4 = 15 cm. Luas = 15 x 15 = 225 cm²."
+    },
+    {
+      "id": 38,
+      "question": "Diagonal-diagonal persegi panjang adalah...",
+      "options": [
+        "Tegak lurus",
+        "Sama panjang",
+        "Tidak sama",
+        "Sejajar"
+      ],
+      "answer": "Sama panjang",
+      "explanation": "Diagonal persegi panjang selalu sama panjang dan saling membagi dua sama panjang."
+    },
+    {
+      "id": 39,
+      "question": "Segiempat yang tidak memiliki sisi sejajar sama sekali adalah...",
+      "options": [
+        "Trapesium",
+        "Layang-layang",
+        "Jajargenjang",
+        "Segiempat sembarang"
+      ],
+      "answer": "Segiempat sembarang",
+      "explanation": "Segiempat sembarang tidak memiliki pasangan sisi yang sejajar."
+    },
+    {
+      "id": 40,
+      "question": "Luas belah ketupat adalah 96 cm². Jika d1=12 cm, maka d2 adalah...",
+      "options": [
+        "8 cm",
+        "16 cm",
+        "24 cm",
+        "32 cm"
+      ],
+      "answer": "16 cm",
+      "explanation": "d2 = (2 x 96) / 12 = 16 cm."
+    },
+    {
+      "id": 41,
+      "question": "Manakah yang memiliki simetri lipat paling banyak?",
+      "options": [
+        "Persegi",
+        "Persegi Panjang",
+        "Belah Ketupat",
+        "Layang-layang"
+      ],
+      "answer": "Persegi",
+      "explanation": "Persegi memiliki 4, PP memiliki 2, Belah Ketupat memiliki 2, Layang-layang memiliki 1."
+    },
+    {
+      "id": 42,
+      "question": "Jika luas trapesium 60 cm² dan tinggi 6 cm, jumlah sisi sejajarnya adalah...",
+      "options": [
+        "10 cm",
+        "20 cm",
+        "30 cm",
+        "40 cm"
+      ],
+      "answer": "20 cm",
+      "explanation": "Jumlah sisi sejajar = (2 x 60) / 6 = 20 cm."
+    },
+    {
+      "id": 43,
+      "question": "Belah ketupat dengan diagonal 12 cm dan 5 cm. Hitung satu sisinya!",
+      "options": [
+        "6.5 cm",
+        "7.5 cm",
+        "13 cm",
+        "17 cm"
+      ],
+      "answer": "6.5 cm",
+      "explanation": "Sisi = √((6)²+(2.5)²) = √42.25 = 6.5 cm."
+    },
+    {
+      "id": 44,
+      "question": "Diagonal layang-layang 10 cm dan 24 cm. Luasnya adalah...",
+      "options": [
+        "120 cm²",
+        "240 cm²",
+        "34 cm²",
+        "60 cm²"
+      ],
+      "answer": "120 cm²",
+      "explanation": "Luas = 1/2 x 10 x 24 = 120 cm²."
+    },
+    {
+      "id": 45,
+      "question": "Jika salah satu sudut segiempat 100°, dua sudut lainnya 80° dan 80°, besar sudut keempat adalah...",
+      "options": [
+        "80°",
+        "100°",
+        "110°",
+        "120°"
+      ],
+      "answer": "100°",
+      "explanation": "360 - (100 + 80 + 80) = 100°."
+    },
+    {
+      "id": 46,
+      "question": "<img src='./images/Square_1.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Apakah gambar di atas memiliki 4 sudut siku-siku dan 4 sisi sama panjang?",
+      "options": [
+        "Ya",
+        "Tidak",
+        "Hanya sudut",
+        "Hanya sisi"
+      ],
+      "answer": "Ya",
+      "explanation": "Gambar tersebut menunjukkan representasi geometri dari sebuah persegi."
+    },
+    {
+      "id": 47,
+      "question": "<img src='./images/Rectangle.svg' style='width:100%; border-radius:12px; margin:16px 0;'> \n Jika panjang 10 cm dan lebar 5 cm, berapakah kelilingnya?",
+      "options": [
+        "15 cm",
+        "30 cm",
+        "50 cm",
+        "25 cm"
+      ],
+      "answer": "30 cm",
+      "explanation": "K = 2(10 + 5) = 30 cm."
+    },
+    {
+      "id": 48,
+      "question": "Jajargenjang memiliki alas 8 cm dan luas 32 cm². Berapakah tingginya?",
+      "options": [
+        "2 cm",
+        "4 cm",
+        "8 cm",
+        "16 cm"
+      ],
+      "answer": "4 cm",
+      "explanation": "Tinggi = Luas / Alas = 32 / 8 = 4 cm."
+    },
+    {
+      "id": 49,
+      "question": "Segiempat yang hanya memiliki sepasang sisi sejajar adalah...",
+      "options": [
+        "Jajargenjang",
+        "Trapesium",
+        "Belah Ketupat",
+        "Persegi"
+      ],
+      "answer": "Trapesium",
+      "explanation": "Trapesium didefinisikan sebagai segiempat yang memiliki setidaknya sepasang sisi sejajar."
+    },
+    {
+      "id": 50,
+      "question": "(HOTS) Luas daerah yang diarsir pada gambar gabungan persegi (s=10) dan persegi panjang (12x5) adalah...",
+      "options": [
+        "100 cm²",
+        "60 cm²",
+        "160 cm²",
+        "40 cm²"
+      ],
+      "answer": "160 cm²",
+      "explanation": "Total Luas = Luas Persegi + Luas Persegi Panjang = (10*10) + (12*5) = 100 + 60 = 160 cm²."
+    }
+  ]
+}

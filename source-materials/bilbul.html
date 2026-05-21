@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Pembelajaran Bilangan Bulat - MTs Ma'arif Jumo</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Amiri:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+* { font-family: 'Nunito', sans-serif; }
+.amiri { font-family: 'Amiri', serif; }
+html, body { height: 100%; margin: 0; }
+
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes pulse-glow { 0%,100%{box-shadow:0 0 20px rgba(16,185,129,0.3)} 50%{box-shadow:0 0 40px rgba(16,185,129,0.6)} }
+@keyframes slideUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes starBurst { 0%{transform:scale(0) rotate(0)} 50%{transform:scale(1.3) rotate(180deg)} 100%{transform:scale(1) rotate(360deg)} }
+@keyframes confetti { 0%{transform:translateY(0) rotate(0);opacity:1} 100%{transform:translateY(300px) rotate(720deg);opacity:0} }
+
+.float-anim { animation: float 3s ease-in-out infinite; }
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.slide-up { animation: slideUp 0.5s ease-out forwards; }
+.star-burst { animation: starBurst 0.6s ease-out forwards; }
+
+.number-line { position:relative; height:60px; background:linear-gradient(90deg,#065f46,#10b981,#065f46); border-radius:30px; }
+.number-dot { width:20px;height:20px;border-radius:50%;background:#fbbf24;border:3px solid #fff;position:absolute;top:20px;cursor:grab;transition:left 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.3); }
+.number-dot:active { cursor:grabbing; }
+
+.card-hover { transition:all 0.3s; }
+.card-hover:hover { transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.15); }
+
+.islamic-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%2310b981' stroke-opacity='0.08' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.progress-bar { transition: width 0.5s ease; }
+
+.btn-primary { background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;padding:12px 32px;border-radius:12px;font-weight:700;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 15px rgba(16,185,129,0.3); }
+.btn-primary:hover { transform:translateY(-2px);box-shadow:0 6px 20px rgba(16,185,129,0.4); }
+
+.quiz-option { border:2px solid #e5e7eb;border-radius:12px;padding:14px 20px;cursor:pointer;transition:all 0.2s;background:#fff; }
+.quiz-option:hover { border-color:#10b981;background:#ecfdf5; }
+.quiz-option.correct { border-color:#10b981;background:#d1fae5;animation:slideUp 0.3s; }
+.quiz-option.wrong { border-color:#ef4444;background:#fee2e2; }
+
+.toast { position:fixed;top:20px;right:20px;padding:16px 24px;border-radius:12px;color:#fff;font-weight:700;z-index:9999;animation:slideUp 0.3s; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full overflow-auto islamic-pattern" style="background-color:#f0fdf4;">
+  <div id="app" class="h-full w-full"><!-- HEADER NAV -->
+   <nav id="nav-bar" class="hidden sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-emerald-100 px-4 py-3">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">π</span>
+      </div><span class="font-bold text-emerald-800 text-sm" id="nav-title">Bilangan Bulat</span>
+     </div>
+     <div class="flex items-center gap-3">
+      <div class="hidden sm:flex items-center gap-2 bg-emerald-50 rounded-full px-3 py-1"><i data-lucide="star" class="w-4 h-4 text-yellow-500"></i> <span id="score-display" class="text-sm font-bold text-emerald-700">0</span>
+      </div>
+      <div class="h-2 w-24 bg-emerald-100 rounded-full overflow-hidden">
+       <div id="progress-fill" class="progress-bar h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style="width:0%"></div>
+      </div>
+     </div>
+    </div>
+   </nav><!-- PAGE: HOME -->
+   <section id="page-home" class="min-h-full flex items-center justify-center px-4 py-8">
+    <div class="text-center max-w-lg slide-up">
+     <div class="mb-6">
+      <div class="w-24 h-24 mx-auto bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl flex items-center justify-center float-anim shadow-xl">
+       <svg width="48" height="48" viewbox="0 0 48 48" fill="none">
+        <text x="8" y="20" font-size="14" fill="#fff" font-weight="bold">
+         +3
+        </text><text x="8" y="40" font-size="14" fill="#fbbf24" font-weight="bold">
+         −5
+        </text>
+       </svg>
+      </div>
+     </div>
+     <p class="amiri text-emerald-700 text-lg mb-2">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+     <h1 id="home-title" class="text-4xl sm:text-5xl font-black text-emerald-900 mb-3">Bilangan Bulat</h1>
+     <p class="text-emerald-600 font-semibold mb-1">Matematika Kelas VII</p>
+     <p id="home-school" class="text-emerald-500 text-sm mb-8">MTs Ma'arif Jumo</p><button onclick="navigateTo('tujuan')" class="btn-primary text-lg px-10 py-4 pulse-glow"> <span class="flex items-center gap-2">🚀 Mulai Belajar</span> </button>
+     <div class="mt-8 flex justify-center gap-6 text-emerald-400 text-xs"><span class="flex items-center gap-1"><i data-lucide="book-open" class="w-4 h-4"></i> 8 Materi</span> <span class="flex items-center gap-1"><i data-lucide="gamepad-2" class="w-4 h-4"></i> Game</span> <span class="flex items-center gap-1"><i data-lucide="award" class="w-4 h-4"></i> Kuis</span>
+     </div>
+    </div>
+   </section><!-- PAGE: TUJUAN -->
+   <section id="page-tujuan" class="hidden min-h-full px-4 py-8">
+    <div class="max-w-3xl mx-auto slide-up">
+     <h2 class="text-3xl font-black text-emerald-900 mb-6 text-center">🎯 Tujuan Pembelajaran</h2>
+     <div class="grid gap-4">
+      <div class="bg-white rounded-2xl p-5 shadow-md card-hover border-l-4 border-emerald-500">
+       <div class="flex items-start gap-3"><span class="text-2xl">1️⃣</span>
+        <div>
+         <p class="font-bold text-emerald-800">Memahami Konsep</p>
+         <p class="text-gray-600 text-sm">Siswa memahami konsep bilangan bulat positif, negatif, dan nol</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 shadow-md card-hover border-l-4 border-teal-500">
+       <div class="flex items-start gap-3"><span class="text-2xl">2️⃣</span>
+        <div>
+         <p class="font-bold text-emerald-800">Membandingkan &amp; Mengurutkan</p>
+         <p class="text-gray-600 text-sm">Siswa mampu membandingkan dan mengurutkan bilangan bulat</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 shadow-md card-hover border-l-4 border-green-500">
+       <div class="flex items-start gap-3"><span class="text-2xl">3️⃣</span>
+        <div>
+         <p class="font-bold text-emerald-800">Operasi Hitung</p>
+         <p class="text-gray-600 text-sm">Siswa mampu melakukan penjumlahan, pengurangan, perkalian, dan pembagian</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 shadow-md card-hover border-l-4 border-lime-500">
+       <div class="flex items-start gap-3"><span class="text-2xl">4️⃣</span>
+        <div>
+         <p class="font-bold text-emerald-800">Soal Kontekstual</p>
+         <p class="text-gray-600 text-sm">Siswa mampu menyelesaikan soal dalam kehidupan sehari-hari</p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="text-center mt-8"><button onclick="navigateTo('materi')" class="btn-primary">Lanjut ke Materi →</button>
+     </div>
+    </div>
+   </section><!-- PAGE: MATERI -->
+   <section id="page-materi" class="hidden min-h-full px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+     <div class="flex items-center justify-between mb-6"><button onclick="prevMateri()" id="btn-prev-materi" class="bg-white rounded-full p-2 shadow-md hover:bg-emerald-50 disabled:opacity-30" disabled><i data-lucide="chevron-left" class="w-5 h-5 text-emerald-700"></i></button>
+      <h2 class="text-xl font-black text-emerald-900" id="materi-title">Pengertian Bilangan Bulat</h2><button onclick="nextMateri()" id="btn-next-materi" class="bg-white rounded-full p-2 shadow-md hover:bg-emerald-50"><i data-lucide="chevron-right" class="w-5 h-5 text-emerald-700"></i></button>
+     </div>
+     <div id="materi-content" class="bg-white rounded-3xl p-6 sm:p-8 shadow-lg min-h-[400px]">
+     </div>
+     <div class="flex justify-center gap-2 mt-6" id="materi-dots"></div>
+     <div class="text-center mt-4"><button onclick="navigateTo('simulasi')" class="text-emerald-600 font-semibold hover:underline text-sm">Langsung ke Simulasi →</button>
+     </div>
+    </div>
+   </section><!-- PAGE: SIMULASI -->
+   <section id="page-simulasi" class="hidden min-h-full px-4 py-8">
+    <div class="max-w-4xl mx-auto slide-up">
+     <h2 class="text-3xl font-black text-emerald-900 mb-6 text-center">📐 Simulasi Garis Bilangan</h2>
+     <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-lg">
+      <p class="text-gray-600 mb-4 text-center">Geser titik kuning pada garis bilangan untuk melihat nilai bilangan bulat!</p>
+      <div class="relative mb-6">
+       <div class="number-line mx-4 sm:mx-8">
+        <div id="sim-dot" class="number-dot" style="left:50%"></div>
+       </div>
+       <div class="flex justify-between mx-4 sm:mx-8 mt-3 text-xs font-bold text-emerald-800"><span>-10</span><span>-5</span><span>0</span><span>5</span><span>10</span>
+       </div>
+      </div>
+      <div class="text-center">
+       <p class="text-lg font-bold text-emerald-800">Nilai: <span id="sim-value" class="text-3xl text-emerald-600">0</span></p>
+      </div>
+      <hr class="my-6 border-emerald-100">
+      <h3 class="font-bold text-emerald-800 mb-3">🧮 Simulasi Operasi Hitung</h3>
+      <div class="grid sm:grid-cols-3 gap-3 mb-4"><input type="number" id="sim-a" value="5" class="border-2 border-emerald-200 rounded-xl px-4 py-3 text-center font-bold text-lg focus:border-emerald-500 outline-none"> <select id="sim-op" class="border-2 border-emerald-200 rounded-xl px-4 py-3 text-center font-bold text-lg focus:border-emerald-500 outline-none"> <option value="+">+ (Tambah)</option> <option value="-">− (Kurang)</option> <option value="*">× (Kali)</option> <option value="/">÷ (Bagi)</option> </select> <input type="number" id="sim-b" value="-3" class="border-2 border-emerald-200 rounded-xl px-4 py-3 text-center font-bold text-lg focus:border-emerald-500 outline-none">
+      </div>
+      <div class="text-center"><button onclick="calculateSim()" class="btn-primary">Hitung!</button>
+       <div id="sim-result" class="mt-4 text-2xl font-black text-emerald-700 hidden"></div>
+      </div>
+     </div>
+     <div class="flex justify-between mt-6"><button onclick="navigateTo('materi')" class="text-emerald-600 font-semibold hover:underline">← Materi</button> <button onclick="navigateTo('game')" class="btn-primary">Game Edukatif →</button>
+     </div>
+    </div>
+   </section><!-- PAGE: GAME -->
+   <section id="page-game" class="hidden min-h-full px-4 py-8">
+    <div class="max-w-4xl mx-auto slide-up">
+     <h2 class="text-3xl font-black text-emerald-900 mb-6 text-center">🎮 Game Edukatif</h2>
+     <div class="grid sm:grid-cols-2 gap-4 mb-6"><button onclick="startGame('tebak')" class="bg-white rounded-2xl p-6 shadow-lg card-hover text-left border-2 border-transparent hover:border-emerald-400"> <span class="text-3xl mb-2 block">🎯</span> <h3 class="font-bold text-emerald-800 text-lg">Tebak Hasil</h3><p class="text-gray-500 text-sm">Tebak hasil operasi bilangan bulat dengan cepat!</p></button> <button onclick="startGame('pasangan')" class="bg-white rounded-2xl p-6 shadow-lg card-hover text-left border-2 border-transparent hover:border-teal-400"> <span class="text-3xl mb-2 block">🃏</span> <h3 class="font-bold text-emerald-800 text-lg">Cari Pasangan</h3><p class="text-gray-500 text-sm">Cocokkan soal dengan jawaban yang benar!</p></button>
+     </div>
+     <div id="game-area" class="bg-white rounded-3xl p-6 sm:p-8 shadow-lg min-h-[300px] hidden">
+      <div id="game-content"></div>
+     </div>
+     <div class="text-center mt-6"><button onclick="navigateTo('kuis')" class="btn-primary">Kuis Evaluasi →</button>
+     </div>
+    </div>
+   </section><!-- PAGE: KUIS -->
+   <section id="page-kuis" class="hidden min-h-full px-4 py-8">
+    <div class="max-w-3xl mx-auto slide-up">
+     <div id="kuis-header" class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-black text-emerald-900">📝 Kuis Evaluasi</h2>
+      <div class="flex items-center gap-3"><span id="kuis-timer" class="bg-red-50 text-red-600 font-bold px-3 py-1 rounded-full text-sm">⏱ 10:00</span> <span id="kuis-progress" class="bg-emerald-50 text-emerald-700 font-bold px-3 py-1 rounded-full text-sm">1/10</span>
+      </div>
+     </div>
+     <div id="kuis-content" class="bg-white rounded-3xl p-6 sm:p-8 shadow-lg">
+      <div id="kuis-start-screen" class="text-center py-8"><span class="text-6xl mb-4 block">📋</span>
+       <h3 class="text-2xl font-bold text-emerald-800 mb-2">Siap untuk Kuis?</h3>
+       <p class="text-gray-500 mb-6">10 soal HOTS • Waktu 10 menit • Skor otomatis</p><button onclick="startKuis()" class="btn-primary text-lg">Mulai Kuis!</button>
+      </div>
+      <div id="kuis-question" class="hidden"></div>
+      <div id="kuis-result" class="hidden text-center py-8"></div>
+     </div>
+    </div>
+   </section><!-- PAGE: SELESAI -->
+   <section id="page-selesai" class="hidden min-h-full flex items-center justify-center px-4 py-8">
+    <div class="text-center max-w-lg slide-up">
+     <div class="text-6xl mb-4">
+      🏆
+     </div>
+     <h2 class="text-3xl font-black text-emerald-900 mb-2">Alhamdulillah!</h2>
+     <p class="text-emerald-600 mb-4">Kamu telah menyelesaikan semua materi Bilangan Bulat</p>
+     <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+      <p class="text-gray-500 text-sm mb-2">Total Skor</p>
+      <p id="final-score" class="text-5xl font-black text-emerald-600">0</p>
+      <div id="final-stars" class="flex justify-center gap-1 mt-3"></div>
+      <p id="final-message" class="mt-3 text-emerald-700 font-semibold"></p>
+     </div>
+     <div class="bg-emerald-50 rounded-2xl p-4 mb-6 border border-emerald-200">
+      <p class="amiri text-emerald-800 text-lg">"مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللهُ لَهُ طَرِيقًا إِلَى الْجَنَّةِ"</p>
+      <p class="text-emerald-600 text-xs mt-1">Barang siapa menempuh jalan untuk mencari ilmu, Allah mudahkan jalannya ke surga (HR. Muslim)</p>
+     </div><button onclick="resetAll()" class="btn-primary">🔄 Ulangi dari Awal</button>
+    </div>
+   </section><!-- BOTTOM NAV -->
+   <nav id="bottom-nav" class="hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-emerald-100 px-2 py-2 z-50">
+    <div class="max-w-md mx-auto flex justify-around"><button onclick="navigateTo('materi')" class="flex flex-col items-center gap-0.5 text-xs text-emerald-600 hover:text-emerald-800 p-1"><i data-lucide="book-open" class="w-5 h-5"></i>Materi</button> <button onclick="navigateTo('simulasi')" class="flex flex-col items-center gap-0.5 text-xs text-emerald-600 hover:text-emerald-800 p-1"><i data-lucide="sliders" class="w-5 h-5"></i>Simulasi</button> <button onclick="navigateTo('game')" class="flex flex-col items-center gap-0.5 text-xs text-emerald-600 hover:text-emerald-800 p-1"><i data-lucide="gamepad-2" class="w-5 h-5"></i>Game</button> <button onclick="navigateTo('kuis')" class="flex flex-col items-center gap-0.5 text-xs text-emerald-600 hover:text-emerald-800 p-1"><i data-lucide="clipboard-check" class="w-5 h-5"></i>Kuis</button>
+    </div>
+   </nav>
+  </div>
+  <div id="toast-container"></div>
+  <script>
+// STATE
+let currentPage = 'home';
+let currentMateri = 0;
+let totalScore = 0;
+let kuisScore = 0;
+let kuisIndex = 0;
+let kuisTimer = null;
+let kuisTimeLeft = 600;
+let gameScore = 0;
+
+const defaultConfig = {
+  school_name: "MTs Ma'arif Jumo",
+  main_title: "Bilangan Bulat",
+  background_color: "#f0fdf4",
+  surface_color: "#ffffff",
+  text_color: "#064e3b",
+  primary_action: "#059669",
+  secondary_action: "#0d9488",
+  font_family: "Nunito",
+  font_size: 16
+};
+
+// MATERI DATA
+const materiData = [
+  {
+    title: "Pengertian Bilangan Bulat",
+    content: `<div class="space-y-4">
+      <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+        <h3 class="font-bold text-emerald-800 text-lg mb-2">📖 Apa itu Bilangan Bulat?</h3>
+        <p class="text-gray-700">Bilangan bulat adalah bilangan yang terdiri dari bilangan <strong>positif</strong>, bilangan <strong>negatif</strong>, dan <strong>nol</strong>.</p>
+        <p class="text-gray-600 mt-2 text-sm">Himpunan bilangan bulat dilambangkan dengan <strong>Z</strong> = {..., -3, -2, -1, 0, 1, 2, 3, ...}</p>
+      </div>
+      <div class="bg-yellow-50 rounded-2xl p-5 border border-yellow-200">
+        <h3 class="font-bold text-yellow-800 mb-2">💡 Contoh dalam Kehidupan</h3>
+        <ul class="text-gray-700 space-y-1 text-sm">
+          <li>🌡️ Suhu di bawah nol: <strong>-5°C</strong></li>
+          <li>🏢 Lantai basement: <strong>-1, -2</strong></li>
+          <li>💰 Utang: <strong>-50.000</strong></li>
+          <li>⛰️ Ketinggian di atas laut: <strong>+2500 m</strong></li>
+        </ul>
+      </div>
+    </div>`
+  },
+  {
+    title: "Bilangan Positif, Negatif, dan Nol",
+    content: `<div class="space-y-4">
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+          <p class="text-3xl mb-1">➖</p>
+          <p class="font-bold text-blue-800 text-sm">Negatif</p>
+          <p class="text-blue-600 text-xs">..., -3, -2, -1</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
+          <p class="text-3xl mb-1">⭕</p>
+          <p class="font-bold text-gray-800 text-sm">Nol</p>
+          <p class="text-gray-600 text-xs">0</p>
+        </div>
+        <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+          <p class="text-3xl mb-1">➕</p>
+          <p class="font-bold text-green-800 text-sm">Positif</p>
+          <p class="text-green-600 text-xs">1, 2, 3, ...</p>
+        </div>
+      </div>
+      <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+        <h3 class="font-bold text-emerald-800 mb-2">📏 Garis Bilangan</h3>
+        <div class="overflow-x-auto">
+          <div class="flex items-center justify-center gap-0 min-w-[300px] py-3">
+            <div class="flex items-center">
+              ${[-5,-4,-3,-2,-1,0,1,2,3,4,5].map(n => `<div class="flex flex-col items-center mx-1.5"><div class="w-0.5 h-3 bg-emerald-400"></div><span class="text-xs font-bold ${n===0?'text-red-600':'text-emerald-700'}">${n}</span></div>`).join('')}
+            </div>
+          </div>
+          <div class="h-0.5 bg-emerald-400 -mt-6 mx-4"></div>
+        </div>
+        <p class="text-sm text-gray-600 mt-3">⬅️ Semakin kiri, semakin kecil nilainya</p>
+      </div>
+    </div>`
+  },
+  {
+    title: "Membandingkan Bilangan Bulat",
+    content: `<div class="space-y-4">
+      <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+        <h3 class="font-bold text-emerald-800 mb-3">⚖️ Aturan Membandingkan</h3>
+        <div class="space-y-2 text-sm">
+          <p class="bg-white rounded-lg p-3">✅ Bilangan positif <strong>selalu lebih besar</strong> dari bilangan negatif</p>
+          <p class="bg-white rounded-lg p-3">✅ Nol lebih besar dari semua bilangan negatif</p>
+          <p class="bg-white rounded-lg p-3">✅ Semakin ke kanan pada garis bilangan = semakin besar</p>
+        </div>
+      </div>
+      <div class="bg-yellow-50 rounded-2xl p-5 border border-yellow-200">
+        <h3 class="font-bold text-yellow-800 mb-2">📝 Contoh</h3>
+        <div class="grid grid-cols-2 gap-2 text-center text-sm">
+          <div class="bg-white rounded-lg p-2"><strong>3 > -5</strong> ✅</div>
+          <div class="bg-white rounded-lg p-2"><strong>-2 > -7</strong> ✅</div>
+          <div class="bg-white rounded-lg p-2"><strong>0 > -3</strong> ✅</div>
+          <div class="bg-white rounded-lg p-2"><strong>-1 < 4</strong> ✅</div>
+        </div>
+      </div>
+    </div>`
+  },
+  {
+    title: "Operasi Penjumlahan",
+    content: `<div class="space-y-4">
+      <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+        <h3 class="font-bold text-emerald-800 mb-3">➕ Aturan Penjumlahan</h3>
+        <div class="space-y-2 text-sm">
+          <p class="bg-white rounded-lg p-3">🟢 (+) + (+) = Tambah biasa → <strong>3 + 5 = 8</strong></p>
+          <p class="bg-white rounded-lg p-3">🔴 (-) + (-) = Jumlahkan, tanda negatif → <strong>(-3) + (-5) = -8</strong></p>
+          <p class="bg-white rounded-lg p-3">🟡 (+) + (-) = Kurangkan, ikuti tanda terbesar → <strong>7 + (-3) = 4</strong></p>
+        </div>
+      </div>
+      <div class="bg-blue-50 rounded-2xl p-5 border border-blue-200">
+        <h3 class="font-bold text-blue-800 mb-2">🌡️ Analogi Suhu</h3>
+        <p class="text-sm text-gray-700">Bayangkan termometer! Suhu naik = tambah positif, suhu turun = tambah negatif</p>
+        <p class="text-sm mt-2"><strong>Pagi 5°C + naik 3°C = 8°C</strong></p>
+        <p class="text-sm"><strong>Siang 2°C + turun 5°C = -3°C</strong></p>
+      </div>
+    </div>`
+  },
+  {
+    title: "Operasi Pengurangan",
+    content: `<div class="space-y-4">
+      <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+        <h3 class="font-bold text-emerald-800 mb-3">➖ Aturan Pengurangan</h3>
+        <p class="text-sm text-gray-700 mb-3">Mengurangi = menambah dengan lawan bilangannya</p>
+        <div class="space-y-2 text-sm">
+          <p class="bg-white rounded-lg p-3"><strong>a - b = a + (-b)</strong></p>
+          <p class="bg-white rounded-lg p-3">5 - 8 = 5 + (-8) = <strong>-3</strong></p>
+          <p class="bg-white rounded-lg p-3">(-3) - (-7) = (-3) + 7 = <strong>4</strong></p>
+          <p class="bg-white rounded-lg p-3">(-4) - 2 = (-4) + (-2) = <strong>-6</strong></p>
+        </div>
+      </div>
+    </div>`
+  },
+  {
+    title: "Operasi Perkalian",
+    content: `<div class="space-y-4">
+      <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+        <h3 class="font-bold text-emerald-800 mb-3">✖️ Aturan Tanda Perkalian</h3>
+        <div class="grid grid-cols-2 gap-2 text-center text-sm">
+          <div class="bg-green-100 rounded-lg p-3"><strong>(+) × (+) = (+)</strong></div>
+          <div class="bg-green-100 rounded-lg p-3"><strong>(-) × (-) = (+)</strong></div>
+          <div class="bg-red-100 rounded-lg p-3"><strong>(+) × (-) = (-)</strong></div>
+          <div class="bg-red-100 rounded-lg p-3"><strong>(-) × (+) = (-)</strong></div>
+        </div>
+      </div>
+      <div class="bg-yellow-50 rounded-2xl p-5 border border-yellow-200">
+        <h3 class="font-bold text-yellow-800 mb-2">📝 Contoh</h3>
+        <div class="space-y-1 text-sm">
+          <p>3 × 4 = <strong>12</strong></p>
+          <p>(-3) × (-4) = <strong>12</strong></p>
+          <p>3 × (-4) = <strong>-12</strong></p>
+          <p>(-3) × 4 = <strong>-12</strong></p>
+        </div>
+      </div>
+    </div>`
+  },
+  {
+    title: "Operasi Pembagian",
+    content: `<div class="space-y-4">
+      <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+        <h3 class="font-bold text-emerald-800 mb-3">➗ Aturan Tanda Pembagian</h3>
+        <p class="text-sm text-gray-600 mb-3">Sama seperti perkalian!</p>
+        <div class="grid grid-cols-2 gap-2 text-center text-sm">
+          <div class="bg-green-100 rounded-lg p-3"><strong>(+) ÷ (+) = (+)</strong></div>
+          <div class="bg-green-100 rounded-lg p-3"><strong>(-) ÷ (-) = (+)</strong></div>
+          <div class="bg-red-100 rounded-lg p-3"><strong>(+) ÷ (-) = (-)</strong></div>
+          <div class="bg-red-100 rounded-lg p-3"><strong>(-) ÷ (+) = (-)</strong></div>
+        </div>
+      </div>
+      <div class="bg-red-50 rounded-2xl p-4 border border-red-200">
+        <p class="text-red-700 text-sm font-bold">⚠️ Ingat! Pembagian dengan nol tidak terdefinisi (tidak boleh!)</p>
+      </div>
+    </div>`
+  },
+  {
+    title: "Penerapan dalam Kehidupan",
+    content: `<div class="space-y-4">
+      <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+        <h3 class="font-bold text-emerald-800 mb-3">🌍 Soal Kontekstual</h3>
+        <div class="space-y-3">
+          <div class="bg-white rounded-lg p-3 text-sm">
+            <p class="font-bold text-emerald-700">🏦 Soal 1:</p>
+            <p>Saldo Ahmad Rp50.000. Ia belanja Rp75.000. Berapa saldonya?</p>
+            <p class="text-emerald-600 mt-1"><strong>Jawab:</strong> 50.000 - 75.000 = -25.000 (utang Rp25.000)</p>
+          </div>
+          <div class="bg-white rounded-lg p-3 text-sm">
+            <p class="font-bold text-emerald-700">🌡️ Soal 2:</p>
+            <p>Suhu pagi -3°C, siang naik 8°C. Berapa suhu siang?</p>
+            <p class="text-emerald-600 mt-1"><strong>Jawab:</strong> -3 + 8 = 5°C</p>
+          </div>
+          <div class="bg-white rounded-lg p-3 text-sm">
+            <p class="font-bold text-emerald-700">🏢 Soal 3:</p>
+            <p>Lift di lantai 3, turun 5 lantai. Di lantai berapa sekarang?</p>
+            <p class="text-emerald-600 mt-1"><strong>Jawab:</strong> 3 - 5 = -2 (basement 2)</p>
+          </div>
+        </div>
+      </div>
+    </div>`
+  }
+];
+
+// KUIS DATA
+const kuisData = [
+  { q: "Hasil dari (-8) + 5 = ...", opts: ["-3", "3", "-13", "13"], ans: 0 },
+  { q: "Hasil dari (-6) - (-4) = ...", opts: ["-10", "-2", "2", "10"], ans: 1 },
+  { q: "(-3) × (-7) = ...", opts: ["-21", "21", "-10", "10"], ans: 1 },
+  { q: "(-24) ÷ 6 = ...", opts: ["4", "-4", "18", "-18"], ans: 1 },
+  { q: "Urutkan dari terkecil: -3, 5, -7, 2, 0", opts: ["-7,-3,0,2,5", "-3,-7,0,2,5", "5,2,0,-3,-7", "0,-3,-7,2,5"], ans: 0 },
+  { q: "Suhu -5°C naik 12°C menjadi ...", opts: ["7°C", "-7°C", "17°C", "-17°C"], ans: 0 },
+  { q: "Jika a = -4 dan b = 3, maka a × b - a = ...", opts: ["-8", "-16", "8", "16"], ans: 0 },
+  { q: "Lift dari lantai 2, turun 5 lantai = lantai ...", opts: ["-3", "3", "-7", "7"], ans: 0 },
+  { q: "(-2)³ = ...", opts: ["-8", "8", "-6", "6"], ans: 0 },
+  { q: "Nilai |−9| − |−3| = ...", opts: ["6", "-6", "12", "-12"], ans: 0 }
+];
+
+// NAVIGATION
+function navigateTo(page) {
+  document.querySelectorAll('[id^="page-"]').forEach(el => el.classList.add('hidden'));
+  document.getElementById('page-' + page).classList.remove('hidden');
+  currentPage = page;
+
+  const showNav = page !== 'home';
+  document.getElementById('nav-bar').classList.toggle('hidden', !showNav);
+  document.getElementById('bottom-nav').classList.toggle('hidden', !showNav);
+
+  if (page === 'materi') renderMateri();
+  updateProgress();
+  window.scrollTo(0, 0);
+  lucide.createIcons();
+}
+
+function updateProgress() {
+  const pages = ['home','tujuan','materi','simulasi','game','kuis','selesai'];
+  const idx = pages.indexOf(currentPage);
+  const pct = Math.round((idx / (pages.length - 1)) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('score-display').textContent = totalScore;
+}
+
+// MATERI
+function renderMateri() {
+  const m = materiData[currentMateri];
+  document.getElementById('materi-title').textContent = m.title;
+  document.getElementById('materi-content').innerHTML = m.content;
+  document.getElementById('btn-prev-materi').disabled = currentMateri === 0;
+  document.getElementById('btn-next-materi').disabled = currentMateri === materiData.length - 1;
+
+  let dots = '';
+  for (let i = 0; i < materiData.length; i++) {
+    dots += `<button onclick="goToMateri(${i})" class="w-3 h-3 rounded-full ${i === currentMateri ? 'bg-emerald-500' : 'bg-emerald-200'} transition-all"></button>`;
+  }
+  document.getElementById('materi-dots').innerHTML = dots;
+}
+
+function nextMateri() { if (currentMateri < materiData.length - 1) { currentMateri++; renderMateri(); } }
+function prevMateri() { if (currentMateri > 0) { currentMateri--; renderMateri(); } }
+function goToMateri(i) { currentMateri = i; renderMateri(); }
+
+// SIMULASI
+function initSimulation() {
+  const dot = document.getElementById('sim-dot');
+  let dragging = false;
+  const line = dot.parentElement;
+
+  function updateVal(x) {
+    const rect = line.getBoundingClientRect();
+    let pct = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+    dot.style.left = (pct * 100) + '%';
+    const val = Math.round(pct * 20 - 10);
+    document.getElementById('sim-value').textContent = val;
+  }
+
+  dot.addEventListener('mousedown', () => dragging = true);
+  dot.addEventListener('touchstart', () => dragging = true);
+  document.addEventListener('mousemove', e => { if (dragging) updateVal(e.clientX); });
+  document.addEventListener('touchmove', e => { if (dragging) updateVal(e.touches[0].clientX); });
+  document.addEventListener('mouseup', () => dragging = false);
+  document.addEventListener('touchend', () => dragging = false);
+  line.addEventListener('click', e => updateVal(e.clientX));
+}
+
+function calculateSim() {
+  const a = parseInt(document.getElementById('sim-a').value) || 0;
+  const b = parseInt(document.getElementById('sim-b').value) || 0;
+  const op = document.getElementById('sim-op').value;
+  let result;
+  switch(op) {
+    case '+': result = a + b; break;
+    case '-': result = a - b; break;
+    case '*': result = a * b; break;
+    case '/': result = b !== 0 ? (a / b) : 'Tidak terdefinisi'; break;
+  }
+  const el = document.getElementById('sim-result');
+  el.classList.remove('hidden');
+  el.innerHTML = `<span class="bg-emerald-100 px-6 py-3 rounded-xl inline-block">${a} ${op === '*' ? '×' : op === '/' ? '÷' : op} ${b < 0 ? '('+b+')' : b} = <strong>${typeof result === 'number' ? result : result}</strong></span>`;
+  totalScore += 2;
+  updateProgress();
+}
+
+// GAMES
+function startGame(type) {
+  document.getElementById('game-area').classList.remove('hidden');
+  gameScore = 0;
+  if (type === 'tebak') renderTebakGame();
+  else renderPasanganGame();
+}
+
+let tebakQuestion = null;
+function renderTebakGame() {
+  const ops = ['+','-','*'];
+  const op = ops[Math.floor(Math.random() * ops.length)];
+  const a = Math.floor(Math.random() * 21) - 10;
+  const b = Math.floor(Math.random() * 21) - 10;
+  let answer;
+  switch(op) { case '+': answer = a+b; break; case '-': answer = a-b; break; case '*': answer = a*b; break; }
+  
+  const wrongAnswers = new Set();
+  while(wrongAnswers.size < 3) {
+    const w = answer + (Math.floor(Math.random()*11) - 5);
+    if (w !== answer) wrongAnswers.add(w);
+  }
+  const options = [...wrongAnswers, answer].sort(() => Math.random() - 0.5);
+  
+  document.getElementById('game-content').innerHTML = `
+    <div class="text-center">
+      <p class="text-sm text-gray-500 mb-2">Skor: ⭐ ${gameScore}</p>
+      <h3 class="text-3xl font-black text-emerald-800 mb-6">${a} ${op === '*' ? '×' : op} ${b < 0 ? '('+b+')' : b} = ?</h3>
+      <div class="grid grid-cols-2 gap-3 max-w-sm mx-auto">
+        ${options.map(o => `<button onclick="checkTebak(${o},${answer})" class="quiz-option text-lg font-bold">${o}</button>`).join('')}
+      </div>
+    </div>`;
+}
+
+function checkTebak(selected, answer) {
+  if (selected === answer) {
+    gameScore++;
+    totalScore += 5;
+    showToast('✅ Benar!', 'bg-emerald-500');
+  } else {
+    showToast(`❌ Salah! Jawaban: ${answer}`, 'bg-red-500');
+  }
+  updateProgress();
+  setTimeout(renderTebakGame, 1000);
+}
+
+function renderPasanganGame() {
+  const pairs = [
+    { q: "3 + (-7)", a: "-4" },
+    { q: "(-2) × (-5)", a: "10" },
+    { q: "(-8) + 3", a: "-5" },
+    { q: "12 ÷ (-4)", a: "-3" },
+    { q: "(-6) - (-2)", a: "-4" },
+    { q: "5 × (-3)", a: "-15" }
+  ].sort(() => Math.random() - 0.5).slice(0, 4);
+
+  const shuffledAnswers = [...pairs.map(p=>p.a)].sort(() => Math.random() - 0.5);
+  let selectedQ = null;
+  let matched = 0;
+
+  document.getElementById('game-content').innerHTML = `
+    <div class="text-center mb-4">
+      <p class="text-sm text-gray-500">Cocokkan soal dengan jawaban! Skor: ⭐ ${gameScore}</p>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="space-y-2" id="pair-questions">${pairs.map((p,i) => `<button class="w-full quiz-option text-sm font-bold" data-idx="${i}" onclick="selectPairQ(this,${i})">${p.q}</button>`).join('')}</div>
+      <div class="space-y-2" id="pair-answers">${shuffledAnswers.map((a,i) => `<button class="w-full quiz-option text-sm font-bold" data-val="${a}" onclick="selectPairA(this,'${a}')">${a}</button>`).join('')}</div>
+    </div>`;
+
+  window._pairData = pairs;
+  window._selectedQ = null;
+}
+
+function selectPairQ(el, idx) {
+  document.querySelectorAll('#pair-questions button').forEach(b => b.style.borderColor = '#e5e7eb');
+  el.style.borderColor = '#10b981';
+  window._selectedQ = idx;
+}
+
+function selectPairA(el, val) {
+  if (window._selectedQ === null) { showToast('Pilih soal dulu!', 'bg-yellow-500'); return; }
+  const correct = window._pairData[window._selectedQ].a;
+  if (val === correct) {
+    el.classList.add('correct');
+    document.querySelectorAll('#pair-questions button')[window._selectedQ].classList.add('correct');
+    gameScore++;
+    totalScore += 5;
+    showToast('✅ Cocok!', 'bg-emerald-500');
+  } else {
+    el.classList.add('wrong');
+    showToast('❌ Tidak cocok!', 'bg-red-500');
+  }
+  window._selectedQ = null;
+  updateProgress();
+}
+
+// KUIS
+function startKuis() {
+  kuisIndex = 0;
+  kuisScore = 0;
+  kuisTimeLeft = 600;
+  document.getElementById('kuis-start-screen').classList.add('hidden');
+  document.getElementById('kuis-question').classList.remove('hidden');
+  document.getElementById('kuis-result').classList.add('hidden');
+  renderKuisQuestion();
+  kuisTimer = setInterval(() => {
+    kuisTimeLeft--;
+    const m = Math.floor(kuisTimeLeft/60);
+    const s = kuisTimeLeft%60;
+    document.getElementById('kuis-timer').textContent = `⏱ ${m}:${s.toString().padStart(2,'0')}`;
+    if (kuisTimeLeft <= 0) finishKuis();
+  }, 1000);
+}
+
+function renderKuisQuestion() {
+  const q = kuisData[kuisIndex];
+  document.getElementById('kuis-progress').textContent = `${kuisIndex+1}/10`;
+  document.getElementById('kuis-question').innerHTML = `
+    <p class="text-sm text-gray-500 mb-2">Soal ${kuisIndex+1}</p>
+    <h3 class="text-xl font-bold text-emerald-900 mb-6">${q.q}</h3>
+    <div class="space-y-3">
+      ${q.opts.map((o,i) => `<button onclick="answerKuis(${i})" class="quiz-option w-full text-left flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-700 text-sm flex-shrink-0">${String.fromCharCode(65+i)}</span>${o}</button>`).join('')}
+    </div>`;
+}
+
+function answerKuis(idx) {
+  const q = kuisData[kuisIndex];
+  const btns = document.querySelectorAll('#kuis-question .quiz-option');
+  btns.forEach(b => b.style.pointerEvents = 'none');
+  if (idx === q.ans) {
+    btns[idx].classList.add('correct');
+    kuisScore++;
+    totalScore += 10;
+  } else {
+    btns[idx].classList.add('wrong');
+    btns[q.ans].classList.add('correct');
+  }
+  updateProgress();
+  setTimeout(() => {
+    kuisIndex++;
+    if (kuisIndex >= kuisData.length) finishKuis();
+    else renderKuisQuestion();
+  }, 1200);
+}
+
+function finishKuis() {
+  clearInterval(kuisTimer);
+  document.getElementById('kuis-question').classList.add('hidden');
+  const result = document.getElementById('kuis-result');
+  result.classList.remove('hidden');
+  const pct = Math.round((kuisScore/10)*100);
+  let grade = pct >= 90 ? 'A (Mumtaz!)' : pct >= 80 ? 'B (Jayyid Jiddan!)' : pct >= 70 ? 'C (Jayyid!)' : 'D (Tetap Semangat!)';
+  let stars = '';
+  const starCount = Math.ceil(kuisScore/2);
+  for(let i=0;i<5;i++) stars += `<span class="text-3xl ${i<starCount?'star-burst':'opacity-30'}" style="animation-delay:${i*0.1}s">${i<starCount?'⭐':'☆'}</span>`;
+  
+  result.innerHTML = `
+    <span class="text-6xl mb-4 block">${pct>=70?'🎉':'💪'}</span>
+    <h3 class="text-2xl font-bold text-emerald-800 mb-2">Nilai: ${pct}</h3>
+    <p class="text-lg font-bold text-emerald-600 mb-2">${grade}</p>
+    <div class="flex justify-center gap-1 mb-4">${stars}</div>
+    <p class="text-gray-500 mb-4">Benar: ${kuisScore}/10</p>
+    <div class="flex gap-3 justify-center">
+      <button onclick="startKuis()" class="btn-primary text-sm">🔄 Ulangi</button>
+      <button onclick="navigateTo('selesai')" class="btn-primary text-sm bg-gradient-to-r from-teal-500 to-cyan-500">✅ Selesai</button>
+    </div>`;
+  
+  document.getElementById('final-score').textContent = totalScore;
+}
+
+// SELESAI
+function resetAll() {
+  totalScore = 0;
+  currentMateri = 0;
+  navigateTo('home');
+}
+
+// TOAST
+function showToast(msg, bg) {
+  const t = document.createElement('div');
+  t.className = `toast ${bg}`;
+  t.textContent = msg;
+  document.getElementById('toast-container').appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+// ELEMENT SDK
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (config) => {
+    const font = config.font_family || defaultConfig.font_family;
+    document.body.style.fontFamily = `${font}, sans-serif`;
+    document.body.style.backgroundColor = config.background_color || defaultConfig.background_color;
+    document.getElementById('home-title').textContent = config.main_title || defaultConfig.main_title;
+    document.getElementById('home-school').textContent = config.school_name || defaultConfig.school_name;
+    document.getElementById('nav-title').textContent = config.main_title || defaultConfig.main_title;
+
+    document.querySelectorAll('.btn-primary').forEach(el => {
+      el.style.background = `linear-gradient(135deg, ${config.primary_action || defaultConfig.primary_action}, ${config.secondary_action || defaultConfig.secondary_action})`;
+    });
+  },
+  mapToCapabilities: (config) => ({
+    recolorables: [
+      { get: () => config.background_color || defaultConfig.background_color, set: v => { config.background_color = v; window.elementSdk.setConfig({background_color:v}); }},
+      { get: () => config.surface_color || defaultConfig.surface_color, set: v => { config.surface_color = v; window.elementSdk.setConfig({surface_color:v}); }},
+      { get: () => config.text_color || defaultConfig.text_color, set: v => { config.text_color = v; window.elementSdk.setConfig({text_color:v}); }},
+      { get: () => config.primary_action || defaultConfig.primary_action, set: v => { config.primary_action = v; window.elementSdk.setConfig({primary_action:v}); }},
+      { get: () => config.secondary_action || defaultConfig.secondary_action, set: v => { config.secondary_action = v; window.elementSdk.setConfig({secondary_action:v}); }}
+    ],
+    borderables: [],
+    fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: v => { config.font_family = v; window.elementSdk.setConfig({font_family:v}); }},
+    fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: v => { config.font_size = v; window.elementSdk.setConfig({font_size:v}); }}
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ["school_name", config.school_name || defaultConfig.school_name],
+    ["main_title", config.main_title || defaultConfig.main_title]
+  ])
+});
+
+// INIT
+initSimulation();
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f8db7c660063912',t:'MTc3ODI5ODM5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

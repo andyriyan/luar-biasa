@@ -1,0 +1,298 @@
+workflow
+
+Yang paling ideal adalah membuat:
+
+# “INGEST WORKFLOW PROMPT”
+
+yaitu prompt khusus ketika Anda menambahkan source material baru.
+
+Jadi workflow-nya menjadi sangat konsisten:
+
+```plaintext id="o2a8h5"
+Tambah source material
+↓
+Paste ingest prompt
+↓
+AI membaca source
+↓
+AI transform ke sistem pembelajaran
+↓
+AI update navigation
+↓
+AI update homepage
+↓
+AI generate quiz
+↓
+AI generate UI mapping
+```
+
+---
+
+# Workflow yang Saya Rekomendasikan
+
+## Saat Ada Materi Baru
+
+Misalnya Anda menambahkan:
+
+```plaintext id="e94wyv"
+/source-materials/
+  matematika/
+    persamaan-kuadrat.md
+```
+
+---
+
+# Maka Prompt yang Dipaste
+
+## TEMPLATE:
+
+# SOURCE MATERIAL INGEST PROMPT
+
+```markdown id="9kp9v7"
+Ada source material baru pada project ini.
+
+Lokasi:
+[source-materials/path-file]
+
+Tugas:
+1. baca dan pahami isi materi
+2. pecah materi menjadi konsep-konsep kecil
+3. buat progressive learning flow
+4. buat Learning Focus Card structure
+5. buat step-by-step learning
+6. buat mobile-first presentation
+7. buat quiz.json
+8. buat materi.json
+9. buat halaman materi
+10. update homepage
+11. update navigation
+12. update materi-list.json
+
+Gunakan aturan dari:
+- MASTER_PROMPT.md
+- UX_RULES.md
+- DESIGN_SYSTEM.md
+- AI_RULES.md
+- MATERIAL_SYSTEM.md
+- SCIENTIFIC_RENDERING.md
+
+Kebutuhan:
+- Android-native feel
+- immersive learning
+- one focus at a time
+- responsive smartphone UI
+- smooth animation
+- scientific rendering support
+- dark mode support
+- reusable component
+- semantic HTML
+- modular JavaScript
+
+Pastikan:
+- tidak merusak struktur existing
+- tidak overwrite materi lain
+- menjaga consistency UI
+- menjaga consistency architecture
+```
+
+---
+
+# Ini Akan Menjadi:
+
+# Prompt Harian Anda
+
+Karena setiap kali:
+
+* ada materi baru
+* update materi
+* tambahan bab
+
+Anda tinggal:
+
+1. simpan markdown
+2. paste prompt ingest
+
+SELESAI.
+
+---
+
+# Saya Sangat Menyarankan:
+
+# Naming Convention
+
+---
+
+# Source Material
+
+```plaintext id="crzsqw"
+/source-materials/
+  matematika/
+  fisika/
+  kimia/
+  bahasa-arab/
+  sejarah/
+```
+
+---
+
+# Output Production
+
+```plaintext id="i1w4k7"
+/materi/
+```
+
+---
+
+# Workflow Lengkap yang Paling Ideal
+
+```plaintext id="g8z6jz"
+Guru menulis materi
+↓
+source-materials/*.md
+↓
+Claude ingest prompt
+↓
+AI parsing
+↓
+AI chunking
+↓
+AI instructional design
+↓
+AI generate JSON
+↓
+AI generate UI
+↓
+AI update navigation
+↓
+Production ready
+```
+
+---
+
+# Yang Sebenarnya Dilakukan AI
+
+AI nanti:
+
+* membaca markdown
+* mengenali heading
+* mengenali rumus
+* mengenali langkah
+* mengenali konsep
+* mengenali latihan
+
+lalu:
+
+* mengubah menjadi flow belajar
+
+---
+
+# Saya Juga Merekomendasikan:
+
+# Material Metadata
+
+Di awal markdown:
+
+```markdown id="x6y5nm"
+---
+title: Persamaan Kuadrat
+subject: matematika
+grade: 10
+theme: dark
+difficulty: medium
+tags:
+  - aljabar
+  - persamaan
+  - matematika
+render:
+  - katex
+  - chart
+---
+```
+
+---
+
+# Kenapa Ini Penting
+
+Karena AI nanti bisa:
+
+* otomatis menentukan renderer
+* otomatis menentukan quiz difficulty
+* otomatis menentukan visual style
+* otomatis menentukan icon/theme
+
+---
+
+# Contoh Workflow Nyata
+
+---
+
+## 1. Anda buat:
+
+```plaintext id="xvq6f0"
+/source-materials/matematika/persamaan-kuadrat.md
+```
+
+---
+
+## 2. Paste prompt:
+
+```markdown id="t3esqf"
+Ada source material baru pada project ini.
+
+Lokasi:
+source-materials/matematika/persamaan-kuadrat.md
+
+Transformasikan menjadi sistem pembelajaran interaktif berdasarkan seluruh dokumentasi project.
+```
+
+---
+
+## 3. Claude membuat:
+
+```plaintext id="7ub3dn"
+/materi/persamaan-kuadrat/
+  index.html
+  materi.json
+  quiz.json
+```
+
+dan:
+
+* update homepage
+* update navigation
+* update progress system
+
+---
+
+# Ini Akan Sangat Powerful
+
+Karena Anda nanti tinggal:
+
+* menulis markdown
+* AI mengubahnya menjadi aplikasi belajar
+
+---
+
+# Bahkan Nanti Bisa Dikembangkan Menjadi
+
+## AI Pipeline
+
+```plaintext id="s6q4gh"
+Markdown
+↓
+AI parser
+↓
+Lesson graph
+↓
+Quiz generator
+↓
+Visual generator
+↓
+Interactive renderer
+↓
+PWA app
+```
+
+dan itu sebenarnya sudah mendekati:
+
+# modern AI-native educational publishing system.

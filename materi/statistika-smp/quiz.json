@@ -1,0 +1,41 @@
+{
+  "quizTitle": "Kuis: Statistika SMP",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Data nilai ulangan matematika: 4, 4, 5, 5, 6, 6, 7, 7, 7, 8, 9, 10. Berapakah modus dari data tersebut?",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "answer": "7",
+      "explanation": "Modus adalah nilai yang paling sering muncul. Dari data tersebut, angka 7 muncul sebanyak tiga kali, yang merupakan frekuensi paling banyak."
+    },
+    {
+      "id": 2,
+      "question": "Rata-rata berat badan dari 14 siswa laki-laki adalah 54 kg, dan rata-rata berat badan 16 siswa perempuan adalah 48 kg. Rata-rata berat badan gabungan dari seluruh siswa tersebut adalah...",
+      "options": [
+        "50,2 kg",
+        "50,8 kg",
+        "51,0 kg",
+        "51,2 kg"
+      ],
+      "answer": "50,8 kg",
+      "explanation": "Gunakan rumus rata-rata gabungan:\n $\\bar{x}_{gab} = \\frac{(54 \\times 14) + (48 \\times 16)}{14 + 16} = \\frac{756 + 768}{30} = \\frac{1524}{30} = 50,8$ kg."
+    },
+    {
+      "id": 3,
+      "question": "Data sudah diurutkan: 35, 36, 36, 37, 37, 38, 38, 38, 39, 40, 40, 40, 41, 41, 42, 42. Berapakah nilai Median dari data tersebut?",
+      "options": [
+        "38",
+        "38,5",
+        "39",
+        "39,5"
+      ],
+      "answer": "38,5",
+      "explanation": "Banyak data (n) = 16 (Genap). Maka Median adalah rata-rata dari data ke-8 dan ke-9. \nData ke-8 adalah 38, dan data ke-9 adalah 39. \nMedian = $\\frac{38 + 39}{2} = 38,5$."
+    }
+  ]
+}

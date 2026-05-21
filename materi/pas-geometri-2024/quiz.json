@@ -1,0 +1,125 @@
+{
+  "quizTitle": "Kuis Geometri PAS 2024",
+  "questions": [
+    {
+      "id": 11,
+      "question": "Perhatikan sifat bangun datar: (i) Memiliki empat sisi, (ii) Memiliki empat sudut, (iii) Diagonal saling tegak lurus, (iv) Salah satu diagonal membagi diagonal lainnya menjadi dua bagian sama panjang. Bangun tersebut adalah...",
+      "options": [
+        "Persegi panjang",
+        "Jajar genjang",
+        "Layang-layang",
+        "Belah ketupat"
+      ],
+      "answer": "Layang-layang",
+      "explanation": "Sifat diagonal saling tegak lurus membatasi pilihan pada layang-layang, belah ketupat, atau persegi. Sifat 'salah satu diagonal membagi diagonal lainnya sama panjang' adalah ciri khas layang-layang. Pada belah ketupat, kedua diagonalnya saling membagi sama panjang."
+    },
+    {
+      "id": 12,
+      "question": "Sebuah persegi panjang memiliki keliling 56 cm. Panjangnya tiga kali dari lebarnya. Berapakah luas persegi panjang tersebut?",
+      "options": [
+        "140 cm2",
+        "147 cm2",
+        "156 cm2",
+        "167 cm2"
+      ],
+      "answer": "147 cm2",
+      "explanation": "K = 2(p + l). Diketahui p = 3l, maka 56 = 2(3l + l) -> 56 = 8l -> l = 7 cm. p = 3 x 7 = 21 cm. Luas = 21 x 7 = 147 cm2."
+    },
+    {
+      "id": 13,
+      "question": "Diketahui layang-layang PQRS dengan SQ = 16 cm (diagonal 1), RQ = 10 cm dan PQ = 17 cm. Berapakah luasnya? <img src='./images/TUDAXa0.png' style='width:100%; border-radius:12px; margin:16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>",
+      "options": [
+        "80 cm2",
+        "108 cm2",
+        "168 cm2",
+        "180 cm2"
+      ],
+      "answer": "168 cm2",
+      "explanation": "Setengah diagonal SQ adalah 8 cm. Dengan Pythagoras: TR = akar(10^2 - 8^2) = 6 cm. PT = akar(17^2 - 8^2) = 15 cm. Panjang diagonal PR = 15 + 6 = 21 cm. Luas = 1/2 x 16 x 21 = 168 cm2."
+    },
+    {
+      "id": 14,
+      "question": "Terdapat trapesium ABCD dengan AB=12cm, CD=15cm, dan sisi miring BC=5cm. Berapakah tinggi trapesium tersebut? <img src='./images/sdCcQIK.png' style='width:100%; border-radius:12px; margin:16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>",
+      "options": [
+        "3 cm",
+        "4 cm",
+        "5 cm",
+        "10 cm"
+      ],
+      "answer": "4 cm",
+      "explanation": "Selisih alas (CE) = 15 - 12 = 3 cm. Menggunakan Pythagoras pada segitiga siku-siku dengan sisi miring 5 cm: Tinggi = akar(5^2 - 3^2) = akar(16) = 4 cm."
+    },
+    {
+      "id": 15,
+      "question": "Diketahui belah ketupat KLMN dengan panjang diagonal 16 cm dan 30 cm. Keliling belah ketupat tersebut adalah...",
+      "options": [
+        "34 cm",
+        "40 cm",
+        "68 cm",
+        "88 cm"
+      ],
+      "answer": "68 cm",
+      "explanation": "Setengah diagonal adalah 8 cm dan 15 cm. Sisi (s) = akar(8^2 + 15^2) = akar(289) = 17 cm. Keliling = 4 x 17 = 68 cm."
+    },
+    {
+      "id": 16,
+      "question": "Sebuah prisma mempunyai alas berbentuk segi-lima. Banyaknya sisi dan titik sudut dari prisma tersebut adalah...",
+      "options": [
+        "Sisi 7 dan titik sudut 10",
+        "Sisi 10 dan titik sudut 10",
+        "Sisi 7 dan titik sudut 5",
+        "Sisi 10 dan titik sudut 5"
+      ],
+      "answer": "Sisi 7 dan titik sudut 10",
+      "explanation": "Rumus prisma segi-n: Sisi = n + 2 -> 5 + 2 = 7. Titik sudut = 2n -> 2 x 5 = 10."
+    },
+    {
+      "id": 17,
+      "question": "Banyaknya diagonal bidang pada balok adalah...",
+      "options": [
+        "4 buah",
+        "6 buah",
+        "8 buah",
+        "12 buah"
+      ],
+      "answer": "12 buah",
+      "explanation": "Balok memiliki 6 sisi berbentuk persegi panjang. Setiap sisi memiliki 2 diagonal bidang. Maka 6 x 2 = 12 diagonal bidang."
+    },
+    {
+      "id": 18,
+      "question": "<img src='./images/PkFJgMh.png' style='width:100%; border-radius:12px; margin:16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'> Dari gambar jaring-jaring (i) pola 1-4-1, (ii) overlap, (iii) pola 2-3-1, dan (iv) sayap sejajar, manakah yang valid menjadi jaring-jaring kubus?",
+      "options": [
+        "(i) dan (ii)",
+        "(i) dan (iii)",
+        "(ii) dan (iii)",
+        "(i) dan (iv)"
+      ],
+      "answer": "(i) dan (iii)",
+      "explanation": "Pola 1-4-1 (i) dan pola 2-3-1 (iii) adalah pola standar yang valid. Pola (ii) akan menyebabkan sisi bertumpuk (overlap) dan pola (iv) tidak menutup bagian atas."
+    },
+    {
+      "id": 19,
+      "question": "<img src='./images/xPQMqqz.png' style='width:100%; border-radius:12px; margin:16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'> Balok (pxlxt = 5x4x3) dicat seluruh permukaannya. Banyak kubus kecil yang terkena cat hanya pada dua sisinya adalah...",
+      "options": [
+        "8",
+        "16",
+        "20",
+        "24"
+      ],
+      "answer": "24",
+      "explanation": "Rumus: 4 x ((p-2) + (l-2) + (t-2)) = 4 x ((5-2) + (4-2) + (3-2)) = 4 x (3 + 2 + 1) = 24."
+    },
+    {
+      "id": 20,
+      "question": "Bangun ruang yang memiliki 3 sisi (termasuk alas/tutup lingkaran), tidak memiliki titik sudut, dan memiliki 2 rusuk adalah...",
+      "options": [
+        "Kubus",
+        "Kerucut",
+        "Tabung",
+        "Prisma"
+      ],
+      "answer": "Tabung",
+      "explanation": "Tabung memiliki 3 sisi (alas, tutup, selimut), 2 rusuk lengkung, dan 0 titik sudut. Kerucut memiliki titik puncak (sudut) dan hanya 2 sisi."
+    }
+  ]
+}

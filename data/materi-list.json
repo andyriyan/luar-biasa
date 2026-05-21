@@ -1,0 +1,221 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-05-09",
+  "categories": [
+    {
+      "id": "all",
+      "label": "Semua",
+      "icon": "grid_view"
+    },
+    {
+      "id": "aswaja",
+      "label": "Aswaja",
+      "icon": "mosque"
+    },
+    {
+      "id": "math",
+      "label": "Matematika",
+      "icon": "functions"
+    },
+    {
+      "id": "science",
+      "label": "IPA",
+      "icon": "science"
+    },
+    {
+      "id": "simulasi",
+      "label": "Simulasi",
+      "icon": "smart_toy"
+    }
+  ],
+  "materi": [
+    {
+      "id": "bilangan-bulat",
+      "slug": "bilangan-bulat",
+      "title": "Bilangan Bulat Fase D",
+      "description": "Pendekatan konseptual dan struktural bilangan bulat dilengkapi visualisasi logika pengerjaan aritmetika berjenjang.",
+      "category": "math",
+      "thumbnail": "",
+      "totalConcepts": 5,
+      "estimatedTime": "25 menit",
+      "difficulty": "mudah",
+      "tags": [
+        "bilangan bulat",
+        "fase d",
+        "kurikulum merdeka"
+      ],
+      "published": true
+    },
+    {
+      "id": "bank-soal-matematika-smp",
+      "slug": "bank-soal-matematika-smp",
+      "title": "Bank Soal Statistika & Geometri SMP",
+      "description": "Modul review latihan komprehensif 20 soal matematika terintegrasi materi kelas VII.",
+      "category": "math",
+      "thumbnail": "",
+      "totalConcepts": 4,
+      "estimatedTime": "45 menit",
+      "difficulty": "sedang",
+      "tags": [
+        "review",
+        "statistika",
+        "geometri",
+        "pythagoras"
+      ],
+      "published": true
+    },
+    {
+      "id": "pas-geometri-2024",
+      "slug": "pas-geometri-2024",
+      "title": "Pembahasan PAS Geometri 2024",
+      "description": "Latihan soal dan pembahasan lengkap Geometri Bidang & Ruang.",
+      "category": "math",
+      "thumbnail": "",
+      "totalConcepts": 7,
+      "estimatedTime": "25 menit",
+      "difficulty": "sedang",
+      "tags": [
+        "matematika",
+        "SMP",
+        "geometri"
+      ],
+      "published": true
+    },
+    {
+      "id": "pengantar-aswaja",
+      "slug": "pengantar-aswaja",
+      "title": "Materi 1: Pengantar Aswaja",
+      "description": "Memahami konsep dasar Ahlussunnah wal Jama'ah An-Nahdliyyah",
+      "category": "aswaja",
+      "thumbnail": "",
+      "totalConcepts": 3,
+      "estimatedTime": "20 menit",
+      "difficulty": "mudah",
+      "tags": [
+        "aswaja",
+        "nu",
+        "dasar"
+      ],
+      "published": true
+    },
+    {
+      "id": "statistika-smp",
+      "slug": "statistika-smp",
+      "title": "Statistika Matematika SMP",
+      "description": "Belajar konsep dasar statistika, mulai dari nilai rata-rata, median, modus, hingga penyajian data.",
+      "category": "math",
+      "thumbnail": "",
+      "totalConcepts": 5,
+      "estimatedTime": "35 menit",
+      "difficulty": "menengah",
+      "tags": [
+        "matematika",
+        "statistika",
+        "smp"
+      ],
+      "published": true
+    },
+    {
+      "id": "bangun-datar-segiempat",
+      "slug": "bangun-datar-segiempat",
+      "title": "Bangun Datar Segiempat",
+      "description": "Klasifikasi, sifat-sifat, dan perhitungan luas/keliling segiempat SMP Kelas 7.",
+      "category": "math",
+      "thumbnail": "",
+      "totalConcepts": 5,
+      "estimatedTime": "20 menit",
+      "difficulty": "menengah",
+      "tags": [
+        "matematika",
+        "geometri",
+        "smp"
+      ],
+      "published": true
+    },
+    {
+      "id": "geometri-dan-pythagoras",
+      "slug": "geometri-dan-pythagoras",
+      "title": "Geometri Dasar dan Teorema Pythagoras",
+      "description": "Materi hubungan garis, sudut, segitiga, dan Pythagoras untuk siswa kelas 7.",
+      "category": "math",
+      "thumbnail": "",
+      "totalConcepts": 10,
+      "estimatedTime": "25 menit",
+      "difficulty": "mudah",
+      "tags": [
+        "geometri",
+        "segitiga",
+        "pythagoras"
+      ],
+      "published": true
+    },
+    {
+      "id": "tekanan-ipa-kelas-9",
+      "slug": "tekanan-ipa-kelas-9",
+      "title": "Tekanan (IPA Kelas 9)",
+      "description": "Pelajari konsep tekanan zat padat, cair, Hukum Pascal, Archimedes, dan gas di atmosfer.",
+      "category": "science",
+      "thumbnail": "",
+      "totalConcepts": 5,
+      "estimatedTime": "20 menit",
+      "difficulty": "sedang",
+      "tags": [
+        "tekanan",
+        "ipa",
+        "kelas 9"
+      ],
+      "published": true
+    },
+    {
+      "id": "aljabar-kelas-7",
+      "slug": "aljabar-kelas-7",
+      "title": "materi dan simulasi aljabar",
+      "description": "pembelajaran aljabar digital",
+      "category": "aljabar",
+      "thumbnail": "",
+      "totalConcepts": 9,
+      "estimatedTime": "30 menit",
+      "difficulty": "mudah",
+      "tags": [
+        "aljabar",
+        "suku sejenis",
+        "simulasi"
+      ],
+      "published": true
+    },
+    {
+      "id": "aljabar-interaktif",
+      "slug": "aljabar",
+      "title": "Simulasi Aljabar Interaktif",
+      "description": "Media interaktif lengkap aljabar dengan visualisasi suku sejenis, kartu variabel, latihan, dan game.",
+      "category": "simulasi",
+      "thumbnail": "",
+      "totalConcepts": 9,
+      "estimatedTime": "30 menit",
+      "difficulty": "mudah",
+      "tags": [
+        "aljabar",
+        "suku sejenis",
+        "simulasi"
+      ],
+      "published": true
+    },
+    {
+      "id": "bilbul-interaktif",
+      "slug": "bilbul",
+      "title": "Simulasi Bilangan Bulat",
+      "description": "Visualisasi interaktif penjumlahan & pengurangan bilangan bulat menggunakan garis bilangan dinamis.",
+      "category": "simulasi",
+      "thumbnail": "",
+      "totalConcepts": 8,
+      "estimatedTime": "25 menit",
+      "difficulty": "mudah",
+      "tags": [
+        "bilangan bulat",
+        "garis bilangan",
+        "simulasi"
+      ],
+      "published": true
+    }
+  ]
+}

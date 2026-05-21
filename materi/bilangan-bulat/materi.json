@@ -1,0 +1,139 @@
+{
+    "title": "Bilangan Bulat Fase D (Ekspansi Kompetensi)",
+    "description": "Pendekatan konseptual, struktural, dan modul taktis pemecahan masalah (Scaffolding & Drill) Bilangan Bulat Kelas VII.",
+    "theme": "math",
+    "concepts": [
+        {
+            "id": "konsep-1",
+            "title": "Definisi & Posisi Bilangan Bulat",
+            "icon": "blur_on",
+            "content": "Bilangan bulat terdiri dari bilangan bulat positif, nol, dan bilangan bulat negatif. Pada garis bilangan, bilangan negatif terletak di sebelah kiri nol, dan bilangan positif di sebelah kanan nol. **Prinsip Utama:** Semakin ke kanan posisinya, nilainya semakin besar. Semakin ke kiri, nilainya semakin kecil.\n\n### Contoh Soal Berjenjang (Scaffolding):\n1. **[Mudah]** Tentukan lawan dari bilangan $-17$!\n   *Penyelesaian:* Lawan dari negatif adalah positif, maka lawannya adalah $17$.\n2. **[Sedang]** Bandingkan bilangan $-20$ dan $-15$ menggunakan tanda $<$ atau $>$!\n   *Penyelesaian:* Karena $-20$ berada di sebelah kiri $-15$ pada garis bilangan, maka $-20 < -15$.\n3. **[Sulit/HOTS]** Urutkan dari yang terkecil: $-5, 0, 3, -8, 1$!\n   *Penyelesaian:* Lihat posisi paling kiri pada garis bilangan: $-8, -5, 0, 1, 3$.",
+            "steps": [
+                "Gambar garis bilangan mental atau fisik jika ragu.",
+                "Ingat bahwa bilangan negatif berangka besar justru bernilai lebih kecil."
+            ],
+            "summary": "Garis bilangan adalah kunci memahami posisi dan perbandingan nilai pada bilangan bulat."
+        },
+        {
+            "id": "konsep-2",
+            "title": "Mekanika Penjumlahan & Pengurangan",
+            "icon": "add_circle_outline",
+            "content": "Penjumlahan menggabungkan nilai. Pengurangan didefinisikan sebagai penjumlahan dengan lawan dari bilangan tersebut ($a - b = a + (-b)$). Mengurangkan bilangan negatif sama dengan menambahkan bilangan positifnya ($4 - (-2) = 4 + 2 = 6$).\n\n### Contoh Soal Berjenjang (Scaffolding):\n1. **[Mudah]** Hitunglah hasil dari $-9 + (-6)$!\n   *Penyelesaian:* Karena tandanya sama-sama negatif, jumlahkan angkanya: $9 + 6 = 15$. Hasilnya tetap negatif, yaitu $-15$.\n2. **[Sedang]** Tentukan hasil dari $15 + (-7) - 3$!\n   *Penyelesaian:* Kerjakan dari kiri: $15 + (-7) = 8$. Lalu kurangi: $8 - 3 = 5$.\n3. **[Sulit/HOTS]** Hitunglah hasil dari $-1 + 2 - 3 + 4 - 5 + 6 - ... - 99 + 100$!\n   *Penyelesaian:* Kelompokkan per pasang: $(-1+2) + (-3+4) + ... + (-99+100)$. Setiap pasang bernilai $1$. Karena ada $100$ angka, berarti ada $50$ pasang. Maka hasilnya: $50 \\times 1 = 50$.",
+            "steps": [
+                "Gunakan analogi 'Utang' untuk bilangan negatif dan 'Uang/Bayar' untuk positif.",
+                "Jika ada tanda double seperti $- (-)$, segera ubah menjadi $+$."
+            ],
+            "summary": "Pengurangan dengan bilangan negatif otomatis berubah menjadi operasi penjumlahan biasa."
+        },
+        {
+            "id": "konsep-3",
+            "title": "Aturan Perkalian & Pembagian",
+            "icon": "clear",
+            "content": "Perkalian dan pembagian mengikuti aturan tanda yang ketat: jika tandanya sama hasilnya positif, jika tandanya berbeda hasilnya negatif. Ingat, pembagian dengan nol tidak memiliki definisi.\n\n### Contoh Soal Berjenjang (Scaffolding):\n1. **[Mudah]** Tentukan hasil dari $-12 \\times (-4)$!\n   *Penyelesaian:* Negatif dikali negatif hasilnya positif. $12 \\times 4 = 48$.\n2. **[Sedang]** Hitunglah hasil dari $48 \\div (-12) \\times 3$!\n   *Penyelesaian:* Kerjakan urut dari kiri. Pembagian dulu: $48 \\div (-12) = -4$. Baru kalikan: $-4 \\times 3 = -12$.\n3. **[Sulit/HOTS]** Berapakah hasil dari $-6 \\times (-10) \\times (-6) \\times 25$!\n   *Penyelesaian:* Hitung bertahap: $-6 \\times (-10) = 60$. Kemudian $60 \\times (-6) = -360$. Terakhir $-360 \\times 25 = -9.000$.",
+            "steps": [
+                "Tentukan tanda hasil akhirnya (+ atau -) sebelum menghitung angkanya.",
+                "Lakukan perkalian atau pembagian seperti pada bilangan cacah biasa."
+            ],
+            "summary": "Perkalian/pembagian dua bilangan bertanda sama menghasilkan nilai positif, sedangkan yang berbeda tanda menghasilkan nilai negatif."
+        },
+        {
+            "id": "konsep-4",
+            "title": "Urutan Operasi (KuBaTaKur / PEMDAS)",
+            "icon": "format_list_numbered",
+            "content": "Jika menemukan banyak operasi hitung dalam satu soal, wajib menggunakan urutan hierarki: **Ku**rung, **Ba**gi, **Ta**li (Kali), **Kur**ang (Tambah/Kurang). Perkalian dan pembagian setingkat (kerjakan dari kiri ke kanan), begitu pula penjumlahan dan Quran.\n\n### Contoh Soal Berjenjang (Scaffolding):\n1. **[Mudah]** Hitunglah hasil dari $(-8) \\times (5 - 12)$!\n   *Penyelesaian:* Kerjakan dalam kurung dulu: $5 - 12 = -7$. Lalu kalikan: $(-8) \\times (-7) = 56$.\n2. **[Sedang]** Berapakah hasil dari $(9 + 4) \\times 5 - 18 \\div 6$!\n   *Penyelesaian:* Dalam kurung dulu: $13 \\times 5 - 18 \\div 6$. Lakukan perkalian & pembagian: $65 - 3$. Hasil akhirnya: $62$.\n3. **[Sulit/HOTS]** Hitunglah hasil dari $616 \\div (-4) - 6 + 7 \\times 22$!\n   *Penyelesaian:* Dahulukan pembagian dan perkalian secara simultan: $(-154) - 6 + 154$. Lakukan operasi dari kiri: $-154 - 6 = -160$. Terakhir: $-160 + 154 = -6$.",
+            "steps": [
+                "Beri tanda garis bawah pada operasi perkalian atau pembagian agar tidak sengaja menjumlahkannya terlebih dahulu.",
+                "Selalu evaluasi operasi di dalam tanda kurung paling awal."
+            ],
+            "summary": "Kegagalan mengikuti urutan operasi KuBaTaKur adalah sumber error matematika paling umum di kelas VII."
+        },
+        {
+            "id": "konsep-5",
+            "title": "Aplikasi Kontekstual & Soal Cerita (HOTS)",
+            "icon": "stars",
+            "content": "Bilangan bulat digunakan untuk memecahkan masalah polaritas di kehidupan nyata seperti variasi suhu, kedalaman laut, posisi lift, skor kompetisi, hingga transaksi keuangan.\n\n### Contoh Soal Berjenjang (Scaffolding):\n1. **[Mudah]** Suhu udara mula-mula $2^\\circ\\text{C}$. Jika suhu turun $5^\\circ\\text{C}$, berapakah suhu sekarang?\n   *Penyelesaian:* Penurunan berarti pengurangan: $2 - 5 = -3^\\circ\\text{C}$.\n2. **[Sedang]** Andi menyelam di kedalaman $25$ meter, lalu ia naik $10$ meter, dan turun lagi $5$ meter. Di kedalaman berapa Andi berada?\n   *Penyelesaian:* Kedalaman laut ditulis negatif: $-25 + 10 - 5 = -15 - 5 = -20$ meter (artinya di kedalaman $20$ meter).\n3. **[Sulit/HOTS]** Setiap naik $100$ meter dari permukaan laut, suhu udara turun $0,5^\\circ\\text{C}$. Jika suhu di permukaan laut adalah $37^\\circ\\text{C}$, berapakah suhu udara di puncak gunung yang memiliki ketinggian $2.400$ meter?\n   *Penyelesaian:* Total penurunan suhu = $(2.400 \\div 100) \\times 0,5^\\circ\\text{C} = 24 \\times 0,5 = 12^\\circ\\text{C}$. Suhu di puncak = Suhu awal $-$ Penurunan = $37^\\circ\\text{C} - 12^\\circ\\text{C} = 25^\\circ\\text{C}$.",
+            "steps": [
+                "Terjemahkan kata kunci: 'turun/bawah/rugi' menjadi tanda negatif, 'naik/atas/untung' menjadi tanda positif.",
+                "Tuliskan model matematikanya secara terstruktur sebelum menghitung."
+            ],
+            "summary": "Kemampuan abstraksi mengubah kalimat cerita menjadi model matematika bilangan bulat sangat melatih berpikir kritis."
+        },
+        {
+            "id": "konsep-6",
+            "title": "Penyelesaian Soal: Analisis Perbandingan & Nilai Mutlak",
+            "icon": "insights",
+            "content": "Nilai mutlak (disimbolkan dengan $|x|$) mengukur jarak suatu bilangan dari angka nol pada garis bilangan. Karena jarak tidak pernah negatif, hasil nilai mutlak selalu bernilai positif atau nol. Ketika mengurutkan kombinasi bilangan bulat dan nilai mutlak, kita wajib menyederhanakan bentuk mutlaknya terlebih dahulu.\n\n**CONTOH SOAL:**\nUrutkan nilai dari yang terbesar ke terkecil dari kombinasi bilangan berikut: $-12, |-15|, -3, |-2|, 0$\n\n### BREAKDOWN PENGERJAAN STEP-BY-STEP:\n* **Langkah 1 (Sederhanakan Nilai Mutlak):** Hitung semua nilai yang berada di dalam tanda mutlak. \n  $|-15| = 15$ dan $|-2| = 2$. Kini deret angka kita menjadi: $-12, 15, -3, 2, 0$.\n* **Langkah 2 (Pengelompokan):** Pisahkan bilangan positif dan negatif untuk mempermudah analisis. \n  Kelompok Positif/Nol: $15, 2, 0$. Kelompok Negatif: $-3, -12$.\n* **Langkah 3 (Analisis Garis Bilangan):** Ingat bahwa pada kelompok negatif, angka yang terlihat besar (seperti $-12$) letaknya lebih kiri dari $-3$, sehingga $-3 > -12$.\n* **Langkah 4 (Penggabungan Sementara):** Susun seluruh angka dari yang terbesar: $15, 2, 0, -3, -12$.\n* **Langkah 5 (Hasil Akhir):** Kembalikan angka modifikasi ke format soal aslinya: $|-15|, |-2|, 0, -3, -12$.",
+            "steps": [
+                "Ubah semua ekspresi ber-tanda mutlak menjadi bilangan positif terlebih dahulu.",
+                "Bandingkan kelompok positif secara normal, lalu kelompok negatif dengan logika terbalik."
+            ],
+            "summary": "Operasi nilai mutlak harus diselesaikan di awal sebelum melakukan pengurutan posisi."
+        },
+        {
+            "id": "konsep-7",
+            "title": "Penyelesaian Soal: Operasi Beruntun Tanda Ganda",
+            "icon": "unfold_more",
+            "content": "Ketika tanda operasi ($+$ atau $-$) bertemu langsung dengan tanda bilangan positif/negatif di dalam kurung, siswa sering kali bingung. Kita menggunakan prinsip perkalian tanda untuk menyederhanakan tanda ganda tersebut terlebih dahulu menjadi satu tanda operasi tunggal.\n\n**CONTOH SOAL:**\nHitung hasil akhir dari operasi matematika berikut: $-18 - (-12) + (-5) - 7$\n\n### BREAKDOWN PENGERJAAN STEP-BY-STEP:\n* **Langkah 1 (Penyederhanaan Tanda Ganda):** Periksa tanda yang berdempetan.\n  $- (-12)$ memiliki tanda minus bertemu minus, berubah menjadi $+ 12$.\n  $+ (-5)$ memiliki tanda plus bertemu minus, berubah menjadi $- 5$.\n* **Langkah 2 (Tulis Ulang Persamaan):** Susun kembali persamaan tanpa tanda kurung penjerat: $-18 + 12 - 5 - 7$.\n* **Langkah 3 (Hitung Segmen Pertama dari Kiri):** Hitung $-18 + 12$. Diibaratkan Anda memiliki utang $18$ dan baru membayar $12$, maka Anda masih berutang $6$ (ditulis $-6$). Persamaan menjadi: $-6 - 5 - 7$.\n* **Langkah 4 (Hitung Segmen Kedua):** Hitung $-6 - 5$. Berutang $6$ lalu berutang lagi $5$, maka total utang menjadi $11$ (ditulis $-11$). Persamaan menjadi: $-11 - 7$.\n* **Langkah 5 (Hasil Akhir):** Hitung $-11 - 7$. Utang $11$ ditambah utang $7$ menghasilkan total utang akhir $-18$.",
+            "steps": [
+                "Ingat: $-(-x) = +x$ dan $+(-x) = -x$.",
+                "Setelah tanda disederhanakan, operasikan angka secara konsisten runtut dari kiri ke kanan."
+            ],
+            "summary": "Menghilangkan kurung lewat penyederhanaan tanda ganda mencegah deviasi hitung aritmetika dasar."
+        },
+        {
+            "id": "konsep-8",
+            "title": "Penyelesaian Soal: Sifat Distributif Faktorisasi",
+            "icon": "grain",
+            "content": "Sifat distributif menyatakan bahwa $a \\times (b + c) = (a \\times b) + (a \\times c)$. Sifat ini bisa digunakan secara terbalik (faktorisasi) untuk memecahkan penjumlahan perkalian berulang yang melibatkan angka kembar, sehingga kita tidak perlu mengalikan angka-angka besar satu per satu.\n\n**CONTOH SOAL:**\nTentukan nilai akhir dari operasi: $(42 \\times 27) + (42 \\times 83) - (42 \\times 10)$\n\n### BREAKDOWN PENGERJAAN STEP-BY-STEP:\n* **Langkah 1 (Identifikasi Angka Pengali):** Amati pola persamaan. Terdapat angka kembar $42$ yang bertindak sebagai pengali di setiap bagian operasi.\n* **Langkah 2 (Faktorisasi):** Keluarkan angka $42$, lalu satukan angka-angka lainnya ke dalam satu tanda kurung besar mengikuti operasi aslinya ($+$ dan $-$): $42 \\times (27 + 83 - 10)$.\n* **Langkah 3 (Hitung Operasi Dalam Kurung):** Lakukan penjumlahan dan pengurangan di dalam kurung: $27 + 83 = 110$. Kemudian $110 - 10 = 100$. Persamaan kini menjadi jauh lebih sederhana: $42 \\times 100$.\n* **Langkah 4 (Perkalian Akhir):** Mengalikan bilangan dengan angka kelipatan seratus sangatlah mudah, cukup tambahkan dua angka nol di belakang pengali.\n* **Langkah 5 (Hasil Akhir):** $42 \\times 100 = 4.200$.",
+            "steps": [
+                "Pastikan angka pengali yang diekstrak benar-benar identik/sama persis.",
+                "Selesaikan operasi penambahan/pengurangan di dalam kurung sebelum melakukan perkalian utama."
+            ],
+            "summary": "Faktorisasi distributif mengubah tiga kali proses perkalian rumit menjadi satu kali operasi perkalian berbasis ratusan."
+        },
+        {
+            "id": "konsep-9",
+            "title": "Penyelesaian Soal: Substitusi Variabel Aljabar",
+            "icon": "reorder",
+            "content": "Substitusi berarti mengganti simbol huruf (variabel) dengan nilai angka yang sudah ditentukan. Tantangan terbesar dalam konsep ini adalah menjaga akurasi tanda negatif saat angka tersebut dipangkatkan atau dikalikan dengan koefisien di depannya.\n\n**CONTOH SOAL:**\nJika diketahui nilai $a = -4, b = 5$, dan $c = -2$, hitunglah nilai dari ekspresi aljabar $2a^2 - 3bc$\n\n### BREAKDOWN PENGERJAAN STEP-BY-STEP:\n* **Langkah 1 (Substitusi Masuk):** Masukkan nilai angka menggantikan huruf ke dalam tanda kurung pelindung: $2(-4)^2 - 3(5)(-2)$.\n* **Langkah 2 (Hitung Eksponen/Pangkat):** Berdasarkan urutan operasi, hitung pangkat terlebih dahulu. $(-4)^2 = (-4) \\times (-4) = 16$. Persamaan berubah menjadi: $2(16) - 3(5)(-2)$.\n* **Langkah 3 (Perkalian Suku Pertama):** Kalikan koefisien depan dengan hasil kuadrat: $2 \\times 16 = 32$.\n* **Langkah 4 (Perkalian Suku Kedua):** Perhatikan perkalian berantai tanda negatif pada suku kedua: $-3 \\times 5 = -15$. Kemudian kelanjutan operasinya $-15 \\times (-2) = +30$. Tanda berubah menjadi positif.\n* **Langkah 5 (Penjumlahan Akhir):** Gabungkan hasil kedua suku yang tersisa: $32 + 30 = 62$.",
+            "steps": [
+                "Wajib membungkus bilangan negatif dengan tanda kurung saat melakukan proses substitusi.",
+                "Ingat bahwa kuadrat dari bilangan negatif selalu menghasilkan nilai bilangan positif."
+            ],
+            "summary": "Ketelitian urutan pengerjaan pangkat sebelum perkalian menjadi penentu kebenaran nilai substitusi aljabar."
+        },
+        {
+            "id": "konsep-10",
+            "title": "Penyelesaian Soal: Aplikasi Selisih Suhu Ekstrem",
+            "icon": "ac_unit",
+            "content": "Soal ini menguji penalaran siswa dalam menghubungkan variabel waktu nyata dengan perubahan nilai bilangan bulat secara konstan. Kuncinya adalah mencari total akumulasi perubahan terlebih dahulu sebelum menggabungkannya dengan kondisi awal.\n\n**CONTOH SOAL:**\nSuhu sebongkah daging beku di dalam freezer adalah $-12^\\circ\\text{C}$. Setelah dikeluarkan, suhunya naik secara konstan sebesar $3^\\circ\\text{C}$ setiap $5$ menit. Berapakah suhu daging tersebut setelah didiamkan selama $20$ menit?\n\n### BREAKDOWN PENGERJAAN STEP-BY-STEP:\n* **Langkah 1 (Identifikasi Data):** Catat komponen utama. Suhu awal ($T_0$) = $-12^\\circ\\text{C}$. Kecepatan naik = $3^\\circ\\text{C}$ / $5$ menit. Total waktu = $20$ menit.\n* **Langkah 2 (Hitung Frekuensi Kenaikan):** Cari tahu berapa kali kenaikan $3^\\circ\\text{C}$ itu terjadi selama durasi $20$ menit: $20 \\text{ menit} \\div 5 \\text{ menit} = 4 \\text{ kali}$.\n* **Langkah 3 (Hitung Total Perubahan Nilai):** Kalikan frekuensi dengan besarnya suhu tiap kenaikan: $4 \\times 3^\\circ\\text{C} = 12^\\circ\\text{C}$.\n* **Langkah 4 (Formulasi Akhir):** Masukkan ke dalam rumus suhu akhir: $\\text{Suhu Akhir} = \\text{Suhu Awal} + \\text{Total Kenaikan}$.\n* **Langkah 5 (Perhitungan Akhir):** $\\text{Suhu Akhir} = -12^\\circ\\text{C} + 12^\\circ\\text{C} = 0^\\circ\\text{C}$. Daging tepat berada pada titik beku air.",
+            "steps": [
+                "Bagi total waktu durasi dengan interval waktu untuk mencari kelipatan frekuensi.",
+                "Gunakan operasi penjumlahan jika suhu dinyatakan 'naik' dan pengurangan jika suhu 'turun'."
+            ],
+            "summary": "Aplikasi perubahan suhu berkala diselesaikan dengan memadukan operasi pembagian waktu, perkalian skala, dan penjumlahan bilangan bulat."
+        },
+        {
+            "id": "konsep-11",
+            "title": "Penyelesaian Soal: Sistem Penilaian Kompetensi (HOTS)",
+            "icon": "gavel",
+            "content": "Soal model kompetensi ujian memerlukan kecermatan tingkat tinggi karena siswa harus mencari variabel jumlah soal yang bernilai 'salah' secara mandiri sebelum menerapkan formula pembobotan skor.\n\n**CONTOH SOAL:**\nPada sebuah kuis matematika aturan skornya adalah: Benar $= +4$, Salah $= -2$, dan Kosong (tidak dijawab) $= -1$. Dari total $40$ soal yang diujikan, Budi berhasil menjawab benar $28$ soal dan membiarkan kosong $5$ soal. Berapakah nilai skor akhir total yang didapatkan oleh Budi?\n\n### BREAKDOWN PENGERJAAN STEP-BY-STEP:\n* **Langkah 1 (Cari Jumlah Soal Salah):** Hitung sisa soal yang dijawab salah oleh Budi: $\\text{Soal Salah} = \\text{Total Soal} - (\\text{Benar} + \\text{Kosong}) = 40 - (28 + 5) = 40 - 33 = 7 \\text{ soal}$.\n* **Langkah 2 (Hitung Bobot Skor Kategori):** Kalikan jumlah soal di tiap kategori dengan bobot nilainya masing-masing:\n  - Skor Benar: $28 \\times 4 = 112$\n  - Skor Kosong: $5 \\times (-1) = -5$\n  - Skor Salah: $7 \\times (-2) = -14$\n* **Langkah 3 (Susun Persamaan Total):** Gabungkan semua perolehan poin: $\\text{Skor Total} = 112 + (-5) + (-14)$.\n* **Langkah 4 (Sederhanakan Tanda Aritmetika):** Ubah operasi ganda menjadi pengurangan linier: $\\text{Skor Total} = 112 - 5 - 14$.\n* **Langkah 5 (Hasil Akhir):** Lakukan pengurangan berurutan dari kiri: $112 - 5 = 107 \\rightarrow 107 - 14 = 93$.",
+            "steps": [
+                "Selalu cari kuantitas kategori tersembunyi (salah) di awal pengerjaan.",
+                "Jumlahkan seluruh hasil pembobotan nilai dengan memperhatikan tanda minus sebagai pengurang skor."
+            ],
+            "summary": "Skor akhir kompetensi diperoleh dari jumlahan aljabar seluruh poin kategori, termasuk poin penalti bilangan negatif."
+        },
+        {
+            "id": "konsep-12",
+            "title": "Penyelesaian Soal: Pola Bilangan Logika Tinggi (HOTS)",
+            "icon": "psychology",
+            "content": "Soal tipe ini menguji kemampuan siswa kelas VII dalam mengamati struktur matematika (pattern recognition) secara global, sehingga pengerjaan deret panjang bisa disederhanakan tanpa membuang banyak waktu menghitung satu demi satu angka.\n\n**CONTOH SOAL:**\nHitunglah hasil akhir dari deret operasi bilangan bulat berikut ini: $1 - 2 + 3 - 4 + 5 - 6 + ... + 49 - 50$\n\n### BREAKDOWN PENGERJAAN STEP-BY-STEP:\n* **Langkah 1 (Amati Pola Hubungan):** Perhatikan bahwa deret angka mengalami pergantian tanda bergantian berpasangan antara bilangan ganjil positif dan genap negatif.\n* **Langkah 2 (Metode Pengelompokan / Pairing):** Pasangkan angka-angka berdampingan menggunakan tanda kurung bantu: $(1 - 2) + (3 - 4) + (5 - 6) + ... + (49 - 50)$.\n* **Langkah 3 (Evaluasi Nilai Kelompok):** Hitung hasil dari setiap tanda kurung kecil tersebut:\n  $1 - 2 = -1$\n  $3 - 4 = -1$\n  $5 - 6 = -1$\n  Terlihat dengan jelas pola konsisten bahwa setiap pasangan bernilai tetap yaitu $-1$.\n* **Langkah 4 (Hitung Jumlah Pasangan):** Deret memiliki total $50$ angka. Karena setiap pasang membutuhkan $2$ angka, maka total pasangan yang terbentuk adalah: $50 \\div 2 = 25 \\text{ pasang}$.\n* **Langkah 5 (Hasil Akhir):** Kalikan total pasangan dengan nilai konstan tiap pasangnya: $25 \\times (-1) = -25$.",
+            "steps": [
+                "JANGAN menghitung manual dari depan ke belakang satu per satu karena rawan error.",
+                "Temukan nilai konstan hasil pengelompokan berpasangan lalu kalikan dengan total jumlah pasangan."
+            ],
+            "summary": "Metode pasang deret (pairing method) mereduksi puluhan operasi penjumlahan panjang menjadi satu baris operasi perkalian sederhana."
+        }
+    ]
+}

@@ -1,0 +1,67 @@
+{
+  "title": "Tekanan (IPA Kelas 9)",
+  "description": "Memahami konsep tekanan pada zat padat, cair (hidrostatis), Hukum Pascal, Hukum Archimedes, dan tekanan udara.",
+  "theme": "science",
+  "concepts": [
+    {
+      "id": "tekanan-zat-padat",
+      "title": "1. Tekanan pada Zat Padat",
+      "icon": "layers",
+      "content": "Tekanan pada zat padat didefinisikan sebagai besarnya gaya yang bekerja per satuan luas permukaan bidang tekan.<br><br>$$\nP = \\frac{F}{A}\n$$",
+      "steps": [
+        "**P** = Tekanan ($\\\\text{N/m}^2$ atau Pascal / $\\\\text{Pa}$)",
+        "**F** = Gaya tekan ($\\\\text{Newton}$ atau $\\\\text{N}$)",
+        "**A** = Luas bidang tekan ($\\\\text{m}^2$)"
+      ],
+      "summary": "Semakin kecil luas permukaan ($A$), maka tekanan ($P$) yang dihasilkan akan semakin besar jika gaya yang diberikan sama."
+    },
+    {
+      "id": "tekanan-hidrostatis",
+      "title": "2. Tekanan Hidrostatis (Zat Cair)",
+      "icon": "water_drop",
+      "content": "Tekanan hidrostatis adalah tekanan yang dimiliki oleh zat cair yang diam akibat pengaruh kedalaman dan gaya gravitasi.<br><br>$$\nP_h = \\rho \\cdot g \\cdot h\n$$",
+      "steps": [
+        "**P_h** = Tekanan hidrostatis ($\\\\text{Pa}$)",
+        "**&rho;** (rho) = Massa jenis zat cair ($\\\\text{kg/m}^3$)",
+        "**g** = Percepatan gravitasi ($\\\\text{m/s}^2$, umumnya $10\\\\text{ m/s}^2$)",
+        "**h** = Kedalaman zat cair dihitung dari **permukaan atas** ($\\\\text{m}$)"
+      ],
+      "summary": "Tekanan hidrostatis berbanding lurus dengan kedalaman dan massa jenis zat cair."
+    },
+    {
+      "id": "hukum-pascal",
+      "title": "3. Hukum Pascal",
+      "icon": "compress",
+      "content": "Tekanan yang diberikan pada zat cair dalam ruang tertutup akan diteruskan ke segala arah dengan sama besar. Prinsip ini diterapkan pada pompa atau dongkrak hidrolik.<br><br>$$\n\\frac{F_1}{A_1} = \\frac{F_2}{A_2}\n$$",
+      "steps": [
+        "*F_1, F_2* = Gaya pada penampang 1 dan 2 ($\\\\text{N}$)",
+        "*A_1, A_2* = Luas penampang 1 dan 2 ($\\\\text{m}^2$ atau $\\\\text{cm}^2$)"
+      ],
+      "summary": "Gaya kecil pada penampang kecil dapat menghasilkan gaya besar pada penampang besar."
+    },
+    {
+      "id": "hukum-archimedes",
+      "title": "4. Hukum Archimedes",
+      "icon": "sailing",
+      "content": "Setiap benda yang dicelupkan sebagian atau seluruhnya ke dalam zat cair akan mengalami gaya ke atas (gaya apung) yang besarnya sama dengan berat zat cair yang dipindahkan.<br><br>$$\nF_a = \\rho_c \\cdot g \\cdot V_b\n$$<br>$$\nF_a = W_{udara} - W_{cair}\n$$",
+      "steps": [
+        "**F_a** = Gaya ke atas / gaya apung ($\\\\text{N}$)",
+        "**V_b** = Volume benda yang tercelup ($\\\\text{m}^3$)",
+        "**W_{udara}** = Berat benda di udara ($\\\\text{N}$)",
+        "**W_{cair}** = Berat benda di dalam zat cair ($\\\\text{N}$)"
+      ],
+      "summary": "Prinsip Archimedes menentukan apakah benda akan terapung, melayang, atau tenggelam."
+    },
+    {
+      "id": "tekanan-udara",
+      "title": "5. Tekanan Udara (Gas)",
+      "icon": "air",
+      "content": "Tekanan udara di permukaan laut adalah $76\\\\text{ cmHg}$. Setiap kenaikan $100\\\\text{ m}$ dari permukaan laut, tekanan udara berkurang sebesar $1\\\\text{ cmHg}$.<br><br>$$\nh = (76 - P_{bar}) \\cdot 100\\\\text{ m}\n$$<br>$$\nP_{bar} = 76 - \\frac{h}{100}\n$$",
+      "steps": [
+        "**h** = Ketinggian tempat dari permukaan laut ($\\\\text{m}$)",
+        "**P_{bar}** = Tekanan udara pada tempat tersebut ($\\\\text{cmHg}$)"
+      ],
+      "summary": "Semakin tinggi suatu tempat, lapisan udara di atasnya makin tipis sehingga tekanan udaranya makin rendah."
+    }
+  ]
+}

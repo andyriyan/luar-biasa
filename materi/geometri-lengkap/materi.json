@@ -1,0 +1,112 @@
+{
+  "title": "Geometri & Pythagoras Lengkap",
+  "description": "Eksplorasi mendalam tentang garis, sudut, segitiga, dan teorema Pythagoras.",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "k1",
+      "title": "Hubungan Antar Garis",
+      "icon": "timeline",
+      "content": "Garis sejajar tidak pernah bertemu, sedangkan garis berpotongan bertemu di satu titik. <img src='./images/Bt9wrxSs_Screenshot-2026-05-10-100320.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Sejajar: Jarak antar garis selalu tetap",
+        "Berpotongan: Memiliki satu titik persekutuan"
+      ],
+      "summary": "Memahami posisi garis dasar."
+    },
+    {
+      "id": "k2",
+      "title": "Klasifikasi Sudut",
+      "icon": "square_foot",
+      "content": "Sudut diukur dalam derajat (°). Jenisnya: Lancip (<90°), Siku-siku (90°), Tumpul (90°-180°), dan Lurus (180°).",
+      "steps": [
+        "Ukur besar sudut",
+        "Tentukan kategori berdasarkan derajat"
+      ],
+      "summary": "Sudut ditentukan oleh besarnya rotasi."
+    },
+    {
+      "id": "k3",
+      "title": "Perbandingan Segitiga",
+      "icon": "change_history",
+      "content": "Garis sejajar dalam segitiga menciptakan perbandingan sisi yang tetap. <img src='./images/pdLxctc3_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'> Rumus: $$\\frac{SQ}{RQ}=\\frac{TQ}{PQ}$$",
+      "steps": [
+        "Gunakan konsep kesebangunan",
+        "Hitung panjang sisi yang hilang"
+      ],
+      "summary": "Sisi-sisi pada segitiga sebangun bersifat proporsional."
+    },
+    {
+      "id": "k4",
+      "title": "Garis Lurus & Berpelurus",
+      "icon": "horizontal_rule",
+      "content": "Sudut yang membentuk garis lurus berjumlah $180^\\circ$. <img src='./images/tJWHnR77_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Sudut A + Sudut B = 180°"
+      ],
+      "summary": "Total sudut pada garis lurus adalah 180°."
+    },
+    {
+      "id": "k5",
+      "title": "Sudut Sehadap",
+      "icon": "compare_arrows",
+      "content": "Dua garis sejajar yang dipotong garis lain membentuk sudut sehadap yang sama besar. <img src='./images/151ShFYd_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Identifikasi posisi sudut sehadap"
+      ],
+      "summary": "Sudut sehadap memiliki nilai derajat identik."
+    },
+    {
+      "id": "k6",
+      "title": "Jenis-Jenis Segitiga",
+      "icon": "category",
+      "content": "Berdasarkan sisi: Sama sisi, Sama kaki, Sembarang. Berdasarkan sudut: Lancip, Siku-siku, Tumpul.",
+      "steps": [
+        "Cek panjang semua sisi",
+        "Ukur sudut terbesarnya"
+      ],
+      "summary": "Segitiga diklasifikasi lewat sisi dan sudut."
+    },
+    {
+      "id": "k7",
+      "title": "Keliling Segitiga",
+      "icon": "calculate",
+      "content": "Keliling ($K$) adalah total panjang semua sisi luar. <img src='./images/xT2wF2cm_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "K = s1 + s2 + s3"
+      ],
+      "summary": "Cukup jumlahkan semua sisinya."
+    },
+    {
+      "id": "k8",
+      "title": "Sudut Dalam & Luar",
+      "icon": "architecture",
+      "content": "Sudut luar segitiga sama dengan jumlah dua sudut dalam yang tidak berpelurus dengannya. <img src='./images/2SHg6L2r_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Sudut Luar = 180° - Sudut Dalam"
+      ],
+      "summary": "Hubungan erat antara sudut dalam dan luar."
+    },
+    {
+      "id": "k9",
+      "title": "Total Sudut Segitiga",
+      "icon": "functions",
+      "content": "Jumlah ketiga sudut dalam segitiga apa pun selalu $180^\\circ$. <img src='./images/fWxFdrBH_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Sudut A + B + C = 180°"
+      ],
+      "summary": "Konstanta sudut segitiga adalah 180°."
+    },
+    {
+      "id": "k10",
+      "title": "Teorema Pythagoras",
+      "icon": "straighten",
+      "content": "Pada segitiga siku-siku: kuadrat sisi miring ($c$) sama dengan jumlah kuadrat sisi tegak ($a$) dan datar ($b$). <img src='./images/nhwwZbhh_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'> $$c^2 = a^2 + b^2$$",
+      "steps": [
+        "Tentukan sisi miring",
+        "Gunakan rumus untuk mencari panjang sisi"
+      ],
+      "summary": "Fondasi perhitungan segitiga siku-siku."
+    }
+  ]
+}

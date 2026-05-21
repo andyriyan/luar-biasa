@@ -1,0 +1,25 @@
+<section class="focus-overlay" id="focus-overlay" aria-label="Learning Focus Panel" aria-hidden="true">
+  <div class="focus-header">
+    <span class="date-badge" data-slot="progress">Konsep 1 / 5</span>
+    <button class="btn-icon" type="button" id="btn-close-focus" data-action="close-focus" aria-label="Tutup Focus Mode">
+      <span class="material-icons" aria-hidden="true">close</span>
+    </button>
+  </div>
+  <div class="focus-body">
+    <div style="max-width:600px; margin:0 auto;">
+      <div id="focus-content">
+        <h2 class="text-h2" data-slot="title">Judul Konsep</h2>
+        <div class="text-body mt-2" data-slot="content">Isi konsep akan diisi lewat JavaScript.</div>
+        <div class="mt-4" data-slot="summary"></div>
+      </div>
+    </div>
+  </div>
+  <div class="focus-nav">
+    <button class="btn btn-outline" type="button" id="btn-prev" data-action="prev-focus">
+      <span class="material-icons" aria-hidden="true">arrow_back</span>
+    </button>
+    <button class="btn btn-primary" type="button" id="btn-next" data-action="next-focus">
+      Lanjut <span class="material-icons" aria-hidden="true">arrow_forward</span>
+    </button>
+  </div>
+</section>

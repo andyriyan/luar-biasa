@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Daftar Materi — Media Belajar Digital</title>
+  <meta name="description" content="Jelajahi semua materi pembelajaran yang tersedia.">
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#10853F">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <script src="./assets/js/storage.js" defer></script>
+  <script src="./assets/js/app.js" defer></script>
+
+  <style>
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--bg-card);
+      border: 1px solid var(--border-normal);
+      border-radius: var(--radius-full);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-4);
+      box-shadow: var(--shadow-1);
+      transition: box-shadow var(--duration-short) var(--ease-standard);
+    }
+    .search-bar:focus-within {
+      box-shadow: var(--shadow-2);
+      border-color: var(--accent-primary);
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: var(--font-latin);
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+    .search-bar input::placeholder { color: var(--text-tertiary); }
+    .search-bar .material-icons { color: var(--text-tertiary); }
+
+    .category-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: var(--space-2);
+      padding-bottom: var(--space-2);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .category-scroll::-webkit-scrollbar { display: none; }
+
+    .grid-materi {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .empty-state .material-icons { font-size: 3rem; color: var(--text-tertiary); }
+
+    .page-header {
+      padding: var(--space-4) 0 var(--space-2);
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: var(--space-4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container container">
+    <header class="page-header anim-fade-down">
+      <h1 class="text-h2">Semua Materi</h1>
+      <p class="text-caption mt-2">Pilih materi yang ingin kamu pelajari</p>
+    </header>
+
+    <!-- Search -->
+    <div class="search-bar anim-fade-in delay-1">
+      <span class="material-icons" aria-hidden="true">search</span>
+      <input type="search" id="search-input" placeholder="Cari materi..." aria-label="Cari materi">
+    </div>
+
+    <!-- Kategori -->
+    <section class="anim-fade-in delay-2">
+      <div class="category-scroll" id="category-container"></div>
+    </section>
+
+    <!-- Daftar Materi -->
+    <section class="anim-fade-up delay-3">
+      <div class="grid-materi" id="materi-container">
+        <div class="skeleton" style="height:180px;"></div>
+        <div class="skeleton" style="height:180px;"></div>
+        <div class="skeleton" style="height:180px;"></div>
+        <div class="skeleton" style="height:180px;"></div>
+      </div>
+    </section>
+
+    <div class="mt-4" data-component="footer"></div>
+  </div>
+
+  <div data-component="bottom-nav"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const tplRes  = await fetch('./components/lesson-card.html');
+        const tplHtml = tplRes.ok ? await tplRes.text() : '';
+
+        const res  = await fetch('./data/materi-list.json');
+        const data = await res.json();
+
+        const catEl    = document.getElementById('category-container');
+        const gridEl   = document.getElementById('materi-container');
+        const searchEl = document.getElementById('search-input');
+
+        let activeCategory = 'all';
+        let searchQuery    = '';
+
+        const renderMateri = () => {
+          gridEl.innerHTML = '';
+          const filtered = data.materi.filter(m => {
+            if (!m.published) return false;
+            const matchCat  = activeCategory === 'all' || m.category === activeCategory;
+            const matchSearch = !searchQuery ||
+              m.title.toLowerCase().includes(searchQuery) ||
+              m.description.toLowerCase().includes(searchQuery) ||
+              (m.tags || []).some(t => t.toLowerCase().includes(searchQuery));
+            return matchCat && matchSearch;
+          });
+
+          if (filtered.length === 0) {
+            gridEl.innerHTML = `
+              <div class="empty-state">
+                <span class="material-icons">search_off</span>
+                <p class="text-secondary mt-2">Tidak ada materi ditemukan.</p>
+              </div>`;
+            return;
+          }
+
+          filtered.forEach(item => {
+            const progress = window.Storage ? Storage.getProgress(item.id) : 0;
+            const anchor   = document.createElement('a');
+            anchor.href    = `./materi/${item.slug}/index.html`;
+            anchor.style.cssText = 'text-decoration:none;color:inherit;';
+            anchor.innerHTML     = tplHtml;
+            const card = anchor.querySelector('[data-component-role="lesson-card"]');
+            if (!card) return;
+            card.querySelector('[data-slot="title"]').textContent       = item.title;
+            card.querySelector('[data-slot="description"]').textContent = item.description;
+            card.querySelector('[data-slot="duration"]').textContent    = item.estimatedTime || '15 menit';
+            card.querySelector('[data-slot="progress-bar"]').style.width = `${progress}%`;
+            gridEl.appendChild(anchor);
+          });
+        };
+
+        // Render kategori
+        catEl.innerHTML = data.categories.map((cat, i) => `
+          <button class="chip category-btn" data-id="${cat.id}"
+                  style="${i === 0 ? 'background:var(--chip-bg-active);color:var(--chip-text-active);' : ''}">
+            <span class="material-icons" style="font-size:16px;">${cat.icon}</span>
+            ${cat.label}
+          </button>
+        `).join('');
+
+        document.querySelectorAll('.category-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.category-btn').forEach(b => {
+              b.style.background = ''; b.style.color = '';
+            });
+            btn.style.background = 'var(--chip-bg-active)';
+            btn.style.color      = 'var(--chip-text-active)';
+            activeCategory = btn.dataset.id;
+            renderMateri();
+          });
+        });
+
+        searchEl.addEventListener('input', e => {
+          searchQuery = e.target.value.trim().toLowerCase();
+          renderMateri();
+        });
+
+        renderMateri();
+      } catch (e) {
+        console.error('Error loading materi', e);
+      }
+    });
+  </script>
+</body>
+</html>

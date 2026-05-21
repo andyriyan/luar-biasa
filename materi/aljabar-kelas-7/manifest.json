@@ -1,0 +1,17 @@
+{
+  "name": "Media Pembelajaran Aljabar Kelas 7",
+  "short_name": "AljabarMTS",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background-color": "#f8fafc",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3426/3426144.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

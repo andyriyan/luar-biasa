@@ -1,0 +1,91 @@
+{
+  "title": "Pembahasan Geometri PAS 2024",
+  "description": "Ringkasan konsep bangun datar dan bangun ruang berdasarkan soal PAS terbaru.",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "konsep-segiempat",
+      "title": "Sifat Diagonal Segi Empat",
+      "icon": "category",
+      "content": "Diagonal merupakan garis yang menghubungkan titik sudut berhadapan. Sifat diagonal membantu mengidentifikasi jenis bangun datar. <img src='./images/HsHTx1y.png' style='width:100%; border-radius:12px; margin:16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>",
+      "steps": [
+        "Diagonal tegak lurus: Persegi, Belah Ketupat, dan Layang-layang.",
+        "Layang-layang: Hanya satu diagonal membagi diagonal lain sama panjang.",
+        "Belah Ketupat: Kedua diagonal saling membagi dua sama panjang."
+      ],
+      "summary": "Perbedaan utama layang-layang dan belah ketupat terletak pada pembagian panjang diagonalnya."
+    },
+    {
+      "id": "konsep-pythagoras",
+      "title": "Aplikasi Pythagoras pada Bangun Datar",
+      "icon": "calculate",
+      "content": "Teorema Pythagoras digunakan untuk mencari tinggi trapesium atau diagonal layang-layang. Rumusnya adalah: $$c = \\sqrt{a^2 + b^2}$$. <img src='./images/RZLL7tT.png' style='width:100%; border-radius:12px; margin:16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>",
+      "steps": [
+        "Tinggi Trapesium: Gunakan selisih alas sebagai alas segitiga siku-siku.",
+        "Sisi Belah Ketupat: Gunakan setengah panjang kedua diagonalnya.",
+        "Tripel Pythagoras: Hafalkan kombinasi (3,4,5), (5,12,13), dan (8,15,17)."
+      ],
+      "summary": "Gunakan Pythagoras untuk mencari elemen bangun datar yang tidak diketahui secara langsung."
+    },
+    {
+      "id": "konsep-prisma",
+      "title": "Unsur Bangun Ruang Prisma",
+      "icon": "view_in_ar",
+      "content": "Prisma segi-$n$ memiliki jumlah sisi, rusuk, dan titik sudut yang berpola tetap.",
+      "steps": [
+        "Banyak Sisi: $n + 2$",
+        "Banyak Titik Sudut: $2n$",
+        "Banyak Rusuk: $3n$"
+      ],
+      "summary": "Prisma segi-lima memiliki 7 sisi dan 10 titik sudut."
+    },
+    {
+      "id": "konsep-balok",
+      "title": "Diagonal pada Balok",
+      "icon": "grid_view",
+      "content": "Balok memiliki elemen diagonal yang tersebar di sisi dan ruangnya. <img src='./images/oZst4Kg.png' style='width:100%; border-radius:12px; margin:16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>",
+      "steps": [
+        "Diagonal Bidang: Terdapat 12 buah (2 di setiap sisi).",
+        "Diagonal Ruang: Terdapat 4 buah.",
+        "Bidang Diagonal: Terdapat 6 buah."
+      ],
+      "summary": "Balok memiliki total 12 diagonal bidang karena memiliki 6 sisi persegi panjang."
+    },
+    {
+      "id": "konsep-jaring",
+      "title": "Analisis Jaring-Jaring Kubus",
+      "icon": "architecture",
+      "content": "Jaring-jaring kubus terdiri dari 6 persegi yang jika dilipat membentuk kubus tanpa ada sisi yang menumpuk. <img src='./images/3i7Betw.png' style='width:100%; border-radius:12px; margin:16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>",
+      "steps": [
+        "Pola 1-4-1: Satu kotak di atas, empat berderet, satu di bawah.",
+        "Pola 2-3-1: Dua kotak, tiga berderet, satu kotak.",
+        "Hindari pola yang membentuk persegi 2x2 karena akan menyebabkan sisi bertumpuk."
+      ],
+      "summary": "Pola 1-4-1 dan 2-3-1 adalah pola jaring-jaring kubus yang paling umum dan valid."
+    },
+    {
+      "id": "konsep-satuan",
+      "title": "Analisis Kubus Satuan yang Dicat",
+      "icon": "layers",
+      "content": "Untuk balok berukuran $p \\times l \\times t$ yang dicat seluruh permukaannya, kubus satuan dapat dikelompokkan berdasarkan jumlah sisi yang terkena cat.",
+      "steps": [
+        "Terkena 3 sisi: Selalu 8 buah (di titik sudut).",
+        "Terkena 2 sisi: $4 \\times ((p-2) + (l-2) + (t-2))$.",
+        "Terkena 1 sisi: Terletak di tengah permukaan bidang."
+      ],
+      "summary": "Kubus yang terkena cat pada dua sisi terletak di rusuk balok (tidak termasuk bagian sudut)."
+    },
+    {
+      "id": "konsep-tabung",
+      "title": "Karakteristik Tabung",
+      "icon": "radio_button_unchecked",
+      "content": "Tabung merupakan bangun ruang sisi lengkung yang tidak memiliki titik sudut.",
+      "steps": [
+        "Memiliki 3 sisi: Alas, Tutup (lingkaran), dan Selimut.",
+        "Memiliki 2 rusuk lengkung.",
+        "Memiliki 0 titik sudut."
+      ],
+      "summary": "Ciri khas tabung adalah memiliki alas dan tutup lingkaran yang kongruen tanpa sudut tajam."
+    }
+  ]
+}

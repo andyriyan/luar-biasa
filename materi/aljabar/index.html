@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar Aljabar Interaktif</title>
+  <script src="../../assets/vendor/tailwind.min.js"></script>
+  <script src="../../assets/vendor/lucide.min.js"></script>
+  <script>
+if (!window.elementSdk) {
+  window.elementSdk = {
+    init: function(options) {
+      console.log("Mock elementSdk initialized");
+      if (options && options.onConfigChange) {
+        options.onConfigChange(options.defaultConfig || {});
+      }
+    },
+    setConfig: function(config) {
+      console.log("Mock setConfig called", config);
+    }
+  };
+}
+</script>
+  <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { nunito: ['Nunito'], amiri: ['Amiri'] },
+      colors: {
+        primary: '#0d9488',
+        secondary: '#0284c7',
+        accent: '#10b981',
+        dark: '#134e4a',
+        light: '#f0fdfa'
+      }
+    }
+  }
+}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; font-family: 'Nunito', sans-serif; }
+.page { display: none; height: 100%; overflow-y: auto; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(13,148,136,0.3); } 50% { box-shadow: 0 0 40px rgba(13,148,136,0.6); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+.animate-in { animation: fadeIn 0.6s ease forwards; }
+.float { animation: float 3s ease-in-out infinite; }
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.slide-in { animation: slideIn 0.5s ease forwards; }
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(13,148,136,0.2); }
+.islamic-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230d9488' fill-opacity='0.05'%3E%3Cpath d='M30 0l30 30-30 30L0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.drag-item { cursor: grab; user-select: none; }
+.drag-item:active { cursor: grabbing; }
+.drop-zone { border: 2px dashed #0d9488; min-height: 50px; transition: all 0.3s; }
+.drop-zone.over { background: rgba(13,148,136,0.1); border-color: #0284c7; }
+.timer-bar { transition: width 1s linear; }
+.badge { background: linear-gradient(135deg, #0d9488, #0284c7); }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  
+ </head>
+ <body class="h-full bg-light islamic-pattern"><!-- Audio Context for Sound Effects -->
+  <div id="app" class="h-full w-full overflow-auto"><!-- PAGE: PEMBUKA -->
+   <div id="page-home" class="page active">
+    <div class="min-h-full flex flex-col items-center justify-center p-6 text-center">
+     <div class="animate-in max-w-lg w-full"><!-- Islamic Ornament -->
+      <div class="mb-4">
+       <svg class="mx-auto w-16 h-16 text-primary float" viewbox="0 0 100 100"><polygon points="50,5 61,35 95,35 68,57 79,90 50,70 21,90 32,57 5,35 39,35" fill="currentColor" opacity="0.8" /> <circle cx="50" cy="50" r="15" fill="white" stroke="currentColor" stroke-width="2" />
+       </svg>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-black text-dark mb-2" id="display-title">Belajar Aljabar Interaktif</h1>
+      <p class="font-amiri text-xl text-primary mb-1">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+      <p class="text-sm text-gray-600 mb-1" id="display-school">MTs Ma'arif Jumo</p>
+      <p class="text-sm text-gray-500 mb-6">Matematika Kelas VII</p><!-- Math Illustration -->
+      <div class="flex justify-center gap-4 mb-6">
+       <div class="bg-white rounded-xl p-3 shadow-lg card-hover">
+        <span class="text-2xl font-bold text-primary">2x</span>
+       </div>
+       <div class="bg-white rounded-xl p-3 shadow-lg card-hover">
+        <span class="text-2xl font-bold text-secondary">+</span>
+       </div>
+       <div class="bg-white rounded-xl p-3 shadow-lg card-hover">
+        <span class="text-2xl font-bold text-accent">3y</span>
+       </div>
+       <div class="bg-white rounded-xl p-3 shadow-lg card-hover">
+        <span class="text-2xl font-bold text-primary">=</span>
+       </div>
+       <div class="bg-white rounded-xl p-3 shadow-lg card-hover">
+        <span class="text-2xl font-bold text-dark">?</span>
+       </div>
+      </div>
+      <p class="text-gray-600 mb-6 italic">"Barang siapa menempuh jalan untuk mencari ilmu, maka Allah akan mudahkan baginya jalan menuju surga." (HR. Muslim)</p><button onclick="navigateTo('tujuan')" class="bg-primary text-white px-8 py-4 rounded-full text-lg font-bold pulse-glow hover:bg-teal-700 transition-all"> 🚀 Mulai Belajar </button>
+     </div>
+    </div>
+   </div><!-- PAGE: TUJUAN PEMBELAJARAN -->
+   <div id="page-tujuan" class="page">
+    <div class="min-h-full p-4 md:p-8">
+     <div class="max-w-3xl mx-auto animate-in"><a href="../../index.html" class="mb-4 text-primary flex items-center gap-1 hover:underline"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Beranda</a>
+      <h2 class="text-2xl md:text-3xl font-bold text-dark mb-6 flex items-center gap-2"><i data-lucide="target" class="w-7 h-7 text-primary"></i> Tujuan Pembelajaran</h2>
+      <p class="text-gray-600 mb-6">Setelah mempelajari materi ini, kamu akan mampu:</p>
+      <div class="space-y-3" id="tujuan-list">
+      </div>
+      <div class="mt-8 text-center"><button onclick="navigateTo('materi')" class="bg-primary text-white px-6 py-3 rounded-full font-bold hover:bg-teal-700 transition-all">Lanjut ke Materi →</button>
+      </div>
+     </div>
+    </div>
+   </div><!-- PAGE: MATERI -->
+   <div id="page-materi" class="page">
+    <div class="min-h-full p-4 md:p-8">
+     <div class="max-w-4xl mx-auto animate-in"><button onclick="navigateTo('tujuan')" class="mb-4 text-primary flex items-center gap-1 hover:underline"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali</button>
+      <h2 class="text-2xl md:text-3xl font-bold text-dark mb-6 flex items-center gap-2"><i data-lucide="book-open" class="w-7 h-7 text-primary"></i> Materi Aljabar</h2><!-- Sub-materi Navigation -->
+      <div class="flex flex-wrap gap-2 mb-6" id="submateri-nav"></div><!-- Materi Content -->
+      <div id="materi-content" class="bg-white rounded-2xl p-6 shadow-lg"></div>
+      <div class="mt-6 flex justify-between"><button id="btn-prev-materi" onclick="prevMateri()" class="bg-gray-200 text-gray-700 px-5 py-2 rounded-full font-bold hover:bg-gray-300 transition-all">← Sebelumnya</button> <button id="btn-next-materi" onclick="nextMateri()" class="bg-primary text-white px-5 py-2 rounded-full font-bold hover:bg-teal-700 transition-all">Selanjutnya →</button>
+      </div>
+      <div class="mt-4 text-center"><button onclick="navigateTo('simulasi')" class="text-secondary underline font-bold">Ke Simulasi Interaktif →</button>
+      </div>
+     </div>
+    </div>
+   </div><!-- PAGE: SIMULASI -->
+   <div id="page-simulasi" class="page">
+    <div class="min-h-full p-4 md:p-8">
+     <div class="max-w-4xl mx-auto animate-in"><button onclick="navigateTo('materi')" class="mb-4 text-primary flex items-center gap-1 hover:underline"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali</button>
+      <h2 class="text-2xl md:text-3xl font-bold text-dark mb-6 flex items-center gap-2"><i data-lucide="wand-2" class="w-7 h-7 text-primary"></i> Simulasi Interaktif</h2><!-- Tabs -->
+      <div class="flex flex-wrap gap-2 mb-6"><button onclick="showSimulasi('gabung')" class="sim-tab bg-primary text-white px-4 py-2 rounded-full font-bold text-sm" data-tab="gabung">Gabung Suku Sejenis</button> <button onclick="showSimulasi('kartu')" class="sim-tab bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-bold text-sm" data-tab="kartu">Kartu Variabel</button> <button onclick="showSimulasi('dragdrop')" class="sim-tab bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-bold text-sm" data-tab="dragdrop">Drag &amp; Drop</button>
+      </div>
+      <div id="simulasi-content" class="bg-white rounded-2xl p-6 shadow-lg"></div>
+      <div class="mt-6 text-center"><button onclick="navigateTo('latihan')" class="bg-secondary text-white px-6 py-3 rounded-full font-bold hover:bg-blue-700 transition-all">Ke Latihan →</button>
+      </div>
+     </div>
+    </div>
+   </div><!-- PAGE: LATIHAN -->
+   <div id="page-latihan" class="page">
+    <div class="min-h-full p-4 md:p-8">
+     <div class="max-w-3xl mx-auto animate-in"><button onclick="navigateTo('simulasi')" class="mb-4 text-primary flex items-center gap-1 hover:underline"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali</button>
+      <h2 class="text-2xl md:text-3xl font-bold text-dark mb-6 flex items-center gap-2"><i data-lucide="pencil" class="w-7 h-7 text-primary"></i> Latihan Interaktif</h2>
+      <div id="latihan-content"></div>
+      <div class="mt-6 text-center"><button onclick="navigateTo('game')" class="text-secondary underline font-bold">Ke Game Edukatif →</button>
+      </div>
+     </div>
+    </div>
+   </div><!-- PAGE: GAME -->
+   <div id="page-game" class="page">
+    <div class="min-h-full p-4 md:p-8">
+     <div class="max-w-3xl mx-auto animate-in"><button onclick="navigateTo('latihan')" class="mb-4 text-primary flex items-center gap-1 hover:underline"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali</button>
+      <h2 class="text-2xl md:text-3xl font-bold text-dark mb-6 flex items-center gap-2"><i data-lucide="gamepad-2" class="w-7 h-7 text-primary"></i> Game Edukatif</h2>
+      <div id="game-content"></div>
+      <div class="mt-6 text-center"><button onclick="navigateTo('evaluasi')" class="text-secondary underline font-bold">Ke Evaluasi HOTS →</button>
+      </div>
+     </div>
+    </div>
+   </div><!-- PAGE: EVALUASI -->
+   <div id="page-evaluasi" class="page">
+    <div class="min-h-full p-4 md:p-8">
+     <div class="max-w-3xl mx-auto animate-in"><button onclick="navigateTo('game')" class="mb-4 text-primary flex items-center gap-1 hover:underline"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali</button>
+      <h2 class="text-2xl md:text-3xl font-bold text-dark mb-6 flex items-center gap-2"><i data-lucide="brain" class="w-7 h-7 text-primary"></i> Evaluasi HOTS</h2>
+      <div id="evaluasi-content"></div>
+     </div>
+    </div>
+   </div><!-- PAGE: PENUTUP -->
+   <div id="page-penutup" class="page">
+    <div class="min-h-full p-4 md:p-8">
+     <div class="max-w-3xl mx-auto animate-in text-center">
+      <div id="penutup-content"></div>
+     </div>
+    </div>
+   </div><!-- Bottom Navigation -->
+   <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+    <div class="flex justify-around py-2"><button onclick="navigateTo('home')" class="nav-btn flex flex-col items-center text-xs text-gray-500 hover:text-primary" data-page="home"><i data-lucide="home" class="w-5 h-5"></i><span>Home</span></button> <button onclick="navigateTo('materi')" class="nav-btn flex flex-col items-center text-xs text-gray-500 hover:text-primary" data-page="materi"><i data-lucide="book-open" class="w-5 h-5"></i><span>Materi</span></button> <button onclick="navigateTo('simulasi')" class="nav-btn flex flex-col items-center text-xs text-gray-500 hover:text-primary" data-page="simulasi"><i data-lucide="wand-2" class="w-5 h-5"></i><span>Simulasi</span></button> <button onclick="navigateTo('latihan')" class="nav-btn flex flex-col items-center text-xs text-gray-500 hover:text-primary" data-page="latihan"><i data-lucide="pencil" class="w-5 h-5"></i><span>Latihan</span></button> <button onclick="navigateTo('evaluasi')" class="nav-btn flex flex-col items-center text-xs text-gray-500 hover:text-primary" data-page="evaluasi"><i data-lucide="brain" class="w-5 h-5"></i><span>Evaluasi</span></button>
+    </div>
+   </nav>
+  </div>
+  <script>
+// ========== AUDIO ==========
+let audioCtx;
+function getAudioCtx() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); return audioCtx; }
+
+function playSound(type) {
+  try {
+    const ctx = getAudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    gain.gain.value = 0.15;
+    if (type === 'click') { osc.frequency.value = 800; gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1); osc.start(); osc.stop(ctx.currentTime + 0.1); }
+    else if (type === 'correct') { osc.frequency.value = 523; osc.start(); osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1); osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4); osc.stop(ctx.currentTime + 0.4); }
+    else if (type === 'wrong') { osc.frequency.value = 200; osc.type = 'sawtooth'; osc.start(); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3); osc.stop(ctx.currentTime + 0.3); }
+    else if (type === 'success') { osc.frequency.value = 440; osc.start(); osc.frequency.setValueAtTime(554, ctx.currentTime + 0.15); osc.frequency.setValueAtTime(659, ctx.currentTime + 0.3); osc.frequency.setValueAtTime(880, ctx.currentTime + 0.45); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.7); osc.stop(ctx.currentTime + 0.7); }
+  } catch(e) {}
+}
+
+// ========== NAVIGATION ==========
+let currentPage = 'home';
+function navigateTo(page) {
+  playSound('click');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => { b.classList.toggle('text-primary', b.dataset.page === page); b.classList.toggle('text-gray-500', b.dataset.page !== page); });
+  currentPage = page;
+  window.scrollTo(0, 0);
+  if (page === 'simulasi') showSimulasi('gabung');
+  if (page === 'latihan') renderLatihan();
+  if (page === 'game') renderGame();
+  if (page === 'evaluasi') renderEvaluasi();
+  if (page === 'penutup') renderPenutup();
+}
+
+// ========== TUJUAN ==========
+const tujuanItems = [
+  'Memahami konsep dasar aljabar',
+  'Mengenal variabel, koefisien, konstanta, dan suku',
+  'Menyederhanakan bentuk aljabar',
+  'Melakukan operasi hitung bentuk aljabar',
+  'Menyelesaikan masalah kontekstual dengan aljabar'
+];
+function renderTujuan() {
+  const el = document.getElementById('tujuan-list');
+  el.innerHTML = tujuanItems.map((t, i) => `<div class="slide-in bg-white rounded-xl p-4 shadow flex items-center gap-3" style="animation-delay:${i*0.1}s"><span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">${i+1}</span><span class="text-gray-700">${t}</span></div>`).join('');
+}
+
+// ========== MATERI ==========
+let currentMateriIdx = 0;
+const materiData = [
+  { title: 'Pengertian Aljabar', content: `<div class="space-y-4"><p class="text-gray-700">Aljabar adalah cabang matematika yang menggunakan <strong class="text-primary">huruf (simbol)</strong> untuk mewakili bilangan yang belum diketahui nilainya.</p><div class="bg-teal-50 rounded-xl p-4 border-l-4 border-primary"><p class="font-bold text-dark">Contoh:</p><p class="text-lg">Umur Adi = <span class="bg-primary text-white px-2 py-1 rounded">x</span> tahun</p><p class="text-sm text-gray-600 mt-1">Huruf x mewakili umur Adi yang belum kita ketahui</p></div><div class="bg-blue-50 rounded-xl p-4 mt-3"><p class="text-sm text-gray-600">💡 Aljabar membantu kita menyelesaikan masalah sehari-hari dengan menggunakan simbol sebagai pengganti bilangan yang belum diketahui.</p></div></div>` },
+  { title: 'Variabel', content: `<div class="space-y-4"><p class="text-gray-700">Variabel adalah <strong class="text-primary">simbol/huruf</strong> yang mewakili bilangan yang belum diketahui nilainya.</p><div class="flex flex-wrap gap-3 justify-center my-4"><div class="bg-primary text-white px-6 py-4 rounded-xl text-2xl font-bold float">x</div><div class="bg-secondary text-white px-6 py-4 rounded-xl text-2xl font-bold float" style="animation-delay:0.5s">y</div><div class="bg-accent text-white px-6 py-4 rounded-xl text-2xl font-bold float" style="animation-delay:1s">n</div></div><div class="bg-teal-50 p-4 rounded-xl"><p class="font-bold">Contoh dalam kehidupan:</p><ul class="list-disc pl-5 mt-2 space-y-1 text-gray-700"><li>Harga satu buku = <strong>x</strong> rupiah</li><li>Jumlah siswa = <strong>n</strong> orang</li><li>Panjang tali = <strong>p</strong> meter</li></ul></div></div>` },
+  { title: 'Koefisien', content: `<div class="space-y-4"><p class="text-gray-700">Koefisien adalah <strong class="text-primary">bilangan yang mengalikan variabel</strong>.</p><div class="bg-white border-2 border-primary rounded-xl p-6 text-center my-4"><p class="text-4xl font-bold"><span class="text-secondary">3</span><span class="text-primary">x</span></p><p class="mt-2"><span class="text-secondary font-bold">3</span> = koefisien &nbsp; <span class="text-primary font-bold">x</span> = variabel</p></div><div class="grid grid-cols-2 gap-3"><div class="bg-teal-50 p-3 rounded-xl text-center"><p class="text-xl font-bold"><span class="text-secondary">5</span><span class="text-primary">y</span></p><p class="text-sm text-gray-600">Koefisien = 5</p></div><div class="bg-blue-50 p-3 rounded-xl text-center"><p class="text-xl font-bold"><span class="text-secondary">-2</span><span class="text-primary">a</span></p><p class="text-sm text-gray-600">Koefisien = -2</p></div></div></div>` },
+  { title: 'Konstanta', content: `<div class="space-y-4"><p class="text-gray-700">Konstanta adalah <strong class="text-primary">bilangan yang berdiri sendiri</strong> (tidak memiliki variabel).</p><div class="bg-teal-50 p-4 rounded-xl my-4"><p class="text-2xl font-bold text-center">2x + <span class="bg-yellow-300 px-2 rounded">5</span></p><p class="text-center mt-2 text-gray-600">Angka <strong>5</strong> adalah konstanta</p></div><div class="bg-blue-50 p-4 rounded-xl"><p class="font-bold">Contoh lain:</p><ul class="mt-2 space-y-2"><li class="text-lg">3y - <span class="bg-yellow-200 px-1 rounded font-bold">7</span> → konstanta = -7</li><li class="text-lg">x² + 2x + <span class="bg-yellow-200 px-1 rounded font-bold">1</span> → konstanta = 1</li></ul></div></div>` },
+  { title: 'Suku Sejenis & Tidak Sejenis', content: `<div class="space-y-4"><p class="text-gray-700"><strong class="text-primary">Suku sejenis</strong> = suku dengan variabel dan pangkat yang sama.</p><div class="grid md:grid-cols-2 gap-4 my-4"><div class="bg-green-50 border-2 border-green-300 rounded-xl p-4"><p class="font-bold text-green-700 mb-2">✅ Suku Sejenis</p><div class="space-y-1"><p class="text-lg"><span class="bg-green-200 px-2 rounded">3x</span> dan <span class="bg-green-200 px-2 rounded">5x</span></p><p class="text-lg"><span class="bg-green-200 px-2 rounded">2y²</span> dan <span class="bg-green-200 px-2 rounded">-4y²</span></p></div></div><div class="bg-red-50 border-2 border-red-300 rounded-xl p-4"><p class="font-bold text-red-700 mb-2">❌ Tidak Sejenis</p><div class="space-y-1"><p class="text-lg"><span class="bg-red-200 px-2 rounded">3x</span> dan <span class="bg-red-200 px-2 rounded">5y</span></p><p class="text-lg"><span class="bg-red-200 px-2 rounded">2x</span> dan <span class="bg-red-200 px-2 rounded">2x²</span></p></div></div></div><p class="text-sm text-gray-600 bg-yellow-50 p-3 rounded-xl">⚠️ Ingat: Hanya suku sejenis yang bisa dijumlahkan atau dikurangkan!</p></div>` },
+  { title: 'Penjumlahan & Pengurangan', content: `<div class="space-y-4"><p class="text-gray-700">Operasi penjumlahan dan pengurangan hanya bisa dilakukan pada <strong class="text-primary">suku sejenis</strong>.</p><div class="bg-teal-50 rounded-xl p-4 my-4"><p class="font-bold mb-2">Langkah:</p><ol class="list-decimal pl-5 space-y-1"><li>Kelompokkan suku sejenis</li><li>Jumlahkan/kurangkan koefisiennya</li></ol></div><div class="bg-white border rounded-xl p-4"><p class="font-bold text-dark mb-2">Contoh:</p><p class="text-lg">(3x + 2y) + (5x - y)</p><p class="text-lg mt-1">= (3x + 5x) + (2y - y)</p><p class="text-lg mt-1 text-primary font-bold">= 8x + y</p></div><div class="bg-blue-50 p-4 rounded-xl mt-3"><p class="text-lg">(4a - 3b) - (2a + b)</p><p class="text-lg mt-1">= 4a - 3b - 2a - b</p><p class="text-lg mt-1 text-primary font-bold">= 2a - 4b</p></div></div>` },
+  { title: 'Perkalian Aljabar', content: `<div class="space-y-4"><p class="text-gray-700">Perkalian bentuk aljabar menggunakan <strong class="text-primary">sifat distributif</strong>.</p><div class="bg-teal-50 rounded-xl p-4 my-4"><p class="font-bold">Aturan:</p><ul class="list-disc pl-5 mt-2 space-y-1"><li>Kalikan koefisien × koefisien</li><li>Kalikan variabel × variabel (pangkat ditambah)</li></ul></div><div class="bg-white border rounded-xl p-4"><p class="font-bold mb-2">Contoh 1:</p><p class="text-lg">3x × 2y = <span class="text-primary font-bold">6xy</span></p></div><div class="bg-white border rounded-xl p-4 mt-3"><p class="font-bold mb-2">Contoh 2 (Distributif):</p><p class="text-lg">2(x + 3) = 2·x + 2·3 = <span class="text-primary font-bold">2x + 6</span></p></div></div>` },
+  { title: 'Pembagian Aljabar', content: `<div class="space-y-4"><p class="text-gray-700">Pembagian bentuk aljabar: bagi koefisien dan kurangkan pangkat variabel yang sama.</p><div class="bg-teal-50 rounded-xl p-4 my-4"><p class="font-bold">Aturan:</p><ul class="list-disc pl-5 mt-2 space-y-1"><li>Bagi koefisien</li><li>Kurangkan pangkat variabel yang sama</li></ul></div><div class="bg-white border rounded-xl p-4"><p class="text-lg">6x² ÷ 2x = <span class="text-primary font-bold">3x</span></p><p class="text-sm text-gray-600 mt-1">(6÷2 = 3, x²÷x = x)</p></div><div class="bg-white border rounded-xl p-4 mt-3"><p class="text-lg">12ab ÷ 4a = <span class="text-primary font-bold">3b</span></p></div></div>` },
+  { title: 'Penerapan Aljabar', content: `<div class="space-y-4"><p class="text-gray-700">Aljabar sangat berguna dalam <strong class="text-primary">kehidupan sehari-hari</strong>!</p><div class="space-y-3"><div class="bg-teal-50 rounded-xl p-4"><p class="font-bold">🛒 Belanja:</p><p>Harga 3 buku dan 2 pensil: <span class="text-primary font-bold">3x + 2y</span></p></div><div class="bg-blue-50 rounded-xl p-4"><p class="font-bold">👨‍👩‍👧 Umur:</p><p>Umur Ani 5 tahun lebih tua dari Budi: <span class="text-primary font-bold">x + 5</span></p></div><div class="bg-green-50 rounded-xl p-4"><p class="font-bold">📐 Luas:</p><p>Luas persegi panjang: <span class="text-primary font-bold">p × l</span></p></div></div></div>` }
+];
+
+function renderSubmateriNav() {
+  const nav = document.getElementById('submateri-nav');
+  nav.innerHTML = materiData.map((m, i) => `<button onclick="goToMateri(${i})" class="submateri-btn px-3 py-1 rounded-full text-xs font-bold transition-all ${i === currentMateriIdx ? 'bg-primary text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}">${i+1}. ${m.title}</button>`).join('');
+}
+function renderMateri() {
+  document.getElementById('materi-content').innerHTML = `<h3 class="text-xl font-bold text-dark mb-4">${materiData[currentMateriIdx].title}</h3>${materiData[currentMateriIdx].content}`;
+  renderSubmateriNav();
+  document.getElementById('btn-prev-materi').style.visibility = currentMateriIdx === 0 ? 'hidden' : 'visible';
+  document.getElementById('btn-next-materi').textContent = currentMateriIdx === materiData.length - 1 ? 'Selesai ✓' : 'Selanjutnya →';
+}
+function goToMateri(i) { playSound('click'); currentMateriIdx = i; renderMateri(); }
+function nextMateri() { if (currentMateriIdx < materiData.length - 1) { currentMateriIdx++; renderMateri(); playSound('click'); } }
+function prevMateri() { if (currentMateriIdx > 0) { currentMateriIdx--; renderMateri(); playSound('click'); } }
+
+// ========== SIMULASI ==========
+function showSimulasi(type) {
+  playSound('click');
+  document.querySelectorAll('.sim-tab').forEach(b => { b.classList.toggle('bg-primary', b.dataset.tab === type); b.classList.toggle('text-white', b.dataset.tab === type); b.classList.toggle('bg-gray-200', b.dataset.tab !== type); b.classList.toggle('text-gray-700', b.dataset.tab !== type); });
+  const el = document.getElementById('simulasi-content');
+  if (type === 'gabung') {
+    el.innerHTML = `<h3 class="font-bold text-lg mb-4">Penggabungan Suku Sejenis</h3><p class="text-gray-600 mb-4">Klik suku-suku sejenis untuk menggabungkannya!</p><div class="flex flex-wrap gap-3 justify-center mb-4" id="suku-items"></div><div class="bg-teal-50 p-4 rounded-xl mt-4"><p class="font-bold">Hasil:</p><p id="suku-result" class="text-xl font-bold text-primary mt-2">-</p></div><button onclick="resetGabung()" class="mt-4 bg-gray-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-300">🔄 Reset</button>`;
+    initGabung();
+  } else if (type === 'kartu') {
+    el.innerHTML = `<h3 class="font-bold text-lg mb-4">Kartu Variabel Interaktif</h3><p class="text-gray-600 mb-4">Klik kartu untuk membaliknya dan lihat nilai variabelnya!</p><div class="grid grid-cols-3 md:grid-cols-4 gap-3" id="kartu-grid"></div>`;
+    initKartu();
+  } else if (type === 'dragdrop') {
+    el.innerHTML = `<h3 class="font-bold text-lg mb-4">Susun Bentuk Aljabar</h3><p class="text-gray-600 mb-4">Seret suku-suku ke kotak yang benar!</p><div class="flex flex-wrap gap-2 mb-4 justify-center" id="drag-source"></div><div class="grid grid-cols-2 gap-4 mt-4"><div><p class="font-bold text-center mb-2 text-primary">Suku dengan x</p><div class="drop-zone rounded-xl p-4 min-h-[80px] flex flex-wrap gap-2" id="drop-x" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,'x')"></div></div><div><p class="font-bold text-center mb-2 text-secondary">Konstanta</p><div class="drop-zone rounded-xl p-4 min-h-[80px] flex flex-wrap gap-2" id="drop-const" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,'const')"></div></div></div><p id="dd-feedback" class="mt-4 text-center font-bold"></p><button onclick="showSimulasi('dragdrop')" class="mt-3 bg-gray-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-300">🔄 Reset</button>`;
+    initDragDrop();
+  }
+}
+
+let gabungSuku = [];
+function initGabung() {
+  gabungSuku = [{v:'3x',t:'x',sel:false},{v:'2y',t:'y',sel:false},{v:'5x',t:'x',sel:false},{v:'-y',t:'y',sel:false},{v:'4',t:'c',sel:false},{v:'-2x',t:'x',sel:false},{v:'3',t:'c',sel:false}];
+  renderGabung();
+}
+function renderGabung() {
+  const colors = {x:'bg-primary text-white',y:'bg-secondary text-white',c:'bg-yellow-400 text-dark'};
+  document.getElementById('suku-items').innerHTML = gabungSuku.map((s,i) => `<button onclick="selectGabung(${i})" class="px-4 py-3 rounded-xl font-bold text-lg transition-all ${colors[s.t]} ${s.sel?'ring-4 ring-yellow-300 scale-110':''}">${s.v}</button>`).join('');
+}
+function selectGabung(i) {
+  playSound('click');
+  gabungSuku[i].sel = !gabungSuku[i].sel;
+  renderGabung();
+  // Check if all selected are same type
+  const selected = gabungSuku.filter(s => s.sel);
+  if (selected.length >= 2) {
+    const types = new Set(selected.map(s => s.t));
+    if (types.size === 1) {
+      let sum = 0; const t = selected[0].t;
+      selected.forEach(s => { const num = parseInt(s.v) || (s.v.startsWith('-') ? -1 : 1); sum += num; });
+      const suffix = t === 'c' ? '' : t === 'x' ? 'x' : 'y';
+      document.getElementById('suku-result').textContent = sum + suffix;
+      playSound('correct');
+    } else {
+      document.getElementById('suku-result').textContent = '⚠️ Pilih suku sejenis saja!';
+    }
+  }
+}
+function resetGabung() { initGabung(); document.getElementById('suku-result').textContent = '-'; }
+
+function initKartu() {
+  const cards = [{front:'x',back:'x = 5'},{front:'2x',back:'2×5 = 10'},{front:'3y',back:'3×3 = 9'},{front:'y',back:'y = 3'},{front:'x+y',back:'5+3 = 8'},{front:'2x-y',back:'10-3 = 7'}];
+  document.getElementById('kartu-grid').innerHTML = cards.map((c,i) => `<div onclick="flipKartu(this)" class="card-hover cursor-pointer bg-primary text-white rounded-xl p-4 text-center h-20 flex items-center justify-center" data-flipped="0" data-back="${c.back}"><span class="text-xl font-bold">${c.front}</span></div>`).join('');
+}
+function flipKartu(el) {
+  playSound('click');
+  if (el.dataset.flipped === '0') { el.dataset.flipped = '1'; el.innerHTML = `<span class="text-lg font-bold">${el.dataset.back}</span>`; el.className = 'card-hover cursor-pointer bg-yellow-300 text-dark rounded-xl p-4 text-center h-20 flex items-center justify-center'; }
+  else { el.dataset.flipped = '0'; el.className = 'card-hover cursor-pointer bg-primary text-white rounded-xl p-4 text-center h-20 flex items-center justify-center'; el.innerHTML = `<span class="text-xl font-bold">?</span>`; }
+}
+
+function initDragDrop() {
+  const items = [{v:'3x',t:'x'},{v:'7',t:'const'},{v:'-2x',t:'x'},{v:'5',t:'const'},{v:'x',t:'x'},{v:'-4',t:'const'}];
+  document.getElementById('drag-source').innerHTML = items.map((it,i) => `<div class="drag-item bg-white border-2 border-primary rounded-lg px-4 py-2 font-bold" draggable="true" ondragstart="event.dataTransfer.setData('text','${i}|${it.v}|${it.t}')" data-idx="${i}">${it.v}</div>`).join('');
+}
+function handleDrop(e, zone) {
+  e.preventDefault(); e.target.closest('.drop-zone').classList.remove('over');
+  const [idx, val, type] = e.dataTransfer.getData('text').split('|');
+  const item = document.querySelector(`[data-idx="${idx}"]`);
+  if (type === zone) { e.target.closest('.drop-zone').appendChild(item); item.classList.add('bg-green-100','border-green-400'); playSound('correct'); document.getElementById('dd-feedback').textContent = '✅ Benar!'; document.getElementById('dd-feedback').className = 'mt-4 text-center font-bold text-green-600'; }
+  else { playSound('wrong'); document.getElementById('dd-feedback').textContent = '❌ Coba lagi!'; document.getElementById('dd-feedback').className = 'mt-4 text-center font-bold text-red-600'; }
+}
+
+// ========== LATIHAN ==========
+const latihanSoal = [
+  {q:'Koefisien dari 5x adalah...', opts:['5','x','5x','1'], ans:0},
+  {q:'Suku sejenis dari 3y adalah...', opts:['3x','7y','-2','y²'], ans:1},
+  {q:'Hasil dari 4x + 2x = ...', opts:['6x²','6x','8x','42x'], ans:1},
+  {q:'Konstanta dari 2x + 7 adalah...', opts:['2','x','7','2x'], ans:2},
+  {q:'Hasil dari 3(x + 2) = ...', opts:['3x + 2','3x + 6','x + 6','3x + 5'], ans:1},
+  {q:'Hasil dari 8x - 3x = ...', opts:['5','5x','11x','5x²'], ans:1},
+  {q:'Variabel dari 9ab adalah...', opts:['9','a','b','ab'], ans:3},
+  {q:'Hasil dari 2x × 3x = ...', opts:['6x','5x²','6x²','6'], ans:2},
+];
+let latihanIdx = 0, latihanScore = 0, latihanAnswered = false;
+
+function renderLatihan() {
+  latihanIdx = 0; latihanScore = 0;
+  showLatihanSoal();
+}
+function showLatihanSoal() {
+  latihanAnswered = false;
+  if (latihanIdx >= latihanSoal.length) {
+    document.getElementById('latihan-content').innerHTML = `<div class="bg-white rounded-2xl p-8 shadow-lg text-center"><h3 class="text-2xl font-bold text-dark mb-4">🎉 Selesai!</h3><p class="text-4xl font-bold text-primary mb-2">${latihanScore}/${latihanSoal.length}</p><p class="text-gray-600 mb-4">${latihanScore >= 6 ? 'Luar biasa! Kamu sudah paham!' : 'Terus belajar ya!'}</p><button onclick="renderLatihan()" class="bg-primary text-white px-6 py-2 rounded-full font-bold">Ulangi</button></div>`;
+    playSound('success'); return;
+  }
+  const s = latihanSoal[latihanIdx];
+  document.getElementById('latihan-content').innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-lg"><div class="flex justify-between mb-4"><span class="text-sm font-bold text-gray-500">Soal ${latihanIdx+1}/${latihanSoal.length}</span><span class="text-sm font-bold text-primary">Skor: ${latihanScore}</span></div><p class="text-lg font-bold text-dark mb-4">${s.q}</p><div class="space-y-2" id="latihan-opts">${s.opts.map((o,i) => `<button onclick="checkLatihan(${i})" class="w-full text-left p-3 rounded-xl border-2 border-gray-200 hover:border-primary transition-all font-medium">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}</div><p id="latihan-feedback" class="mt-4 font-bold text-center"></p></div>`;
+}
+function checkLatihan(i) {
+  if (latihanAnswered) return;
+  latihanAnswered = true;
+  const s = latihanSoal[latihanIdx];
+  const btns = document.querySelectorAll('#latihan-opts button');
+  btns.forEach((b,idx) => { b.disabled = true; if (idx === s.ans) b.classList.add('bg-green-100','border-green-400'); if (idx === i && i !== s.ans) b.classList.add('bg-red-100','border-red-400'); });
+  if (i === s.ans) { latihanScore++; playSound('correct'); document.getElementById('latihan-feedback').innerHTML = '<span class="text-green-600">✅ Benar! Hebat!</span>'; }
+  else { playSound('wrong'); document.getElementById('latihan-feedback').innerHTML = `<span class="text-red-600">❌ Jawaban yang benar: ${String.fromCharCode(65+s.ans)}. ${s.opts[s.ans]}</span>`; }
+  setTimeout(() => { latihanIdx++; showLatihanSoal(); }, 1500);
+}
+
+// ========== GAME ==========
+let gameScore = 0, gameLevel = 0;
+const gameLevels = [
+  {q:'Jika x = 3, berapa nilai 2x + 1?', ans:'7'},
+  {q:'Jika y = 4, berapa nilai 3y - 5?', ans:'7'},
+  {q:'Sederhanakan: 5x + 3x', ans:'8x'},
+  {q:'Sederhanakan: 7a - 2a', ans:'5a'},
+  {q:'Jika x = 2, berapa 4x²?', ans:'16'},
+  {q:'Hasil dari 2(x+3) jika x=1?', ans:'8'},
+];
+function renderGame() {
+  gameScore = 0; gameLevel = 0;
+  showGameLevel();
+}
+function showGameLevel() {
+  if (gameLevel >= gameLevels.length) {
+    document.getElementById('game-content').innerHTML = `<div class="bg-white rounded-2xl p-8 shadow-lg text-center"><h3 class="text-2xl font-bold text-dark mb-2">🏆 Petualangan Selesai!</h3><p class="text-5xl mb-4">⭐</p><p class="text-lg text-gray-700">Poin kamu: <span class="text-primary font-bold">${gameScore}</span></p><div class="mt-4 badge text-white px-6 py-3 rounded-full inline-block font-bold">${gameScore >= 5 ? 'Master Aljabar!' : gameScore >= 3 ? 'Pejuang Aljabar!' : 'Petualang Aljabar!'}</div><br><button onclick="renderGame()" class="mt-4 bg-primary text-white px-6 py-2 rounded-full font-bold">Main Lagi</button></div>`;
+    playSound('success'); return;
+  }
+  const g = gameLevels[gameLevel];
+  document.getElementById('game-content').innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-lg"><div class="flex justify-between items-center mb-4"><span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">Level ${gameLevel+1}</span><span class="text-primary font-bold">⭐ ${gameScore}</span></div><p class="text-lg font-bold text-dark mb-4">🗺️ ${g.q}</p><div class="flex gap-2"><input type="text" id="game-input" class="flex-1 border-2 border-gray-200 rounded-xl px-4 py-2 font-bold focus:border-primary outline-none" placeholder="Jawaban..." onkeydown="if(event.key==='Enter')checkGame()"><button onclick="checkGame()" class="bg-primary text-white px-4 py-2 rounded-xl font-bold hover:bg-teal-700">Cek!</button></div><p id="game-feedback" class="mt-3 font-bold text-center"></p></div>`;
+}
+function checkGame() {
+  const input = document.getElementById('game-input').value.trim().toLowerCase();
+  const ans = gameLevels[gameLevel].ans;
+  if (input === ans) { gameScore++; playSound('correct'); document.getElementById('game-feedback').innerHTML = '<span class="text-green-600">✅ Benar! +1 poin</span>'; }
+  else { playSound('wrong'); document.getElementById('game-feedback').innerHTML = `<span class="text-red-600">❌ Jawabannya: ${ans}</span>`; }
+  setTimeout(() => { gameLevel++; showGameLevel(); }, 1200);
+}
+
+// ========== EVALUASI HOTS ==========
+const evalSoal = [
+  {q:'Adi membeli 3 buku dan 2 pensil. Harga 1 buku = x, 1 pensil = y. Total harga belanja Adi adalah...', opts:['3x + 2y','5xy','3 + x + 2 + y','6xy'], ans:0, pembahasan:'3 buku = 3x, 2 pensil = 2y. Total = 3x + 2y'},
+  {q:'Umur Budi 5 tahun lebih tua dari Ani. Jika umur Ani = x, maka umur mereka berdua adalah...', opts:['2x + 5','x + 5','2x - 5','x² + 5'], ans:0, pembahasan:'Ani = x, Budi = x + 5. Total = x + (x+5) = 2x + 5'},
+  {q:'Panjang kebun = (2x+3) m, lebar = x m. Keliling kebun adalah...', opts:['6x + 6','3x + 3','4x + 6','2x² + 3x'], ans:0, pembahasan:'Keliling = 2(p+l) = 2(2x+3+x) = 2(3x+3) = 6x + 6'},
+  {q:'Harga 4 jeruk dan 3 mangga = 4a + 3b. Jika beli 2 kali lipat, totalnya...', opts:['8a + 6b','6a + 5b','4a + 3b','16ab'], ans:0, pembahasan:'2 × (4a + 3b) = 8a + 6b'},
+  {q:'Sederhanakan: 5x + 3 - 2x + 7', opts:['3x + 10','7x + 10','3x - 4','7x - 4'], ans:0, pembahasan:'(5x - 2x) + (3 + 7) = 3x + 10'},
+  {q:'Jika panjang tali A = 3x cm dan tali B = (x+4) cm. Selisih panjangnya...', opts:['2x - 4','4x + 4','2x + 4','4x - 4'], ans:0, pembahasan:'3x - (x+4) = 3x - x - 4 = 2x - 4'},
+  {q:'Sebuah persegi memiliki sisi (x+2) cm. Luasnya...', opts:['x² + 4x + 4','2x + 4','x² + 2','x + 4'], ans:0, pembahasan:'Luas = (x+2)² = x² + 4x + 4'},
+  {q:'Ibu membeli 5 kg beras seharga p/kg dan 2 kg gula seharga q/kg. Jika bayar Rp100.000, kembaliannya...', opts:['100000 - 5p - 2q','100000 - 7pq','5p + 2q - 100000','100000 + 5p + 2q'], ans:0, pembahasan:'Total belanja = 5p + 2q. Kembalian = 100000 - (5p + 2q)'},
+  {q:'Hasil dari 3x(x + 2) adalah...', opts:['3x² + 6x','3x + 6','3x² + 2','6x²'], ans:0, pembahasan:'3x × x + 3x × 2 = 3x² + 6x'},
+  {q:'Ada 2x+1 siswa di kelas A dan 3x-2 di kelas B. Jika x=10, total siswa...', opts:['49','51','48','50'], ans:0, pembahasan:'(2(10)+1) + (3(10)-2) = 21 + 28 = 49'},
+];
+let evalIdx = 0, evalScore = 0, evalAnswered = false;
+
+function renderEvaluasi() {
+  evalIdx = 0; evalScore = 0;
+  showEvalSoal();
+}
+function showEvalSoal() {
+  evalAnswered = false;
+  if (evalIdx >= evalSoal.length) {
+    const persen = Math.round(evalScore / evalSoal.length * 100);
+    const kategori = persen >= 90 ? 'Sangat Baik 🌟' : persen >= 75 ? 'Baik 👍' : persen >= 60 ? 'Cukup 📖' : 'Perlu Belajar Lagi 💪';
+    document.getElementById('evaluasi-content').innerHTML = `<div class="bg-white rounded-2xl p-8 shadow-lg text-center"><h3 class="text-2xl font-bold text-dark mb-4">📊 Hasil Evaluasi</h3><p class="text-5xl font-black text-primary mb-2">${persen}%</p><p class="text-lg text-gray-700">Skor: ${evalScore}/${evalSoal.length}</p><p class="mt-2 text-lg font-bold">${kategori}</p><div class="mt-6 flex gap-3 justify-center"><button onclick="renderEvaluasi()" class="bg-gray-200 px-5 py-2 rounded-full font-bold hover:bg-gray-300">Ulangi</button><button onclick="navigateTo('penutup')" class="bg-primary text-white px-5 py-2 rounded-full font-bold hover:bg-teal-700">Selesai →</button></div></div>`;
+    playSound('success'); return;
+  }
+  const s = evalSoal[evalIdx];
+  document.getElementById('evaluasi-content').innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-lg"><div class="flex justify-between mb-3"><span class="text-sm font-bold text-gray-500">Soal ${evalIdx+1}/${evalSoal.length}</span><span class="text-sm font-bold text-primary">Benar: ${evalScore}</span></div><p class="text-base font-bold text-dark mb-4">${s.q}</p><div class="space-y-2" id="eval-opts">${s.opts.map((o,i) => `<button onclick="checkEval(${i})" class="w-full text-left p-3 rounded-xl border-2 border-gray-200 hover:border-primary transition-all font-medium text-sm">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}</div><div id="eval-feedback" class="mt-4"></div></div>`;
+}
+function checkEval(i) {
+  if (evalAnswered) return;
+  evalAnswered = true;
+  const s = evalSoal[evalIdx];
+  const btns = document.querySelectorAll('#eval-opts button');
+  btns.forEach((b,idx) => { b.disabled = true; if (idx === s.ans) b.classList.add('bg-green-100','border-green-400'); if (idx === i && i !== s.ans) b.classList.add('bg-red-100','border-red-400'); });
+  const correct = i === s.ans;
+  if (correct) { evalScore++; playSound('correct'); }
+  else playSound('wrong');
+  document.getElementById('eval-feedback').innerHTML = `<div class="p-3 rounded-xl ${correct ? 'bg-green-50' : 'bg-red-50'} text-sm"><p class="font-bold ${correct ? 'text-green-700' : 'text-red-700'}">${correct ? '✅ Benar!' : '❌ Kurang tepat'}</p><p class="text-gray-700 mt-1"><strong>Pembahasan:</strong> ${s.pembahasan}</p></div>`;
+  setTimeout(() => { evalIdx++; showEvalSoal(); }, 2500);
+}
+
+// ========== PENUTUP ==========
+function renderPenutup() {
+  document.getElementById('penutup-content').innerHTML = `
+    <div class="bg-white rounded-2xl p-8 shadow-lg max-w-lg mx-auto">
+      <svg class="mx-auto w-16 h-16 text-primary mb-4" viewBox="0 0 100 100"><polygon points="50,5 61,35 95,35 68,57 79,90 50,70 21,90 32,57 5,35 39,35" fill="currentColor"/></svg>
+      <h3 class="text-2xl font-bold text-dark mb-4">Rangkuman</h3>
+      <div class="text-left bg-teal-50 rounded-xl p-4 mb-6 text-sm space-y-1">
+        <p>✅ Aljabar menggunakan huruf sebagai simbol bilangan</p>
+        <p>✅ Variabel = huruf, Koefisien = angka di depan variabel</p>
+        <p>✅ Konstanta = bilangan tanpa variabel</p>
+        <p>✅ Operasi hanya bisa pada suku sejenis</p>
+        <p>✅ Aljabar sangat berguna dalam kehidupan sehari-hari</p>
+      </div>
+      <div class="bg-blue-50 rounded-xl p-4 mb-6">
+        <p class="font-amiri text-lg mb-1">رَبِّ زِدْنِي عِلْمًا</p>
+        <p class="text-sm text-gray-600">"Ya Tuhanku, tambahkanlah ilmu kepadaku"</p>
+      </div>
+      <p class="text-gray-600 italic mb-6">"Teruslah belajar, karena setiap usahamu bernilai ibadah. Semangat! 💪"</p>
+      <div class="badge text-white rounded-2xl p-4 inline-block">
+        <p class="text-sm">🏅 Sertifikat</p>
+        <p class="font-bold">Telah Menyelesaikan</p>
+        <p class="text-lg font-black">Belajar Aljabar Interaktif</p>
+        <p class="text-sm mt-1">MTs Ma'arif Jumo</p>
+      </div>
+      <div class="mt-6">
+        <button onclick="navigateTo('home')" class="bg-primary text-white px-6 py-3 rounded-full font-bold hover:bg-teal-700">🏠 Kembali ke Awal</button>
+      </div>
+    </div>`;
+}
+
+// ========== INIT ==========
+const defaultConfig = {
+  main_title: 'Belajar Aljabar Interaktif',
+  school_name: 'MTs Ma\'arif Jumo',
+  background_color: '#f0fdfa',
+  surface_color: '#ffffff',
+  text_color: '#134e4a',
+  primary_action: '#0d9488',
+  secondary_action: '#0284c7'
+};
+
+function applyConfig(config) {
+  document.getElementById('display-title').textContent = config.main_title || defaultConfig.main_title;
+  document.getElementById('display-school').textContent = config.school_name || defaultConfig.school_name;
+  document.body.style.backgroundColor = config.background_color || defaultConfig.background_color;
+}
+
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (config) => { applyConfig(config); },
+  mapToCapabilities: (config) => ({
+    recolorables: [
+      { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+      { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+      { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+      { get: () => config.primary_action || defaultConfig.primary_action, set: (v) => { config.primary_action = v; window.elementSdk.setConfig({ primary_action: v }); } },
+      { get: () => config.secondary_action || defaultConfig.secondary_action, set: (v) => { config.secondary_action = v; window.elementSdk.setConfig({ secondary_action: v }); } },
+    ],
+    borderables: [],
+    fontEditable: { get: () => config.font_family || 'Nunito', set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+    fontSizeable: { get: () => config.font_size || 16, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ['main_title', config.main_title || defaultConfig.main_title],
+    ['school_name', config.school_name || defaultConfig.school_name]
+  ])
+});
+
+renderTujuan();
+renderMateri();
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f8e59bc72258802',t:'MTc3ODMwNTAyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

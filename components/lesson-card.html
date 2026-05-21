@@ -1,0 +1,12 @@
+<article class="card card-interactive flex-col" data-component-role="lesson-card">
+  <div style="height:80px; border-radius: var(--radius-sm); background: var(--badge-bg); display:flex; align-items:center; justify-content:center; margin-bottom: var(--space-3);">
+    <span class="material-icons" aria-hidden="true">menu_book</span>
+  </div>
+  <h3 class="text-h3" data-slot="title">Judul Materi</h3>
+  <p class="text-caption mt-2" data-slot="description">Deskripsi singkat materi.</p>
+  <div class="date-badge mt-2" data-slot="duration">15 menit</div>
+  <div style="width:100%; height:6px; background: var(--bg-surface-alt); border-radius:999px; margin-top: var(--space-3); overflow:hidden;">
+    <div data-slot="progress-bar" style="width:0%; height:100%; background: var(--accent-primary);"></div>
+  </div>
+</article>
+

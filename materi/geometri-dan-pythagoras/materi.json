@@ -1,0 +1,129 @@
+{
+  "title": "Garis dan Sudut",
+  "description": "Modul pembelajaran Matematika Kelas 7 tentang garis, sudut, dan geometri pytagoras.",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "konsep-1",
+      "title": "Hubungan Antar Garis",
+      "icon": "timeline",
+      "content": "Pada bangun ruang terdapat garis sejajar dan garis berpotongan.<img src='./images/hOPDFlM.png' style='width:100%; border-radius:12px; margin:16px 0;'>Garis sejajar tidak pernah bertemu walaupun diperpanjang. Garis berpotongan bertemu di satu titik.",
+      "steps": [
+        "AB sejajar dengan CD",
+        "AB berpotongan dengan AD",
+        "AB berpotongan dengan BC"
+      ],
+      "summary": "Garis sejajar memiliki arah sama, garis berpotongan bertemu di satu titik."
+    },
+    {
+      "id": "konsep-2",
+      "title": "Jenis-Jenis Sudut",
+      "icon": "square_foot",
+      "content": "Sudut dibagi menjadi beberapa jenis berdasarkan besar sudutnya.",
+      "steps": [
+        "Sudut lancip: kurang dari 90°",
+        "Sudut siku-siku: tepat 90°",
+        "Sudut tumpul: antara 90° dan 180°",
+        "Sudut lurus: 180°"
+      ],
+      "summary": "Jenis sudut ditentukan dari besar derajatnya."
+    },
+    {
+      "id": "konsep-3",
+      "title": "Perbandingan pada Segitiga",
+      "icon": "change_history",
+      "content": "Jika terdapat garis sejajar pada segitiga maka berlaku perbandingan sisi.<img src='./images/NWCDKKa.png' style='width:100%; border-radius:12px; margin:16px 0;'>Contoh: $$\\frac{SQ}{RQ}=\\frac{TQ}{PQ}$$",
+      "steps": [
+        "Hitung panjang seluruh sisi",
+        "Gunakan perbandingan sisi",
+        "Selesaikan persamaan"
+      ],
+      "summary": "Perbandingan segitiga membantu mencari panjang sisi yang belum diketahui."
+    },
+    {
+      "id": "konsep-4",
+      "title": "Sudut pada Garis Lurus",
+      "icon": "horizontal_rule",
+      "content": "Jumlah sudut pada garis lurus adalah $$180^\\circ$$.<img src='./images/XtO4eIQ.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Gabungkan semua sudut",
+        "Samakan dengan 180°",
+        "Cari nilai variabel"
+      ],
+      "summary": "Sudut yang membentuk garis lurus jumlahnya 180°."
+    },
+    {
+      "id": "konsep-5",
+      "title": "Garis Sejajar dan Sudut Sehadap",
+      "icon": "compare_arrows",
+      "content": "Jika dua garis sejajar dipotong garis lain, maka sudut sehadap besarnya sama.<img src='./images/NyOsAgb.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Cari sudut berpelurus",
+        "Gunakan hubungan sudut sehadap",
+        "Tentukan sudut yang ditanya"
+      ],
+      "summary": "Sudut sehadap pada garis sejajar selalu sama besar."
+    },
+    {
+      "id": "konsep-6",
+      "title": "Jenis Segitiga",
+      "icon": "category",
+      "content": "Segitiga dibedakan berdasarkan panjang sisi dan besar sudut.",
+      "steps": [
+        "Segitiga sama sisi: semua sisi sama",
+        "Segitiga sama kaki: dua sisi sama",
+        "Segitiga sembarang: semua sisi berbeda",
+        "Segitiga siku-siku: memiliki sudut 90°"
+      ],
+      "summary": "Jenis segitiga dapat dikenali dari sisi dan sudutnya."
+    },
+    {
+      "id": "konsep-7",
+      "title": "Keliling Segitiga",
+      "icon": "calculate",
+      "content": "Keliling segitiga diperoleh dengan menjumlahkan semua panjang sisi.<img src='./images/nIt9QlL.png' style='width:100%; border-radius:12px; margin:16px 0;'>$$K=s_1+s_2+s_3$$",
+      "steps": [
+        "Tuliskan semua sisi",
+        "Jumlahkan seluruh sisi",
+        "Tuliskan satuannya"
+      ],
+      "summary": "Keliling adalah jumlah seluruh sisi bangun."
+    },
+    {
+      "id": "konsep-8",
+      "title": "Sudut Dalam dan Sudut Luar Segitiga",
+      "icon": "architecture",
+      "content": "Jumlah sudut dalam segitiga adalah $$180^\\circ$$.<img src='./images/zaXvdBm.png' style='width:100%; border-radius:12px; margin:16px 0;'>Sudut luar diperoleh dari $$180^\\circ - < dalam$$.",
+      "steps": [
+        "Cari sudut dalam",
+        "Kurangi dengan 180°",
+        "Peroleh sudut luar"
+      ],
+      "summary": "Sudut luar berkaitan langsung dengan sudut dalam segitiga."
+    },
+    {
+      "id": "konsep-9",
+      "title": "Menentukan Besar Sudut Segitiga",
+      "icon": "functions",
+      "content": "Jumlah sudut segitiga adalah $180^\\circ$.<img src='./images/3iW8A7t.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Jumlahkan semua sudut",
+        "Samakan dengan 180°",
+        "Selesaikan nilai x"
+      ],
+      "summary": "Jumlah seluruh sudut segitiga selalu 180°."
+    },
+    {
+      "id": "konsep-10",
+      "title": "Teorema Pythagoras",
+      "icon": "straighten",
+      "content": "Pada segitiga siku-siku berlaku rumus $$c^2=a^2+b^2$$.<img src='./images/K0thyPQ.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "steps": [
+        "Tentukan sisi miring",
+        "Kuadratkan sisi siku-siku",
+        "Jumlahkan hasil kuadrat"
+      ],
+      "summary": "Teorema Pythagoras digunakan pada segitiga siku-siku."
+    }
+  ]
+}

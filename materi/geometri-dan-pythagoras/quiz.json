@@ -1,0 +1,125 @@
+{
+  "quizTitle": "Kuis: Geometri Dasar dan Teorema Pythagoras",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Perhatikan gambar berikut:<br><img src='./images/hOPDFlM.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Garis yang sejajar dengan AB adalah ....",
+      "options": [
+        "AD",
+        "BC",
+        "CD",
+        "AE"
+      ],
+      "answer": "CD",
+      "explanation": "CD memiliki arah yang sama dengan AB sehingga sejajar."
+    },
+    {
+      "id": 2,
+      "question": "Sudut 135° termasuk jenis sudut ....",
+      "options": [
+        "Lancip",
+        "Siku-siku",
+        "Tumpul",
+        "Refleks"
+      ],
+      "answer": "Tumpul",
+      "explanation": "135° berada di antara 90° dan 180°."
+    },
+    {
+      "id": 3,
+      "question": "Perhatikan gambar berikut:<br><img src='./images/NWCDKKa.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Jika SQ=3 cm, RQ=9 cm, dan TQ=4 cm, maka panjang PQ adalah ....",
+      "options": [
+        "9 cm",
+        "10 cm",
+        "12 cm",
+        "15 cm"
+      ],
+      "answer": "12 cm",
+      "explanation": "Gunakan perbandingan segitiga: $$\\frac{3}{9}=\\frac{4}{PQ}$$ sehingga diperoleh PQ=12 cm."
+    },
+    {
+      "id": 4,
+      "question": "Perhatikan gambar berikut:<br><img  src='./images/XtO4eIQ.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Nilai x adalah ....",
+      "options": [
+        "10°",
+        "20°",
+        "30°",
+        "40°"
+      ],
+      "answer": "20°",
+      "explanation": "Diperoleh $$8x+20=180$$ sehingga $$x=20$$."
+    },
+    {
+      "id": 5,
+      "question": "Perhatikan gambar berikut:<br><img  src='./images/NyOsAgb.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Jika sudut A₁ = 120°, maka sudut A₂ adalah ....",
+      "options": [
+        "40°",
+        "50°",
+        "60°",
+        "120°"
+      ],
+      "answer": "60°",
+      "explanation": "Sudut berpelurus jumlahnya 180° sehingga $$180°-120°=60°$$."
+    },
+    {
+      "id": 6,
+      "question": "Segitiga dengan sisi 13 cm, 13 cm, dan 10 cm termasuk ....",
+      "options": [
+        "Segitiga sama sisi",
+        "Segitiga sama kaki",
+        "Segitiga sembarang",
+        "Segitiga siku-siku"
+      ],
+      "answer": "Segitiga sama kaki",
+      "explanation": "Karena terdapat dua sisi yang sama panjang."
+    },
+    {
+      "id": 7,
+      "question": "Perhatikan gambar berikut:<br><img  src='./images/nIt9QlL.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Keliling segitiga adalah ....",
+      "options": [
+        "146 cm",
+        "150 cm",
+        "156 cm",
+        "160 cm"
+      ],
+      "answer": "156 cm",
+      "explanation": "Keliling = 80 + 50 + 26 = 156 cm."
+    },
+    {
+      "id": 8,
+      "question": "Perhatikan gambar berikut:<br><img  src='./images/zaXvdBm.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Jika sudut dalam di titik D adalah 60°, maka sudut luarnya adalah ....",
+      "options": [
+        "100°",
+        "110°",
+        "120°",
+        "130°"
+      ],
+      "answer": "120°",
+      "explanation": "Sudut luar = $$180°-60°=120°$$."
+    },
+    {
+      "id": 9,
+      "question": "Perhatikan gambar berikut:<br><img  src='./images/3iW8A7t.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Besar sudut B adalah ....",
+      "options": [
+        "24°",
+        "28°",
+        "56°",
+        "72°"
+      ],
+      "answer": "56°",
+      "explanation": "Jumlah sudut segitiga 180°. Diperoleh $$x=28$$ sehingga sudut B = 56°."
+    },
+    {
+      "id": 10,
+      "question": "Perhatikan gambar berikut:<br><img  src='./images/K0thyPQ.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Rumus Pythagoras yang benar adalah ....",
+      "options": [
+        "a²=b²+c²",
+        "b²=a²+c²",
+        "c²=b²-a²",
+        "a²+c²=b"
+      ],
+      "answer": "b²=a²+c²",
+      "explanation": "Pada segitiga siku-siku, kuadrat sisi miring sama dengan jumlah kuadrat kedua sisi lainnya."
+    }
+  ]
+}

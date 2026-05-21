@@ -1,0 +1,145 @@
+{
+  "quizTitle": "Kuis Komprehensif Matematika Kelas VII",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Skor ujian matematika siswa kelas 7 adalah 85, 92, 78, 88, 70, 75 dan 95. Mean skor ujian mereka adalah...",
+      "options": ["83,2", "83,1", "73,2", "73,1"],
+      "answer": "A",
+      "explanation": "Mean = (85 + 92 + 78 + 88 + 70 + 75 + 95) / 7 = 583 / 7 ≈ 83,28. Nilai terdekat pada opsi pilihan ganda adalah 83,2."
+    },
+    {
+      "id": 2,
+      "question": "Diketahui data tinggi badan siswa kelas VII: 145, 142, 145, 160, 147, 150, 155, 150, 148, 147, 152, 152, 161, 147, 145, 147. Modus dari data tersebut adalah...",
+      "options": ["145", "147", "150", "152"],
+      "answer": "B",
+      "explanation": "Frekuensi kemunculan nilai: 145 muncul 3 kali, 147 muncul 4 kali, 150 muncul 2 kali, 152 muncul 2 kali. Modus (frekuensi tertinggi) adalah 147."
+    },
+    {
+      "id": 3,
+      "question": "Data nilai ulangan matematika kelas VII disajikan sebagai berikut: Nilai 6 (frekuensi 6), Nilai 7 (frekuensi 7), Nilai 8 (frekuensi 7), Nilai 9 (frekuensi 6), Nilai 10 (frekuensi 4). Median dari data tersebut adalah...",
+      "options": ["7", "7,5", "8", "8,5"],
+      "answer": "C",
+      "explanation": "Total frekuensi (n) = 30 (genap). Median terletak di antara data ke-15 dan ke-16. Menggunakan frekuensi kumulatif: Data ke-15 = 8 dan Data ke-16 = 8. Maka Median = (8 + 8) / 2 = 8."
+    },
+    {
+      "id": 4,
+      "question": "Pada diagram lingkaran persentase kegemaran olahraga dari total 500 siswa: Bulu Tangkis 40%, Sepak Bola 30%, Catur 4%, Basket 6%. Maka jumlah siswa yang gemar olahraga voli adalah...",
+      "options": ["20 siswa", "30 siswa", "100 siswa", "150 siswa"],
+      "answer": "C",
+      "explanation": "Persentase Voli = 100% - (40% + 30% + 4% + 6%) = 20%. Banyak siswa gemar voli = 20/100 x 500 = 100 siswa."
+    },
+    {
+      "id": 5,
+      "question": "Diagram lingkaran derajat menunjukkan latar belakang pendidikan orang tua siswa dengan total 960 orang. Diketahui SD = 162°, SMP = 108°, S-1 = 36°. Banyaknya orang tua siswa yang berlatar belakang pendidikan SMA adalah...",
+      "options": ["114 orang", "124 orang", "134 orang", "144 orang"],
+      "answer": "D",
+      "explanation": "Sudut SMA = 360° - (162° + 108° + 36°) = 54°. Jumlah orang tua SMA = (54 / 360) x 960 = 144 orang."
+    },
+    {
+      "id": 6,
+      "question": "Perhatikan hubungan sudut pada dua buah garis sejajar yang dipotong oleh garis lain. Sudut dalam berseberangan pada kondisi tersebut memiliki karakteristik...",
+      "options": ["Saling berpelurus", "Saling berpenyiku", "Memiliki besar sudut yang sama", "Jumlah kedua sudutnya 180°"],
+      "answer": "C",
+      "explanation": "Berdasarkan teorema geometri, dua sudut dalam berseberangan yang terbentuk akibat perpotongan garis transversal pada dua garis paralel selalu memiliki besar sudut yang identik atau sama besar."
+    },
+    {
+      "id": 7,
+      "question": "Berdasarkan gambar sudut berpelurus siku-siku, jika sebuah sudut terbagi menjadi dua bagian dengan nilai masing-masing adalah 2x° dan (3x - 10)° dan keduanya saling berpenyiku terhadap bidang tegak lurus, berapakah nilai x?",
+      "options": ["15", "20", "25", "30"],
+      "answer": "B",
+      "explanation": "Karena kedua sudut membentuk area penyiku sudut siku-siku, maka: 2x + (3x - 10) = 90 -> 5x - 10 = 90 -> 5x = 100 -> x = 20."
+    },
+    {
+      "id": 8,
+      "question": "Panjang sisi penyiku dari segitiga siku-siku adalah 5 cm dan 12 cm, maka panjang sisi hipotenusanya adalah...",
+      "options": ["13 cm", "14 cm", "15 cm", "17 cm"],
+      "answer": "A",
+      "explanation": "Menggunakan Rumus Pythagoras: c² = a² + b² -> c² = 5² + 12² = 25 + 144 = 169. Maka c = √169 = 13 cm."
+    },
+    {
+      "id": 9,
+      "question": "Jika diketahui suatu sudut luar segitiga adalah ∠ADC = 130°, dan dua sudut dalam yang tidak berpelurus bersamanya adalah 3x° dan (2x + 5)°, tentukan nilai x.",
+      "options": ["20", "25", "30", "35"],
+      "answer": "B",
+      "explanation": "Sifat sudut luar segitiga: ∠Luar = Jumlah 2 ∠Dalam non-pelurus. Maka: 3x + (2x + 5) = 130 -> 5x + 5 = 130 -> 5x = 125 -> x = 25."
+    },
+    {
+      "id": 10,
+      "question": "Diketahui segitiga PQR dengan panjang PQ = 24 cm, QR = 7 cm, dan PR = 25 cm. Maka jenis segitiga tersebut adalah...",
+      "options": ["Segitiga Lancip", "Segitiga Tumpul", "Segitiga Siku-siku", "Segitiga Sama Sisi"],
+      "answer": "C",
+      "explanation": "Uji Pythagoras: Sisi terpanjang² = 25² = 625. Jumlah kuadrat sisi penyiku = 24² + 7² = 576 + 49 = 625. Karena nilai kuadratnya sama besar (625 = 625), maka tergolong Segitiga Siku-siku."
+    },
+    {
+      "id": 11,
+      "question": "Sebuah bangun gabungan terdiri dari jajaran genjang ABEF (sisi atas FE = 20 cm, sisi miring AF = 10 cm) dan belah ketupat BCDE yang berhimpit pada sisi EB. Keliling gabungan bangun luar tersebut adalah...",
+      "options": ["60 cm", "70 cm", "80 cm", "90 cm"],
+      "answer": "C",
+      "explanation": "Sisi luar pembentuk perimeter keliling: FE (20) + ED (10) + DC (10) + CB (10) + AB (20) + AF (10) = 80 cm. Sisi bagian dalam EB tidak ikut dihitung."
+    },
+    {
+      "id": 12,
+      "question": "Pada bangun trapesium sama kaki ABCD, jika diketahui besar salah satu sudut alasnya bernilai lancip, maka hubungan sudut alas tersebut dengan sudut alas di sampingnya adalah...",
+      "options": ["Saling tegak lurus", "Sama besar", "Berjumlah 180°", "Berjumlah 90°"],
+      "answer": "B",
+      "explanation": "Trapesium sama kaki memiliki sifat simetri di mana pasangan sudut-sudut yang terletak pada garis dasar alas yang sama memiliki besar sudut yang sama."
+    },
+    {
+      "id": 13,
+      "question": "Bangun ruang yang hanya memiliki tepat satu buah bidang sisi dan sama sekali tidak memiliki komponen titik sudut dinamakan bangun...",
+      "options": ["Tabung", "Kerucut", "Prisma", "Bola"],
+      "answer": "D",
+      "explanation": "Bola merupakan bangun ruang tiga dimensi yang hanya dibatasi oleh satu bidang sisi lengkung dan tidak memiliki struktur titik sudut maupun rusuk."
+    },
+    {
+      "id": 14,
+      "question": "Banyaknya jumlah bidang sisi yang terdapat pada bangun ruang limas segi enam adalah...",
+      "options": ["6 sisi", "7 sisi", "8 sisi", "12 sisi"],
+      "answer": "B",
+      "explanation": "Rumus jumlah sisi limas segi-n adalah n + 1. Untuk limas segi enam: 6 sisi tegak berbentuk segitiga + 1 sisi alas segi enam = 7 sisi."
+    },
+    {
+      "id": 15,
+      "question": "Pada sebuah diagram batang ekstrakurikuler sekolah, tercatat data: Bola Voli (20 siswa), Bulu Tangkis (25 siswa), Sepak Bola (30 siswa). Berapa jumlah total siswa yang mengikuti ekstrakurikuler bidang olahraga tersebut?",
+      "options": ["65 siswa", "70 siswa", "75 siswa", "80 siswa"],
+      "answer": "C",
+      "explanation": "Total siswa bidang olahraga = Kuantitas Voli + Bulu Tangkis + Sepak Bola = 20 + 25 + 30 = 75 siswa."
+    },
+    {
+      "id": 16,
+      "question": "[Uraian] Dua buah sudut dalam sepihak dari garis sejajar bernilai (3x + 20)° dan (5x - 10)°. Berapakah nilai x yang tepat?",
+      "options": ["20", "21,25", "22,5", "25"],
+      "answer": "B",
+      "explanation": "Sudut dalam sepihak berjumlah 180°. Persamaan: (3x + 20) + (5x - 10) = 180 -> 8x + 10 = 180 -> 8x = 170 -> x = 170/8 = 21,25."
+    },
+    {
+      "id": 17,
+      "question": "[Uraian] Diketahui sebuah segitiga ABC memiliki rasio sudut berturut-turut ∠A = 2x°, ∠B = 3x°, dan ∠C = 4x°. Berapakah besar nilai sudut A?",
+      "options": ["20°", "40°", "60°", "80°"],
+      "answer": "B",
+      "explanation": "Jumlah sudut dalam segitiga = 180°. Maka: 2x + 3x + 4x = 180 -> 9x = 180 -> x = 20. Besar ∠A = 2x = 2(20) = 40°."
+    },
+    {
+      "id": 18,
+      "question": "[Uraian] Sebuah bangun gabungan terdiri dari sebuah persegi panjang berukuran 12 cm x 8 cm di bagian bawah, dan sebuah persegi dengan panjang sisi tegak 4 cm di bagian atasnya. Hitung total luas gabungan tersebut.",
+      "options": ["96 cm²", "100 cm²", "112 cm²", "128 cm²"],
+      "answer": "C",
+      "explanation": "Luas persegi panjang = 12 x 8 = 96 cm². Luas persegi = 4 x 4 = 16 cm². Luas gabungan total = 96 + 16 = 112 cm²."
+    },
+    {
+      "id": 19,
+      "question": "[Uraian] Jaring-jaring dari bangun ruang prisma segitiga sama sisi secara mendasar terdiri dari susunan pola...",
+      "options": ["5 buah segitiga", "3 persegi panjang & 2 segitiga sama sisi", "3 segitiga & 2 persegi panjang", "4 persegi & 1 segitiga"],
+      "answer": "B",
+      "explanation": "Prisma segitiga memiliki 3 sisi tegak berbentuk persegi/persegi panjang serta 2 sisi alas dan tutup berbentuk segitiga."
+    },
+    {
+      "id": 20,
+      "question": "[Uraian] Suatu kelas terdapat 13 siswa laki-laki (rata-rata tinggi 160 cm) dan 17 siswa perempuan (rata-rata tinggi 150 cm). Berapakah rata-rata tinggi seluruh siswa di kelas tersebut?",
+      "options": ["153,33 cm", "154,33 cm", "155,00 cm", "156,67 cm"],
+      "answer": "B",
+      "explanation": "Rata-rata gabungan = ((13 x 160) + (17 x 150)) / (13 + 17) = (2080 + 2550) / 30 = 4630 / 30 ≈ 154,33 cm."
+    }
+  ]
+}

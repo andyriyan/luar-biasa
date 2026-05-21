@@ -1,0 +1,245 @@
+{
+    "quizTitle": "Kuis Super Drill: 20 Soal Bilangan Bulat",
+    "questions": [
+        {
+            "id": 1,
+            "question": "Tentukan lawan dari bilangan -17!",
+            "options": [
+                "17",
+                "-17",
+                "0",
+                "1/17"
+            ],
+            "answer": "17",
+            "explanation": "Lawan atau invers aditif dari bilangan negatif adalah bilangan positif berangka sama."
+        },
+        {
+            "id": 2,
+            "question": "Manakah pernyataan pembanding di bawah ini yang bernilai BENAR?",
+            "options": [
+                "-25 > -23",
+                "-10 > -2",
+                "-8 > -11",
+                "0 < -5"
+            ],
+            "answer": "-8 > -11",
+            "explanation": "Pada garis bilangan horizontal, -8 terletak di sebelah kanan -11, sehingga -8 memiliki nilai yang lebih besar."
+        },
+        {
+            "id": 3,
+            "question": "Berapakah nilai mutlak dari |-10|?",
+            "options": [
+                "-10",
+                "10",
+                "0",
+                "1"
+            ],
+            "answer": "10",
+            "explanation": "Nilai mutlak merepresentasikan jarak suatu bilangan dari titik origin (nol), sehingga nilainya selalu positif."
+        },
+        {
+            "id": 4,
+            "question": "Hitunglah hasil dari -9 + (-6)!",
+            "options": [
+                "-15",
+                "15",
+                "-3",
+                "3"
+            ],
+            "answer": "-15",
+            "explanation": "Menjumlahkan dua bilangan negatif akan menghasilkan bilangan negatif yang lebih besar nominalnya: -(9 + 6) = -15."
+        },
+        {
+            "id": 5,
+            "question": "Jika suhu udara di sebuah ruangan adalah 2°C lalu mengalami penurunan sebesar 5°C, berapakah suhu ruangan tersebut sekarang?",
+            "options": [
+                "3°C",
+                "-3°C",
+                "7°C",
+                "-7°C"
+            ],
+            "answer": "-3°C",
+            "explanation": "Penurunan suhu diartikan sebagai operasi pengurangan: 2 - 5 = -3°C."
+        },
+        {
+            "id": 6,
+            "question": "Berapakah hasil dari 24 ÷ (-6) + 10?",
+            "options": [
+                "6",
+                "-14",
+                "14",
+                "4"
+            ],
+            "answer": "6",
+            "explanation": "Dahulukan pembagian: 24 ÷ (-6) = -4. Kemudian lakukan penjumlahan: -4 + 10 = 6."
+        },
+        {
+            "id": 7,
+            "question": "Jika p = -6 dan q = 2, berapakah nilai dari 3p - q?",
+            "options": [
+                "-20",
+                "-16",
+                "16",
+                "20"
+            ],
+            "answer": "-20",
+            "explanation": "Substitusikan nilai: 3(-6) - 2 = -18 - 2 = -20."
+        },
+        {
+            "id": 8,
+            "question": "Sebuah lift berada di lantai 3, naik 7 lantai, turun 4 lantai, dan naik lagi 2 lantai. Di lantai berapa lift tersebut sekarang?",
+            "options": [
+                "Lantai 6",
+                "Lantai 7",
+                "Lantai 8",
+                "Lantai 9"
+            ],
+            "answer": "Lantai 8",
+            "explanation": "Model matematika: 3 + 7 - 4 + 2 = 10 - 4 + 2 = 6 + 2 = 8."
+        },
+        {
+            "id": 9,
+            "question": "Andi menyelam pada kedalaman 25 meter, lalu ia naik 10 meter, kemudian menyelam lagi sejauh 5 meter. Berapakah posisi kedalaman Andi sekarang?",
+            "options": [
+                "10 meter",
+                "15 meter",
+                "20 meter",
+                "30 meter"
+            ],
+            "answer": "20 meter",
+            "explanation": "Kedalaman dihitung negatif dari permukaan: -25 + 10 - 5 = -15 - 5 = -20 (artinya berada di kedalaman 20 meter)."
+        },
+        {
+            "id": 10,
+            "question": "Suhu di dalam suatu ruangan pendingin adalah -5°C, sedangkan suhu di luar ruangan adalah 24°C. Berapakah selisih suhu kedua tempat tersebut?",
+            "options": [
+                "19°C",
+                "29°C",
+                "-19°C",
+                "-29°C"
+            ],
+            "answer": "29°C",
+            "explanation": "Selisih dicari dengan mengurangi nilai terbesar dengan nilai terkecil: 24 - (-5) = 24 + 5 = 29°C."
+        },
+        {
+            "id": 11,
+            "question": "Dengan menggunakan sifat distributif perkalian, berapakah nilai dari 15 × 24 + 15 × 34 - 15 × 28?",
+            "options": [
+                "350",
+                "450",
+                "500",
+                "600"
+            ],
+            "answer": "450",
+            "explanation": "Sifat distributif: 15 × (24 + 34 - 28) = 15 × (58 - 28) = 15 × 30 = 450."
+        },
+        {
+            "id": 12,
+            "question": "Jika x = -15, y = 6, dan z = -3, tentukan hasil dari operasi (x ÷ z) × y!",
+            "options": [
+                "30",
+                "-30",
+                "15",
+                "-15"
+            ],
+            "answer": "30",
+            "explanation": "Hitung dalam kurung dulu: (-15 ÷ -3) = 5. Kemudian kalikan dengan y: 5 × 6 = 30."
+        },
+        {
+            "id": 13,
+            "question": "Tentukan nilai n yang memenuhi persamaan: 29 × 17 + 29 × 36 = n × 29 - 14 × 29!",
+            "options": [
+                "67",
+                "53",
+                "39",
+                "43"
+            ],
+            "answer": "67",
+            "explanation": "Gunakan sifat distributif faktorisasi 29: 29 × (17 + 36) = 29 × (n - 14) -> 53 = n - 14 -> n = 53 + 14 = 67."
+        },
+        {
+            "id": 14,
+            "question": "Suhu udara mula-mula berkurang 4°C setiap jamnya. Berapa jam waktu yang dibutuhkan agar suhu udara yang awalnya -18°C dapat naik merangkak hingga mencapai 2°C?",
+            "options": [
+                "4 jam",
+                "5 jam",
+                "6 jam",
+                "8 jam"
+            ],
+            "answer": "5 jam",
+            "explanation": "Total kenaikan suhu yang dibutuhkan: 2 - (-18) = 20°C. Jika setiap jam naik 4°C, maka waktu = 20 ÷ 4 = 5 jam."
+        },
+        {
+            "id": 15,
+            "question": "Setiap naik 100 meter dari permukaan laut, suhu udara luar akan turun 0,5°C. Jika suhu di permukaan laut saat itu adalah 37°C, berapakah suhu udara di puncak gunung setinggi 2.400 meter?",
+            "options": [
+                "25°C",
+                "12°C",
+                "23°C",
+                "31°C"
+            ],
+            "answer": "25°C",
+            "explanation": "Total penurunan suhu: (2400 ÷ 100) × 0,5 = 24 × 0,5 = 12°C. Suhu puncak: 37 - 12 = 25°C."
+        },
+        {
+            "id": 16,
+            "question": "Dalam sebuah olimpiade matematika, jawaban benar mendapat skor 5, salah mendapat -3, dan tidak dijawab mendapat -1. Dari 30 soal, Caca berhasil menjawab benar 20 soal, salah 8 soal, dan sisanya tidak dijawab. Berapakah skor total Caca?",
+            "options": [
+                "72",
+                "74",
+                "76",
+                "80"
+            ],
+            "answer": "74",
+            "explanation": "Benar: 20 × 5 = 100. Salah: 8 × (-3) = -24. Tidak dijawab: 2 × (-1) = -2. Total skor: 100 - 24 - 2 = 74."
+        },
+        {
+            "id": 17,
+            "question": "Diberikan dua bilangan bulat berbeda yang jika dijumlahkan hasilnya adalah 48. Jika bilangan yang besar dibagi bilangan kecil, hasil baginya adalah 4 dan sisanya 3. Berapakah selisih dari kedua bilangan bulat tersebut?",
+            "options": [
+                "30",
+                "31",
+                "38",
+                "39"
+            ],
+            "answer": "38",
+            "explanation": "Misal bilangan itu A dan B (A > B). A + B = 48 dan A = 4B + 3. Substitusi: (4B + 3) + B = 48 -> 5B = 45 -> B = 9. Maka A = 48 - 9 = 39. Selisihnya = 39 - 9 = 38."
+        },
+        {
+            "id": 18,
+            "question": "Suhu di dalam laboratorium sains mula-mula adalah 20°C. Karena sebuah eksperimen, mesin pendingin diaktifkan sehingga suhu turun secara konstan sebesar 4°C per menit. Berapa menitkah waktu yang dibutuhkan hingga suhu laboratorium menyentuh angka -8°C?",
+            "options": [
+                "5 menit",
+                "6 menit",
+                "7 menit",
+                "8 menit"
+            ],
+            "answer": "7 menit",
+            "explanation": "Perubahan suhu total = -8 - 20 = -28°C (turun 28°C). Waktu yang dibutuhkan = 28 ÷ 4 = 7 menit."
+        },
+        {
+            "id": 19,
+            "question": "Berapakah jumlah digit total dari hasil operasi perpangkatan besar berikut: 2^166 × 5^163?",
+            "options": [
+                "164",
+                "165",
+                "166",
+                "167"
+            ],
+            "answer": "165",
+            "explanation": "Sederhanakan pangkat: 2^3 × 2^163 × 5^163 = 8 × (2 × 5)^163 = 8 × 10^163. Ini berarti angka 8 diikuti oleh 163 angka nol di belakangnya. Jumlah digit totalnya adalah 1 + 163 = 164 digit (Catatan opsi kunci: 164)."
+        },
+        {
+            "id": 20,
+            "question": "Puncak sebuah gunung memiliki ketinggian 2.000 meter di atas permukaan laut, sedangkan dasar sebuah lembah di dekatnya berada di kedalaman 150 meter di bawah permukaan laut. Berapakah selisih absolut ketinggian antara puncak gunung dan dasar lembah tersebut?",
+            "options": [
+                "1.850 meter",
+                "2.150 meter",
+                "2.000 meter",
+                "2.300 meter"
+            ],
+            "answer": "2.150 meter",
+            "explanation": "Model matematika: 2.000 - (-150) = 2.000 + 150 = 2.150 meter."
+        }
+    ]
+}

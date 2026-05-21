@@ -1,0 +1,67 @@
+{
+  "title": "Statistika Matematika SMP",
+  "description": "Belajar konsep dasar statistika, mulai dari nilai rata-rata, median, modus, hingga penyajian data.",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "konsep-1",
+      "title": "Apa itu Statistika?",
+      "icon": "analytics",
+      "content": "Sering kali kita mendengar kata **Statistika** dan **Statistik**. Keduanya memiliki arti yang berbeda lho!<br><br>**Statistika** merupakan ilmu yang mempelajari bagaimana mengumpulkan, mengolah, menyajikan, menganalisis data, dan mengambil keputusan berdasarkan hasil analisis data tersebut.<br><br>**Statistik** adalah kumpulan metode atau cara itu sendiri, serta data atau hasil pengolahannya.",
+      "steps": [
+        "Ingat: Statistika adalah <b>Ilmunya</b>.",
+        "Statistik adalah <b>Datanya / Metodenya</b>."
+      ],
+      "summary": "Statistika adalah ilmu tentang statistik. Dengan ilmu ini, kita bisa mengambil kesimpulan dan membuat prediksi dari sebuah kumpulan data."
+    },
+    {
+      "id": "konsep-2",
+      "title": "Mean (Rata-rata)",
+      "icon": "calculate",
+      "content": "Rata-rata (Mean) adalah suatu bilangan yang mewakili sekumpulan data. Mean diperoleh dari jumlah seluruh data dibagikan dengan banyak data.<br><br>Rata-rata disimbolkan dengan $\\bar{x}$ (dibaca: x bar).<br><br>Rumus dasar rata-rata untuk data $x_1, x_2, ..., x_n$ adalah:<br><br>$$ \\bar{x} = \\frac{x_1 + x_2 + ... + x_n}{n} $$",
+      "steps": [
+        "Jumlahkan semua nilai data yang ada.",
+        "Hitung ada berapa banyak data tersebut ($n$).",
+        "Bagi jumlah total nilai dengan banyaknya data."
+      ],
+      "summary": "Mean atau Rata-rata adalah jumlah seluruh nilai data dibagi dengan banyaknya data."
+    },
+    {
+      "id": "konsep-3",
+      "title": "Median & Modus",
+      "icon": "vertical_align_center",
+      "content": "**Median** adalah nilai tengah dari suatu data yang **telah diurutkan** dari yang terkecil hingga terbesar.<br>Jika jumlah data ganjil, median persis di tengah. Jika genap, median adalah rata-rata dari dua angka di tengah.<br><br>**Modus** adalah nilai yang paling sering muncul atau nilai yang frekuensinya paling banyak dalam sekumpulan data.",
+      "steps": [
+        "<b>Untuk mencari Median:</b> Wajib urutkan data dari kecil ke besar terlebih dahulu!",
+        "Jika data berjumlah $n$ (ganjil): Median berada di urutan ke-$\\frac{n+1}{2}$.",
+        "Jika data berjumlah genap: Jumlahkan dua angka di tengah lalu bagi dua.",
+        "<b>Untuk mencari Modus:</b> Hitung frekuensi tiap angka, angka dengan frekuensi terbesar adalah modus."
+      ],
+      "summary": "Median adalah nilai tengah setelah diurutkan, sedangkan Modus adalah nilai yang paling sering muncul."
+    },
+    {
+      "id": "konsep-4",
+      "title": "Rata-rata Gabungan",
+      "icon": "group_add",
+      "content": "Bagaimana jika kita menggabungkan dua kelompok yang sudah memiliki rata-rata masing-masing?<br><br>Jika kelompok pertama memiliki rata-rata $\\bar{x}_1$ dan anggota sebanyak $n_1$, lalu kelompok kedua memiliki rata-rata $\\bar{x}_2$ dan anggota $n_2$, maka rata-rata gabungannya adalah:<br><br>$$ \\bar{x}_{gab} = \\frac{\\bar{x}_1 \\times n_1 + \\bar{x}_2 \\times n_2}{n_1 + n_2} $$",
+      "steps": [
+        "Kalikan rata-rata kelompok 1 dengan jumlah anggotanya.",
+        "Kalikan rata-rata kelompok 2 dengan jumlah anggotanya.",
+        "Jumlahkan kedua hasil perkalian tersebut.",
+        "Bagi dengan total seluruh anggota ($n_1 + n_2$)."
+      ],
+      "summary": "Rata-rata gabungan menggabungkan total nilai dari kedua kelompok, lalu dibagi dengan total anggota dari kedua kelompok tersebut."
+    },
+    {
+      "id": "konsep-5",
+      "title": "Penyajian Data",
+      "icon": "pie_chart",
+      "content": "Data yang sudah dikumpulkan tidak akan bermakna jika tidak disajikan dengan baik. Ada beberapa bentuk penyajian data yang umum digunakan di SMP:<br><br>1. **Tabel Frekuensi**: Menyajikan data berpasangan dengan jumlah kemunculannya.<br>2. **Diagram Batang**: Menggunakan balok/batang untuk menunjukkan kuantitas data.<br>3. **Diagram Garis**: Sangat cocok untuk menunjukkan perubahan data dari waktu ke waktu.<br>4. **Diagram Lingkaran**: Menyajikan persentase porsi sebuah data dari total keseluruhan (satu lingkaran penuh $= 360^{\\circ}$ atau $100\\%$).",
+      "steps": [
+        "Gunakan diagram garis untuk melihat trend (misal: suhu tubuh harian).",
+        "Gunakan diagram lingkaran untuk melihat perbandingan porsi (misal: jenis ekskul yang diikuti siswa)."
+      ],
+      "summary": "Penyajian data membantu kita membaca, membandingkan, dan mengambil kesimpulan dari kumpulan angka dengan lebih mudah secara visual."
+    }
+  ]
+}

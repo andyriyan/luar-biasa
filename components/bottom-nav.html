@@ -1,0 +1,61 @@
+<!-- components/bottom-nav.html -->
+<style>
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid var(--border-subtle);
+    padding-bottom: env(safe-area-inset-bottom, 0px); /* For iOS notch */
+    box-shadow: 0 -10px 25px -5px rgba(20, 83, 45, 0.08);
+    z-index: 100;
+  }
+  
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    transition: all var(--duration-short) var(--ease-standard);
+  }
+  
+  .nav-item.active {
+    color: var(--accent-primary);
+  }
+  
+  .nav-item.active .nav-icon-wrapper {
+    background-color: var(--chip-bg);
+  }
+
+  .nav-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 32px;
+    border-radius: 16px;
+    margin-bottom: 4px;
+    transition: background-color var(--duration-short) var(--ease-standard);
+  }
+  
+  .nav-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+</style>
+
+<nav class="bottom-nav" id="bottom-nav-container">
+  <!-- Items will be populated by JS from navigation.json -->
+</nav>

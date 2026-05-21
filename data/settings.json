@@ -1,0 +1,10 @@
+{
+  "theme": "auto",
+  "fontSize": "normal",
+  "language": "id",
+  "teacherMode": false,
+  "animations": true,
+  "sound": false,
+  "appName": "Belajar",
+  "version": "1.0.0"
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif Aljabar</title>
+    <link rel="stylesheet" href="../style.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <h1>Uji Nyali Kuis Aljabar</h1>
+        <p id="quiz-info">Skor Anda akan dihitung otomatis</p>
+    </header>
+
+    <main class="container">
+        <section class="card" id="quiz-card">
+            <div style="display: flex; justify-content: space-between; font-size:12px; color:var(--text-muted)">
+                <span id="txt-level">LEVEL: -</span>
+                <span id="txt-number">Soal: 0/0</span>
+            </div>
+            <h3 id="question-text" style="margin: 15px 0; font-size:18px;">Memuat bank soal...</h3>
+            <div class="options-container" id="options-box"></div>
+            <div id="feedback-box" style="margin-top:15px; padding:12px; border-radius:8px; display:none; font-size:14px;"></div>
+            <button class="btn btn-success" id="btn-next" style="display: none;">Soal Selanjutnya ➡️</button>
+        </section>
+
+        <section class="card" id="result-card" style="display: none; text-align: center;">
+            <h2>🎉 Selesai Evaluasi!</h2>
+            <h1 id="score-text" style="font-size: 48px; color: var(--accent); margin:15px 0;">0</h1>
+            <p id="result-msg">Kerja bagus! Teruslah berlatih matematika.</p>
+            <button class="btn btn-primary" onclick="window.location.reload()" style="margin-top: 15px;">Ulangi Kuis 🔄</button>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="../index.html" class="nav-link">🏠 <span>Home</span></a>
+        <a href="konsep-1.html" class="nav-link">📖 <span>Materi</span></a>
+        <a href="simulasi.html" class="nav-link">⚙️ <span>Simulasi</span></a>
+        <a href="quiz.html" class="nav-link active">🏆 <span>Kuis</span></a>
+    </nav>
+
+    <script>
+        let bankSoal = [];
+        let currentIdx = 0;
+        let score = 0;
+
+        async function loadSoal() {
+            try {
+                const response = await fetch('../data/soal.json');
+                bankSoal = await response.json();
+                showQuestion();
+            } catch (err) {
+                document.getElementById('question-text').innerText = "Gagal memuat database soal secara lokal.";
+            }
+        }
+
+        function showQuestion() {
+            if(currentIdx >= bankSoal.length) {
+                showResult();
+                return;
+            }
+
+            const item = bankSoal[currentIdx];
+            document.getElementById('txt-level').innerText = `KATEGORI: ${item.kategori}`;
+            document.getElementById('txt-number').innerText = `Soal: ${currentIdx + 1}/${bankSoal.length}`;
+            document.getElementById('question-text').innerHTML = item.soal;
+            
+            const optionsBox = document.getElementById('options-box');
+            optionsBox.innerHTML = "";
+            document.getElementById('feedback-box').style.display = "none";
+            document.getElementById('btn-next').style.display = "none";
+
+            item.pilihan.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "option-btn";
+                btn.innerHTML = opt;
+                btn.onclick = () => checkAnswer(idx);
+                optionsBox.appendChild(btn);
+            });
+
+            if (typeof MathJax !== 'undefined') MathJax.typeset();
+        }
+
+        function checkAnswer(selectedIdx) {
+            const item = bankSoal[currentIdx];
+            const optionBtns = document.querySelectorAll('.option-btn');
+            const feedbackBox = document.getElementById('feedback-box');
+            
+            optionBtns.forEach(btn => btn.disabled = true);
+
+            if(selectedIdx === item.jawaban) {
+                optionBtns[selectedIdx].classList.add('correct');
+                feedbackBox.style.backgroundColor = "#e6f4ea";
+                feedbackBox.style.color = "#137333";
+                feedbackBox.innerHTML = `<strong>Benar!</strong><br>${item.pembahasan}`;
+                score += 10;
+            } else {
+                optionBtns[selectedIdx].classList.add('wrong');
+                optionBtns[item.jawaban].classList.add('correct');
+                feedbackBox.style.backgroundColor = "#fce8e6";
+                feedbackBox.style.color = "#c5221f";
+                feedbackBox.innerHTML = `<strong>Kurang tepat.</strong><br>${item.pembahasan}`;
+            }
+
+            feedbackBox.style.display = "block";
+            document.getElementById('btn-next').style.display = "block";
+            if (typeof MathJax !== 'undefined') MathJax.typeset();
+        }
+
+        document.getElementById('btn-next').onclick = () => {
+            currentIdx++;
+            showQuestion();
+        };
+
+        function showResult() {
+            document.getElementById('quiz-card').style.display = "none";
+            document.getElementById('result-card').style.display = "block";
+            let totalMax = bankSoal.length * 10;
+            let finalScore = Math.round((score / totalMax) * 100);
+            document.getElementById('score-text').innerText = finalScore;
+        }
+
+        window.onload = loadSoal;
+    </script>
+</body>
+</html>

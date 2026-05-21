@@ -1,0 +1,67 @@
+{
+  "title": "Bangun Datar Segiempat",
+  "description": "Modul pembelajaran Matematika Kelas 7 tentang klasifikasi, sifat, dan rumus segiempat.",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "definisi-dasar",
+      "title": "Definisi & Sifat Umum",
+      "icon": "school",
+      "content": "Segiempat adalah bangun datar dengan empat sisi dan empat sudut[cite: 279]. Secara umum, jumlah besar sudut dalam segiempat selalu $$360^\\circ$$ karena dapat dibagi menjadi dua buah segitiga[cite: 280, 326].",
+      "steps": [
+        "Memiliki 4 sisi",
+        "Memiliki 4 titik sudut",
+        "Total sudut dalam = 360°"
+      ],
+      "summary": "Segiempat adalah poligon empat sisi dengan total sudut dalam 360 derajat."
+    },
+    {
+      "id": "persegi-panjang",
+      "title": "Persegi & Persegi Panjang",
+      "icon": "crop_square",
+      "content": "**Persegi** memiliki empat sisi sama panjang dan sudut siku-siku ($$90^\\circ$$)[cite: 282]. **Persegi Panjang** memiliki dua pasang sisi sejajar yang sama panjang [cite: 284].\n\n**Rumus Persegi:**\n- Keliling: $$K = 4 \\times s$$\n- Luas: $$L = s^2$$\n\n**Rumus Persegi Panjang:**\n- Keliling: $$K = 2(p + l)$$\n- Luas: $$L = p \\times l$$ [cite: 302, 303, 305, 306]",
+      "steps": [
+        "Persegi: Semua sisi sama",
+        "P. Panjang: Sisi berhadapan sama",
+        "Keduanya memiliki sudut siku-siku"
+      ],
+      "summary": "Persegi adalah bentuk khusus dari persegi panjang dengan semua sisi sama panjang."
+    },
+    {
+      "id": "jajargenjang-trapesium",
+      "title": "Jajargenjang & Trapesium",
+      "icon": "reorder",
+      "content": "<img src='./images/Parallelogram_area.svg' style='width:100%; border-radius:12px; margin:16px 0;'>\n**Jajargenjang** memiliki dua pasang sisi sejajar[cite: 286]. **Trapesium** hanya memiliki tepat satu pasang sisi sejajar [cite: 290].\n\n**Rumus Luas:**\n- Jajargenjang: $$L = a \\times t$$ [cite: 309]\n- Trapesium: $$L = \\frac{1}{2}(a + b) \\times t$$ [cite: 315]",
+      "steps": [
+        "Jajargenjang: 2 pasang sisi sejajar",
+        "Trapesium: 1 pasang sisi sejajar",
+        "Gunakan tinggi (t) yang tegak lurus alas"
+      ],
+      "summary": "Jajargenjang dan trapesium dibedakan berdasarkan jumlah pasangan sisi sejajarnya."
+    },
+    {
+      "id": "belah-ketupat-layang",
+      "title": "Belah Ketupat & Layang-layang",
+      "icon": "diamond",
+      "content": "**Belah Ketupat** memiliki empat sisi sama panjang[cite: 288]. **Layang-layang** memiliki dua pasang sisi berurutan sama panjang [cite: 292].\n\n**Rumus Luas (Keduanya):**\n$$L = \\frac{1}{2} \\times d_1 \\times d_2$$\n[cite: 312, 318]",
+      "steps": [
+        "Diagonal saling tegak lurus",
+        "Belah Ketupat: Semua sisi sama",
+        "Layang-layang: Sisi berurutan sama"
+      ],
+      "summary": "Kedua bangun ini memiliki rumus luas yang sama menggunakan hasil kali diagonal."
+    },
+    {
+      "id": "contoh-aplikasi",
+      "title": "Aplikasi Kontekstual",
+      "icon": "calculate",
+      "content": "Penerapan konsep segiempat dalam kehidupan nyata:\n\n**Kebun Persegi:**\nJika luas kebun $$144\\, m^2$$, maka sisinya adalah $$\\sqrt{144} = 12\\, m$$ dan kelilingnya $$4 \\times 12 = 48\\, m$$ [cite: 381, 382].\n\n**Lapangan Sepak Bola:**\nPanjang $$90\\, m$$ dan lebar $$45\\, m$$ memiliki luas $$4050\\, m^2$$[cite: 383, 385].",
+      "steps": [
+        "Analisis jenis bangun",
+        "Tentukan parameter (s, p, l, a, t)",
+        "Gunakan rumus yang sesuai"
+      ],
+      "summary": "Rumus segiempat digunakan untuk menghitung luas lahan, biaya pagar, hingga kebutuhan ubin."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "quizTitle": "Kuis: Tekanan (IPA Kelas 9)",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Faktor-faktor yang memengaruhi besarnya tekanan pada zat padat adalah...",
+      "options": [
+        "Gaya tekan dan luas bidang tekan",
+        "Gaya tekan dan massa benda",
+        "Luas bidang tekan dan volume benda",
+        "Massa jenis benda dan luas penampang"
+      ],
+      "answer": "Gaya tekan dan luas bidang tekan",
+      "explanation": "Berdasarkan rumus $P = \\frac{F}{A}$, besarnya tekanan ($P$) ditentukan secara langsung oleh gaya tekan ($F$) dan luas bidang tekan ($A$)."
+    },
+    {
+      "id": 2,
+      "question": "Sebuah kubus dengan panjang rusuk $0,5\\text{ m}$ diletakkan di atas lantai. Jika gaya berat kubus yang bekerja pada lantai adalah $50\\text{ N}$, berapakah tekanan yang dialami lantai?",
+      "options": [
+        "25 Pa",
+        "50 Pa",
+        "100 Pa",
+        "200 Pa"
+      ],
+      "answer": "200 Pa",
+      "explanation": "Luas alas kubus ($A$) = $\\text{sisi} \\times \\text{sisi} = 0,5\\text{ m} \\times 0,5\\text{ m} = 0,25\\text{ m}^2$. Masukkan ke rumus tekanan: $P = \\frac{F}{A} = \\frac{50}{0,25} = 200\\text{ Pa}$."
+    },
+    {
+      "id": 3,
+      "question": "Mengapa kaki bebek yang berselaput memudahkan bebek berjalan di atas tanah berlumpur jika dibandingkan dengan kaki ayam?",
+      "options": [
+        "Selaput memperkecil luas bidang sehingga tekanan mengecil",
+        "Selaput memperbesar luas bidang sehingga tekanan mengecil",
+        "Selaput memperkecil gaya tekan ke tanah",
+        "Selaput memperbesar gaya tekan ke tanah"
+      ],
+      "answer": "Selaput memperbesar luas bidang sehingga tekanan mengecil",
+      "explanation": "Selaput pada kaki bebek memperbesar luas permukaan pijakan ($A$). Berdasarkan prinsip tekanan, jika luas bidang membesar, maka tekanan yang dihasilkan ke tanah lumpur menjadi kecil sehingga bebek tidak mudah terperosok."
+    },
+    {
+      "id": 4,
+      "question": "Sebuah wadah berisi air ($\rho = 1.000\\text{ kg/m}^3$). Titik A berada pada kedalaman $20\\text{ cm}$ di bawah permukaan air. Jika percepatan gravitasi $g = 10\\text{ m/s}^2$, berapakah tekanan hidrostatis di titik A?",
+      "options": [
+        "20 Pa",
+        "200 Pa",
+        "2.000 Pa",
+        "20.000 Pa"
+      ],
+      "answer": "2.000 Pa",
+      "explanation": "Ubah kedalaman ke meter: $h = 20\\text{ cm} = 0,2\\text{ m}$. Masukkan ke rumus tekanan hidrostatis: $P_h = \\rho \\cdot g \\cdot h = 1.000 \\cdot 10 \\cdot 0,2 = 2.000\\text{ Pa}$."
+    },
+    {
+      "id": 5,
+      "question": "Pernyataan yang benar mengenai tekanan hidrostatis pada zat cair yang diam adalah...",
+      "options": [
+        "Semakin dalam posisi benda, tekanan hidrostatisnya semakin besar",
+        "Semakin dalam posisi benda, tekanan hidrostatisnya semakin kecil",
+        "Tekanan hidrostatis bergantung pada bentuk wadah zat cair",
+        "Tekanan hidrostatis berbanding terbalik dengan massa jenis zat cair"
+      ],
+      "answer": "Semakin dalam posisi benda, tekanan hidrostatisnya semakin besar",
+      "explanation": "Rumus $P_h = \\rho \\cdot g \\cdot h$ menunjukkan bahwa tekanan hidrostatis berbanding lurus dengan kedalaman ($h$). Jadi, semakin dalam posisi benda, nilai $h$ membesar dan tekanan hidrostatisnya pun semakin besar."
+    },
+    {
+      "id": 6,
+      "question": "Alat pemotong seperti pisau atau kapak dibuat tajam pada bagian ujungnya dengan tujuan untuk...",
+      "options": [
+        "Memperkecil luas bidang agar tekanan yang dihasilkan besar",
+        "Memperbesar luas bidang agar tekanan yang dihasilkan besar",
+        "Memperkecil gaya tekan saat memotong",
+        "Memperbesar gaya tekan saat memotong"
+      ],
+      "answer": "Memperkecil luas bidang agar tekanan yang dihasilkan besar",
+      "explanation": "Bagian tajam pisau dibuat agar luas bidang sentuh ($A$) sekecil mungkin. Dengan luas bidang yang kecil, gaya tekan yang sedikit saja sudah mampu menghasilkan tekanan ($P$) yang sangat besar untuk memotong."
+    },
+    {
+      "id": 7,
+      "question": "Sebuah alat pengangkat mobil hidrolik memiliki dua penampang dengan luas $A_1 = 10\\text{ cm}^2$ dan $A_2 = 1.000\\text{ cm}^2$. Jika pada penampang kecil diberi gaya $F_1 = 50\\text{ N}$, berapakah gaya angkat $F_2$ yang dihasilkan pada penampang besar?",
+      "options": [
+        "250 N",
+        "500 N",
+        "5.000 N",
+        "50.000 N"
+      ],
+      "answer": "5.000 N",
+      "explanation": "Gunakan rumus Hukum Pascal: $\\frac{F_1}{A_1} = \\frac{F_2}{A_2} \\implies \\frac{50}{10} = \\frac{F_2}{1.000} \\implies 5 = \\frac{F_2}{1.000} \\implies F_2 = 5 \\times 1.000 = 5.000\\text{ N}$."
+    },
+    {
+      "id": 8,
+      "question": "Tekanan udara di puncak sebuah gunung adalah $68\\text{ cmHg}$. Berapakah perkiraan ketinggian gunung tersebut dari permukaan laut?",
+      "options": [
+        "600 m",
+        "800 m",
+        "1.200 m",
+        "7.600 m"
+      ],
+      "answer": "800 m",
+      "explanation": "Gunakan rumus ketinggian: $h = (76 - P_{bar}) \\times 100\\text{ m} = (76 - 68) \\times 100 = 8 \\times 100 = 800\\text{ m}$."
+    },
+    {
+      "id": 9,
+      "question": "Sebuah benda ditimbang di udara beratnya $50\\text{ N}$. Ketika dicelupkan sepenuhnya ke dalam air, berat benda tersebut terukur menjadi $42\\text{ N}$. Berapakah besar gaya ke atas (gaya apung) yang dialami benda?",
+      "options": [
+        "8 N",
+        "12 N",
+        "46 N",
+        "92 N"
+      ],
+      "answer": "8 N",
+      "explanation": "Gaya ke atas ($F_a$) adalah selisih berat benda di udara dengan berat di dalam air: $F_a = W_{udara} - W_{cair} = 50\\text{ N} - 42\\text{ N} = 8\\text{ N}$."
+    },
+    {
+      "id": 10,
+      "question": "Alat-alat di bawah ini yang bekerja berdasarkan prinsip Hukum Pascal adalah...",
+      "options": [
+        "Galangan kapal dan balon udara",
+        "Kapal selam dan hidrometer",
+        "Barometer dan manometer",
+        "Kempa hidrolik dan rem hidrolik"
+      ],
+      "answer": "Kempa hidrolik dan rem hidrolik",
+      "explanation": "Alat-alat hidrolik memanfaatkan fluida cair di dalam ruang tertutup untuk meneruskan gaya sesuai dengan prinsip Hukum Pascal."
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Simulasi Aljabar</title>
+    <link rel="stylesheet" href="../style.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <h1>Lab Simulasi Aljabar</h1>
+        <p>Ubah Nilai Slider Untuk Melihat Perubahan Rumus!</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Eksperimen Koefisien & Konstanta</h2>
+            <p style="color: var(--text-muted); font-size:14px; margin-bottom:15px;">Geser slider di bawah ini untuk merangkai bentuk aljabar secara visual.</p>
+            
+            <div class="slider-group">
+                <label>Koefisien <strong>x</strong> (<span id="val-kof">2</span>)</label>
+                <input type="range" id="slide-kof" min="-10" max="10" value="2">
+            </div>
+
+            <div class="slider-group">
+                <label>Konstanta (<span id="val-kon">5</span>)</label>
+                <input type="range" id="slide-kon" min="-20" max="20" value="5">
+            </div>
+
+            <div class="sim-box" id="output-sim">
+                2x + 5
+            </div>
+            <p style="font-size: 13px; text-align:center; color: var(--text-muted);">Suku terbentuk dari penggabungan komponen di atas.</p>
+        </section>
+
+        <div class="nav-buttons">
+            <a href="latihan.html" class="btn btn-secondary">⬅️ Pembahasan</a>
+            <a href="quiz.html" class="btn btn-primary">Mulai Kuis ➡️</a>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="../index.html" class="nav-link">🏠 <span>Home</span></a>
+        <a href="konsep-1.html" class="nav-link">📖 <span>Materi</span></a>
+        <a href="simulasi.html" class="nav-link active">⚙️ <span>Simulasi</span></a>
+        <a href="quiz.html" class="nav-link">🏆 <span>Kuis</span></a>
+    </nav>
+
+    <script>
+        const slideKof = document.getElementById('slide-kof');
+        const slideKon = document.getElementById('slide-kon');
+        const valKof = document.getElementById('val-kof');
+        const valKon = document.getElementById('val-kon');
+        const outputSim = document.getElementById('output-sim');
+
+        function updateSimulasi() {
+            let kof = slideKof.value;
+            let kon = parseInt(slideKon.value);
+            valKof.innerText = kof;
+            valKon.innerText = kon;
+
+            let stringAljabar = "";
+            if(kof != 0) {
+                stringAljabar += (kof == 1) ? "x" : (kof == -1) ? "-x" : kof + "x";
+            }
+            if(kon !== 0) {
+                if(kon > 0 && kof != 0) stringAljabar += " + " + kon;
+                else if(kon > 0 && kof == 0) stringAljabar += kon;
+                else stringAljabar += " - " + Math.abs(kon);
+            }
+            if(kof == 0 && kon == 0) stringAljabar = "0";
+
+            outputSim.innerText = stringAljabar;
+        }
+
+        slideKof.addEventListener('input', updateSimulasi);
+        slideKon.addEventListener('input', updateSimulasi);
+    </script>
+</body>
+</html>

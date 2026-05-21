@@ -1,0 +1,164 @@
+/* ================================================
+   ANIMATION.CSS — Smooth Motion System
+   Hardware-accelerated, lightweight
+   ================================================ */
+
+/* ─── Keyframes ─── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(1); }
+  to   { transform: scale(1.03); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+
+@keyframes expandCard {
+  from {
+    opacity: 0.6;
+    transform: scale(0.94);
+    border-radius: 24px;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 0px;
+  }
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.3); opacity: 0; }
+  50%  { transform: scale(1.05); opacity: 1; }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: var(--progress-value, 0%); }
+}
+
+/* ─── Utility Animation Classes ─── */
+.anim-fade-in {
+  animation: fadeIn var(--duration-medium) var(--ease-decelerate) both;
+}
+
+.anim-fade-up {
+  animation: fadeUp var(--duration-long) var(--ease-decelerate) both;
+}
+
+.anim-fade-down {
+  animation: fadeDown var(--duration-long) var(--ease-decelerate) both;
+}
+
+.anim-scale-in {
+  animation: scaleIn var(--duration-medium) var(--ease-spring) both;
+}
+
+.anim-slide-right {
+  animation: slideInRight var(--duration-long) var(--ease-decelerate) both;
+}
+
+.anim-slide-left {
+  animation: slideInLeft var(--duration-long) var(--ease-decelerate) both;
+}
+
+/* ─── Stagger delay utilities ─── */
+.delay-1 { animation-delay: 50ms; }
+.delay-2 { animation-delay: 100ms; }
+.delay-3 { animation-delay: 150ms; }
+.delay-4 { animation-delay: 200ms; }
+.delay-5 { animation-delay: 250ms; }
+.delay-6 { animation-delay: 300ms; }
+.delay-7 { animation-delay: 350ms; }
+.delay-8 { animation-delay: 400ms; }
+
+/* ─── Skeleton Loading ─── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface-alt) 25%,
+    var(--bg-card-hover) 50%,
+    var(--bg-surface-alt) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ─── Page transitions ─── */
+.page-enter {
+  animation: fadeUp var(--duration-long) var(--ease-decelerate) both;
+}
+
+.page-exit {
+  animation: fadeIn var(--duration-medium) var(--ease-accelerate) reverse both;
+}
+
+/* ─── Reduce motion support ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

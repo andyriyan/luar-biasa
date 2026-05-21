@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title id="page-title">MTs Ma'arif Jumo — Media Belajar Digital</title>
+  <meta name="description" content="Platform pembelajaran digital MTs Ma'arif Jumo. Madrasahe keren, ora ninggal pesantren.">
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#10853F">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./assets/css/main.css">
+
+  <!-- Scripts -->
+  <script src="./assets/js/storage.js" defer></script>
+  <script src="./assets/js/app.js" defer></script>
+
+  <style>
+    /* ─── Hero / Branding ─── */
+    .hero-section {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-dark, #0a5f2c) 100%);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      color: white;
+      margin-top: var(--space-4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -20px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-logo-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+
+    .hero-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.3);
+      background: white;
+      flex-shrink: 0;
+    }
+
+    .hero-school-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .hero-tagline {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.8);
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .hero-greeting {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    .hero-stat {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-3);
+      flex: 1;
+      text-align: center;
+    }
+
+    .hero-stat-num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #FEEA35;
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.8);
+      margin-top: 2px;
+    }
+
+    /* ─── Category Scroll ─── */
+    .category-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: var(--space-2);
+      padding-bottom: var(--space-2);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .category-scroll::-webkit-scrollbar { display: none; }
+
+    /* ─── Materi Grid ─── */
+    .grid-materi {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    .lesson-card-skeleton { height: 180px; width: 100%; }
+  </style>
+</head>
+<body>
+
+  <div class="app-container container">
+
+    <!-- ─── Hero Branding ─── -->
+    <section class="hero-section anim-fade-down" id="hero-section" aria-label="Identitas Madrasah">
+      <div class="hero-logo-row">
+        <img src="./assets/logo/logomts.png" alt="Logo MTs Ma'arif Jumo" class="hero-logo" id="hero-logo">
+        <div>
+          <h1 class="hero-school-name" id="hero-school-name">MTs Ma'arif Jumo</h1>
+          <p class="hero-tagline" id="hero-tagline">Madrasahe keren, ora ninggal pesantren</p>
+        </div>
+      </div>
+
+      <p class="hero-greeting" id="hero-greeting">Selamat Belajar! 👋</p>
+      <p class="hero-sub">Pilih materi yang ingin kamu pelajari hari ini.</p>
+
+      <div class="hero-stats" id="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num" id="stat-total">—</div>
+          <div class="hero-stat-label">Total Materi</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" id="stat-done">—</div>
+          <div class="hero-stat-label">Selesai</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" id="stat-pct">—%</div>
+          <div class="hero-stat-label">Progress</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Kategori ─── -->
+    <section class="mt-4 anim-fade-in delay-2">
+      <h2 class="text-h3 mb-2">Kategori</h2>
+      <div class="category-scroll" id="category-container">
+        <!-- Diisi JS -->
+      </div>
+    </section>
+
+    <!-- ─── Daftar Materi ─── -->
+    <section class="mt-4 anim-fade-up delay-4">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-h3">Materi Tersedia</h2>
+      </div>
+
+      <div class="grid-materi" id="materi-container">
+        <div class="skeleton lesson-card-skeleton"></div>
+        <div class="skeleton lesson-card-skeleton"></div>
+        <div class="skeleton lesson-card-skeleton"></div>
+        <div class="skeleton lesson-card-skeleton"></div>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <div data-component="footer"></div>
+    </section>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div data-component="bottom-nav"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // ─── Update greeting sesuai waktu ───
+      const hour = new Date().getHours();
+      const greetEl = document.getElementById('hero-greeting');
+      if (greetEl) {
+        const greet = hour < 11 ? 'Selamat Pagi! ☀️'
+                    : hour < 15 ? 'Selamat Siang! 🌤️'
+                    : hour < 18 ? 'Selamat Sore! 🌇'
+                    : 'Selamat Malam! 🌙';
+        greetEl.textContent = greet;
+      }
+
+      // ─── Load identitas dari storage ───
+      if (window.Storage) {
+        const s = Storage.getSettings();
+        const nameEl    = document.getElementById('hero-school-name');
+        const taglineEl = document.getElementById('hero-tagline');
+        if (nameEl && s.appName)   nameEl.textContent = s.appName;
+        if (taglineEl && s.tagline) taglineEl.textContent = s.tagline;
+
+        const titleEl = document.getElementById('page-title');
+        if (titleEl && s.appName) titleEl.textContent = s.appName + ' — Media Belajar Digital';
+      }
+
+      try {
+        // ─── Load template kartu ───
+        const tplRes  = await fetch('./components/lesson-card.html');
+        const tplHtml = tplRes.ok ? await tplRes.text() : '';
+
+        // ─── Load data materi ───
+        const res  = await fetch('./data/materi-list.json');
+        const data = await res.json();
+
+        const catContainer   = document.getElementById('category-container');
+        const materiContainer = document.getElementById('materi-container');
+
+        // ─── Hitung stats progress ───
+        const allProgress = window.Storage ? Storage.getAllProgress() : {};
+        const total       = data.materi.filter(m => m.published).length;
+        const done        = data.materi.filter(m => m.published && (Storage ? Storage.getProgress(m.id) : 0) >= 100).length;
+        const pct         = total > 0 ? Math.round((done / total) * 100) : 0;
+
+        document.getElementById('stat-total').textContent = total;
+        document.getElementById('stat-done').textContent  = done;
+        document.getElementById('stat-pct').textContent   = pct + '%';
+
+        // ─── Render Materi ───
+        const renderMateri = (categoryId) => {
+          materiContainer.innerHTML = '';
+          const filtered = categoryId === 'all'
+            ? data.materi.filter(m => m.published)
+            : data.materi.filter(m => m.published && m.category === categoryId);
+
+          if (filtered.length === 0) {
+            materiContainer.innerHTML = '<p class="text-secondary" style="grid-column:1/-1;text-align:center;padding:2rem;">Belum ada materi di kategori ini.</p>';
+            return;
+          }
+
+          filtered.forEach(item => {
+            const progress = window.Storage ? Storage.getProgress(item.id) : 0;
+            const anchor   = document.createElement('a');
+            anchor.href    = `./materi/${item.slug}/index.html`;
+            anchor.style.cssText = 'text-decoration:none;color:inherit;';
+            anchor.innerHTML     = tplHtml;
+
+            const card = anchor.querySelector('[data-component-role="lesson-card"]');
+            if (!card) return;
+            card.querySelector('[data-slot="title"]').textContent       = item.title;
+            card.querySelector('[data-slot="description"]').textContent = item.description;
+            card.querySelector('[data-slot="duration"]').textContent    = item.estimatedTime || '15 menit';
+            card.querySelector('[data-slot="progress-bar"]').style.width = `${progress}%`;
+            materiContainer.appendChild(anchor);
+          });
+        };
+
+        // ─── Render Kategori ───
+        catContainer.innerHTML = data.categories.map((cat, i) => `
+          <button class="chip category-btn${i === 0 ? ' active-cat' : ''}" data-id="${cat.id}"
+                  style="${i === 0 ? 'background:var(--chip-bg-active);color:var(--chip-text-active);' : ''}">
+            <span class="material-icons" style="font-size:16px;">${cat.icon}</span>
+            ${cat.label}
+          </button>
+        `).join('');
+
+        document.querySelectorAll('.category-btn').forEach(btn => {
+          btn.addEventListener('click', e => {
+            document.querySelectorAll('.category-btn').forEach(b => {
+              b.style.background = ''; b.style.color = '';
+              b.classList.remove('active-cat');
+            });
+            btn.style.background = 'var(--chip-bg-active)';
+            btn.style.color      = 'var(--chip-text-active)';
+            btn.classList.add('active-cat');
+            renderMateri(btn.dataset.id);
+          });
+        });
+
+        // Default: tampilkan semua
+        renderMateri('all');
+
+      } catch (e) {
+        console.error('Error loading materi data', e);
+      }
+    });
+  </script>
+</body>
+</html>

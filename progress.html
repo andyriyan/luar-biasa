@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Progress Belajar</title>
+  <meta name="description" content="Pantau kemajuan belajarmu di sini.">
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#10853F">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <script src="./assets/js/storage.js" defer></script>
+  <script src="./assets/js/app.js" defer></script>
+
+  <style>
+    .progress-hero {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-dark, #0a5f2c) 100%);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      color: white;
+      margin-top: var(--space-4);
+      text-align: center;
+    }
+
+    .progress-circle {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 8px solid rgba(255,255,255,0.3);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: var(--space-4) auto;
+      position: relative;
+    }
+
+    .progress-circle-fill {
+      position: absolute; inset: -8px;
+      border-radius: 50%;
+      border: 8px solid transparent;
+      border-top-color: #FEEA35;
+      transform: rotate(-90deg);
+      transition: transform 1s var(--ease-decelerate);
+    }
+
+    .progress-pct {
+      font-size: 2rem; font-weight: 800; color: white; line-height: 1;
+    }
+    .progress-label { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
+
+    .stats-row {
+      display: flex; gap: var(--space-3); margin-top: var(--space-4);
+    }
+    .stat-card {
+      flex: 1; background: var(--bg-card);
+      border-radius: var(--radius-md); padding: var(--space-4);
+      text-align: center; box-shadow: var(--shadow-1);
+      border: 1px solid var(--border-subtle);
+    }
+    .stat-num {
+      font-size: 1.8rem; font-weight: 800; color: var(--accent-primary);
+    }
+    .stat-lbl { font-size: 0.75rem; color: var(--text-tertiary); margin-top: 2px; }
+
+    .materi-progress-item {
+      display: flex; flex-direction: column; gap: var(--space-1);
+      padding: var(--space-4);
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-1);
+      border: 1px solid var(--border-subtle);
+      text-decoration: none; color: inherit;
+      transition: transform var(--duration-short) var(--ease-standard);
+    }
+    .materi-progress-item:active { transform: scale(0.98); }
+
+    .progress-bar-track {
+      width: 100%; height: 8px;
+      background: var(--bg-surface-alt);
+      border-radius: 999px; overflow: hidden;
+      margin-top: var(--space-2);
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      transition: width 0.8s var(--ease-decelerate);
+    }
+
+    .badge-done {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--accent-primary-light, #dcfce7);
+      color: var(--accent-primary);
+      padding: 2px 10px; border-radius: var(--radius-full);
+      font-size: 0.75rem; font-weight: 700;
+    }
+
+    .badge-inprogress {
+      background: rgba(234,179,8,0.15); color: var(--accent-secondary);
+    }
+
+    .badge-notstarted {
+      background: var(--bg-surface-alt); color: var(--text-tertiary);
+    }
+
+    .btn-reset {
+      width: 100%; padding: var(--space-4);
+      background: transparent;
+      border: 2px solid var(--accent-danger);
+      color: var(--accent-danger);
+      border-radius: var(--radius-full);
+      font-weight: 700; font-size: 1rem;
+      cursor: pointer;
+      transition: all var(--duration-short) var(--ease-standard);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-reset:active { background: rgba(239,68,68,0.08); transform: scale(0.98); }
+  </style>
+</head>
+<body>
+
+  <div class="app-container container">
+    <header class="anim-fade-down" style="padding: var(--space-4) 0 var(--space-2);">
+      <h1 class="text-h2">Progress Belajar</h1>
+      <p class="text-caption mt-2">Pantau kemajuanmu di sini</p>
+    </header>
+
+    <!-- Hero circle -->
+    <section class="progress-hero anim-scale-in">
+      <p style="color:rgba(255,255,255,0.8); font-size:0.9rem;">Total Progress</p>
+      <div class="progress-circle">
+        <div class="progress-circle-fill" id="circle-fill"></div>
+        <span class="progress-pct" id="overall-pct">0%</span>
+        <span class="progress-label">selesai</span>
+      </div>
+      <p style="color:rgba(255,255,255,0.85); font-size:0.9rem;" id="overall-label">Ayo mulai belajar!</p>
+    </section>
+
+    <!-- Stats row -->
+    <div class="stats-row anim-fade-up delay-2">
+      <div class="stat-card">
+        <div class="stat-num" id="stat-total">0</div>
+        <div class="stat-lbl">Total Materi</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-done">0</div>
+        <div class="stat-lbl">Selesai</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-inprogress">0</div>
+        <div class="stat-lbl">Sedang Dikerjakan</div>
+      </div>
+    </div>
+
+    <!-- Per-materi list -->
+    <section class="mt-4 anim-fade-up delay-3">
+      <h2 class="text-h3 mb-3">Detail Per Materi</h2>
+      <div id="progress-list" class="flex-col gap-3">
+        <div class="skeleton" style="height:90px;"></div>
+        <div class="skeleton" style="height:90px;"></div>
+        <div class="skeleton" style="height:90px;"></div>
+      </div>
+    </section>
+
+    <!-- Reset -->
+    <section class="mt-4 anim-fade-up delay-4" style="padding-bottom: var(--space-8);">
+      <button class="btn-reset" id="btn-reset-progress">
+        <span class="material-icons">delete_outline</span>
+        Reset Semua Progress
+      </button>
+    </section>
+  </div>
+
+  <div data-component="bottom-nav"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res  = await fetch('./data/materi-list.json');
+        const data = await res.json();
+        const materi = data.materi.filter(m => m.published);
+
+        const total       = materi.length;
+        const allProgress = window.Storage ? Storage.getAllProgress() : {};
+
+        let done = 0, inProgress = 0;
+        const items = materi.map(m => {
+          const pct = window.Storage ? Storage.getProgress(m.id) : 0;
+          if (pct >= 100) done++;
+          else if (pct > 0) inProgress++;
+          return { ...m, pct };
+        });
+
+        const overallPct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+        document.getElementById('stat-total').textContent      = total;
+        document.getElementById('stat-done').textContent       = done;
+        document.getElementById('stat-inprogress').textContent = inProgress;
+        document.getElementById('overall-pct').textContent     = overallPct + '%';
+        document.getElementById('overall-label').textContent   =
+          overallPct === 0   ? 'Ayo mulai belajar!' :
+          overallPct < 50    ? 'Terus semangat! 💪' :
+          overallPct < 100   ? 'Hampir selesai! 🔥' :
+                               'Luar biasa! Semua selesai! 🎉';
+
+        // Render progress list
+        const listEl = document.getElementById('progress-list');
+        listEl.innerHTML = items.map(item => {
+          const badgeClass = item.pct >= 100 ? 'badge-done'
+                           : item.pct > 0   ? 'badge-inprogress'
+                           :                  'badge-notstarted';
+          const badgeText  = item.pct >= 100 ? '✓ Selesai'
+                           : item.pct > 0   ? `${item.pct}% selesai`
+                           :                  'Belum dimulai';
+          const badgeIcon  = item.pct >= 100 ? 'check_circle' : item.pct > 0 ? 'play_circle' : 'radio_button_unchecked';
+          return `
+            <a href="./materi/${item.slug}/index.html" class="materi-progress-item">
+              <div class="flex items-center justify-between">
+                <h3 class="text-h3" style="font-size:0.95rem; flex:1; margin-right:8px;">${item.title}</h3>
+                <span class="badge-done ${badgeClass}" style="flex-shrink:0;">
+                  <span class="material-icons" style="font-size:14px;">${badgeIcon}</span>
+                  ${badgeText}
+                </span>
+              </div>
+              <p class="text-caption">${item.estimatedTime || '?'} • ${item.totalConcepts || '?'} konsep</p>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" style="width:${item.pct}%;"></div>
+              </div>
+            </a>`;
+        }).join('');
+
+      } catch(e) {
+        console.error('Error loading progress data', e);
+      }
+
+      // Reset button
+      document.getElementById('btn-reset-progress').addEventListener('click', () => {
+        const confirmed = confirm('Yakin ingin menghapus semua data progress? Data tidak bisa dikembalikan.');
+        if (confirmed && window.Storage) {
+          Storage.resetAllProgress();
+          location.reload();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

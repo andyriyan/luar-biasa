@@ -1,0 +1,55 @@
+{
+  "title": "Bank Soal Statistika & Geometri SMP",
+  "description": "Modul review latihan komprehensif mencakup materi ukuran pemusatan data tunggal, membaca diagram data, hubungan garis dan sudut, teorema pythagoras, serta luas dan keliling bangun datar gabungan.",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "statistika-dasar",
+      "title": "Konsep Pemusatan Data Tunggal",
+      "icon": "calculate",
+      "content": "Statistika deskriptif dasar berfokus pada pengolahan tiga ukuran pemusatan data tunggal:\n1. **Mean (Rata-rata)**: Jumlah total seluruh nilai data dibagi dengan banyak data ($n$).\n2. **Modus**: Data tunggal yang memiliki frekuensi kemunculan paling tinggi di dalam kelompok.\n3. **Median**: Titik nilai tengah data set setelah diurutkan dari terkecil ke terbesar. Jika jumlah sampel genap, nilai tengah diperoleh dari rata-rata dua nilai yang berada di posisi tengah.",
+      "steps": [
+        "Urutkan sekumpulan nilai acak terlebih dahulu sebelum mencari median.",
+        "Jumlahkan seluruh nilai lalu bagi dengan total sampel untuk mendapatkan nilai Mean.",
+        "Hitung frekuensi perulangan nilai individu guna memastikan letak Modus data."
+      ],
+      "summary": "Mean, median, dan modus memberikan gambaran representasi pusat dari penyebaran suatu kelompok data tunggal."
+    },
+    {
+      "id": "analisis-diagram",
+      "title": "Teknik Analisis Diagram Data",
+      "icon": "pie_chart",
+      "content": "Penyajian data dalam diagram membantu visualisasi informasi secara efisien:\n1. **Diagram Lingkaran**: Menggunakan porsi derajat ($360^\\circ$) atau persentase ($100\\%$). Sektor tak diketahui dihitung dari sisa total derajat atau persen tersebut.\n2. **Diagram Batang**: Menyajikan data menggunakan tinggi kolom vertikal proporsional sesuai kuantitas masing-masing kelompok data acuan.",
+      "steps": [
+        "Identifikasi tipe satuan diagram (persen atau derajat).",
+        "Hitung jumlah riil menggunakan rumus: $\\frac{\\text{Sektor Porsi}}{\\text{Total Sektor}} \\times \\text{Total Populasi}$.",
+        "Jumlahkan kategori sejenis jika diminta data gabungan multi-variabel."
+      ],
+      "summary": "Analisis diagram mengandalkan rasio bagian terhadap nilai total keseluruhan wadah grafis."
+    },
+    {
+      "id": "garis-sudut",
+      "title": "Hubungan Garis dan Sudut",
+      "icon": "timeline",
+      "content": "Ketika dua garis sejajar dipotong oleh sebuah garis transversal (lintas), akan terbentuk pola hubungan sudut yang spesifik:\n1. **Sudut Dalam Berseberangan**: Memiliki besar sudut yang identik (sama besar) karena posisi silang interior.\n2. **Sudut Dalam Sepihak**: Terletak di sisi interior yang searah, memiliki total jumlahan sudut sebesar $180^\\circ$.\n3. **Sudut Berpelurus & Berpenyiku**: Sudut berpelurus membentuk garis lurus ($180^\\circ$) dan berpenyiku membentuk sudut $90^\\circ$.",
+      "steps": [
+        "Tentukan jenis hubungan posisi antara dua variabel sudut.",
+        "Susun kalimat matematika aljabar linear sesuai prinsip teorinya.",
+        "Selesaikan nilai variabel penyusun melalui metode pindah ruas aljabar."
+      ],
+      "summary": "Hubungan sudut garis sejajar menyederhanakan penemuan nilai sudut tak diketahui lewat persamaan aljabar."
+    },
+    {
+      "id": "pythagoras-geometri",
+      "title": "Teorema Pythagoras & Geometri Bangun",
+      "icon": "layers",
+      "content": "Aplikasi geometri pada matematika SMP menitikberatkan pada klasifikasi serta dimensi ukuran bangun:\n1. **Teorema Pythagoras**: Pada segitiga siku-siku, berlaku kuadrat sisi miring sama dengan jumlah kuadrat sisi penyikunya ($c^2 = a^2 + b^2$). Jika persamaan ini tepat terpenuhi oleh panjang sisi segi tiga, bangun tersebut adalah segitiga siku-siku.\n2. **Keliling & Luas Gabungan**: Keliling diperoleh dengan menjumlahkan garis tepi terluar saja. Luas gabungan dihitung dari jumlahan luas komponen-komponen bangun datar penyusunnya.",
+      "steps": [
+        "Gunakan rumus kuadrat sisi untuk menguji identitas tipe karakteristik sudut segitiga.",
+        "Abaikan garis bagian dalam saat menghitung keliling perimeter eksternal bangun gabungan.",
+        "Pecah bangun kompleks menjadi bagian dasar (persegi/persegi panjang) untuk mempermudah kalkulasi total luas."
+      ],
+      "summary": "Kombinasi analisis Pythagoras dan penguraian komponen mempermudah penyelesaian kasus geometri spasial kompleks."
+    }
+  ]
+}

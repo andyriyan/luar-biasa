@@ -1,0 +1,16 @@
+<article class="card flex-col" data-component-role="quiz-card" aria-live="polite">
+  <div class="date-badge mb-3" id="question-counter" data-slot="counter">Pertanyaan 1 / 10</div>
+  <h3 class="text-h3 mt-2 mb-4" id="question-text" data-slot="question">Isi pertanyaan kuis.</h3>
+  <div class="mt-4 flex-col gap-2" id="options-container" data-slot="options">
+    <button class="option-card" type="button">Opsi A</button>
+    <button class="option-card" type="button">Opsi B</button>
+    <button class="option-card" type="button">Opsi C</button>
+    <button class="option-card" type="button">Opsi D</button>
+  </div>
+  <div class="explanation-box" id="explanation-box" data-slot="explanation">
+    <h4 class="text-h3 mb-2" style="font-size: 1rem;">Pembahasan:</h4>
+    <div class="text-body" id="explanation-text">
+    Pembahasan akan muncul setelah jawaban dicek.
+    </div>
+  </div>
+</article>

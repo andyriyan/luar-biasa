@@ -1,0 +1,125 @@
+{
+  "quizTitle": "Kuis Visual: Geometri & Pythagoras",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Perhatikan gambar berikut:<br><img src='./images/Bt9wrxSs_Screenshot-2026-05-10-100320.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Garis yang sejajar dengan AB adalah ....",
+      "options": [
+        "AD",
+        "BC",
+        "CD",
+        "AE"
+      ],
+      "answer": "CD",
+      "explanation": "Garis CD memiliki arah yang sama dengan AB sehingga tidak akan pernah berpotongan."
+    },
+    {
+      "id": 2,
+      "question": "Sudut 135° seperti pada materi konsep 2 termasuk jenis sudut ....",
+      "options": [
+        "Lancip",
+        "Siku-siku",
+        "Tumpul",
+        "Refleks"
+      ],
+      "answer": "Tumpul",
+      "explanation": "Sudut tumpul besarnya berada di antara 90° dan 180°."
+    },
+    {
+      "id": 3,
+      "question": "Perhatikan gambar perbandingan berikut:<br><img src='./images/pdLxctc3_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Jika SQ=3, RQ=9, dan TQ=4, maka panjang PQ adalah ....",
+      "options": [
+        "9 cm",
+        "10 cm",
+        "12 cm",
+        "15 cm"
+      ],
+      "answer": "12 cm",
+      "explanation": "Berdasarkan rumus perbandingan: 3/9 = 4/PQ, maka PQ = 12."
+    },
+    {
+      "id": 4,
+      "question": "Berdasarkan gambar garis lurus ini:<br><img src='./images/tJWHnR77_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Berapakah nilai x?",
+      "options": [
+        "10°",
+        "20°",
+        "30°",
+        "40°"
+      ],
+      "answer": "20°",
+      "explanation": "Total sudut pelurus adalah 180°. Maka 8x + 20 = 180, sehingga x = 20."
+    },
+    {
+      "id": 5,
+      "question": "Lihat gambar sudut sehadap ini:<br><img src='./images/151ShFYd_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Jika sudut A₁ = 120°, maka sudut A₂ adalah ....",
+      "options": [
+        "60°",
+        "120°",
+        "150°",
+        "180°"
+      ],
+      "answer": "60°",
+      "explanation": "Sudut A₁ dan A₂ adalah sudut berpelurus, maka 180° - 120° = 60°."
+    },
+    {
+      "id": 6,
+      "question": "Segitiga dengan panjang sisi 13 cm, 13 cm, dan 10 cm disebut segitiga ....",
+      "options": [
+        "Sama sisi",
+        "Sama kaki",
+        "Sembarang",
+        "Siku-siku"
+      ],
+      "answer": "Sama kaki",
+      "explanation": "Memiliki dua sisi yang sama panjang (13 cm)."
+    },
+    {
+      "id": 7,
+      "question": "Hitunglah keliling bangun berikut:<br><img src='./images/xT2wF2cm_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "options": [
+        "146 cm",
+        "150 cm",
+        "156 cm",
+        "160 cm"
+      ],
+      "answer": "156 cm",
+      "explanation": "Keliling = 80 + 50 + 26 = 156 cm."
+    },
+    {
+      "id": 8,
+      "question": "Perhatikan gambar sudut luar segitiga:<br><img src='./images/2SHg6L2r_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Jika sudut dalam D = 60°, maka besar sudut luar adalah ....",
+      "options": [
+        "100°",
+        "110°",
+        "120°",
+        "130°"
+      ],
+      "answer": "120°",
+      "explanation": "Sudut luar = 180° - 60° = 120°."
+    },
+    {
+      "id": 9,
+      "question": "Berdasarkan gambar berikut, hitunglah besar sudut B:<br><img src='./images/fWxFdrBH_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'>",
+      "options": [
+        "24°",
+        "28°",
+        "56°",
+        "72°"
+      ],
+      "answer": "56°",
+      "explanation": "Jumlah sudut segitiga 180°. Setelah dicari x=28, maka sudut B (2x) = 56°."
+    },
+    {
+      "id": 10,
+      "question": "Berdasarkan gambar segitiga siku-siku ini:<br><img src='./images/nhwwZbhh_screenshot-1.png' style='width:100%; border-radius:12px; margin:16px 0;'><br>Manakah rumus Pythagoras yang tepat?",
+      "options": [
+        "a²=b²+c²",
+        "b²=a²+c²",
+        "c²=b²-a²",
+        "a+c=b"
+      ],
+      "answer": "b²=a²+c²",
+      "explanation": "Pada gambar tersebut, b adalah sisi miring, sehingga kuadratnya adalah jumlah kuadrat sisi tegak dan datar."
+    }
+  ]
+}

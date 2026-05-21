@@ -1,0 +1,87 @@
+/* ================================================
+   MAIN.CSS — Core Styles & Tailwind Entry Point
+   ================================================ */
+
+@import '../fonts/fonts.css';
+@import '../fonts/material-icons.css';
+
+@import 'theme.css';
+@import 'animation.css';
+@import 'components.css';
+
+/* ─── Reset & Base ─── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+html {
+  font-family: var(--font-latin);
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  /* Prevent pull-to-refresh on mobile app feel */
+  overscroll-behavior-y: none;
+}
+
+/* ─── Arabic & Javanese text support ─── */
+.text-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.5em;
+  line-height: 2;
+  text-align: right;
+  direction: rtl;
+}
+
+.text-javanese {
+  font-family: var(--font-javanese);
+  font-size: 1.2em;
+  line-height: 1.8;
+}
+
+/* ─── Layout Utils ─── */
+.container {
+  width: 100%;
+  max-width: 600px; /* Mobile first optimal width */
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 80px; /* Space for bottom nav */
+}
+
+/* ─── Tailwind Utilities (Simulated core ones for immediate use) ─── */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+.text-center { text-align: center; }
+.font-bold { font-weight: 700; }

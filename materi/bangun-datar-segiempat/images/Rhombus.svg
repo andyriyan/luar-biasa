@@ -1,0 +1,42 @@
+<svg width="209mm" height="121mm" version="1.1" viewBox="0 0 209 121" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <rect width="209" height="121" fill="#fff"/>
+
+ <g font-family="Times" font-size="13px" font-style="italic">
+  <text x="200" y="65">A</text>
+  <text x="149" y="32">B</text>
+  <text x="97" y="65">C</text>
+  <text x="149" y="98">D</text>
+  <text x="45" y="119">A</text>
+  <text x="86" y="65">B</text>
+  <text x="45" y="11">C</text>
+  <text x="3" y="66">D</text>
+
+ <g id="b">
+  <path d="m55 61v-5h-5" fill="none" stroke="#000" stroke-width=".5"/>
+  <text x="53" y="72">I</text>
+ </g>
+ <use transform="translate(103)" xlink:href="#b"/>
+ </g>
+ <g fill="none" stroke="#000">
+ <path d="m153 34v54m47-27h-94" stroke-dasharray="1" stroke-width=".5"/>
+ <path d="m200 61-47-27-47 27 47 27z"/>
+
+ <g id="e" stroke-width=".5">
+  <path d="m50 61h-36m36 0v-47" stroke-dasharray="1"/>
+  <path d="m48 38 4-1m-19 22-1 4m3-4-1 4"/>
+ </g>
+ <use transform="rotate(180 50 61)" xlink:href="#e"/>
+ <g id="c">
+  <use transform="matrix(-1 0 0 1 100 0)" xlink:href="#d"/>
+  <g id="d">
+   <path d="m50 14-36 47" stroke-linecap="round"/>
+   <path d="m32 34 3 3m-2-4 3 3m-5-1 3 3" stroke-width=".5"/>
+  </g>
+ </g>
+ <use transform="matrix(1 0 0-1 0 122)" xlink:href="#c"/>
+ </g>
+
+ <path d="m130 72 2 4h-5l3-1m42-33 2 4h-5l3-1"/>
+ <path id="a" d="m134 42-2 4h5l-3-1m-7 1-2 4 5 0l-3-1"/>
+ <use transform="translate(42 30)" xlink:href="#a"/>
+</svg>

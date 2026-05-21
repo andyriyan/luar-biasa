@@ -1,0 +1,25 @@
+<header class="card flex items-center justify-between" role="banner" aria-label="Navigasi Atas">
+  <a href="./index.html" style="text-decoration:none; color:inherit;" aria-label="Kembali ke Beranda">
+    <div class="flex items-center gap-2">
+      <span class="material-icons" aria-hidden="true">school</span>
+      <strong>Media Belajar</strong>
+    </div>
+  </a>
+  <button class="btn btn-outline" type="button" data-action="toggle-theme">
+    <span class="material-icons" aria-hidden="true">dark_mode</span>
+    Tema
+  </button>
+</header>
+<script>
+  (function () {
+    const root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root) return;
+    const btn = root.querySelector('[data-action="toggle-theme"]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      if (window.App && typeof window.App.toggleTheme === 'function') {
+        window.App.toggleTheme();
+      }
+    });
+  })();
+</script>
