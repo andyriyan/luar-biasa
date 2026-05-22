@@ -11,6 +11,12 @@ const QuizManager = {
   isAnswered: false,
   slug: null,
   
+  fixImagePaths(htmlString) {
+    if (!htmlString || !this.slug) return htmlString;
+    // Ubah path ./images/... atau images/... menjadi materi/${slug}/images/...
+    return htmlString.replace(/src\s*=\s*["'](?:\.\/)?images\/(.+?)["']/g, `src="materi/${this.slug}/images/$1"`);
+  },
+  
   async init() {
     try {
       // Periksa protokol
@@ -63,15 +69,16 @@ const QuizManager = {
     document.getElementById('question-counter').textContent = `Pertanyaan ${this.currentIndex + 1} / ${this.data.questions.length}`;
     
     const questionText = document.getElementById('question-text');
-    questionText.innerHTML = q.question;
+    questionText.innerHTML = this.fixImagePaths(q.question);
     
     const optionsContainer = document.getElementById('options-container');
     let html = '';
     
     q.options.forEach((opt, idx) => {
+      const fixedOpt = this.fixImagePaths(opt);
       html += `
         <div class="option-card" data-value="${opt.replace(/"/g, '&quot;')}">
-          ${opt}
+          ${fixedOpt}
         </div>
       `;
     });
@@ -130,7 +137,7 @@ const QuizManager = {
     // Tampilkan pembahasan
     const expBox = document.getElementById('explanation-box');
     const expText = document.getElementById('explanation-text');
-    expText.innerHTML = q.explanation || (isCorrect ? 'Jawaban Anda Benar!' : 'Jawaban Anda Kurang Tepat.');
+    expText.innerHTML = this.fixImagePaths(q.explanation) || (isCorrect ? 'Jawaban Anda Benar!' : 'Jawaban Anda Kurang Tepat.');
     expBox.classList.add('show');
     
     // Render Math in Explanation
