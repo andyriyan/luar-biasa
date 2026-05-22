@@ -8,19 +8,24 @@
       "icon": "grid_view"
     },
     {
-      "id": "aswaja",
-      "label": "Aswaja",
-      "icon": "mosque"
+      "id": "aritmatika",
+      "label": "Aritmatika",
+      "icon": "iso"
     },
     {
-      "id": "math",
-      "label": "Matematika",
-      "icon": "functions"
+      "id": "aljabar",
+      "label": "Aljabar",
+      "icon": "sort"
     },
     {
-      "id": "science",
-      "label": "IPA",
-      "icon": "science"
+      "id": "geometri",
+      "label": "Geometri",
+      "icon": "architecture"
+    },
+    {
+      "id": "statistika",
+      "label": "Statistika",
+      "icon": "bar_chart"
     },
     {
       "id": "simulasi",
@@ -34,7 +39,7 @@
       "slug": "bilangan-bulat",
       "title": "Bilangan Bulat Fase D",
       "description": "Pendekatan konseptual dan struktural bilangan bulat dilengkapi visualisasi logika pengerjaan aritmetika berjenjang.",
-      "category": "math",
+      "category": "aritmatika",
       "thumbnail": "",
       "totalConcepts": 5,
       "estimatedTime": "25 menit",
@@ -51,7 +56,7 @@
       "slug": "bank-soal-matematika-smp",
       "title": "Bank Soal Statistika & Geometri SMP",
       "description": "Modul review latihan komprehensif 20 soal matematika terintegrasi materi kelas VII.",
-      "category": "math",
+      "category": "soal",
       "thumbnail": "",
       "totalConcepts": 4,
       "estimatedTime": "45 menit",
@@ -69,7 +74,7 @@
       "slug": "pas-geometri-2024",
       "title": "Pembahasan PAS Geometri 2024",
       "description": "Latihan soal dan pembahasan lengkap Geometri Bidang & Ruang.",
-      "category": "math",
+      "category": "geometri",
       "thumbnail": "",
       "totalConcepts": 7,
       "estimatedTime": "25 menit",
@@ -78,23 +83,6 @@
         "matematika",
         "SMP",
         "geometri"
-      ],
-      "published": true
-    },
-    {
-      "id": "pengantar-aswaja",
-      "slug": "pengantar-aswaja",
-      "title": "Materi 1: Pengantar Aswaja",
-      "description": "Memahami konsep dasar Ahlussunnah wal Jama'ah An-Nahdliyyah",
-      "category": "aswaja",
-      "thumbnail": "",
-      "totalConcepts": 3,
-      "estimatedTime": "20 menit",
-      "difficulty": "mudah",
-      "tags": [
-        "aswaja",
-        "nu",
-        "dasar"
       ],
       "published": true
     },
