@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulasi Tumpuk Pecahan Dinamis</title>
+  <style>
+    :root {
+      --accent-primary: #10853F;
+      --bg-card: #ffffff;
+      --bg-surface: #f4f4f5;
+      --text-primary: #18181b;
+      --text-secondary: #71717a;
+      --border-subtle: #e4e4e7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-card: #18181b;
+        --bg-surface: #09090b;
+        --text-primary: #f4f4f5;
+        --text-secondary: #a1a1aa;
+        --border-subtle: #27272a;
+      }
+    }
+    body { 
+      background-color: var(--bg-surface); 
+      color: var(--text-primary); 
+      font-family: system-ui, -apple-system, sans-serif; 
+      margin: 0;
+      padding: 0;
+    }
+    .app-container { 
+      max-width: 480px; 
+      margin: 0 auto; 
+      min-height: 100vh; 
+      background-color: var(--bg-card); 
+      display: flex; 
+      flex-direction: column;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    .sawah-box {
+      width: 110px;
+      height: 110px;
+      border: 2px solid var(--text-primary);
+      position: relative;
+      background: #f1f5f9;
+      display: grid;
+    }
+    .sawah-gabung-box {
+      width: 180px;
+      height: 180px;
+      border: 3px solid var(--text-primary);
+      position: relative;
+      background: #f1f5f9;
+      display: grid;
+    }
+    .kotak-grid {
+      border: 1px dashed var(--text-secondary);
+      box-sizing: border-box;
+    }
+    /* Warna Arsiran */
+    .arsir-v { background-color: rgba(16, 133, 63, 0.4); } /* Hijau */
+    .arsir-h { background-color: rgba(59, 130, 246, 0.4); } /* Biru */
+    .arsir-campuran { background-color: rgba(234, 179, 8, 0.6); } /* Kuning (Irisan) */
+    
+    .btn-kembali {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-secondary); text-decoration: none; font-weight: 600;
+      padding: 6px 12px; border-radius: 999px; background: var(--bg-card);
+      border: 1px solid var(--border-subtle); margin-bottom: 12px; font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-container p-4" style="padding: 16px; box-sizing: border-box;">
+  
+  <!-- Tombol Kembali -->
+  <div>
+    <a href="../../index.html" class="btn-kembali">← Kembali</a>
+  </div>
+
+  <!-- Header -->
+  <div style="text-align: center; margin-bottom: 16px;">
+    <h1 style="font-size: 18px; font-weight: bold; margin: 0; color: var(--accent-primary);">Laboratorium Pecahan Dinamis</h1>
+    <p style="font-size: 12px; color: var(--text-secondary); margin: 4px 0 0 0;">Ubah angka sesuka hati dan tumpuk untuk melihat asal-usul penyebutnya.</p>
+  </div>
+
+  <!-- Kontrol Input Angka Dinamis -->
+  <div style="background: var(--bg-surface); padding: 12px; border-radius: 12px; border: 1px solid var(--border-subtle); margin-bottom: 16px;">
+    <div style="display: flex; justify-content: space-around; align-items: center; gap: 8px;">
+      
+      <!-- Pecahan 1 -->
+      <div style="text-align: center;">
+        <label style="font-size: 11px; font-weight: bold; color: #10853F; display: block; margin-bottom: 4px;">PECAHAN A (VERTIKAL)</label>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <input type="number" id="input-pembilang-1" value="1" min="1" max="5" style="width: 45px; text-align: center; padding: 4px; font-weight: bold;">
+          <div style="width: 30px; border-top: 2px solid var(--text-primary);"></div>
+          <input type="number" id="input-penyebut-1" value="2" min="2" max="6" style="width: 45px; text-align: center; padding: 4px; font-weight: bold;">
+        </div>
+      </div>
+
+      <div style="font-size: 20px; font-weight: bold; color: var(--text-secondary);">+</div>
+
+      <!-- Pecahan 2 -->
+      <div style="text-align: center;">
+        <label style="font-size: 11px; font-weight: bold; color: #3b82f6; display: block; margin-bottom: 4px;">PECAHAN B (HORIZONTAL)</label>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <input type="number" id="input-pembilang-2" value="1" min="1" max="5" style="width: 45px; text-align: center; padding: 4px; font-weight: bold;">
+          <div style="width: 30px; border-top: 2px solid var(--text-primary);"></div>
+          <input type="number" id="input-penyebut-2" value="3" min="2" max="6" style="width: 45px; text-align: center; padding: 4px; font-weight: bold;">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tampilan Visual Proses -->
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-around; gap: 16px;">
+    
+    <!-- Area Kondisi Terpisah -->
+    <div style="display: flex; justify-content: space-around; align-items: center; background: var(--bg-surface); padding: 12px; border-radius: 12px;">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div id="canvas-sawah-1" class="sawah-box"></div>
+        <span style="font-size: 11px; margin-top: 4px; color: var(--text-secondary);">Belahan Vertikal</span>
+      </div>
+      <div style="font-size: 20px; font-weight: bold; color: var(--text-secondary);">+</div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div id="canvas-sawah-2" class="sawah-box"></div>
+        <span style="font-size: 11px; margin-top: 4px; color: var(--text-secondary);">Belahan Horizontal</span>
+      </div>
+    </div>
+
+    <!-- Tombol Pemicu Aksi -->
+    <div style="text-align: center;">
+      <button id="btn-tumpuk" onclick="prosesTumpukSilang()" style="background: var(--accent-primary); color: white; border: none; padding: 10px 24px; font-weight: bold; border-radius: 20px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 6px rgb(0 0 0 / 0.15);">
+        Simulasikan Tumpuk Silang ➔
+      </button>
+    </div>
+
+    <!-- Area Hasil Gabungan Ditumpuk -->
+    <div id="panel-hasil" style="display: none; flex-direction: column; align-items: center; background: #f0fdf4; border: 2px solid #bbf7d0; padding: 16px; border-radius: 12px;">
+      <h3 style="margin: 0 0 8px 0; font-size: 14px; color: #166534;">Hasil Efek Tumpuk Silang</h3>
+      
+      <div id="canvas-sawah-gabung" class="sawah-gabung-box"></div>
+
+      <p style="font-size: 12px; text-align: center; color: #1e293b; margin: 12px 0 0 0; line-height: 1.4;">
+        Garis saling memotong membentuk <span id="total-kotak-baru" style="font-weight: bold; color: #b91c1c; font-size: 14px;">?</span> kotak kecil baru.
+      </p>
+
+      <!-- Penjelasan Konseptual Otomatis -->
+      <div style="background: white; width: 100%; border-radius: 8px; padding: 10px; margin-top: 12px; box-sizing: border-box; font-size: 11px; line-height: 1.5; border: 1px solid #e2e8f0;">
+        <div style="margin-bottom: 4px;">• Pecahan A menjadi: <span id="info-porsi-1" style="font-weight: bold; color: #10853F;">?</span> kotak kecil</div>
+        <div style="margin-bottom: 6px;">• Pecahan B menjadi: <span id="info-porsi-2" style="font-weight: bold; color: #3b82f6;">?</span> kotak kecil</div>
+        <div style="border-top: 1px solid #e2e8f0; pt: 6px; padding-top: 6px; text-align: center; font-weight: bold; font-size: 13px; color: #1e293b;">
+          Total Berwarna = <span id="rumus-akhir">?</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Efek Suara Sintetis 
+  function playSound(type) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator(); const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination); gain.gain.value = 0.1;
+      if (type === 'click') { osc.frequency.value = 400; osc.start(); osc.stop(ctx.currentTime + 0.05); }
+      else if (type === 'success') {
+        osc.frequency.value = 523; osc.start();
+        osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
+        osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
+        osc.stop(ctx.currentTime + 0.4);
+      }
+    } catch(e) {}
+  }
+
+  function renderSawahDinamis() {
+    // Sembunyikan panel hasil setiap kali input berubah agar siswa harus klik tumpuk lagi
+    document.getElementById('panel-hasil').style.display = 'none';
+    document.getElementById('btn-tumpuk').style.display = 'inline-block';
+
+    const pem1 = parseInt(document.getElementById('input-pembilang-1').value) || 1;
+    const pen1 = parseInt(document.getElementById('input-penyebut-1').value) || 2;
+    const pem2 = parseInt(document.getElementById('input-pembilang-2').value) || 1;
+    const pen2 = parseInt(document.getElementById('input-penyebut-2').value) || 3;
+
+    // Validasi pembilang tidak boleh lebih besar dari penyebut demi logika objek utuh
+    if (pem1 > pen1) { document.getElementById('input-pembilang-1').value = pen1; return renderSawahDinamis(); }
+    if (pem2 > pen2) { document.getElementById('input-pembilang-2').value = pen2; return renderSawahDinamis(); }
+
+    // Render Sawah 1 (Vertikal -> Grid Kolom)
+    const box1 = document.getElementById('canvas-sawah-1');
+    box1.innerHTML = '';
+    box1.style.gridTemplateColumns = `repeat(${pen1}, 1fr)`;
+    box1.style.gridTemplateRows = `1fr`;
+    for(let i=0; i<pen1; i++) {
+      const k = document.createElement('div');
+      k.className = 'kotak-grid' + (i < pem1 ? ' arsir-v' : '');
+      box1.appendChild(k);
+    }
+
+    // Render Sawah 2 (Horizontal -> Grid Baris)
+    const box2 = document.getElementById('canvas-sawah-2');
+    box2.innerHTML = '';
+    box2.style.gridTemplateColumns = `1fr`;
+    box2.style.gridTemplateRows = `repeat(${pen2}, 1fr)`;
+    for(let i=0; i<pen2; i++) {
+      const k = document.createElement('div');
+      k.className = 'kotak-grid' + (i < pem2 ? ' arsir-h' : '');
+      box2.appendChild(k);
+    }
+  }
+
+  function prosesTumpukSilang() {
+    playSound('success');
+    const pem1 = parseInt(document.getElementById('input-pembilang-1').value);
+    const pen1 = parseInt(document.getElementById('input-penyebut-1').value);
+    const pem2 = parseInt(document.getElementById('input-pembilang-2').value);
+    const pen2 = parseInt(document.getElementById('input-penyebut-2').value);
+
+    const totalPenyebutBaru = pen1 * pen2;
+    const porsiBaru1 = pem1 * pen2;
+    const porsiBaru2 = pem2 * pen1;
+    const hasilPembilangAkhir = porsiBaru1 + porsiBaru2;
+
+    document.getElementById('total-kotak-baru').innerText = totalPenyebutBaru;
+    document.getElementById('info-porsi-1').innerText = `${porsiBaru1}/${totalPenyebutBaru}`;
+    document.getElementById('info-porsi-2').innerText = `${porsiBaru2}/${totalPenyebutBaru}`;
+    document.getElementById('rumus-akhir').innerText = `${porsiBaru1} + ${porsiBaru2} = ${hasilPembilangAkhir}/${totalPenyebutBaru}`;
+
+    // Render Grid Gabungan (pen1 Kolom x pen2 Baris)
+    const boxGabung = document.getElementById('canvas-sawah-gabung');
+    boxGabung.innerHTML = '';
+    boxGabung.style.gridTemplateColumns = `repeat(${pen1}, 1fr)`;
+    boxGabung.style.gridTemplateRows = `repeat(${pen2}, 1fr)`;
+
+    // Bangun koordinat jaring kotak untuk mendeteksi tumpukan arsiran
+    for(let r=0; r<pen2; r++) { // baris mewakili pecahan 2
+      for(let c=0; c<pen1; c++) { // kolom mewakili pecahan 1
+        const k = document.createElement('div');
+        k.className = 'kotak-grid';
+        
+        const apakahArsirV = (c < pem1);
+        const apakahArsirH = (r < pem2);
+
+        if (apakahArsirV && apakahArsirH) {
+          k.classList.add('arsir-campuran');
+        } else if (apakahArsirV) {
+          k.classList.add('arsir-v');
+        } else if (apakahArsirH) {
+          k.classList.add('arsir-h');
+        }
+        boxGabung.appendChild(k);
+      }
+    }
+
+    document.getElementById('panel-hasil').style.display = 'flex';
+    document.getElementById('btn-tumpuk').style.display = 'none';
+  }
+
+  // Ikat Event Listener agar perubahan input langsung mengubah bentuk grid secara real-time
+  document.getElementById('input-pembilang-1').addEventListener('input', () => { playSound('click'); renderSawahDinamis(); });
+  document.getElementById('input-penyebut-1').addEventListener('input', () => { playSound('click'); renderSawahDinamis(); });
+  document.getElementById('input-pembilang-2').addEventListener('input', () => { playSound('click'); renderSawahDinamis(); });
+  document.getElementById('input-penyebut-2').addEventListener('input', () => { playSound('click'); renderSawahDinamis(); });
+
+  // Jalankan render awal saat halaman dimuat
+  renderSawahDinamis();
+</script>
+</body>
+</html>

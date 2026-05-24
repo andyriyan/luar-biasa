@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mode Presentasi Mengajar — Media Belajar Digital</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <link rel="stylesheet" href="./assets/vendor/katex/katex.min.css">
+
+  <!-- Scripts -->
+  <script defer src="./assets/vendor/katex/katex.min.js"></script>
+  <script defer src="./assets/vendor/katex/contrib/auto-render.min.js"></script>
+  <script src="./assets/js/storage.js" defer></script>
+  <script src="./assets/js/app.js" defer></script>
+
+  <style>
+    /* ─── Custom Global Styles for Presentation Mode ─── */
+    body {
+      background-color: var(--bg-surface-alt);
+      color: var(--text-primary);
+      transition: background-color var(--duration-medium) var(--ease-standard);
+      min-height: 100vh;
+    }
+
+    /* ─── Layer 1: Dashboard Selector Styles ─── */
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-4) var(--space-12);
+    }
+
+    .dashboard-header {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-dark, #0a5f2c) 100%);
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-8);
+      margin-bottom: var(--space-6);
+      box-shadow: var(--shadow-premium);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .dashboard-title-area h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .dashboard-title-area p {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: var(--space-2);
+    }
+
+    .btn-back-panel {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      color: white;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      transition: all var(--duration-short);
+    }
+
+    .btn-back-panel:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .presentation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .materi-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-1);
+      transition: all var(--duration-medium) var(--ease-spring);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .materi-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-2);
+      border-color: var(--accent-primary);
+    }
+
+    .badge-pres {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(245,158,11,0.4);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-regular {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--bg-surface-alt);
+      color: var(--text-tertiary);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border: 1px solid var(--border-normal);
+    }
+
+    .materi-card-body h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+      padding-right: 60px; /* Space for badge if present */
+    }
+
+    .materi-card-body p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: var(--space-4);
+    }
+
+    .materi-meta {
+      display: flex;
+      gap: var(--space-3);
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-5);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: var(--space-3);
+    }
+
+    .materi-meta span {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .materi-meta .material-icons {
+      font-size: 14px;
+    }
+
+    .btn-action-pres {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      background: var(--accent-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      text-decoration: none;
+      transition: all var(--duration-short) var(--ease-standard);
+      box-shadow: var(--shadow-1);
+    }
+
+    .btn-action-pres:hover {
+      background: var(--accent-primary-dark);
+      transform: scale(1.02);
+    }
+
+    /* ─── Layer 2: Slide Viewer Styles ─── */
+    .slide-viewer-container {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background-color: var(--bg-surface);
+      flex-direction: column;
+    }
+
+    .slide-viewer-container.active {
+      display: flex;
+    }
+
+    /* Top Navigation Bar in Slides */
+    .slide-top-bar {
+      padding: var(--space-4) var(--space-6);
+      background-color: var(--bg-blur);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slide-school-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .slide-school-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-primary);
+    }
+
+    .slide-school-text h4 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .slide-school-text p {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+
+    .slide-top-actions {
+      display: flex;
+      gap: var(--space-3);
+    }
+
+    .btn-slide-action {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-normal);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--duration-short);
+    }
+
+    .btn-slide-action:hover {
+      background: var(--chip-bg-active);
+      color: var(--chip-text-active);
+      transform: scale(1.08);
+      border-color: transparent;
+    }
+
+    /* Main Slide Content Canvas */
+    .slide-canvas {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      padding: var(--space-6) var(--space-10);
+      gap: var(--space-8);
+      position: relative;
+    }
+
+    /* Slide Layout Split Screen */
+    .slide-left-col {
+      flex: 5.5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+      padding-right: var(--space-4);
+      scrollbar-width: thin;
+    }
+
+    .slide-right-col {
+      flex: 4.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-surface-alt);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: inset var(--shadow-1);
+      border: 1.5px solid var(--border-subtle);
+      overflow: hidden;
+      position: relative;
+      min-height: 350px;
+    }
+
+    /* Slide Screen: Cover Slide */
+    .cover-slide-content {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .cover-badge {
+      background: var(--accent-primary-light);
+      color: var(--accent-primary);
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-5);
+      display: inline-block;
+    }
+
+    .cover-title {
+      font-size: 3.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: var(--space-4);
+    }
+
+    .cover-desc {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: var(--space-8);
+    }
+
+    .cover-start-btn {
+      padding: var(--space-4) var(--space-8);
+      background: var(--accent-primary);
+      color: white;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      transition: all var(--duration-short);
+      box-shadow: var(--shadow-premium);
+    }
+
+    .cover-start-btn:hover {
+      background: var(--accent-primary-dark);
+      transform: translateY(-3px);
+    }
+
+    /* Slide Screen: Content Slide */
+    .slide-index-indicator {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--accent-secondary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+
+    .slide-concept-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: var(--space-4);
+    }
+
+    .slide-concept-content {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: var(--space-6);
+      font-weight: 500;
+    }
+
+    /* Pedagogical Step-by-Step Cards (Strictly Anti-Jenuh) */
+    .slide-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      list-style: none;
+      padding: 0;
+    }
+
+    .slide-step-card {
+      background-color: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4) var(--space-5);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      box-shadow: var(--shadow-1);
+      transform: translateX(-15px);
+      opacity: 0;
+      transition: all var(--duration-medium) var(--ease-decelerate);
+    }
+
+    .slide-step-card.revealed {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .slide-step-number {
+      background: var(--accent-primary);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-1);
+    }
+
+    .slide-step-text {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* Slide Content right side illustrations */
+    .slide-media-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-2);
+      animation: fadeIn var(--duration-medium) ease forwards;
+    }
+
+    /* KaTeX Render Container for Math Presentations */
+    .slide-katex-wrapper {
+      padding: var(--space-6);
+      background-color: var(--bg-card);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-1);
+      width: 100%;
+      text-align: center;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      overflow-x: auto;
+    }
+
+    /* Slide Screen: End Slide */
+    .end-slide-content {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .end-icon {
+      font-size: 4.5rem;
+      color: var(--accent-secondary);
+      margin-bottom: var(--space-4);
+      animation: pulse 2s infinite var(--ease-standard);
+    }
+
+    .end-title {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+    }
+
+    .end-desc {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-8);
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .end-actions {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-end-quiz {
+      padding: var(--space-4) var(--space-6);
+      background: var(--accent-secondary);
+      color: white;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 1.05rem;
+      box-shadow: var(--shadow-premium);
+      transition: all var(--duration-short);
+    }
+
+    .btn-end-quiz:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    .btn-end-exit {
+      padding: var(--space-4) var(--space-6);
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-normal);
+      color: var(--text-primary);
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 1.05rem;
+      transition: all var(--duration-short);
+    }
+
+    .btn-end-exit:hover {
+      background: var(--border-subtle);
+      transform: translateY(-2px);
+    }
+
+    /* Bottom Control Bar in Slides */
+    .slide-bottom-bar {
+      padding: var(--space-4) var(--space-6);
+      background-color: var(--bg-blur);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10001;
+    }
+
+    .slide-progress-container {
+      flex: 1;
+      max-width: 400px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .slide-progress-bg {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-surface-alt);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .slide-progress-fill {
+      height: 100%;
+      background: var(--accent-primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .slide-progress-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      min-width: 80px;
+    }
+
+    .slide-nav-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .btn-slide-nav {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-normal);
+      color: var(--text-primary);
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      transition: all var(--duration-short);
+    }
+
+    .btn-slide-nav:hover:not(:disabled) {
+      background: var(--accent-primary);
+      color: white;
+      border-color: transparent;
+      transform: scale(1.03);
+    }
+
+    .btn-slide-nav:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Floating Interactive Slide List Select */
+    .slide-jump-wrapper {
+      position: relative;
+    }
+
+    .slide-jump-select {
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-normal);
+      color: var(--text-primary);
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      outline: none;
+      max-width: 250px;
+    }
+
+    /* Keyboard hint */
+    .keyboard-hint {
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+    }
+    .kbd {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-normal);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+
+    /* Keyframes */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.85; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       LAYER 1: PRESENTATION DASHBOARD (SELECTOR)
+       ========================================================================= -->
+  <div class="dashboard-container" id="dashboard-layer">
+    <header class="dashboard-header anim-fade-down">
+      <div class="dashboard-title-area">
+        <h1>Mode Presentasi Kelas</h1>
+        <p id="dashboard-subtitle">Menghubungkan Laptop ke Proyektor untuk slide pembelajaran interaktif dan pedagogis.</p>
+      </div>
+      <a href="./settings-identitas.html" class="btn-back-panel">
+        <span class="material-icons">manage_accounts</span>
+        Kembali ke Panel Guru
+      </a>
+    </header>
+
+    <main class="mt-4">
+      <h2 class="text-h3 mb-4" style="font-size:1.35rem; color: var(--text-primary);">Daftar Materi Mengajar</h2>
+      
+      <!-- Materials Grid container -->
+      <div class="presentation-grid" id="materials-container">
+        <!-- Skeletons -->
+        <div class="skeleton w-full" style="height:220px; border-radius:24px;"></div>
+        <div class="skeleton w-full" style="height:220px; border-radius:24px;"></div>
+        <div class="skeleton w-full" style="height:220px; border-radius:24px;"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       LAYER 2: SLIDE PRESENTATION PLAYER (CANVAS SCREEN)
+       ========================================================================= -->
+  <div class="slide-viewer-container" id="slide-layer">
+    <!-- Slide Top bar -->
+    <div class="slide-top-bar">
+      <div class="slide-school-info">
+        <img src="./assets/logo/logomts.png" alt="Logo" class="slide-school-logo" id="slide-logo">
+        <div class="slide-school-text">
+          <h4 id="slide-school-name">MTs Ma'arif Jumo</h4>
+          <p id="slide-school-tagline">Madrasahe keren, ora ninggal pesantren</p>
+        </div>
+      </div>
+      
+      <div class="slide-top-actions">
+        <!-- Interactive slide select jump menu -->
+        <div class="slide-jump-wrapper" id="slide-jump-container">
+          <select id="jump-select" class="slide-jump-select" aria-label="Lompat ke Slide">
+            <!-- Diisi dinamis -->
+          </select>
+        </div>
+        
+        <button class="btn-slide-action" id="btn-fullscreen" title="Layar Penuh" aria-label="Toggle Fullscreen">
+          <span class="material-icons" id="fullscreen-icon">fullscreen</span>
+        </button>
+        <button class="btn-slide-action" id="btn-exit-slide" title="Keluar Slide" aria-label="Keluar Presentasi">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Slide Main Canvas -->
+    <div class="slide-canvas" id="slide-canvas">
+      <!-- Diisi dinamis menggunakan Javascript -->
+    </div>
+
+    <!-- Slide Bottom Control bar -->
+    <div class="slide-bottom-bar">
+      <div class="slide-progress-container">
+        <div class="slide-progress-bg">
+          <div class="slide-progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="slide-progress-text" id="progress-text">Slide 0 / 0</div>
+      </div>
+
+      <!-- Keyboard hint (tampil di desktop) -->
+      <div class="keyboard-hint" style="display:none" id="keyboard-hint">
+        <span class="kbd">← →</span>
+        <span style="font-size:0.72rem;color:var(--text-tertiary);">Navigasi</span>
+        <span class="kbd">Space</span>
+        <span style="font-size:0.72rem;color:var(--text-tertiary);">Lanjut</span>
+        <span class="kbd">Esc</span>
+        <span style="font-size:0.72rem;color:var(--text-tertiary);">Keluar</span>
+      </div>
+
+      <div class="slide-nav-controls">
+        <button class="btn-slide-nav" id="btn-prev-slide">
+          <span class="material-icons">arrow_back</span>
+          Sebelumnya
+        </button>
+        <button class="btn-slide-nav" id="btn-next-slide">
+          Berikutnya
+          <span class="material-icons" id="next-btn-icon">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       DYNAMIC CORE SLIDESHOW ENGINE SCRIPT
+       ========================================================================= -->
+  <script>
+    const PresentationEngine = {
+      materiList: [],
+      activeMateri: null,
+      currentSlideIndex: 0, // 0 is Cover, 1..N are Concepts, N+1 is End Slide
+      revealedStepsCount: 0, // Track incremental step reveals on the current slide
+
+      async init() {
+        this.applyBranding();
+        await this.loadMaterials();
+        this.checkRouteParams();
+        this.setupKeyboardNavigation();
+        this.setupGlobalControls();
+      },
+
+      applyBranding() {
+        if (window.Storage) {
+          const s = Storage.getSettings();
+          const nameEl = document.getElementById('slide-school-name');
+          const taglineEl = document.getElementById('slide-school-tagline');
+          if (nameEl && s.appName) nameEl.textContent = s.appName;
+          if (taglineEl && s.tagline) taglineEl.textContent = s.tagline;
+        }
+      },
+
+      async loadMaterials() {
+        try {
+          const res = await fetch('./data/materi-list.json');
+          if (!res.ok) throw new Error('Gagal memuat list materi.');
+          const data = await res.json();
+          this.materiList = data.materi || [];
+
+          this.renderDashboard();
+        } catch (err) {
+          console.error(err);
+          document.getElementById('materials-container').innerHTML = `
+            <div style="grid-column: 1/-1; text-align:center; padding:3rem; color:var(--accent-danger);">
+              <span class="material-icons" style="font-size:3.5rem;">error_outline</span>
+              <p style="margin-top:12px; font-weight:700;">Gagal memuat daftar materi presentasi.</p>
+            </div>
+          `;
+        }
+      },
+
+      renderDashboard() {
+        const container = document.getElementById('materials-container');
+        if (!container) return;
+
+        container.innerHTML = '';
+        // Dashboard guru menampilkan semua materi yang published (termasuk presentationOnly)
+        const publishedList = this.materiList.filter(m => m.published !== false);
+
+        if (publishedList.length === 0) {
+          container.innerHTML = `
+            <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-tertiary);">
+              <span class="material-icons" style="font-size:4rem;">inbox</span>
+              <p style="margin-top:12px;font-weight:600;">Belum ada materi tersedia.</p>
+            </div>`;
+          return;
+        }
+
+        publishedList.forEach(m => {
+          const card = document.createElement('div');
+          card.className = 'materi-card anim-fade-up';
+          
+          const isPresOnly = m.presentationOnly === true;
+          const badge = isPresOnly 
+            ? `<span class="badge-pres"><span style="font-size:12px;font-family:'Material Icons'">star</span> Khusus Mengajar</span>` 
+            : `<span class="badge-regular">Reguler</span>`;
+
+          card.innerHTML = `
+            ${badge}
+            <div class="materi-card-body">
+              <h3>${m.title}</h3>
+              <p>${m.description || 'Tidak ada deskripsi materi.'}</p>
+            </div>
+            <div>
+              <div class="materi-meta">
+                <span><span class="material-icons">auto_stories</span> ${m.totalConcepts || 0} Konsep</span>
+                <span><span class="material-icons">hourglass_empty</span> ${m.estimatedTime || '15 menit'}</span>
+                <span><span class="material-icons">trending_up</span> ${m.difficulty || 'mudah'}</span>
+              </div>
+              <button class="btn-action-pres" data-slug="${m.slug}" style="${isPresOnly ? 'background:linear-gradient(135deg,#f59e0b,#d97706);' : ''}">
+                <span class="material-icons">${isPresOnly ? 'co_present' : 'present_to_all'}</span>
+                ${isPresOnly ? 'Mulai Mengajar (Proyektor)' : 'Mulai Mengajar'}
+              </button>
+            </div>
+          `;
+
+          // Tambahkan border emas pada materi presentationOnly
+          if (isPresOnly) {
+            card.style.borderLeft = '4px solid #f59e0b';
+            card.style.background = 'var(--bg-card)';
+          }
+
+          // Handle click to present
+          card.querySelector('.btn-action-pres').addEventListener('click', () => {
+            this.startPresentation(m.slug);
+          });
+
+          container.appendChild(card);
+        });
+
+        // Hitung & tampilkan summary materi
+        const total    = publishedList.length;
+        const presOnly = publishedList.filter(m => m.presentationOnly).length;
+        const regular  = total - presOnly;
+        const subtitleEl = document.getElementById('dashboard-subtitle');
+        if (subtitleEl) {
+          const s = window.Storage ? Storage.getSettings() : {};
+          const schoolName = s.appName || 'Madrasah';
+          subtitleEl.textContent = `${schoolName} — ${regular} materi reguler · ${presOnly} materi khusus kelas tersedia.`;
+        }
+      },
+
+      checkRouteParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('materi');
+        if (slug) {
+          this.startPresentation(slug, false); // false = jangan pushState lagi karena sudah di URL
+        }
+      },
+
+      async startPresentation(slug, pushState = true) {
+        try {
+          const res = await fetch(`./materi/${slug}/materi.json`);
+          if (!res.ok) throw new Error('Gagal memuat materi JSON.');
+          this.activeMateri = await res.json();
+          this.activeMateri.slug = slug; // simpan slug
+
+          // Update URL
+          if (pushState) {
+            const newUrl = `${window.location.pathname}?materi=${slug}`;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+          }
+
+          // Ganti Tampilan Layer
+          document.getElementById('dashboard-layer').style.display = 'none';
+          document.getElementById('slide-layer').classList.add('active');
+
+          // Tampilkan keyboard hint jika desktop
+          const kbHint = document.getElementById('keyboard-hint');
+          if (kbHint && window.matchMedia('(min-width: 768px)').matches) {
+            kbHint.style.display = 'flex';
+          }
+
+          this.currentSlideIndex = 0; // Cover
+          this.revealedStepsCount = 0;
+          
+          this.buildJumpMenu();
+          this.renderActiveSlide();
+        } catch (err) {
+          console.error(err);
+          alert('Gagal memuat file presentasi materi. Pastikan materi.json tersedia di folder materi/' + slug);
+        }
+      },
+
+      exitPresentation() {
+        // Ganti Tampilan Layer
+        document.getElementById('slide-layer').classList.remove('active');
+        document.getElementById('dashboard-layer').style.display = 'block';
+
+        this.activeMateri = null;
+
+        // Reset URL
+        const cleanUrl = window.location.pathname;
+        window.history.pushState({ path: cleanUrl }, '', cleanUrl);
+        
+        this.renderDashboard();
+      },
+
+      buildJumpMenu() {
+        const select = document.getElementById('jump-select');
+        if (!select || !this.activeMateri) return;
+
+        select.innerHTML = '<option value="0">Slide 1: Cover</option>';
+        
+        const concepts = this.activeMateri.concepts || [];
+        concepts.forEach((c, idx) => {
+          select.innerHTML += `<option value="${idx + 1}">Slide ${idx + 2}: ${c.title}</option>`;
+        });
+
+        select.innerHTML += `<option value="${concepts.length + 1}">Slide ${concepts.length + 2}: Selesai</option>`;
+
+        // Event listener jump
+        select.onchange = (e) => {
+          this.currentSlideIndex = parseInt(e.target.value);
+          this.revealedStepsCount = 0;
+          this.renderActiveSlide();
+        };
+      },
+
+      updateJumpMenuSelection() {
+        const select = document.getElementById('jump-select');
+        if (select) {
+          select.value = this.currentSlideIndex;
+        }
+      },
+
+      // Helper parser markdown & html sederhana
+      parseContent(text) {
+        if (!text) return '';
+        let html = text;
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        html = html.replace(/`([^`]+)`/g, '<code style="background:var(--bg-surface-alt);padding:2px 6px;border-radius:6px;font-family:var(--font-mono);font-size:0.9em;">$1</code>');
+        if (!html.includes('<br')) {
+          html = html.replace(/\n/g, '<br>');
+        }
+        return html;
+      },
+
+      renderActiveSlide() {
+        const canvas = document.getElementById('slide-canvas');
+        if (!canvas || !this.activeMateri) return;
+
+        const concepts = this.activeMateri.concepts || [];
+        const totalSlides = concepts.length + 2; // Cover + Concepts + End
+
+        canvas.innerHTML = '';
+        this.updateJumpMenuSelection();
+
+        // ─── CASE 1: COVER SLIDE (Index 0) ───
+        if (this.currentSlideIndex === 0) {
+          canvas.innerHTML = `
+            <div class="cover-slide-content anim-fade-in">
+              <span class="cover-badge">${this.activeMateri.theme || 'Matematika'}</span>
+              <h1 class="cover-title">${this.activeMateri.title}</h1>
+              <p class="cover-desc">${this.activeMateri.description || ''}</p>
+              <button class="cover-start-btn" id="btn-start-presentation">
+                Mulai Pembelajaran
+                <span class="material-icons">play_arrow</span>
+              </button>
+            </div>
+          `;
+          document.getElementById('btn-start-presentation').onclick = () => this.nextSlide();
+          
+          this.updateBottomBar(0, totalSlides);
+          return;
+        }
+
+        // ─── CASE 2: END SLIDE (Index N+1) ───
+        if (this.currentSlideIndex === concepts.length + 1) {
+          canvas.innerHTML = `
+            <div class="end-slide-content anim-fade-in">
+              <span class="material-icons end-icon">emoji_events</span>
+              <h2 class="end-title">Pembelajaran Selesai!</h2>
+              <p class="end-desc">Semua konsep materi telah dibahas secara runtut. Evaluasi pemahaman siswa dengan kuis interaktif bersama di kelas.</p>
+              <div class="end-actions">
+                <a href="./quiz.html?materi=${this.activeMateri.slug}" class="btn-end-quiz" target="_blank">
+                  <span class="material-icons">task_alt</span>
+                  Mulai Kuis Kelas
+                </a>
+                <button class="btn-end-exit" id="btn-end-exit-dashboard">
+                  <span class="material-icons">exit_to_app</span>
+                  Keluar Slide
+                </button>
+              </div>
+            </div>
+          `;
+          document.getElementById('btn-end-exit-dashboard').onclick = () => this.exitPresentation();
+
+          this.updateBottomBar(this.currentSlideIndex, totalSlides);
+          return;
+        }
+
+        // ─── CASE 3: CONCEPT CONTENT SLIDE (Index 1..N) ───
+        const conceptIdx = this.currentSlideIndex - 1;
+        const concept = concepts[conceptIdx];
+
+        // Membagi content: cek jika mengandung image tag HTML
+        let leftContentHtml = '';
+        let rightMediaHtml = '';
+
+        // Deteksi apakah konsep memiliki gambar di dalam teksnya
+        const imgRegex = /<img[^>]+src=['"]([^'"]+)['"][^>]*>/i;
+        const match = concept.content.match(imgRegex);
+
+        let textWithoutImg = concept.content;
+        let imageUrl = '';
+
+        if (match) {
+          // Ada tag image di content! Kita extract.
+          imageUrl = match[1];
+          // Bersihkan path relatif jika ada
+          if (imageUrl.startsWith('./')) {
+            imageUrl = imageUrl.substring(2);
+          }
+          // Bentuk URL lengkap: materi/[slug]/[imageUrl]
+          imageUrl = `materi/${this.activeMateri.slug}/${imageUrl}`;
+          
+          // Hapus tag image dari content kiri
+          textWithoutImg = concept.content.replace(/<img[^>]+>/g, '');
+        }
+
+        // Parse math formulas in content
+        leftContentHtml = `
+          <div class="slide-index-indicator">Konsep ${this.currentSlideIndex} dari ${concepts.length}</div>
+          <h2 class="slide-concept-title">${concept.title}</h2>
+          <div class="slide-concept-content">${this.parseContent(textWithoutImg)}</div>
+        `;
+
+        // Render right media column
+        if (imageUrl) {
+          // Ada gambar
+          rightMediaHtml = `<img src="${imageUrl}" class="slide-media-img" alt="${concept.title}">`;
+        } else {
+          // Jika tidak ada gambar, tampilkan ringkasan / rumus besar KaTeX (jika ada formula matematika)
+          // Cari apakah teks memiliki rumus matematika $$ atau $
+          if (concept.content.includes('$$') || concept.content.includes('$')) {
+            // Render box KaTeX khusus
+            rightMediaHtml = `
+              <div class="slide-katex-wrapper anim-fade-in" style="width:90%;">
+                <p style="font-size:0.75rem; color:var(--text-tertiary); font-weight:800; text-transform:uppercase; margin-bottom:12px; letter-spacing:0.05em;">Visualisasi Matematika</p>
+                <div style="font-size:2rem; padding:16px 0; color:var(--accent-primary);" id="katex-right-pane">
+                  ${concept.content.includes('$$') ? concept.content.match(/\$\$(.*?)\$\$/)?.[0] || '' : concept.content.match(/\$(.*?)\$/)?.[0] || ''}
+                </div>
+              </div>
+            `;
+          } else if (concept.summary) {
+            // Tampilkan ringkasan visual super besar
+            rightMediaHtml = `
+              <div class="anim-fade-in" style="padding:var(--space-6); text-align:center; max-width:85%;">
+                <span class="material-icons" style="font-size:3.5rem; color:var(--accent-primary); margin-bottom:16px;">lightbulb</span>
+                <p style="font-size:0.78rem; font-weight:800; color:var(--accent-primary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">Intisari Konsep</p>
+                <h3 style="font-size:1.6rem; font-weight:700; line-height:1.5; color:var(--text-primary); font-style:italic;">"${concept.summary}"</h3>
+              </div>
+            `;
+          } else {
+            // Default placeholder visual
+            rightMediaHtml = `
+              <div class="anim-fade-in" style="text-align:center; color:var(--text-tertiary);">
+                <span class="material-icons" style="font-size:5rem;">school</span>
+                <p style="margin-top:12px; font-weight:600;">Media Visual Pendukung</p>
+              </div>
+            `;
+          }
+        }
+
+        // Render steps (Pedagogical Step-by-Step Cards)
+        let stepsHtml = '';
+        if (concept.steps && concept.steps.length > 0) {
+          const stepsItems = concept.steps.map((step, sIdx) => `
+            <li class="slide-step-card" id="step-card-${sIdx}">
+              <div class="slide-step-number">${sIdx + 1}</div>
+              <div class="slide-step-text">${this.parseContent(step)}</div>
+            </li>
+          `).join('');
+          stepsHtml = `
+            <ul class="slide-steps-list" style="margin-top: 16px;">
+              ${stepsItems}
+            </ul>
+          `;
+        }
+
+        canvas.innerHTML = `
+          <div class="slide-left-col">
+            ${leftContentHtml}
+            ${stepsHtml}
+          </div>
+          <div class="slide-right-col">
+            ${rightMediaHtml}
+          </div>
+        `;
+
+        // Trigger KaTeX rendering
+        if (window.renderMathInElement) {
+          window.renderMathInElement(canvas, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true  },
+              { left: '$',  right: '$',  display: false }
+            ],
+            throwOnError: false
+          });
+        }
+
+        // Reveal steps incrementally based on current revealed count
+        this.revealStepsIncrementally(false); // false = jangan tambahkan count, hanya render status saat ini
+
+        this.updateBottomBar(this.currentSlideIndex, totalSlides);
+      },
+
+      revealStepsIncrementally(increment = true) {
+        if (!this.activeMateri) return;
+        const concepts = this.activeMateri.concepts || [];
+        const conceptIdx = this.currentSlideIndex - 1;
+        if (conceptIdx < 0 || conceptIdx >= concepts.length) return;
+
+        const concept = concepts[conceptIdx];
+        const steps = concept.steps || [];
+        if (steps.length === 0) return;
+
+        if (increment && this.revealedStepsCount < steps.length) {
+          this.revealedStepsCount++;
+        }
+
+        // Tampilkan kartu sesuai jumlah revealed
+        for (let i = 0; i < steps.length; i++) {
+          const card = document.getElementById(`step-card-${i}`);
+          if (card) {
+            if (i < this.revealedStepsCount) {
+              card.classList.add('revealed');
+            } else {
+              card.classList.remove('revealed');
+            }
+          }
+        }
+
+        // Update button icon/text pada bottom bar jika semua langkah sudah muncul
+        const nextBtnIcon = document.getElementById('next-btn-icon');
+        if (nextBtnIcon) {
+          if (this.revealedStepsCount < steps.length) {
+            nextBtnIcon.textContent = 'unfold_more'; // Ikon "reveal step"
+          } else {
+            nextBtnIcon.textContent = 'arrow_forward'; // Ikon "slide selanjutnya"
+          }
+        }
+      },
+
+      updateBottomBar(currentIndex, totalSlides) {
+        // Progress Bar & Text
+        const pct = totalSlides > 0 ? (currentIndex / (totalSlides - 1)) * 100 : 0;
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        
+        if (progressFill) progressFill.style.width = `${pct}%`;
+        if (progressText) progressText.textContent = `Slide ${currentIndex + 1} / ${totalSlides}`;
+
+        // Navigation Buttons state
+        const btnPrev = document.getElementById('btn-prev-slide');
+        const btnNext = document.getElementById('btn-next-slide');
+
+        if (btnPrev) btnPrev.disabled = currentIndex === 0;
+        
+        // Ikon tombol Next
+        const nextBtnIcon = document.getElementById('next-btn-icon');
+        if (btnNext) {
+          if (currentIndex === totalSlides - 1) {
+            btnNext.innerHTML = 'Selesai <span class="material-icons">check</span>';
+          } else {
+            btnNext.innerHTML = `Berikutnya <span class="material-icons" id="next-btn-icon">arrow_forward</span>`;
+          }
+        }
+      },
+
+      nextSlide() {
+        if (!this.activeMateri) return;
+        const concepts = this.activeMateri.concepts || [];
+        const totalSlides = concepts.length + 2;
+
+        // Cek jika slide aktif adalah content slide dan memiliki langkah-langkah yang belum di-reveal semuanya
+        if (this.currentSlideIndex > 0 && this.currentSlideIndex <= concepts.length) {
+          const conceptIdx = this.currentSlideIndex - 1;
+          const concept = concepts[conceptIdx];
+          const steps = concept.steps || [];
+          
+          if (this.revealedStepsCount < steps.length) {
+            // Reveal langkah berikutnya, jangan pindah slide dulu!
+            this.revealStepsIncrementally(true);
+            return;
+          }
+        }
+
+        // Jika semua langkah sudah di-reveal, baru pindah ke slide berikutnya
+        if (this.currentSlideIndex < totalSlides - 1) {
+          this.currentSlideIndex++;
+          this.revealedStepsCount = 0;
+          this.renderActiveSlide();
+        }
+      },
+
+      prevSlide() {
+        if (this.currentSlideIndex > 0) {
+          this.currentSlideIndex--;
+          this.revealedStepsCount = 0; // reset
+          this.renderActiveSlide();
+        }
+      },
+
+      setupKeyboardNavigation() {
+        document.addEventListener('keydown', e => {
+          const slideLayer = document.getElementById('slide-layer');
+          if (!slideLayer || !slideLayer.classList.contains('active')) return;
+
+          if (e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            this.nextSlide();
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            this.prevSlide();
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            this.exitPresentation();
+          }
+        });
+      },
+
+      setupGlobalControls() {
+        // Navigasi Slide
+        document.getElementById('btn-prev-slide').onclick = () => this.prevSlide();
+        document.getElementById('btn-next-slide').onclick = () => this.nextSlide();
+        document.getElementById('btn-exit-slide').onclick = () => this.exitPresentation();
+
+        // Fullscreen
+        const btnFs = document.getElementById('btn-fullscreen');
+        const fsIcon = document.getElementById('fullscreen-icon');
+        if (btnFs) {
+          btnFs.onclick = () => {
+            if (!document.fullscreenElement) {
+              document.documentElement.requestFullscreen()
+                .then(() => { if (fsIcon) fsIcon.textContent = 'fullscreen_exit'; })
+                .catch(err => console.error(err));
+            } else {
+              document.exitFullscreen()
+                .then(() => { if (fsIcon) fsIcon.textContent = 'fullscreen'; });
+            }
+          };
+        }
+
+        // Listener popstate browser back/forward button
+        window.onpopstate = (e) => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const slug = urlParams.get('materi');
+          if (slug) {
+            this.startPresentation(slug, false);
+          } else {
+            this.exitPresentation();
+          }
+        };
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      PresentationEngine.init();
+    });
+  </script>
+</body>
+</html>

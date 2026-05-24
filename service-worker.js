@@ -1,4 +1,4 @@
-const APP_CACHE = 'edu-app-v3';
+const APP_CACHE = 'edu-app-v4';
 const STATIC_ASSETS = [
   './',
   './assets/css/animation.css',
@@ -36,6 +36,7 @@ const STATIC_ASSETS = [
   './assets/icons/android-chrome-192x192.png',
   './assets/icons/android-chrome-512x512.png',
   './assets/js/app.js',
+  './assets/js/exam-token.js',
   './assets/js/focus-card.js',
   './assets/js/quiz.js',
   './assets/js/storage.js',
@@ -180,7 +181,10 @@ const STATIC_ASSETS = [
   './progress.html',
   './quiz.html',
   './settings-identitas.html',
-  './settings.html'
+  './settings.html',
+  './token-ujian.html',
+  './materi/ulangan-aljabar-7/index.html',
+  './materi/ulangan-bilangan-bulat-7/index.html'
 ];
 
 self.addEventListener('install', event => {

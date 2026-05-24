@@ -274,6 +274,41 @@
         </div>
       </div>
 
+      <!-- ─── Mode Mengajar Presentasi ─── -->
+      <div class="section-card anim-fade-up" style="background: var(--bg-card); border-left: 4px solid var(--accent-primary);">
+        <div class="section-card-header">
+          <span class="material-icons" style="color: var(--accent-primary);">co_present</span>
+          <span class="section-card-title">Mode Mengajar (Presentasi Kelas)</span>
+        </div>
+        <div style="padding: var(--space-4);">
+          <p class="text-caption" style="margin-bottom: var(--space-4);">
+            Buka tampilan slide presentasi khusus proyektor/laptop untuk mengajar di kelas. Mendukung visualisasi step-by-step dan poin penjelasan ringkas yang mudah dipahami murid.
+          </p>
+          <a href="./presentasi.html" class="btn-save" style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">
+            <span class="material-icons">present_to_all</span>
+            Mulai Presentasi Mengajar
+          </a>
+        </div>
+      </div>
+
+      <!-- ─── Token Ujian ─── -->
+      <div class="section-card anim-fade-up delay-1" style="border-left: 4px solid #f59e0b;">
+        <div class="section-card-header">
+          <span class="material-icons" style="color:#f59e0b;">vpn_key</span>
+          <span class="section-card-title">Token Ujian</span>
+        </div>
+        <div style="padding: var(--space-4);">
+          <p class="text-caption" style="margin-bottom: var(--space-4);">
+            Buat dan kelola token akses ujian untuk siswa. Token dibutuhkan agar siswa bisa membuka halaman ujian di waktu yang tepat.
+          </p>
+          <a href="./token-ujian.html" class="btn-save"
+             style="text-decoration:none;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;gap:8px;">
+            <span class="material-icons">vpn_key</span>
+            Kelola Token Ujian
+          </a>
+        </div>
+      </div>
+
       <!-- ─── Identitas Madrasah ─── -->
       <div class="section-card anim-fade-up delay-1">
         <div class="section-card-header">
@@ -441,7 +476,7 @@
       // Jika sudah login di sesi ini, langsung buka panel
       if (sessionStorage.getItem(SESSION_KEY) === '1') {
         openPanel();
-        return;
+        // Jangan return — lanjutkan daftarkan semua event listener
       }
 
       const pwInput    = document.getElementById('pw-input');

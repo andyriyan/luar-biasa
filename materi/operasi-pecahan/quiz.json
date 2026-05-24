@@ -1,0 +1,65 @@
+{
+  "quizTitle": "Kuis Konseptual Sawah Pecahan",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Mengapa kita tidak bisa langsung menjumlahkan pembilang pada operasi 1/2 + 1/3 menjadi 2/5?",
+      "options": [
+        "Karena aturan matematika melarangnya secara mutlak.",
+        "Karena ukuran potongan dari pecahan 1/2 tidak sama besar dengan potongan pecahan 1/3.",
+        "Karena angka penyebut harus selalu bernilai genap.",
+        "Karena pembilang tidak suka digabungkan dengan penyebut berbeda."
+      ],
+      "answer": "Karena ukuran potongan dari pecahan 1/2 tidak sama besar dengan potongan pecahan 1/3.",
+      "explanation": "Seperti pada simulasi sawah, potongan lahan setengah jauh lebih luas dibanding sepertiga, sehingga ukurannya harus disamakan dulu lewat pembelahan KPK."
+    },
+    {
+      "id": 2,
+      "question": "Saat kamu mengubah total belahan sawah menjadi 6 bagian pada level tantangan, angka 6 tersebut berperan sebagai...",
+      "options": [
+        "Pembilang baru hasil perkalian silang.",
+        "Kelipatan Persekutuan Terkecil (KPK) yang menyamakan penyebut.",
+        "Sisa lahan sawah yang tidak terjual.",
+        "Faktor persekutuan terbesar yang memperkecil pecahan."
+      ],
+      "answer": "Kelipatan Persekutuan Terkecil (KPK) yang menyamakan penyebut.",
+      "explanation": "Angka 6 adalah kelipatan terkecil yang bisa dibagi habis oleh angka 2 dan 3, membuat pembagian petak menjadi presisi."
+    },
+    {
+      "id": 3,
+      "question": "Jika sebuah petak sawah dibagi menjadi 8 bagian sama besar, dan 3 bagian di antaranya ditanami padi, bagaimana bentuk pecahannya?",
+      "options": [
+        "8/3",
+        "3/8",
+        "5/8",
+        "3/5"
+      ],
+      "answer": "3/8",
+      "explanation": "3 bagian yang ditanami menjadi pembilang (atas), dan total keseluruhan 8 belahan menjadi penyebut (bawah)."
+    },
+    {
+      "id": 4,
+      "question": "Jika Pak Haji memiliki 5/6 petak sawah lalu memberikan 2/6 bagian kepada pondok, berapakah sisa sawah Pak Haji sekarang?",
+      "options": [
+        "3/0 bagian",
+        "7/6 bagian",
+        "3/6 bagian",
+        "1/6 bagian"
+      ],
+      "answer": "3/6 bagian",
+      "explanation": "Karena penyebutnya sudah sama (6 bagian), kita tinggal mengurangkan pembilangnya secara langsung: 5 - 2 = 3. Sisa sawah adalah 3/6."
+    },
+    {
+      "id": 5,
+      "question": "Apa yang terjadi pada ukuran tiap potongan sawah jika nilai angka penyebutnya semakin besar?",
+      "options": [
+        "Ukuran tiap potongan sawah menjadi semakin sempit/kecil.",
+        "Ukuran tiap potongan sawah menjadi semakin luas/lebar.",
+        "Ukuran petak sawah tidak mengalami perubahan sama sekali.",
+        "Sawah otomatis menghilang dari peta digital."
+      ],
+      "answer": "Ukuran tiap potongan sawah menjadi semakin sempit/kecil.",
+      "explanation": "Semakin banyak pembagi (penyebut), maka satu bagian utuh akan terpotong menjadi bagian yang semakin kecil-kecil."
+    }
+  ]
+}

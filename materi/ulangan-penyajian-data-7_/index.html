@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ulangan Harian: Penyajian Data Kelas 7</title>
+  <link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+  <script src="../../assets/vendor/katex/katex.min.js" defer></script>
+  <script src="../../assets/vendor/katex/auto-render.min.js" defer></script>
+  <script src="../../assets/js/storage.js" defer></script>
+  <script src="../../assets/js/exam-token.js"></script>
+  <style>
+    :root { --bg-main: #f4f6f9; --bg-card: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #3182ce; --primary-hover: #2b6cb0; --border: #e2e8f0; --success: #48bb78; --danger: #f56565; --warning: #ed8936; }
+    [data-theme="dark"] { --bg-main: #1a202c; --bg-card: #2d3748; --text-main: #f7fafc; --text-muted: #a0aec0; --border: #4a5568; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg-main); color: var(--text-main); padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .container { width: 100%; max-width: 650px; background: var(--bg-card); padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid var(--border); position: relative; }
+    .screen { display: none; } .screen.active { display: block; }
+    h2 { margin-bottom: 12px; font-size: 22px; text-align: center; }
+    p { margin-bottom: 20px; text-align: center; color: var(--text-muted); }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+    input, select { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); color: var(--text-main); font-size: 16px; }
+    button { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: var(--primary-hover); }
+    .err-msg { color: var(--danger); font-size: 14px; margin-top: 8px; text-align: center; min-height: 20px; }
+    .header-panel { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--border); font-size: 14px; color: var(--text-muted); }
+    .timer { font-weight: bold; color: var(--text-main); padding: 4px 8px; border-radius: 4px; background: var(--border); }
+    .timer.critical { background: var(--danger); color: white; animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: 0.5; } }
+    .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 25px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: var(--primary); transition: width 0.3s; }
+    .question-box { min-height: 180px; font-size: 17px; line-height: 1.6; margin-bottom: 25px; }
+    .img-exam { display: block; max-width: 100%; max-height: 220px; margin: 15px auto; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .table-mini { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 15px; }
+    .table-mini td { border: 1px solid var(--border); padding: 8px; text-align: center; }
+    .opt-list { display: flex; flex-direction: column; gap: 12px; }
+    .opt-btn { display: flex; align-items: center; padding: 14px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; background: var(--bg-card); font-size: 15px; transition: all 0.2s; }
+    .opt-btn:hover { border-color: var(--primary); background: rgba(49, 130, 206, 0.05); }
+    .opt-btn.selected { border-color: var(--primary); background: var(--primary); color: white; }
+    .opt-code { font-weight: bold; margin-right: 12px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--border); color: var(--text-main); }
+    .opt-btn.selected .opt-code { background: rgba(255,255,255,0.3); color: white; }
+    .nav-panel { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; gap: 10px; }
+    .nav-btn { width: auto; flex: 1; padding: 12px; background: var(--border); color: var(--text-main); }
+    .nav-btn:hover { background: var(--border); opacity: 0.9; }
+    .flag-btn { background: var(--warning); color: white; max-width: 50px; padding: 12px; display: flex; align-items: center; justify-content: center; }
+    .flag-btn:hover { background: #dd6b20; }
+    .flag-btn.flagged { background: #b7791f; border: 2px solid #744210; }
+    .dots-container { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; margin-top: 20px; border-top: 1px dashed var(--border); }
+    .dot { width: 32px; height: 32px; shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid var(--border); font-size: 12px; font-weight: bold; cursor: pointer; background: var(--bg-card); color: var(--text-muted); }
+    .dot.active { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary); }
+    .dot.answered { background: var(--success); color: white; border-color: var(--success); }
+    .dot.flagged { background: var(--warning) !important; color: white !important; }
+    .ur-input { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 8px; font-size: 16px; color: var(--text-main); background: var(--bg-card); }
+    .ur-input:focus { border-color: var(--primary); outline: none; }
+    .result-score { font-size: 48px; font-weight: bold; text-align: center; margin: 20px 0; color: var(--primary); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- SCREEN 1: VALIDASI KODE RUANGAN -->
+  <div id="screen-token" class="screen active">
+    <h2>Konfirmasi Ujian</h2>
+    <p class="token-title">Ulangan Harian: Penyajian Data</p>
+    <p class="token-subtitle">Silakan masukkan Kode Ruangan dari guru untuk membuka soal.</p>
+    <div class="form-group">
+      <input type="text" id="token-input" placeholder="Contoh: 7D-7209" maxlength="16" style="text-transform: uppercase; text-align: center; font-size: 20px; font-weight: bold; letter-spacing: 2px;">
+      <div id="token-hint" class="err-msg"></div>
+    </div>
+    <button id="btn-validasi-token" onclick="doValidateToken()">Verifikasi Kode</button>
+  </div>
+
+  <!-- SCREEN 2: IDENTITAS SISWA -->
+  <div id="screen-login" class="screen">
+    <h2>Identitas Peserta</h2>
+    <p>Lengkapi nama dan kelas Anda dengan benar.</p>
+    <div class="form-group">
+      <label>Nama Lengkap</label>
+      <input type="text" id="student-name" placeholder="Masukkan nama lengkap...">
+    </div>
+    <div class="form-group">
+      <label>Kelas</label>
+      <select id="student-class">
+        <option value="">-- Pilih Kelas --</option>
+        <option value="7A">Kelas 7A</option>
+        <option value="7B">Kelas 7B</option>
+        <option value="7C">Kelas 7C</option>
+        <option value="7D">Kelas 7D</option>
+        <option value="7E">Kelas 7E</option>
+        <option value="7F">Kelas 7F</option>
+      </select>
+    </div>
+    <div id="login-err" class="err-msg"></div>
+    <button onclick="startExam()">Mulai Ujian</button>
+  </div>
+
+  <!-- SCREEN 3: LEMBAR UJIAN -->
+  <div id="screen-exam" class="screen">
+    <div class="header-panel">
+      <div id="student-info-tag">Nama (Kelas)</div>
+      <div class="timer" id="exam-timer">00:00</div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="exam-progress"></div>
+    </div>
+    <div id="exam-engine">
+      <div class="question-box" id="q-box"></div>
+      <div id="ans-box"></div>
+    </div>
+    <div class="nav-panel">
+      <button class="nav-btn" id="btn-prev" onclick="prevQuestion()">Sebelumnya</button>
+      <button class="flag-btn" id="btn-flag" onclick="toggleFlag()">🚩</button>
+      <button class="nav-btn" id="btn-next" onclick="nextQuestion()" style="background: var(--primary); color: white;">Selanjutnya</button>
+    </div>
+    <div class="dots-container" id="dots-map"></div>
+  </div>
+
+  <!-- SCREEN 4: HASIL UJIAN -->
+  <div id="screen-result" class="screen">
+    <h2>Ujian Selesai</h2>
+    <p>Terima kasih telah mengikuti ujian ini. Nilai Anda berhasil diproses.</p>
+    <div class="result-score" id="score-display">0</div>
+    <div id="result-status" style="text-align: center; font-weight: bold; margin-bottom: 25px;"></div>
+    <div id="essay-wa-panel" style="display: none; padding: 15px; border: 1px dashed var(--border); border-radius: 8px; margin-top: 15px; background: rgba(72, 187, 120, 0.05);">
+      <p style="font-size: 14px; text-align: left; margin-bottom: 10px; color: var(--text-main);">⚠️ <b>Penting untuk Jawaban Esai:</b> Klik tombol di bawah untuk mengirim salinan jawaban tertulis Anda ke WhatsApp Guru agar dapat dikoreksi manual.</p>
+      <button onclick="sendEssayToTeacher()" style="background: #25d366;">Kirim Jawaban Ke WA Guru</button>
+    </div>
+    <button onclick="window.location.reload()" style="margin-top: 15px; background: var(--border); color: var(--text-main);">Keluar Aplikasi</button>
+  </div>
+</div>
+
+<script>
+  const EXAM = {
+    examTitle: "Ulangan Harian: Penyajian Data",
+    slug: "ulangan-penyajian-data-7",
+    duration: 60,
+    passingScore: 70,
+    teacherWaNumber: "6281234567890",
+    sections: [
+      {
+        "type": "PG",
+        "label": "Pilihan Ganda",
+        "pointEach": 5,
+        "instruction": "Pilih satu jawaban yang paling tepat.",
+        "questions": [
+          { "id": "pg-1", "q": "Apa yang dimaksud dengan median dalam statistika?", "opts": { "A": "Nilai yang paling sering muncul", "B": "Nilai rata-rata dari sekumpulan data", "C": "Nilai tengah suatu data yang telah diurutkan dari terkecil ke terbesar", "D": "Selisih antara nilai terbesar dan terkecil" }, "ans": "C" },
+          { "id": "pg-2", "q": "Diberikan data: 6, 8, 7, 8, 5, 6, 5, 8, 9, 7, 8, 6. Berapakah modus dari data tersebut?", "opts": { "A": "6", "B": "7", "C": "8", "D": "9" }, "ans": "C" },
+          { "id": "pg-3", "q": "Data tinggi badan (dalam cm) 5 siswa adalah: 156, 157, 158, 159, 160. Berapakah median data tersebut?", "opts": { "A": "157 cm", "B": "158 cm", "C": "159 cm", "D": "160 cm" }, "ans": "B" },
+          { "id": "pg-4", "q": "Rumus untuk menghitung rata-rata (mean) dari sekumpulan data $x_1, x_2, \\dots, x_n$ adalah...", "opts": { "A": "Jumlah data dibagi banyak data", "B": "Nilai tengah setelah diurutkan", "C": "Nilai dengan frekuensi terbanyak", "D": "Nilai terbesar dikurangi nilai terkecil" }, "ans": "A" },
+          { "id": "pg-5", "q": "Perhatikan tabel nilai berikut!<br><table class='table-mini'><tr><td>Nilai</td><td>4</td><td>5</td><td>6</td></tr><tr><td>Frekuensi</td><td>6</td><td>11</td><td>10</td></tr></table><br>Berapakah jumlah siswa yang mendapat nilai kurang dari 7 berdasarkan tabel di atas?", "opts": { "A": "6 orang", "B": "17 orang", "C": "27 orang", "D": "35 orang" }, "ans": "C" },
+          { "id": "pg-6", "q": "Rata-rata nilai dari 16 siswa adalah 6,3. Jika seorang siswa yang memiliki nilai 7,8 tidak disertakan, berapakah nilai rata-rata yang baru?", "opts": { "A": "6,1", "B": "6,2", "C": "7,2", "D": "9,8" }, "ans": "B" },
+          { "id": "pg-7", "q": "Perhatikan tabel tinggi badan berikut!<br><table class='table-mini'><tr><td>Tinggi (cm)</td><td>155</td><td>156</td><td>157</td><td>158</td><td>159</td></tr><tr><td>Frekuensi</td><td>4</td><td>2</td><td>15</td><td>8</td><td>3</td></tr></table><br>Jika rata-rata tinggi badan adalah 157,125 cm, banyak siswa yang memiliki tinggi badan di atas rata-rata adalah...", "opts": { "A": "26 siswa", "B": "15 siswa", "C": "11 siswa", "D": "6 siswa" }, "ans": "C" },
+          { "id": "pg-8", "q": "Diagram lingkaran menunjukkan pendidikan orang tua siswa: SD 45%, SMA 12%, PT 8%, dan sisanya SMP. Jika total orang tua adalah 900 orang, banyak orang tua yang berpendidikan SMP adalah...<br><br><img src='diagram_lingkaran_pendidikan.png' class='img-exam' alt='Diagram Lingkaran Pendidikan'>", "opts": { "A": "385 orang", "B": "350 orang", "C": "315 orang", "D": "108 orang" }, "ans": "C" },
+          { "id": "pg-9", "q": "Rata-rata 8 buah bilangan adalah 72 dan rata-rata 12 bilangan lainnya adalah 84. Rata-rata gabungan dari 20 bilangan tersebut adalah...", "opts": { "A": "76,8", "B": "78,0", "C": "79,2", "D": "80,0" }, "ans": "C" },
+          { "id": "pg-10", "q": "Hasil panen padi selama 5 tahun totalnya adalah 195 ton. Jika hasil tahun 2011=40, 2012=30, 2013=45, dan 2015=25, berapakah hasil panen pada tahun 2014?<br><br><img src='diagram_batang_panen_padi.png' class='img-exam' alt='Diagram Batang Panen Padi'>", "opts": { "A": "45 ton", "B": "50 ton", "C": "55 ton", "D": "60 ton" }, "ans": "B" },
+          { "id": "pg-11", "q": "Tim bola basket terdiri dari 5 siswa dengan rata-rata berat badan 45 kg. Selisih berat badan terbesar dan terkecil adalah 15 kg. Jika ada satu orang terberat dan sisanya memiliki berat yang sama, berapakah berat badan siswa yang terberat?", "opts": { "A": "55 kg", "B": "57 kg", "C": "60 kg", "D": "62 kg" }, "ans": "B" },
+          { "id": "pg-12", "q": "Rata-rata tinggi siswa wanita adalah 134 cm dan pria 145 cm. Jika rata-rata seluruh siswa yang berjumlah 33 orang adalah 142 cm, berapakah jumlah siswa pria di kelas tersebut?", "opts": { "A": "18 orang", "B": "20 orang", "C": "24 orang", "D": "26 orang" }, "ans": "C" }
+        ]
+      },
+      {
+        "type": "PGK",
+        "label": "Pilihan Ganda Kompleks",
+        "pointEach": 5,
+        "instruction": "Pilih SEMUA jawaban yang benar.",
+        "questions": [
+          { "id": "pgk-1", "q": "Perhatikan data nilai: 60, 70, 80, 90, 100 dengan frekuensi masing-masing 6, 7, 8, 5, 4. Manakah pernyataan berikut yang benar?", "opts": { "A": "Jangkauan data tersebut adalah 40.", "B": "Modus dari data tersebut adalah 80.", "C": "Rata-rata data tersebut adalah 78.", "D": "Banyak siswa di atas rata-rata adalah 13 orang." }, "ans": ["A", "B", "C"] },
+          { "id": "pgk-2", "q": "Berdasarkan konsep statistika, pernyataan mana saja yang benar mengenai median dan modus?", "opts": { "A": "Modus adalah nilai yang memiliki frekuensi paling banyak.", "B": "Median selalu sama dengan nilai rata-rata.", "C": "Untuk data berjumlah genap, median adalah rata-rata dari dua nilai tengah.", "D": "Data harus diurutkan terlebih dahulu untuk mencari modus." }, "ans": ["A", "C"] },
+          { "id": "pgk-3", "q": "Sebuah survei terhadap 500 keluarga mengenai jumlah komputer di rumah menunjukkan: 20% tidak memiliki komputer, dan 5% memiliki lebih dari 3 komputer. Manakah pernyataan yang sesuai?", "opts": { "A": "Ada 100 keluarga yang tidak memiliki komputer.", "B": "Ada 25 keluarga yang memiliki lebih dari 3 komputer.", "C": "Total keluarga yang tidak memiliki atau memiliki >3 komputer adalah 125.", "D": "Setengah dari total keluarga memiliki tepat 1 komputer." }, "ans": ["A", "B", "C"] }
+        ]
+      },
+      {
+        "type": "UR",
+        "label": "Uraian Singkat",
+        "pointEach": 5,
+        "instruction": "Jawab singkat dan jelas (langsung tulis angka desimal atau nilai akhirnya saja).",
+        "questions": [
+          { "id": "ur-1", "q": "Hitunglah rata-rata dari data nilai matematika berikut ini secara detail: Nilai 5 (4 siswa), Nilai 6 (5 siswa), Nilai 7 (7 siswa), Nilai 8 (13 siswa), Nilai 9 (6 siswa), Nilai 10 (5 siswa).", "sampleAns": "7,675", "keywords": ["7,675", "7.675"], "synonyms": { "7,675": ["7,68", "7.68"] } },
+          { "id": "ur-2", "q": "Tentukan median dari tabel distribusi frekuensi berikut:<br><table class='table-mini'><tr><td>Tinggi (cm)</td><td>155</td><td>156</td><td>157</td><td>158</td><td>159</td><td>160</td></tr><tr><td>Frekuensi</td><td>3</td><td>5</td><td>2</td><td>3</td><td>4</td><td>3</td></tr></table>", "sampleAns": "157,5 cm", "keywords": ["157,5", "157.5"], "synonyms": { "157,5": ["157,5 cm", "157.5 cm"] } },
+          { "id": "ur-3", "q": "Rata-rata pengunjung perpustakaan selama 5 hari (Senin-Jumat) adalah 41 orang. Jika data Senin=45, Selasa=40, Kamis=30, dan Jumat=20, hitunglah banyak pengunjung pada hari Rabu!<br><br><img src='diagram_batang_pengunjung_perpustakaan.png' class='img-exam' alt='Diagram Batang Pengunjung Perpustakaan'>", "sampleAns": "70 orang", "keywords": ["70"], "synonyms": { "70": ["70 orang", "tujuh puluh"] } },
+          { "id": "ur-4", "q": "Dalam sebuah diagram lingkaran kegemaran olahraga, sudut untuk Voli adalah $90^\\circ$ (setara 54 orang). Jika sudut untuk Futsal adalah $135^\\circ$, berapakah jumlah siswa yang gemar futsal?<br><br><img src='diagram_lingkaran_kegemaran_olahraga.png' class='img-exam' alt='Diagram Lingkaran Kegemaran Olahraga'>", "sampleAns": "81 orang", "keywords": ["81"], "synonyms": { "81": ["81 orang", "delapan puluh satu"] } },
+          { "id": "ur-5", "q": "Rata-rata tinggi badan 32 siswa adalah 170,5 cm. Jika kemudian satu siswa dengan tinggi 154 cm disertakan dalam kelompok tersebut, hitunglah rata-rata tinggi badan yang baru!", "sampleAns": "170 cm", "keywords": ["170"], "synonyms": { "170": ["170 cm", "seratus tujuh puluh"] } }
+        ]
+      }
+    ]
+  };
+
+  let flatQuestions = [];
+  let currentIdx = 0;
+  let userAnswers = {};
+  let flags = {};
+  let timeLeft = EXAM.duration * 60;
+  let timerInterval = null;
+  let cheatCount = 0;
+
+  function initUrlAccess() {
+    const params = new URLSearchParams(window.location.search);
+    const tokenParam = params.get('k') || params.get('ticket');
+    if (tokenParam) {
+      document.getElementById('token-input').value = tokenParam;
+      doValidateToken();
+    }
+  }
+
+  function setTokenErr(msg) {
+    document.getElementById('token-hint').innerText = msg;
+  }
+
+  function doValidateToken() {
+    const input = document.getElementById('token-input').value.trim().toUpperCase();
+    if (!input) return setTokenErr("Kode ruangan tidak boleh kosong!");
+    if (typeof ExamToken !== 'undefined' && typeof ExamToken.validateAccess === 'function') {
+      if (ExamToken.validateAccess(input, EXAM.slug)) {
+        switchScreen('screen-login');
+      } else {
+        setTokenErr("Kode ruangan tidak valid atau kadaluarsa untuk ujian ini!");
+      }
+    } else {
+      if (input.length >= 5) {
+        switchScreen('screen-login');
+      } else {
+        setTokenErr("Format kode salah! Contoh: 7D-7209");
+      }
+    }
+  }
+
+  function switchScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function startExam() {
+    const name = document.getElementById('student-name').value.trim();
+    const cls = document.getElementById('student-class').value;
+    if (!name || !cls) return document.getElementById('login-err').innerText = "Lengkapi Nama dan Kelas!";
+    
+    document.getElementById('student-info-tag').innerText = `${name} (${cls})`;
+    
+    // Flatten questions
+    EXAM.sections.forEach(sec => {
+      sec.questions.forEach(q => {
+        flatQuestions.push({ ...q, secType: sec.type, secLabel: sec.label, pointEach: sec.pointEach });
+      });
+    });
+
+    switchScreen('screen-exam');
+    renderDots();
+    showQuestion(0);
+    startTimer();
+    initAntiCheat();
+  }
+
+  function startTimer() {
+    const timerEl = document.getElementById('exam-timer');
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      let m = Math.floor(timeLeft / 60);
+      let s = timeLeft % 60;
+      timerEl.innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+      if (timeLeft <= 300) timerEl.classList.add('critical');
+      if (timeLeft <= 0) { clearInterval(timerInterval); submitExam(true); }
+    }, 1000);
+  }
+
+  function initAntiCheat() {
+    window.addEventListener('blur', () => {
+      cheatCount++;
+      if (cheatCount >= 3) {
+        alert("Anda terdeteksi meninggalkan halaman ujian 3 kali. Ujian otomatis dikumpulkan.");
+        submitExam(true);
+      } else {
+        alert(`Peringatan ${cheatCount}/3: Dilarang keluar dari tab atau aplikasi ujian!`);
+      }
+    });
+  }
+
+  function renderDots() {
+    const container = document.getElementById('dots-map');
+    container.innerHTML = '';
+    flatQuestions.forEach((q, idx) => {
+      const d = document.createElement('div');
+      d.className = 'dot';
+      d.id = `dot-${idx}`;
+      d.innerText = idx + 1;
+      d.onclick = () => showQuestion(idx);
+      container.appendChild(d);
+    });
+  }
+
+  function updateDotsState() {
+    flatQuestions.forEach((q, idx) => {
+      const d = document.getElementById(`dot-${idx}`);
+      d.classList.remove('active', 'answered', 'flagged');
+      if (idx === currentIdx) d.classList.add('active');
+      if (userAnswers[q.id] !== undefined && userAnswers[q.id] !== "" && (!Array.isArray(userAnswers[q.id]) || userAnswers[q.id].length > 0)) {
+        d.classList.add('answered');
+      }
+      if (flags[q.id]) d.classList.add('flagged');
+    });
+  }
+
+  function prepareMathText(text) {
+    return text;
+  }
+
+  function formatExamText(text) {
+    return text;
+  }
+
+  function typesetMath() {
+    if (typeof renderMathInElement === 'function') {
+      renderMathInElement(document.getElementById('exam-engine'), {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false}
+        ],
+        throwOnError: false
+      });
+    }
+  }
+
+  function showQuestion(idx) {
+    currentIdx = idx;
+    const q = flatQuestions[idx];
+    document.getElementById('exam-progress').style.width = `${((idx + 1) / flatQuestions.length) * 100}%`;
+    
+    let htmlQ = `<div style='font-size:13px; color:var(--text-muted); font-weight:bold; text-transform:uppercase; margin-bottom:5px;'>${q.secLabel} (${q.pointEach} Poin)</div>`;
+    htmlQ += `<div><b>Soal ${idx + 1}.</b> ${formatExamText(prepareMathText(q.q))}</div>`;
+    document.getElementById('q-box').innerHTML = htmlQ;
+
+    const ansContainer = document.getElementById('ans-box');
+    ansContainer.innerHTML = '';
+
+    if (q.secType === 'PG') {
+      const list = document.createElement('div');
+      list.className = 'opt-list';
+      Object.keys(q.opts).forEach(key => {
+        const btn = document.createElement('div');
+        btn.className = `opt-btn ${userAnswers[q.id] === key ? 'selected' : ''}`;
+        btn.innerHTML = `<span class='opt-code'>${key}</span> <span>${formatExamText(prepareMathText(q.opts[key]))}</span>`;
+        btn.onclick = () => { userAnswers[q.id] = key; showQuestion(currentIdx); };
+        list.appendChild(btn);
+      });
+      ansContainer.appendChild(list);
+    } else if (q.secType === 'PGK') {
+      const list = document.createElement('div');
+      list.className = 'opt-list';
+      if (!Array.isArray(userAnswers[q.id])) userAnswers[q.id] = [];
+      Object.keys(q.opts).forEach(key => {
+        const btn = document.createElement('div');
+        const isSel = userAnswers[q.id].includes(key);
+        btn.className = `opt-btn ${isSel ? 'selected' : ''}`;
+        btn.innerHTML = `<span class='opt-code'>${key}</span> <span>${formatExamText(prepareMathText(q.opts[key]))}</span>`;
+        btn.onclick = () => {
+          if (isSel) userAnswers[q.id] = userAnswers[q.id].filter(x => x !== key);
+          else userAnswers[q.id].push(key);
+          showQuestion(currentIdx);
+        };
+        list.appendChild(btn);
+      });
+      ansContainer.appendChild(list);
+    } else if (q.secType === 'UR') {
+      const input = document.createElement('input');
+      input.className = 'ur-input';
+      input.type = 'text';
+      input.placeholder = 'Ketik jawaban singkat di sini...';
+      input.value = userAnswers[q.id] || '';
+      input.oninput = (e) => { userAnswers[q.id] = e.target.value; updateDotsState(); };
+      ansContainer.appendChild(input);
+    }
+
+    const flagBtn = document.getElementById('btn-flag');
+    if (flags[q.id]) flagBtn.classList.add('flagged');
+    else flagBtn.classList.remove('flagged');
+
+    document.getElementById('btn-prev').disabled = idx === 0;
+    const nextBtn = document.getElementById('btn-next');
+    if (idx === flatQuestions.length - 1) {
+      nextBtn.innerText = "Kumpulkan";
+      nextBtn.style.background = "var(--success)";
+    } else {
+      nextBtn.innerText = "Selanjutnya";
+      nextBtn.style.background = "var(--primary)";
+    }
+    
+    updateDotsState();
+    typesetMath();
+  }
+
+  function prevQuestion() { if (currentIdx > 0) showQuestion(currentIdx - 1); }
+  function nextQuestion() {
+    if (currentIdx < flatQuestions.length - 1) {
+      showQuestion(currentIdx + 1);
+    } else {
+      if (confirm("Apakah Anda yakin ingin mengumpulkan semua jawaban ujian?")) submitExam(false);
+    }
+  }
+
+  function toggleFlag() {
+    const q = flatQuestions[currentIdx];
+    flags[q.id] = !flags[q.id];
+    showQuestion(currentIdx);
+  }
+
+  function submitExam(force = false) {
+    clearInterval(timerInterval);
+    window.onblur = null;
+    let totalScore = 0;
+
+    flatQuestions.forEach(q => {
+      let uAns = userAnswers[q.id];
+      if (!uAns) return;
+
+      if (q.secType === 'PG' && uAns === q.ans) {
+        totalScore += q.pointEach;
+      } else if (q.secType === 'PGK') {
+        let isCorrect = true;
+        if (uAns.length !== q.ans.length) isCorrect = false;
+        else {
+          uAns.forEach(x => { if (!q.ans.includes(x)) isCorrect = false; });
+        }
+        if (isCorrect) totalScore += q.pointEach;
+      } else if (q.secType === 'UR') {
+        let textAns = uAns.trim().toLowerCase().replace(/\s+/g, '');
+        let matched = false;
+        q.keywords.forEach(kw => {
+          if (textAns === kw.toLowerCase().replace(/\s+/g, '')) matched = true;
+        });
+        if (!matched && q.synonyms) {
+          Object.keys(q.synonyms).forEach(mainKw => {
+            q.synonyms[mainKw].forEach(syn => {
+              if (textAns === syn.toLowerCase().replace(/\s+/g, '')) matched = true;
+            });
+          });
+        }
+        if (matched) totalScore += q.pointEach;
+      }
+    });
+
+    document.getElementById('score-display').innerText = totalScore;
+    const statusEl = document.getElementById('result-status');
+    if (totalScore >= EXAM.passingScore) {
+      statusEl.innerText = "SELAMAT! ANDA LULUS KKM KELAS";
+      statusEl.style.color = "var(--success)";
+    } else {
+      statusEl.innerText = "BELUM MENCAPAI KKM. TETAP SEMANGAT BELAJAR!";
+      statusEl.style.color = "var(--danger)";
+    }
+
+    switchScreen('screen-result');
+  }
+
+  window.onload = () => { initUrlAccess(); };
+</script>
+</body>
+</html>

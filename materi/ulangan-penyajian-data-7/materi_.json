@@ -1,0 +1,22 @@
+{
+  "title": "Ulangan Harian: Penyajian Data",
+  "description": "Ujian 20 soal · 60 menit · Kode ruangan wajib · KKM 70.",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "petunjuk",
+      "title": "Petunjuk Ujian",
+      "icon": "assignment",
+      "content": "Minta kode ruangan dari guru sebelum memulai. Paling mudah: buka link dari grup WA.",
+      "steps": [
+        "Guru bagikan kode ruangan atau link WA ke kelas.",
+        "Buka ujian → masukkan kode (contoh: 7A-3401) atau tap link WA.",
+        "Isi nama & kelas → klik Mulai.",
+        "Timer 60 menit berjalan otomatis.",
+        "Jawab soal satu per satu. Gunakan tombol Sebelumnya/Selanjutnya.",
+        "Klik 'Kumpulkan' saat selesai. Skor sementara langsung keluar."
+      ],
+      "summary": "20 soal · 100 poin · KKM 70 · Kode ruangan dari guru."
+    }
+  ]
+}

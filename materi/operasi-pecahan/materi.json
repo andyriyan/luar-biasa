@@ -1,0 +1,19 @@
+{
+  "title": "Teka-Teki Pembagian Sawah Wakaf",
+  "description": "Rasakan langsung serunya memotong petak lahan sawah untuk memahami rahasia penyebut pecahan!",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "sim-utama",
+      "title": "Eksplorasi Pembagi Sawah",
+      "icon": "landscape",
+      "content": "Panduan taktis menggunakan alat pemotong visual sawah digital madrasah.",
+      "steps": [
+        "Level 1 — Eksplorasi: Ubah jumlah belahan dan lihat bagaimana pembilang mengambil porsi sawah.",
+        "Level 2 — Tantangan: Gabungkan sawah 1/2 dan 1/3 dengan memotong lahan menjadi ukuran KPK yang sama pas.",
+        "Level 3 — Mandiri: Tarik kesimpulan logis operasi pecahan tanpa menghafal rumus buta."
+      ],
+      "summary": "Menyamakan penyebut pada hakikatnya adalah membelah objek utuh agar setiap potongannya memiliki ukuran yang adil dan sama besar sebelum dijumlahkan."
+    }
+  ]
+}

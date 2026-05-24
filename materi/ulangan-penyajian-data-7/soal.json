@@ -1,0 +1,195 @@
+{
+  "examTitle": "Ulangan Harian: Penyajian Data",
+  "slug": "ulangan-penyajian-data-7",
+  "subject": "Matematika",
+  "class": "7",
+  "duration": 60,
+  "passingScore": 70,
+  "teacherWaNumber": "6281234567890",
+  "sections": [
+    {
+      "type": "PG",
+      "label": "Pilihan Ganda",
+      "pointEach": 5,
+      "instruction": "Pilih satu jawaban yang paling tepat.",
+      "questions": [
+        {
+          "id": "pg-1",
+          "q": "Apa yang dimaksud dengan median dalam statistika?",
+          "opts": {
+            "A": "Nilai yang paling sering muncul",
+            "B": "Nilai rata-rata dari sekumpulan data",
+            "C": "Nilai tengah suatu data yang telah diurutkan dari terkecil ke terbesar",
+            "D": "Selisih antara nilai terbesar dan terkecil"
+          },
+          "ans": "C"
+        },
+        {
+          "id": "pg-2",
+          "q": "Diberikan data: 6, 8, 7, 8, 5, 6, 5, 8, 9, 7, 8, 6. Berapakah modus dari data tersebut?",
+          "opts": { "A": "6", "B": "7", "C": "8", "D": "9" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-3",
+          "q": "Data tinggi badan (dalam cm) 5 siswa adalah: 156, 157, 158, 159, 160. Berapakah median data tersebut?",
+          "opts": { "A": "157 cm", "B": "158 cm", "C": "159 cm", "D": "160 cm" },
+          "ans": "B"
+        },
+        {
+          "id": "pg-4",
+          "q": "Rumus untuk menghitung rata-rata (mean) dari sekumpulan data $x_1, x_2, \\dots, x_n$ adalah...",
+          "opts": {
+            "A": "Jumlah data dibagi banyak data",
+            "B": "Nilai tengah setelah diurutkan",
+            "C": "Nilai dengan frekuensi terbanyak",
+            "D": "Nilai terbesar dikurangi nilai terkecil"
+          },
+          "ans": "A"
+        },
+        {
+          "id": "pg-5",
+          "q": "Perhatikan tabel nilai berikut!<br><table class='table-mini'><tr><td>Nilai</td><td>4</td><td>5</td><td>6</td></tr><tr><td>Frekuensi</td><td>6</td><td>11</td><td>10</td></tr></table><br>Berapakah jumlah siswa yang mendapat nilai kurang dari 7 berdasarkan tabel di atas?",
+          "opts": { "A": "6 orang", "B": "17 orang", "C": "27 orang", "D": "35 orang" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-6",
+          "q": "Rata-rata nilai dari 16 siswa adalah 6,3. Jika seorang siswa yang memiliki nilai 7,8 tidak disertakan, berapakah nilai rata-rata yang baru?",
+          "opts": { "A": "6,1", "B": "6,2", "C": "7,2", "D": "9,8" },
+          "ans": "B"
+        },
+        {
+          "id": "pg-7",
+          "q": "Perhatikan tabel tinggi badan berikut!<br><table class='table-mini'><tr><td>Tinggi (cm)</td><td>155</td><td>156</td><td>157</td><td>158</td><td>159</td></tr><tr><td>Frekuensi</td><td>4</td><td>2</td><td>15</td><td>8</td><td>3</td></tr></table><br>Jika rata-rata tinggi badan adalah 157,125 cm, banyak siswa yang memiliki tinggi badan di atas rata-rata adalah...",
+          "opts": { "A": "26 siswa", "B": "15 siswa", "C": "11 siswa", "D": "6 siswa" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-8",
+          "q": "Diagram lingkaran menunjukkan pendidikan orang tua siswa: SD 45%, SMA 12%, PT 8%, dan sisanya SMP. Jika total orang tua adalah 900 orang, banyak orang tua yang berpendidikan SMP adalah...<br><br><img src='diagram_lingkaran_pendidikan.png' class='img-exam' alt='Diagram Lingkaran Pendidikan'>",
+          "opts": { "A": "385 orang", "B": "350 orang", "C": "315 orang", "D": "108 orang" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-9",
+          "q": "Rata-rata 8 buah bilangan adalah 72 dan rata-rata 12 bilangan lainnya adalah 84. Rata-rata gabungan dari 20 bilangan tersebut adalah...",
+          "opts": { "A": "76,8", "B": "78,0", "C": "79,2", "D": "80,0" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-10",
+          "q": "Hasil panen padi selama 5 tahun totalnya adalah 195 ton. Jika hasil tahun 2011=40, 2012=30, 2013=45, dan 2015=25, berapakah hasil panen pada tahun 2014?<br><br><img src='diagram_batang_panen_padi.png' class='img-exam' alt='Diagram Batang Panen Padi'>",
+          "opts": { "A": "45 ton", "B": "50 ton", "C": "55 ton", "D": "60 ton" },
+          "ans": "B"
+        },
+        {
+          "id": "pg-11",
+          "q": "Tim bola basket terdiri dari 5 siswa dengan rata-rata berat badan 45 kg. Selisih berat badan terbesar dan terkecil adalah 15 kg. Jika ada satu orang terberat dan sisanya memiliki berat yang sama, berapakah berat badan siswa yang terberat?",
+          "opts": { "A": "55 kg", "B": "57 kg", "C": "60 kg", "D": "62 kg" },
+          "ans": "B"
+        },
+        {
+          "id": "pg-12",
+          "q": "Rata-rata tinggi siswa wanita adalah 134 cm dan pria 145 cm. Jika rata-rata seluruh siswa yang berjumlah 33 orang adalah 142 cm, berapakah jumlah siswa pria di kelas tersebut?",
+          "opts": { "A": "18 orang", "B": "20 orang", "C": "24 orang", "D": "26 orang" },
+          "ans": "C"
+        }
+      ]
+    },
+    {
+      "type": "PGK",
+      "label": "Pilihan Ganda Kompleks",
+      "pointEach": 5,
+      "instruction": "Pilih SEMUA jawaban yang benar.",
+      "questions": [
+        {
+          "id": "pgk-1",
+          "q": "Perhatikan data nilai: 60, 70, 80, 90, 100 dengan frekuensi masing-masing 6, 7, 8, 5, 4. Manakah pernyataan berikut yang benar?",
+          "opts": {
+            "A": "Jangkauan data tersebut adalah 40.",
+            "B": "Modus dari data tersebut adalah 80.",
+            "C": "Rata-rata data tersebut adalah 78.",
+            "D": "Banyak siswa di atas rata-rata adalah 13 orang."
+          },
+          "ans": ["A", "B", "C"]
+        },
+        {
+          "id": "pgk-2",
+          "q": "Berdasarkan konsep statistika, pernyataan mana saja yang benar mengenai median dan modus?",
+          "opts": {
+            "A": "Modus adalah nilai yang memiliki frekuensi paling banyak.",
+            "B": "Median selalu sama dengan nilai rata-rata.",
+            "C": "Untuk data berjumlah genap, median adalah rata-rata dari dua nilai tengah.",
+            "D": "Data harus diurutkan terlebih dahulu untuk mencari modus."
+          },
+          "ans": ["A", "C"]
+        },
+        {
+          "id": "pgk-3",
+          "q": "Sebuah survei terhadap 500 keluarga mengenai jumlah komputer di rumah menunjukkan: 20% tidak memiliki komputer, dan 5% memiliki lebih dari 3 komputer. Manakah pernyataan yang sesuai?",
+          "opts": {
+            "A": "Ada 100 keluarga yang tidak memiliki komputer.",
+            "B": "Ada 25 keluarga yang memiliki lebih dari 3 komputer.",
+            "C": "Total keluarga yang tidak memiliki atau memiliki >3 komputer adalah 125.",
+            "D": "Setengah dari total keluarga memiliki tepat 1 komputer."
+          },
+          "ans": ["A", "B", "C"]
+        }
+      ]
+    },
+    {
+      "type": "UR",
+      "label": "Uraian Singkat",
+      "pointEach": 5,
+      "instruction": "Jawab singkat dan jelas (langsung tulis angka desimal atau nilai akhirnya saja).",
+      "questions": [
+        {
+          "id": "ur-1",
+          "q": "Hitunglah rata-rata dari data nilai matematika berikut ini secara detail: Nilai 5 (4 siswa), Nilai 6 (5 siswa), Nilai 7 (7 siswa), Nilai 8 (13 siswa), Nilai 9 (6 siswa), Nilai 10 (5 siswa).",
+          "sampleAns": "7,675",
+          "keywords": ["7,675", "7.675"],
+          "synonyms": {
+            "7,675": ["7,68", "7.68"]
+          }
+        },
+        {
+          "id": "ur-2",
+          "q": "Tentukan median dari tabel distribusi frekuensi berikut:<br><table class='table-mini'><tr><td>Tinggi (cm)</td><td>155</td><td>156</td><td>157</td><td>158</td><td>159</td><td>160</td></tr><tr><td>Frekuensi</td><td>3</td><td>5</td><td>2</td><td>3</td><td>4</td><td>3</td></tr></table>",
+          "sampleAns": "157,5 cm",
+          "keywords": ["157,5", "157.5"],
+          "synonyms": {
+            "157,5": ["157,5 cm", "157.5 cm"]
+          }
+        },
+        {
+          "id": "ur-3",
+          "q": "Rata-rata pengunjung perpustakaan selama 5 hari (Senin-Jumat) adalah 41 orang. Jika data Senin=45, Selasa=40, Kamis=30, dan Jumat=20, hitunglah banyak pengunjung pada hari Rabu!<br><br><img src='diagram_batang_pengunjung_perpustakaan.png' class='img-exam' alt='Diagram Batang Pengunjung Perpustakaan'>",
+          "sampleAns": "70 orang",
+          "keywords": ["70"],
+          "synonyms": {
+            "70": ["70 orang", "tujuh puluh"]
+          }
+        },
+        {
+          "id": "ur-4",
+          "q": "Dalam sebuah diagram lingkaran kegemaran olahraga, sudut untuk Voli adalah $90^\\circ$ (setara 54 orang). Jika sudut untuk Futsal adalah $135^\\circ$, berapakah jumlah siswa yang gemar futsal?<br><br><img src='diagram_lingkaran_kegemaran_olahraga.png' class='img-exam' alt='Diagram Lingkaran Kegemaran Olahraga'>",
+          "sampleAns": "81 orang",
+          "keywords": ["81"],
+          "synonyms": {
+            "81": ["81 orang", "delapan puluh satu"]
+          }
+        },
+        {
+          "id": "ur-5",
+          "q": "Rata-rata tinggi badan 32 siswa adalah 170,5 cm. Jika kemudian satu siswa dengan tinggi 154 cm disertakan dalam kelompok tersebut, hitunglah rata-rata tinggi badan yang baru!",
+          "sampleAns": "170 cm",
+          "keywords": ["170"],
+          "synonyms": {
+            "170": ["170 cm", "seratus tujuh puluh"]
+          }
+        }
+      ]
+    }
+  ]
+}

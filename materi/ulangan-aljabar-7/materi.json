@@ -1,0 +1,21 @@
+{
+  "title": "Ulangan Harian: Aljabar",
+  "description": "Ujian 20 soal · 50 menit · Token wajib · KKM 70",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "petunjuk-ujian",
+      "title": "Petunjuk Ujian Aljabar",
+      "icon": "assignment",
+      "content": "Ujian matematika materi aljabar ini memerlukan sinkronisasi kode enkripsi TOKEN dari Guru Pamong MTs Ma'arif Jumo sebelum pengerjaan dapat dibuka.",
+      "steps": [
+        "Mintalah string sandi token digital resmi kepada guru pengawas Anda di kelas.",
+        "Salin dan masukkan sandi token ke dalam kolom isian layar beranda aplikasi.",
+        "Waktu pengerjaan berdurasi 50 menit akan berjalan otomatis saat tombol konfirmasi ditekan.",
+        "Jangan sekali-kali berpindah tab, menutup aplikasi, atau membuka notifikasi lain selama ujian berjalan demi menghindari pemblokiran otomatis akibat sistem proteksi anti-curang.",
+        "Skor akumulasi nilai akhir PG, PGK, dan Uraian akan dikalkulasi langsung dan ditampilkan saat itu juga setelah pengumpulan."
+      ],
+      "summary": "20 soal · 100 poin maks · Standar KKM Kelulusan 70 · Enkripsi pengaman Token Guru Aktif"
+    }
+  ]
+}

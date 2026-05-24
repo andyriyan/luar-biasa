@@ -1,0 +1,21 @@
+{
+  "title": "Ulangan Harian: Bilangan Bulat",
+  "description": "Ujian 20 soal · 50 menit · Token wajib · KKM 70.",
+  "theme": "math",
+  "concepts": [
+    {
+      "id": "petunjuk",
+      "title": "Petunjuk Ujian",
+      "icon": "assignment",
+      "content": "Minta token dari guru sebelum memulai. Timer langsung berjalan setelah token divalidasi.",
+      "steps": [
+        "Minta token ujian dari guru.",
+        "Buka ujian → masukkan token → isi nama & kelas.",
+        "Timer 50 menit berjalan otomatis setelah klik Mulai.",
+        "Jawab soal satu per satu. Gunakan tombol Sebelumnya/Selanjutnya.",
+        "Klik 'Kumpulkan' saat selesai. Skor sementara langsung keluar."
+      ],
+      "summary": "20 soal · 100 poin · KKM 70 · Token wajib dari guru."
+    }
+  ]
+}

@@ -126,6 +126,7 @@
           gridEl.innerHTML = '';
           const filtered = data.materi.filter(m => {
             if (!m.published) return false;
+            if (m.presentationOnly) return false;
             const matchCat  = activeCategory === 'all' || m.category === activeCategory;
             const matchSearch = !searchQuery ||
               m.title.toLowerCase().includes(searchQuery) ||

@@ -175,7 +175,8 @@
       try {
         const res  = await fetch('./data/materi-list.json');
         const data = await res.json();
-        const materi = data.materi.filter(m => m.published);
+        // Sembunyikan materi khusus presentasi guru dari tampilan progress siswa
+        const materi = data.materi.filter(m => m.published && !m.presentationOnly);
 
         const total       = materi.length;
         const allProgress = window.Storage ? Storage.getAllProgress() : {};

@@ -1,0 +1,319 @@
+{
+  "examTitle": "Ulangan Harian: Aljabar",
+  "subject": "Matematika",
+  "class": "7",
+  "duration": 50,
+  "passingScore": 70,
+  "teacherWaNumber": "6285211238800",
+  "sections": [
+    {
+      "type": "PG",
+      "label": "Pilihan Ganda",
+      "instruction": "Pilih satu jawaban yang paling tepat.",
+      "questions": [
+        {
+          "id": "pg-1",
+          "level": "mudah",
+          "bloom": "C1",
+          "point": 4,
+          "question": "Pada bentuk aljabar 3x - 7, manakah yang bertindak sebagai variabel?",
+          "options": {
+            "A": "3",
+            "B": "x",
+            "C": "-7",
+            "D": "3x"
+          },
+          "answer": "B",
+          "explanation": "Variabel adalah lambang pengganti suatu bilangan yang belum diketahui nilainya, biasanya disimbolkan dengan huruf kecil. Pada bentuk 3x - 7, huruf x mewakili variabel."
+        },
+        {
+          "id": "pg-2",
+          "level": "mudah",
+          "bloom": "C1",
+          "point": 4,
+          "question": "Berapakah nilai konstanta dari bentuk aljabar 2a² - 5a + 9?",
+          "options": {
+            "A": "2",
+            "B": "-5",
+            "C": "9",
+            "D": "a"
+          },
+          "answer": "C",
+          "explanation": "Konstanta adalah suku dari bentuk aljabar yang berupa bilangan saja dan tidak memuat variabel. Pada bentuk tersebut, angkanya adalah 9."
+        },
+        {
+          "id": "pg-3",
+          "level": "mudah",
+          "bloom": "C1",
+          "point": 4,
+          "question": "Tentukan koefisien dari y pada bentuk aljabar x² - 4y + 5!",
+          "options": {
+            "A": "1",
+            "B": "4",
+            "C": "-4",
+            "D": "5"
+          },
+          "answer": "C",
+          "explanation": "Koefisien adalah bilangan di depan variabel. Tanda operasi di depan bilangan ikut serta, sehingga koefisien y adalah -4."
+        },
+        {
+          "id": "pg-4",
+          "level": "mudah",
+          "bloom": "C2",
+          "point": 4,
+          "question": "Bentuk paling sederhana dari penjumlahan aljabar 4a + 5a - 2a adalah...",
+          "options": {
+            "A": "7a",
+            "B": "11a",
+            "C": "9a",
+            "D": "3a"
+          },
+          "answer": "A",
+          "explanation": "Karena semua suku sejenis (memiliki variabel a pangkat 1), koefisien dapat langsung dioperasikan: (4 + 5 - 2)a = 7a."
+        },
+        {
+          "id": "pg-5",
+          "level": "mudah",
+          "bloom": "C2",
+          "point": 4,
+          "question": "Hasil penyederhanaan dari bentuk aljabar -5m - 3m adalah...",
+          "options": {
+            "A": "8m",
+            "B": "-2m",
+            "C": "-8m",
+            "D": "2m"
+          },
+          "answer": "C",
+          "explanation": "Kedua suku sejenis. Operasikan koefisiennya: -5 - 3 = -8, sehingga hasilnya adalah -8m."
+        },
+        {
+          "id": "pg-6",
+          "level": "sedang",
+          "bloom": "C2",
+          "point": 5,
+          "question": "Sederhanakan bentuk aljabar berikut: 7x + 2 - 3x",
+          "options": {
+            "A": "6x",
+            "B": "4x + 2",
+            "C": "10x + 2",
+            "D": "4x - 2"
+          },
+          "answer": "B",
+          "explanation": "Kelompokkan suku sejenis: (7x - 3x) + 2 = 4x + 2. Konstanta 2 tidak bisa dijumlahkan dengan variabel x."
+        },
+        {
+          "id": "pg-7",
+          "level": "sedang",
+          "bloom": "C3",
+          "point": 5,
+          "question": "Sederhanakan bentuk aljabar berikut: 3(2x + 4y) - 5x",
+          "options": {
+            "A": "x + 4y",
+            "B": "6x + 12y",
+            "C": "x + 12y",
+            "D": "11x + 12y"
+          },
+          "answer": "C",
+          "explanation": "Gunakan sifat distributif terlebih dahulu: 3(2x) + 3(4y) - 5x = 6x + 12y - 5x. Kemudian kurangkan suku sejenis: (6x - 5x) + 12y = x + 12y."
+        },
+        {
+          "id": "pg-8",
+          "level": "sedang",
+          "bloom": "C3",
+          "point": 5,
+          "question": "Hasil penjabaran dari perkalian aljabar (x + 3)(x + 2) adalah...",
+          "options": {
+            "A": "x² + 5x + 6",
+            "B": "x² + 6x + 5",
+            "C": "x² + 5",
+            "D": "x² + 6"
+          },
+          "answer": "A",
+          "explanation": "Gunakan skema perkalian distributif ganda: x(x) + x(2) + 3(x) + 3(2) = x² + 2x + 3x + 6 = x² + 5x + 6."
+        },
+        {
+          "id": "pg-9",
+          "level": "sedang",
+          "bloom": "C3",
+          "point": 5,
+          "question": "Jika diketahui nilai variabel a = -2 dan b = 3, berapakah nilai dari bentuk aljabar 3a² - 2b?",
+          "options": {
+            "A": "-18",
+            "B": "6",
+            "C": "18",
+            "D": "30"
+          },
+          "answer": "B",
+          "explanation": "Substitusikan nilai ke dalam variabel: 3(-2)² - 2(3) = 3(4) - 6 = 12 - 6 = 6."
+        },
+        {
+          "id": "pg-10",
+          "level": "sedang",
+          "bloom": "C2",
+          "point": 5,
+          "question": "Berapakah jumlah banyaknya suku pada bentuk aljabar pecahan dan kuadrat berikut: 2x² - 5x + 3?",
+          "options": {
+            "A": "1 suku",
+            "B": "2 suku",
+            "C": "3 suku",
+            "D": "4 suku"
+          },
+          "answer": "C",
+          "explanation": "Suku-suku dipisahkan oleh tanda penjumlahan atau pengurangan. Sukunya adalah 2x², -5x, dan 3 (total ada 3 suku)."
+        },
+        {
+          "id": "pg-11",
+          "level": "sulit",
+          "bloom": "C4",
+          "point": 6,
+          "question": "Sederhanakan bentuk pembagian pecahan aljabar berikut: (6x²y) / (2xy)",
+          "options": {
+            "A": "3x²",
+            "B": "3x",
+            "C": "3y",
+            "D": "3xy"
+          },
+          "answer": "B",
+          "explanation": "Bagi koefisien dengan koefisien: 6/2 = 3. Bagi variabel sejenis: x²/x = x, dan y/y = 1. Hasil akhirnya adalah 3x."
+        },
+        {
+          "id": "pg-12",
+          "level": "sulit",
+          "bloom": "C4",
+          "point": 6,
+          "question": "Sederhanakan operasi gabungan perkalian distributif berikut: 2x(x - 3) - (x² - 5x + 6)",
+          "options": {
+            "A": "x² - x - 6",
+            "B": "x² - 11x - 6",
+            "C": "3x² - x + 6",
+            "D": "x² + x - 6"
+          },
+          "answer": "A",
+          "explanation": "Buka kurung pertama: 2x² - 6x. Buka kurung kedua dengan mengalikan minus: -x² + 5x - 6. Gabungkan suku sejenis: (2x² - x²) + (-6x + 5x) - 6 = x² - x - 6."
+        }
+      ]
+    },
+    {
+      "type": "PGK",
+      "label": "Pilihan Ganda Kompleks",
+      "instruction": "Pilih SEMUA jawaban yang benar (bisa lebih dari satu).",
+      "questions": [
+        {
+          "id": "pgk-1",
+          "level": "sedang",
+          "bloom": "C4",
+          "point": 6,
+          "question": "Manakah di antara pasangan suku-suku berikut yang merupakan kelompok suku sejenis?",
+          "options": {
+            "A": "3x dan 5x",
+            "B": "2a² dan -7a²",
+            "C": "2x dan 2x²",
+            "D": "3x dan 3y",
+            "E": "-m dan 10m"
+          },
+          "answers": ["A", "B", "E"],
+          "explanation": "Suku sejenis wajib memiliki variabel dan pangkat variabel yang sama persis tanpa memedulikan nilai koefisiennya. Pilihan C salah karena pangkat berbeda; pilihan D salah karena variabel berbeda."
+        },
+        {
+          "id": "pgk-2",
+          "level": "sedang",
+          "bloom": "C4",
+          "point": 6,
+          "question": "Seorang siswa menyederhanakan bentuk pengurangan: (5a - 3b) - (2a + 4b). Manakah pernyataan analisis yang benar di bawah ini?",
+          "options": {
+            "A": "Suku hasil penggabungan variabel a adalah 3a",
+            "B": "Suku hasil penggabungan variabel b adalah 1b",
+            "C": "Suku hasil penggabungan variabel b adalah -7b",
+            "D": "Bentuk akhir yang paling sederhana adalah 3a - 7b",
+            "E": "Bentuk akhir yang paling sederhana adalah 3a + b"
+          },
+          "answers": ["A", "C", "D"],
+          "explanation": "Penjabaran: 5a - 3b - 2a - 4b = (5a - 2a) + (-3b - 4b) = 3a - 7b."
+        },
+        {
+          "id": "pgk-3",
+          "level": "sedang",
+          "bloom": "C4",
+          "point": 6,
+          "question": "Umur Ibu adalah 3 kali umur Kakak. Jika umur Kakak dinyatakan dengan x tahun, dan jumlah umur mereka berdua adalah 48 tahun, manakah pernyataan matematis berikut yang valid?",
+          "options": {
+            "A": "Model persamaan aljabarnya adalah 3x + x = 48",
+            "B": "Persamaan aljabar sederhananya adalah 4x = 48",
+            "C": "Umur Kakak yang diperoleh adalah 12 tahun",
+            "D": "Umur Ibu yang diperoleh adalah 30 tahun",
+            "E": "Umur Ibu adalah 36 tahun"
+          },
+          "answers": ["A", "B", "C", "E"],
+          "explanation": "Umur Kakak = x, Umur Ibu = 3x. Total: x + 3x = 48 -> 4x = 48 -> x = 12 tahun (Kakak). Umur Ibu = 3(12) = 36 tahun."
+        }
+      ]
+    },
+    {
+      "type": "UR",
+      "label": "Uraian Singkat",
+      "instruction": "Jawab dengan singkat dan jelas berupa kata kunci, variabel, atau angka mutlak.",
+      "questions": [
+        {
+          "id": "ur-1",
+          "level": "mudah",
+          "bloom": "C2",
+          "point": 6,
+          "question": "Hitunglah hasil akhir nilai dari bentuk aljabar 2x + 3 jika nilai variabel x disubstitusikan dengan angka 5!",
+          "sampleAnswer": "13",
+          "keywords": ["13", "tiga belas"],
+          "synonyms": {
+            "13": ["hasilnya 13", "= 13"]
+          }
+        },
+        {
+          "id": "ur-2",
+          "level": "mudah",
+          "bloom": "C2",
+          "point": 6,
+          "question": "Sederhanakan instruksi kalimat operasi berikut: Kurangkan bentuk 3x dari 8x!",
+          "sampleAnswer": "5x",
+          "keywords": ["5x"],
+          "synonyms": {
+            "5x": ["5 x", "hasilnya 5x"]
+          }
+        },
+        {
+          "id": "ur-3",
+          "level": "sedang",
+          "bloom": "C3",
+          "point": 6,
+          "question": "Sebuah persegi panjang memiliki panjang (2x + 3) cm dan lebar 5 cm. Tuliskan rumus luas persegi panjang tersebut dalam bentuk ekspresi aljabar paling sederhana (tanpa menulis satuan cm)!",
+          "sampleAnswer": "10x + 15",
+          "keywords": ["10x+15", "10x + 15"],
+          "synonyms": {
+            "10x+15": ["15+10x", "15 + 10x"]
+          }
+        },
+        {
+          "id": "ur-4",
+          "level": "sedang",
+          "bloom": "C3",
+          "point": 6,
+          "question": "Diketahui sebuah segitiga memiliki panjang sisi-sisi (x+1) cm, (2x-3) cm, dan 3x cm. Jika keliling segitiga tersebut adalah 34 cm, berapakah nilai dari variabel x?",
+          "sampleAnswer": "6",
+          "keywords": ["6", "enam"],
+          "synonyms": {
+            "6": ["x=6", "x = 6"]
+          }
+        },
+        {
+          "id": "ur-5",
+          "level": "sedang",
+          "bloom": "C3",
+          "point": 6,
+          "question": "Jumlah dua bilangan bulat berurutan adalah 45. Jika bilangan pertama disimbolkan dengan n, berapakah angka untuk nilai bilangan pertama (n) tersebut?",
+          "sampleAnswer": "22",
+          "keywords": ["22", "dua puluh dua"],
+          "synonyms": {
+            "22": ["n=22", "n = 22"]
+          }
+        }
+      ]
+    }
+  ]
+}

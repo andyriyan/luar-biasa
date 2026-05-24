@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "lastUpdated": "2026-05-09",
+  "version": "1.1.0",
+  "lastUpdated": "2026-05-22",
   "categories": [
     {
       "id": "all",
@@ -31,9 +31,89 @@
       "id": "simulasi",
       "label": "Simulasi",
       "icon": "smart_toy"
+    },
+    {
+      "id": "math",
+      "label": "Matematika",
+      "icon": "calculate"
+    },
+    {
+      "id": "science",
+      "label": "IPA",
+      "icon": "science"
+    },
+    {
+      "id": "soal",
+      "label": "Bank Soal",
+      "icon": "quiz"
     }
   ],
   "materi": [
+    {
+      "id": "ulangan-penyajian-data-7",
+      "slug": "ulangan-penyajian-data-7",
+      "title": "Ulangan Harian: Penyajian Data",
+      "description": "Evaluasi materi statistika, mean, median, modus, diagram batang, dan diagram lingkaran kelas 7.",
+      "category": "soal",
+      "thumbnail": "",
+      "totalConcepts": 0,
+      "estimatedTime": "60 menit",
+      "difficulty": "sedang",
+      "tags": ["ujian", "matematika", "7"],
+      "published": true,
+      "isExam": true,
+      "examConfig": {
+        "requiresToken": true,
+        "duration": 60,
+        "totalQuestions": 20,
+        "passingScore": 70,
+        "hasEssay": false
+      }
+    },
+    {
+      "id": "ulangan-bilangan-bulat-7",
+      "slug": "ulangan-bilangan-bulat-7",
+      "title": "Ulangan Harian: Bilangan Bulat",
+      "description": "Evaluasi berjenjang materi bilangan bulat kelas 7 mencakup PG, PG Kompleks, dan Uraian otomatis.",
+      "category": "soal",
+      "thumbnail": "",
+      "totalConcepts": 0,
+      "estimatedTime": "50 menit",
+      "difficulty": "sedang",
+      "tags": ["ujian", "matematika", "kelas 7"],
+      "published": true,
+      "isExam": true,
+      "examConfig": {
+        "requiresToken": true,
+        "duration": 50,
+        "totalQuestions": 20,
+        "passingScore": 70,
+        "hasEssay": false
+      }
+    },
+    {
+      "id": "ulangan-aljabar-7",
+      "slug": "ulangan-aljabar-7",
+      "title": "Ulangan Harian: Aljabar",
+      "description": "Ujian 20 soal · 50 menit · Standar KKM 70 · Enkripsi token wajib",
+      "category": "soal",
+      "thumbnail": "",
+      "totalConcepts": 1,
+      "estimatedTime": "50 menit",
+      "difficulty": "sedang",
+      "tags": ["ujian", "ulangan", "matematika", "7"],
+      "published": true,
+      "isExam": true,
+      "examConfig": {
+        "requiresToken": true,
+        "duration": 50,
+        "totalQuestions": 20,
+        "passingScore": 70,
+        "hasEssay": false,
+        "showTempScoreImmediately": true,
+        "essayScoringMethod": "none"
+      }
+    },
     {
       "id": "bilangan-bulat",
       "slug": "bilangan-bulat",
@@ -51,6 +131,19 @@
       ],
       "published": true
     },
+{
+  "id": "operasi-pecahan",
+  "slug": "operasi-pecahan",
+  "title": "Teka-Teki Sawah Pecahan",
+  "description": "Belah petak lahan sawah secara visual untuk taklukkan operasi hitung penjumlahan pecahan!",
+  "category": "simulasi",
+  "thumbnail": "",
+  "totalConcepts": 1,
+  "estimatedTime": "15 menit",
+  "difficulty": "mudah",
+  "tags": ["simulasi", "pecahan", "kelas-7"],
+  "published": true
+},
     {
       "id": "bank-soal-matematika-smp",
       "slug": "bank-soal-matematika-smp",
@@ -204,6 +297,25 @@
         "simulasi"
       ],
       "published": true
+    },
+    {
+      "id": "pythagoras-presentasi",
+      "slug": "geometri-dan-pythagoras",
+      "title": "Teorema Pythagoras — Slide Kelas",
+      "description": "Slide presentasi proyektor khusus mengajar Teorema Pythagoras step-by-step di kelas.",
+      "category": "geometri",
+      "thumbnail": "",
+      "totalConcepts": 6,
+      "estimatedTime": "20 menit",
+      "difficulty": "mudah",
+      "tags": [
+        "pythagoras",
+        "geometri",
+        "presentasi",
+        "proyektor"
+      ],
+      "published": true,
+      "presentationOnly": true
     }
   ]
 }

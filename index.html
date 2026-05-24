@@ -243,8 +243,8 @@
 
         // ─── Hitung stats progress ───
         const allProgress = window.Storage ? Storage.getAllProgress() : {};
-        const total       = data.materi.filter(m => m.published).length;
-        const done        = data.materi.filter(m => m.published && (Storage ? Storage.getProgress(m.id) : 0) >= 100).length;
+        const total       = data.materi.filter(m => m.published && !m.presentationOnly).length;
+        const done        = data.materi.filter(m => m.published && !m.presentationOnly && (Storage ? Storage.getProgress(m.id) : 0) >= 100).length;
         const pct         = total > 0 ? Math.round((done / total) * 100) : 0;
 
         document.getElementById('stat-total').textContent = total;
@@ -255,8 +255,8 @@
         const renderMateri = (categoryId) => {
           materiContainer.innerHTML = '';
           const filtered = categoryId === 'all'
-            ? data.materi.filter(m => m.published)
-            : data.materi.filter(m => m.published && m.category === categoryId);
+            ? data.materi.filter(m => m.published && !m.presentationOnly)
+            : data.materi.filter(m => m.published && !m.presentationOnly && m.category === categoryId);
 
           if (filtered.length === 0) {
             materiContainer.innerHTML = '<p class="text-secondary" style="grid-column:1/-1;text-align:center;padding:2rem;">Belum ada materi di kategori ini.</p>';

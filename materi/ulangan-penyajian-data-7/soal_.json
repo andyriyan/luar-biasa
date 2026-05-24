@@ -1,0 +1,248 @@
+{
+  "examTitle": "Ulangan Harian: Penyajian Data",
+  "slug": "ulangan-penyajian-data-7",
+  "subject": "Matematika",
+  "class": "7",
+  "duration": 60,
+  "passingScore": 70,
+  "teacherWaNumber": "6281234567890",
+  "sections": [
+    {
+      "type": "PG",
+      "label": "Pilihan Ganda",
+      "pointEach": 5,
+      "instruction": "Pilih satu jawaban yang paling tepat.",
+      "questions": [
+        {
+          "id": "pg-1",
+          "q": "Apa yang dimaksud dengan median dalam statistika?",
+          "opts": {
+            "A": "Nilai yang paling sering muncul",
+            "B": "Nilai rata-rata dari sekumpulan data",
+            "C": "Nilai tengah suatu data yang telah diurutkan dari terkecil ke terbesar",
+            "D": "Selisih antara nilai terbesar dan terkecil"
+          },
+          "ans": "C"
+        },
+        {
+          "id": "pg-2",
+          "q": "Diberikan data: $6, 8, 7, 8, 5, 6, 5, 8, 9, 7, 8, 6$. Berapakah modus dari data tersebut?",
+          "opts": {
+            "A": "6",
+            "B": "7",
+            "C": "8",
+            "D": "9"
+          },
+          "ans": "C"
+        },
+        {
+          "id": "pg-3",
+          "q": "Data tinggi badan (dalam cm) 5 siswa adalah: $156, 157, 158, 159, 160$. Berapakah median data tersebut?",
+          "opts": {
+            "A": "157 cm",
+            "B": "158 cm",
+            "C": "159 cm",
+            "D": "160 cm"
+          },
+          "ans": "B"
+        },
+        {
+          "id": "pg-4",
+          "q": "Rumus untuk menghitung rata-rata (mean) dari sekumpulan data $x_1, x_2, \\dots, x_n$ adalah...",
+          "opts": {
+            "A": "Jumlah data dibagi banyak data",
+            "B": "Nilai tengah setelah diurutkan",
+            "C": "Nilai dengan frekuensi terbanyak",
+            "D": "Selisih nilai tertinggi dan terendah"
+          },
+          "ans": "A"
+        },
+        {
+          "id": "pg-5",
+          "q": "Jika dalam suatu diagram lingkaran, sudut pusat untuk kategori 'Membaca' adalah $90^\\circ$, maka persentase siswa yang gemar membaca adalah...",
+          "opts": {
+            "A": "10%",
+            "B": "20%",
+            "C": "25%",
+            "D": "50%"
+          },
+          "ans": "C"
+        },
+        {
+          "id": "pg-6",
+          "q": "Perhatikan grafik di bawah ini!<br><img src=\"diagram_batang_pengunjung_perpustakaan.png\" class=\"img-exam\" alt=\"Diagram Batang Pengunjung Perpustakaan\"><br>Berdasarkan diagram batang kunjungan perpustakaan di atas, berapakah jumlah pengunjung pada hari Rabu?",
+          "opts": {
+            "A": "40 orang",
+            "B": "45 orang",
+            "C": "50 orang",
+            "D": "55 orang"
+          },
+          "ans": "C"
+        },
+        {
+          "id": "pg-7",
+          "q": "Berdasarkan diagram batang kunjungan perpustakaan pada soal nomor 6, pada hari apakah jumlah pengunjung mencapai nilai tertinggi?",
+          "opts": {
+            "A": "Senin",
+            "B": "Selasa",
+            "C": "Kamis",
+            "D": "Jumat"
+          },
+          "ans": "C"
+        },
+        {
+          "id": "pg-8",
+          "q": "Perhatikan grafik hasil panen di bawah ini!<br><img src=\"diagram_batang_panen_padi.png\" class=\"img-exam\" alt=\"Diagram Batang Panen Padi\"><br>Berdasarkan grafik di atas, berapakah total hasil panen padi dari tahun 2021 hingga tahun 2023?",
+          "opts": {
+            "A": "70 ton",
+            "B": "75 ton",
+            "C": "80 ton",
+            "D": "85 ton"
+          },
+          "ans": "B"
+        },
+        {
+          "id": "pg-9",
+          "q": "Perhatikan diagram lingkaran berikut!<br><img src=\"diagram_lingkaran_kegemaran_olahraga.png\" class=\"img-exam\" alt=\"Diagram Lingkaran Kegemaran Olahraga\"><br>Jika total siswa yang disurvei adalah 200 anak, berapakah jumlah siswa yang gemar bermain sepak bola jika persentasenya adalah 40%?",
+          "opts": {
+            "A": "60 anak",
+            "B": "70 anak",
+            "C": "80 anak",
+            "D": "90 anak"
+          },
+          "ans": "B"
+        },
+        {
+          "id": "pg-10",
+          "q": "Diketahui data nilai matematika 8 siswa: $7, 6, 8, 9, 6, 7, 10, 7$. Berapakah nilai rata-rata (mean) dari data tersebut?",
+          "opts": {
+            "A": "7,00",
+            "B": "7,25",
+            "C": "7,50",
+            "D": "7,75"
+          },
+          "ans": "C"
+        },
+        {
+          "id": "pg-11",
+          "q": "Dalam suatu kelompok yang terdiri dari 5 siswa, rata-rata berat badannya adalah 45 kg. Jika 4 siswa di antaranya memiliki berat yang sama sebesar $x$ kg dan 1 siswa terberat memiliki berat $y$ kg dengan selisih berat antara siswa terberat dan siswa lainnya adalah 15 kg, berapakah berat siswa terberat ($y$)?",
+          "opts": {
+            "A": "42 kg",
+            "B": "52 kg",
+            "C": "57 kg",
+            "D": "60 kg"
+          },
+          "ans": "C"
+        },
+        {
+          "id": "pg-12",
+          "q": "Rata-rata tinggi badan siswa pria di sebuah kelas adalah 145 cm, sedangkan rata-rata tinggi badan siswa wanita adalah 134 cm. Jika total siswa di kelas tersebut adalah 33 orang dan rata-rata tinggi gabungannya adalah 142 cm, berapakah jumlah siswa pria di kelas tersebut?",
+          "opts": {
+            "A": "9 orang",
+            "B": "15 orang",
+            "C": "24 orang",
+            "D": "27 orang"
+          },
+          "ans": "C"
+        }
+      ]
+    },
+    {
+      "type": "PGK",
+      "label": "Pilihan Ganda Kompleks",
+      "pointEach": 5,
+      "instruction": "Pilih SEMUA jawaban yang benar.",
+      "questions": [
+        {
+          "id": "pgk-1",
+          "q": "Diberikan sekumpulan data acak: $12, 15, 12, 18, 20, 15, 12$. Manakah dari pernyataan berikut yang BENAR terkait data tersebut? (Pilih dua jawaban benar)",
+          "opts": {
+            "A": "Modus dari data tersebut adalah 12",
+            "B": "Median dari data tersebut adalah 18",
+            "C": "Nilai rata-rata (mean) data tersebut kurang dari 15",
+            "D": "Modus dari data tersebut adalah 15",
+            "E": "Median dari data tersebut adalah 15"
+          },
+          "ans": ["A", "E"]
+        },
+        {
+          "id": "pgk-2",
+          "q": "Manakah pernyataan di bawah ini yang paling tepat menggambarkan karakteristik nilai statistik? (Pilih dua jawaban benar)",
+          "opts": {
+            "A": "Mean sangat dipengaruhi oleh nilai ekstrem (pencilan)",
+            "B": "Modus adalah frekuensi terbanyak dari suatu variabel data",
+            "C": "Median data genap adalah nilai paling tengah langsung tanpa pembagian",
+            "D": "Rata-rata selalu menghasilkan nilai bulat yang ada di dalam data",
+            "E": "Modus tidak mungkin berjumlah lebih dari satu nilai"
+          },
+          "ans": ["A", "B"]
+        },
+        {
+          "id": "pgk-3",
+          "q": "Perhatikan grafik diagram lingkaran kepemilikan komputer di bawah ini!<br><img src=\"diagram_lingkaran_pendidikan.png\" class=\"img-exam\" alt=\"Diagram Lingkaran Kepemilikan Komputer\"><br>Jika total responden survei berjumlah 500 kepala keluarga, pilihlah pernyataan yang BENAR! (Pilih tiga jawaban benar)",
+          "opts": {
+            "A": "Responden yang tidak memiliki komputer (20%) berjumlah 100 orang",
+            "B": "Responden yang memiliki lebih dari 3 komputer (5%) berjumlah 25 orang",
+            "C": "Total gabungan responden yang tidak punya komputer dan memiliki >3 komputer adalah 125 orang",
+            "D": "Responden yang memiliki 1 komputer (50%) berjumlah 300 orang",
+            "E": "Responden yang memiliki 2 komputer (25%) berjumlah 150 orang"
+          },
+          "ans": ["A", "B", "C"]
+        }
+      ]
+    },
+    {
+      "type": "UR",
+      "label": "Uraian Singkat",
+      "pointEach": 5,
+      "instruction": "Jawab singkat dan jelas.",
+      "questions": [
+        {
+          "id": "ur-1",
+          "q": "Diberikan tabel frekuensi nilai matematika siswa kelas 7:<br><table class=\"table-mini\"><tr><th>Nilai</th><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><th>Frekuensi</th><td>4</td><td>5</td><td>7</td><td>13</td><td>6</td><td>5</td></tr></table><br>Hitunglah nilai rata-rata (mean) dari data pada tabel di atas! (Tuliskan hasil akhir dalam bentuk desimal dengan tiga angka di belakang koma)",
+          "sampleAns": "7,675",
+          "keywords": ["7,675"],
+          "synonyms": {
+            "7,675": ["7.675", "rata-rata 7,675", "mean 7,675"]
+          }
+        },
+        {
+          "id": "ur-2",
+          "q": "Data tinggi badan (dalam cm) 20 pemain basket junior adalah sebagai berikut:<br>150, 152, 153, 154, 155, 155, 156, 157, 157, 157, 158, 158, 159, 160, 160, 162, 163, 164, 165, 168.<br>Berapakah nilai median dari data tinggi badan pemain basket tersebut? (Gunakan koma jika hasilnya desimal)",
+          "sampleAns": "157,5 cm",
+          "keywords": ["157,5"],
+          "synonyms": {
+            "157,5": ["157.5", "157,5 cm", "157.5 cm"]
+          }
+        },
+        {
+          "id": "ur-3",
+          "q": "Jika nilai jangkauan (selisih data terbesar dan terkecil) dari data: $12, 18, x, 25, 30$ adalah 16, dengan 30 sebagai nilai terbesar, berapakah nilai $x$ yang paling tepat sebagai nilai terkecil?",
+          "sampleAns": "14",
+          "keywords": ["14"],
+          "synonyms": {
+            "14": ["nilai x adalah 14", "x = 14", "x=14"]
+          }
+        },
+        {
+          "id": "ur-4",
+          "q": "Pada sebuah diagram lingkaran bertema hobi siswa, sektor sepak bola membentuk sudut siku-siku sebesar $90^\\circ$. Berapa pecahan paling sederhana yang menyatakan bagian dari seluruh siswa yang menyukai sepak bola?",
+          "sampleAns": "1/4",
+          "keywords": ["1/4"],
+          "synonyms": {
+            "1/4": ["seperempat", "1 / 4", "0,25", "0.25"]
+          }
+        },
+        {
+          "id": "ur-5",
+          "q": "Rata-rata nilai ulangan harian dari 9 siswa adalah 75. Setelah nilai siswa kesepuluh dimasukkan, rata-ratanya berubah menjadi 77. Berapakah nilai dari siswa kesepuluh tersebut?",
+          "sampleAns": "95",
+          "keywords": ["95"],
+          "synonyms": {
+            "95": ["nilai 95", "nilai siswa kesepuluh adalah 95"]
+          }
+        }
+      ]
+    }
+  ]
+}

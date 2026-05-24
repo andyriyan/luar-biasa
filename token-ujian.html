@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Token Ujian — Panel Guru</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <script src="./assets/js/storage.js" defer></script>
+  <script src="./assets/js/exam-token.js" defer></script>
+  <script src="./assets/js/app.js" defer></script>
+
+  <style>
+    /* ── Login (sama dengan settings-identitas) ── */
+    #screen-login {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--bg-surface); z-index: 999;
+      padding: var(--space-6);
+    }
+    .login-card {
+      width: 100%; max-width: 380px;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-premium);
+      padding: var(--space-6); text-align: center;
+    }
+    .login-logo {
+      width: 64px; height: 64px; border-radius: 50%;
+      object-fit: cover; border: 3px solid var(--accent-primary);
+      margin: 0 auto var(--space-4); display: block;
+    }
+    .login-title { font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .login-sub   { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: var(--space-5); }
+    .password-field { position: relative; margin-bottom: var(--space-4); }
+    .password-field input {
+      width: 100%; padding: var(--space-3) var(--space-10) var(--space-3) var(--space-4);
+      border: 2px solid var(--border-normal); border-radius: var(--radius-sm);
+      background: var(--bg-surface); color: var(--text-primary);
+      font-size: 1.1rem; letter-spacing: 0.2em; font-family: var(--font-mono);
+      outline: none; transition: border-color var(--duration-short); box-sizing: border-box;
+    }
+    .password-field input:focus { border-color: var(--accent-primary); }
+    .password-field input.error { border-color: var(--accent-danger); }
+    .toggle-pw {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: var(--text-tertiary); padding: 4px;
+    }
+    .error-msg {
+      color: var(--accent-danger); font-size: 0.8rem; font-weight: 600;
+      margin-top: -12px; margin-bottom: var(--space-4); display: none;
+    }
+    .error-msg.show { display: block; }
+    .btn-login {
+      width: 100%; padding: var(--space-4);
+      background: var(--accent-primary); color: white;
+      border: none; border-radius: var(--radius-full);
+      font-weight: 700; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all var(--duration-short); box-shadow: var(--shadow-1);
+    }
+    .btn-login:active { transform: scale(0.98); opacity: 0.9; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-tertiary); text-decoration: none;
+      font-size: 0.8rem; margin-top: var(--space-4);
+    }
+    .back-link .material-icons { font-size: 16px; }
+    .lockout-msg {
+      color: var(--accent-danger); font-size: 0.8rem; font-weight: 600;
+      text-align: center; margin-top: var(--space-3); display: none;
+    }
+    .lockout-msg.show { display: block; }
+
+    /* ── Panel ── */
+    #screen-panel { display: none; }
+
+    .panel-header {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, #0a5f2c 100%);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5); color: white;
+      margin-top: var(--space-4);
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .panel-header img { width: 44px; height: 44px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); object-fit: cover; }
+    .panel-header-text h2 { font-size: 1rem; font-weight: 800; color: white; }
+    .panel-header-text p  { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
+
+    .section-card {
+      background: var(--bg-card); border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle); box-shadow: var(--shadow-1);
+      overflow: hidden; margin-top: var(--space-4);
+    }
+    .section-card-header {
+      padding: var(--space-4); border-bottom: 1px solid var(--border-subtle);
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .section-card-header .material-icons { color: var(--accent-primary); }
+    .section-card-title { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+
+    /* ── Form Generate Token ── */
+    .form-item {
+      padding: var(--space-4); border-bottom: 1px solid var(--border-subtle);
+      display: flex; flex-direction: column; gap: var(--space-2);
+    }
+    .form-item:last-child { border-bottom: none; }
+    .form-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+    .form-input, .form-select {
+      width: 100%; padding: var(--space-3) var(--space-4);
+      border: 1.5px solid var(--border-normal); border-radius: var(--radius-sm);
+      background: var(--bg-surface); color: var(--text-primary);
+      font-family: var(--font-latin); font-size: 1rem; outline: none;
+      transition: border-color var(--duration-short); box-sizing: border-box;
+    }
+    .form-input:focus, .form-select:focus { border-color: var(--accent-primary); }
+    .hint { font-size: 0.75rem; color: var(--text-tertiary); margin-top: var(--space-1); display: flex; align-items: center; gap: 4px; }
+    .hint .material-icons { font-size: 14px; }
+
+    .btn-primary {
+      width: 100%; padding: var(--space-4);
+      background: var(--accent-primary); color: white;
+      border: none; border-radius: var(--radius-full);
+      font-weight: 700; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all var(--duration-short); box-shadow: var(--shadow-1);
+    }
+    .btn-primary:active { transform: scale(0.98); opacity: 0.9; }
+    .btn-secondary {
+      width: 100%; padding: var(--space-4); background: transparent;
+      border: 2px solid var(--border-normal); color: var(--text-secondary);
+      border-radius: var(--radius-full); font-weight: 700; font-size: 1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all var(--duration-short); margin-top: var(--space-3);
+    }
+    .btn-secondary:active { background: var(--bg-surface-alt); }
+    .btn-danger {
+      background: transparent; border: 1.5px solid var(--accent-danger);
+      color: var(--accent-danger); border-radius: var(--radius-full);
+      padding: 6px 14px; font-size: 0.8rem; font-weight: 700;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+      transition: all var(--duration-short);
+    }
+    .btn-danger:active { background: color-mix(in srgb, var(--accent-danger) 10%, transparent); }
+
+    /* ── Token Card ── */
+    .token-card {
+      background: var(--bg-card); border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle); box-shadow: var(--shadow-1);
+      padding: var(--space-4); margin-top: var(--space-3);
+      transition: all var(--duration-short);
+    }
+    .token-card.active   { border-left: 4px solid var(--accent-primary); }
+    .token-card.used     { border-left: 4px solid var(--text-tertiary); opacity: 0.7; }
+    .token-card.expired  { border-left: 4px solid var(--accent-danger); opacity: 0.6; }
+
+    .token-display {
+      font-family: var(--font-mono); font-size: 1.6rem; font-weight: 900;
+      color: var(--accent-primary); letter-spacing: 0.08em;
+      margin: var(--space-2) 0;
+    }
+    .token-card.used    .token-display { color: var(--text-tertiary); }
+    .token-card.expired .token-display { color: var(--accent-danger); }
+
+    .token-meta {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-2); margin-top: var(--space-2);
+    }
+    .token-meta-item { font-size: 0.78rem; color: var(--text-secondary); }
+    .token-meta-item span { display: block; font-weight: 700; color: var(--text-primary); font-size: 0.88rem; }
+
+    .token-status {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: var(--radius-full);
+      font-size: 0.75rem; font-weight: 700; margin-top: var(--space-2);
+    }
+    .token-status.active  { background: color-mix(in srgb, var(--accent-primary) 12%, transparent); color: var(--accent-primary); }
+    .token-status.used    { background: var(--bg-surface-alt); color: var(--text-tertiary); }
+    .token-status.expired { background: color-mix(in srgb, var(--accent-danger) 12%, transparent); color: var(--accent-danger); }
+
+    .token-actions { display: flex; gap: var(--space-2); margin-top: var(--space-3); flex-wrap: wrap; }
+
+    .btn-copy {
+      flex: 1; padding: 8px 14px; border-radius: var(--radius-full);
+      background: var(--accent-primary); color: white;
+      border: none; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      transition: all var(--duration-short);
+    }
+    .btn-copy:active { opacity: 0.85; transform: scale(0.97); }
+    .btn-reset {
+      flex: 1; padding: 8px 14px; border-radius: var(--radius-full);
+      background: transparent; border: 1.5px solid var(--border-normal);
+      color: var(--text-secondary); font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      transition: all var(--duration-short);
+    }
+    .btn-reset:active { background: var(--bg-surface-alt); }
+    .btn-wa {
+      flex: 1; padding: 8px 14px; border-radius: var(--radius-full);
+      background: #25D366; color: white;
+      border: none; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      transition: all var(--duration-short);
+    }
+    .btn-wa:active { opacity: 0.85; transform: scale(0.97); }
+  .btn-link {
+      flex: 1; padding: 8px 14px; border-radius: var(--radius-full);
+      background: transparent; border: 1.5px solid var(--accent-primary);
+      color: var(--accent-primary); font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      transition: all var(--duration-short);
+    }
+    .btn-link:active { background: color-mix(in srgb, var(--accent-primary) 8%, transparent); }
+
+    .result-banner {
+      background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+      border: 2px solid var(--accent-primary);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin-top: var(--space-3);
+      text-align: center;
+      display: none;
+    }
+    .result-banner.show { display: block; }
+    .result-code {
+      font-family: var(--font-mono); font-size: 2.2rem; font-weight: 900;
+      color: var(--accent-primary); letter-spacing: 0.12em; margin: var(--space-2) 0;
+    }
+    .result-link {
+      font-size: 0.72rem; color: var(--text-secondary); word-break: break-all;
+      background: var(--bg-surface); padding: var(--space-2); border-radius: var(--radius-sm);
+      margin-top: var(--space-2);
+    }
+
+    .empty-state {
+      text-align: center; padding: var(--space-8) var(--space-4);
+      color: var(--text-tertiary);
+    }
+    .empty-state .material-icons { font-size: 3rem; display: block; margin-bottom: var(--space-2); }
+    .empty-state p { font-size: 0.9rem; }
+
+    .toast {
+      position: fixed; bottom: 40px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent-primary); color: white;
+      padding: 12px 24px; border-radius: var(--radius-full);
+      font-weight: 600; font-size: 0.9rem;
+      opacity: 0; transition: all 0.3s var(--ease-decelerate);
+      z-index: 9999; white-space: nowrap; box-shadow: var(--shadow-premium);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .divider { height: 1px; background: var(--border-subtle); margin: var(--space-4) 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════ LAYAR LOGIN ══════════════ -->
+  <div id="screen-login">
+    <div class="login-card">
+      <img src="./assets/logo/logomts.png" alt="Logo MTs" class="login-logo">
+      <p class="login-title">Token Ujian</p>
+      <p class="login-sub">Masukkan password Panel Guru untuk mengelola token ujian.</p>
+
+      <div class="password-field">
+        <input type="password" id="pw-input" placeholder="Password" autocomplete="off" maxlength="32">
+        <button class="toggle-pw" id="toggle-pw" type="button">
+          <span class="material-icons" id="toggle-pw-icon">visibility</span>
+        </button>
+      </div>
+      <p class="error-msg" id="error-msg">
+        <span class="material-icons" style="font-size:14px;vertical-align:middle;">error_outline</span>
+        Password salah. Coba lagi.
+      </p>
+      <button class="btn-login" id="btn-login">
+        <span class="material-icons">login</span>
+        Masuk
+      </button>
+      <p class="lockout-msg" id="lockout-msg"></p>
+      <a href="./settings-identitas.html" class="back-link">
+        <span class="material-icons">arrow_back</span>
+        Kembali ke Panel Guru
+      </a>
+    </div>
+  </div>
+
+  <!-- ══════════════ LAYAR PANEL ══════════════ -->
+  <div id="screen-panel">
+    <div class="app-container container">
+
+      <!-- Header -->
+      <div class="panel-header anim-fade-down">
+        <img src="./assets/logo/logomts.png" alt="Logo">
+        <div class="panel-header-text">
+          <h2>Generator Kode Ruangan</h2>
+          <p>Buat kode akses ujian untuk seluruh kelas</p>
+        </div>
+      </div>
+
+      <!-- ── FORM GENERATE TOKEN ── -->
+      <div class="section-card anim-fade-up" style="border-left: 4px solid var(--accent-primary);">
+        <div class="section-card-header">
+          <span class="material-icons">add_circle</span>
+          <span class="section-card-title">Buat Kode Ruangan Baru</span>
+        </div>
+
+        <!-- Pilih Ujian -->
+        <div class="form-item">
+          <label class="form-label" for="sel-ujian">Ujian / Ulangan</label>
+          <select class="form-select" id="sel-ujian">
+            <option value="">— Pilih ujian —</option>
+          </select>
+          <p class="hint">
+            <span class="material-icons">info_outline</span>
+            Hanya ujian dengan <code>isExam: true</code> di materi-list.json yang tampil.
+          </p>
+        </div>
+
+        <!-- Durasi -->
+        <div class="form-item">
+          <label class="form-label" for="input-durasi">Durasi Ujian (menit)</label>
+          <input type="number" id="input-durasi" class="form-input"
+                 placeholder="Contoh: 50" min="5" max="240" value="50">
+        </div>
+
+        <!-- Kode Kelas -->
+        <div class="form-item">
+          <label class="form-label" for="input-kelas">Kode Kelas</label>
+          <input type="text" id="input-kelas" class="form-input"
+                 placeholder="Contoh: 7A" maxlength="5"
+                 style="text-transform:uppercase;">
+          <p class="hint">
+            <span class="material-icons">info_outline</span>
+            Masuk ke dalam kode ruangan. Contoh: 7A, 8B, 9C
+          </p>
+        </div>
+
+        <!-- Tanggal Berlaku -->
+        <div class="form-item">
+          <label class="form-label" for="input-tanggal">Tanggal Berlaku</label>
+          <input type="date" id="input-tanggal" class="form-input">
+          <p class="hint">
+            <span class="material-icons">info_outline</span>
+            Kode hanya bisa dipakai pada tanggal ini. Satu kode berlaku untuk seluruh kelas di semua perangkat.
+          </p>
+        </div>
+
+        <!-- Tombol Generate -->
+        <div style="padding: var(--space-4);">
+          <button class="btn-primary" id="btn-generate">
+            <span class="material-icons">vpn_key</span>
+            Generate Kode Ruangan
+          </button>
+          <div class="result-banner" id="result-banner">
+            <p style="font-size:0.82rem;color:var(--text-secondary);margin:0;">Kode untuk dibagikan ke siswa (format: 7D-7209):</p>
+            <div class="result-code" id="result-code">—</div>
+            <div class="result-link" id="result-link"></div>
+            <div class="token-actions" style="margin-top:var(--space-3);">
+              <button class="btn-copy" id="btn-result-copy" type="button">
+                <span class="material-icons" style="font-size:16px;">content_copy</span>
+                Salin Kode
+              </button>
+              <button class="btn-wa" id="btn-result-wa" type="button">
+                <span class="material-icons" style="font-size:16px;">share</span>
+                Bagikan WA
+              </button>
+              <button class="btn-link" id="btn-result-link" type="button">
+                <span class="material-icons" style="font-size:16px;">link</span>
+                Salin Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── DAFTAR TOKEN AKTIF ── -->
+      <div class="section-card anim-fade-up delay-1">
+        <div class="section-card-header">
+          <span class="material-icons">list_alt</span>
+          <span class="section-card-title">Kode Ruangan Dibuat</span>
+        </div>
+        <div style="padding: var(--space-4);">
+          <div id="token-list">
+            <!-- Diisi JS -->
+          </div>
+          <div class="divider"></div>
+          <button class="btn-secondary" id="btn-hapus-expired" style="margin-top:0;">
+            <span class="material-icons">cleaning_services</span>
+            Hapus Kode Kadaluarsa
+          </button>
+        </div>
+      </div>
+
+      <!-- ── NAVIGASI KEMBALI ── -->
+      <div style="padding: var(--space-4) 0 var(--space-12);">
+        <a href="./settings-identitas.html" class="btn-secondary"
+           style="text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <span class="material-icons">arrow_back</span>
+          Kembali ke Panel Guru
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ══════════════════════════════════════════
+    //  KONFIGURASI (sama dengan settings-identitas)
+    // ══════════════════════════════════════════
+    const PW_KEY      = 'edu_app_guru_pw';
+    const DEFAULT_PW  = '123456';
+    const MAX_ATTEMPT = 5;
+    const LOCKOUT_MS  = 3 * 60 * 1000;
+    const SESSION_KEY = 'guru_session'; // SAMA dengan settings-identitas.html
+
+    let examCatalog = [];
+    let lastGenerated = null;
+
+    // ══════════════════════════════════════════
+    //  HELPERS — AUTH
+    // ══════════════════════════════════════════
+    const getStoredPw     = () => localStorage.getItem(PW_KEY) || DEFAULT_PW;
+    const isLockedOut     = () => Date.now() < parseInt(localStorage.getItem('guru_lockout') || '0');
+    const getLockRemaining= () => Math.ceil((parseInt(localStorage.getItem('guru_lockout')||'0') - Date.now()) / 1000);
+    const getAttempts     = () => parseInt(localStorage.getItem('guru_attempts') || '0');
+
+    function addAttempt() {
+      const a = getAttempts() + 1;
+      localStorage.setItem('guru_attempts', a);
+      if (a >= MAX_ATTEMPT) {
+        localStorage.setItem('guru_lockout', Date.now() + LOCKOUT_MS);
+        localStorage.setItem('guru_attempts', '0');
+      }
+      return a;
+    }
+    function clearAttempts() {
+      localStorage.removeItem('guru_attempts');
+      localStorage.removeItem('guru_lockout');
+    }
+
+    // ══════════════════════════════════════════
+    //  HELPERS — UI
+    // ══════════════════════════════════════════
+    function showToast(msg, isError = false) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.background = isError ? 'var(--accent-danger)' : 'var(--accent-primary)';
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    // ══════════════════════════════════════════
+    //  KODE RUANGAN (ExamToken)
+    // ══════════════════════════════════════════
+
+    function statusLabel(status) {
+      if (status === 'active')  return '✅ Aktif hari ini';
+      if (status === 'future')  return '📅 Belum berlaku';
+      if (status === 'expired') return '⏰ Kadaluarsa';
+      return status;
+    }
+
+    function copyText(text, toastMsg) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(toastMsg);
+      }).catch(() => {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToast(toastMsg);
+      });
+    }
+
+    function showGeneratedResult(session, examTitle) {
+      lastGenerated = session;
+      const banner = document.getElementById('result-banner');
+      const link = ExamToken.buildExamLink(session.slug, session.display, session.durasi, session.validDate);
+      document.getElementById('result-code').textContent = session.display;
+      document.getElementById('result-link').textContent = link;
+      banner.classList.add('show');
+      banner.dataset.title = examTitle || session.slug;
+      banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function renderTokenList() {
+      const container = document.getElementById('token-list');
+      const all = ExamToken.getSessions();
+
+      if (all.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons">vpn_key_off</span>
+            <p>Belum ada kode ruangan.<br>Buat kode baru di atas.</p>
+          </div>`;
+        return;
+      }
+
+      const sorted = [...all].sort((a, b) => {
+        const order = { active: 0, future: 1, expired: 2 };
+        return order[ExamToken.getSessionStatus(a)] - order[ExamToken.getSessionStatus(b)];
+      });
+
+      container.innerHTML = sorted.map((t) => {
+        const status = ExamToken.getSessionStatus(t);
+        const origIdx = all.indexOf(t);
+        const examTitle = examCatalog.find(e => e.slug === t.slug)?.title || t.slug;
+        return `
+        <div class="token-card ${status === 'expired' ? 'expired' : 'active'}">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;">${examTitle}</div>
+              <div class="token-display">${t.display}</div>
+            </div>
+            <span class="token-status ${status === 'expired' ? 'expired' : 'active'}">${statusLabel(status)}</span>
+          </div>
+          <div class="token-meta">
+            <div class="token-meta-item">Durasi<span>${t.durasi} menit</span></div>
+            <div class="token-meta-item">Kelas<span>${t.kelas}</span></div>
+            <div class="token-meta-item">Berlaku<span>${ExamToken.formatDateId(t.validDate)}</span></div>
+            <div class="token-meta-item">Dibuat<span>${new Date(t.createdAt).toLocaleDateString('id-ID')}</span></div>
+          </div>
+          <div class="token-actions">
+            <button class="btn-copy" onclick="copyToken('${t.display}')">
+              <span class="material-icons" style="font-size:16px;">content_copy</span>
+              Salin Kode
+            </button>
+            <button class="btn-wa" onclick="shareSessionWA(${origIdx})">
+              <span class="material-icons" style="font-size:16px;">share</span>
+              Bagikan WA
+            </button>
+            <button class="btn-link" onclick="copySessionLink(${origIdx})">
+              <span class="material-icons" style="font-size:16px;">link</span>
+              Salin Link
+            </button>
+            <button class="btn-danger" onclick="deleteSession(${origIdx})">
+              <span class="material-icons" style="font-size:14px;">delete</span>
+              Hapus
+            </button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    window.copyToken = function (display) {
+      copyText(display, `✓ Kode ${display} disalin!`);
+    };
+
+    window.shareSessionWA = function (idx) {
+      const session = ExamToken.getSessions()[idx];
+      if (!session) return;
+      const title = examCatalog.find(e => e.slug === session.slug)?.title;
+      ExamToken.shareWhatsApp(ExamToken.buildShareText(session, title));
+    };
+
+    window.copySessionLink = function (idx) {
+      const session = ExamToken.getSessions()[idx];
+      if (!session) return;
+      const link = ExamToken.buildExamLink(session.slug, session.display, session.durasi, session.validDate);
+      copyText(link, '✓ Link ujian disalin!');
+    };
+
+    window.deleteSession = function (idx) {
+      const session = ExamToken.getSessions()[idx];
+      if (!session) return;
+      if (!confirm(`Hapus kode ${session.display}?`)) return;
+      ExamToken.deleteSession(idx);
+      renderTokenList();
+      showToast('Kode dihapus.');
+    };
+
+    // ══════════════════════════════════════════
+    //  LOAD DAFTAR UJIAN KE DROPDOWN
+    // ══════════════════════════════════════════
+    async function loadExamList() {
+      const sel = document.getElementById('sel-ujian');
+      try {
+        const res  = await fetch('./data/materi-list.json');
+        const data = await res.json();
+        examCatalog = (data.materi || []).filter(m => m.isExam && m.published !== false);
+
+        if (examCatalog.length === 0) {
+          sel.innerHTML = '<option value="">— Belum ada ujian tersedia —</option>';
+          return;
+        }
+
+        sel.innerHTML = '<option value="">— Pilih ujian —</option>' +
+          examCatalog.map(e => `<option value="${e.slug}">${e.title}</option>`).join('');
+
+        sel.addEventListener('change', () => {
+          const chosen = examCatalog.find(e => e.slug === sel.value);
+          if (chosen?.examConfig?.duration) {
+            document.getElementById('input-durasi').value = chosen.examConfig.duration;
+          }
+        });
+
+      } catch(e) {
+        sel.innerHTML = '<option value="">— Gagal memuat daftar ujian —</option>';
+      }
+    }
+
+    // ══════════════════════════════════════════
+    //  OPEN PANEL
+    // ══════════════════════════════════════════
+    function openPanel() {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      document.getElementById('screen-login').style.display = 'none';
+      document.getElementById('screen-panel').style.display = 'block';
+
+      const dateInput = document.getElementById('input-tanggal');
+      if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
+
+      loadExamList();
+      renderTokenList();
+    }
+
+    // ══════════════════════════════════════════
+    //  INIT
+    // ══════════════════════════════════════════
+    document.addEventListener('DOMContentLoaded', () => {
+
+      if (sessionStorage.getItem(SESSION_KEY) === '1') {
+        openPanel();
+      }
+
+      const pwInput  = document.getElementById('pw-input');
+      const errorMsg = document.getElementById('error-msg');
+      const lockMsg  = document.getElementById('lockout-msg');
+      const btnLogin = document.getElementById('btn-login');
+      const toggleBtn= document.getElementById('toggle-pw');
+      const toggleIco= document.getElementById('toggle-pw-icon');
+
+      toggleBtn.addEventListener('click', () => {
+        const hidden = pwInput.type === 'password';
+        pwInput.type = hidden ? 'text' : 'password';
+        toggleIco.textContent = hidden ? 'visibility_off' : 'visibility';
+      });
+
+      pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') btnLogin.click(); });
+
+      if (isLockedOut()) showLockout();
+
+      btnLogin.addEventListener('click', () => {
+        if (isLockedOut()) { showLockout(); return; }
+        errorMsg.classList.remove('show');
+        pwInput.classList.remove('error');
+
+        if (pwInput.value === getStoredPw()) {
+          clearAttempts(); openPanel();
+        } else {
+          const a = addAttempt();
+          pwInput.classList.add('error'); pwInput.value = '';
+          if (isLockedOut()) { showLockout(); }
+          else {
+            errorMsg.textContent = `Password salah. Sisa percobaan: ${MAX_ATTEMPT - a}.`;
+            errorMsg.classList.add('show');
+          }
+        }
+      });
+
+      function showLockout() {
+        btnLogin.disabled = true; lockMsg.classList.add('show');
+        const tick = setInterval(() => {
+          if (!isLockedOut()) {
+            clearInterval(tick); btnLogin.disabled = false; lockMsg.classList.remove('show');
+          } else {
+            lockMsg.textContent = `Terlalu banyak percobaan. Coba lagi dalam ${getLockRemaining()} detik.`;
+          }
+        }, 1000);
+      }
+
+      document.getElementById('btn-result-copy').addEventListener('click', () => {
+        if (lastGenerated) copyToken(lastGenerated.display);
+      });
+
+      document.getElementById('btn-result-wa').addEventListener('click', () => {
+        if (!lastGenerated) return;
+        const title = document.getElementById('result-banner').dataset.title;
+        ExamToken.shareWhatsApp(ExamToken.buildShareText(lastGenerated, title));
+      });
+
+      document.getElementById('btn-result-link').addEventListener('click', () => {
+        if (!lastGenerated) return;
+        const link = ExamToken.buildExamLink(lastGenerated.slug, lastGenerated.display, lastGenerated.durasi, lastGenerated.validDate);
+        copyText(link, '✓ Link ujian disalin!');
+      });
+
+      document.getElementById('btn-generate').addEventListener('click', async () => {
+        const slug    = document.getElementById('sel-ujian').value;
+        const durasi  = document.getElementById('input-durasi').value;
+        const kelas   = document.getElementById('input-kelas').value.trim();
+        const tanggal = document.getElementById('input-tanggal').value;
+
+        if (!slug)    { showToast('Pilih ujian terlebih dahulu!', true); return; }
+        if (!durasi || durasi < 5) { showToast('Durasi minimal 5 menit!', true); return; }
+        if (!kelas)   { showToast('Kode kelas tidak boleh kosong!', true); return; }
+        if (!tanggal) { showToast('Pilih tanggal berlaku!', true); return; }
+
+        try {
+          const session = await ExamToken.generateRoomCode(slug, kelas, tanggal, durasi);
+          ExamToken.saveSession(session);
+          const examTitle = examCatalog.find(e => e.slug === slug)?.title;
+          renderTokenList();
+          showGeneratedResult(session, examTitle);
+          showToast(`✓ Kode ${session.display} siap dibagikan!`);
+        } catch (err) {
+          console.error(err);
+          showToast('Gagal membuat kode. Coba lagi.', true);
+        }
+      });
+
+      document.getElementById('btn-hapus-expired').addEventListener('click', () => {
+        const removed = ExamToken.clearExpiredSessions();
+        if (removed === 0) { showToast('Tidak ada kode kadaluarsa.'); return; }
+        renderTokenList();
+        showToast(`✓ ${removed} kode dihapus.`);
+      });
+
+    });
+  </script>
+</body>
+</html>

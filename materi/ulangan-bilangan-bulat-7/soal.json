@@ -1,0 +1,190 @@
+{
+  "examTitle": "Ulangan Harian: Bilangan Bulat",
+  "slug": "ulangan-bilangan-bulat-7",
+  "subject": "Matematika",
+  "class": "7",
+  "duration": 50,
+  "passingScore": 70,
+  "teacherWaNumber": "6281234567890",
+  "sections": [
+    {
+      "type": "PG",
+      "label": "Pilihan Ganda",
+      "pointEach": 4,
+      "instruction": "Pilih satu jawaban yang paling tepat.",
+      "questions": [
+        {
+          "id": "pg-1",
+          "q": "Tentukan lawan dari bilangan $-17$.",
+          "opts": { "A": "$-17$", "B": "$0$", "C": "$17$", "D": "$\\frac{1}{17}$" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-2",
+          "q": "Tentukan nilai mutlak dari $|-10|$.",
+          "opts": { "A": "-10", "B": "10", "C": "0", "D": "1" },
+          "ans": "B"
+        },
+        {
+          "id": "pg-3",
+          "q": "Gunakan tanda perbandingan yang tepat untuk $-20$ dan $-15$.",
+          "opts": { "A": "$<$", "B": "$>$", "C": "$=$", "D": "$\\ge$" },
+          "ans": "A"
+        },
+        {
+          "id": "pg-4",
+          "q": "Urutkan bilangan berikut dari yang terkecil: $-5, 0, 3, -8, 1$.",
+          "opts": {
+            "A": "-8, -5, 0, 1, 3",
+            "B": "0, 1, 3, -5, -8",
+            "C": "-5, -8, 0, 1, 3",
+            "D": "3, 1, 0, -5, -8"
+          },
+          "ans": "A"
+        },
+        {
+          "id": "pg-5",
+          "q": "Hitunglah hasil dari $-12 \\times (-4)$.",
+          "opts": { "A": "-48", "B": "-16", "C": "16", "D": "48" },
+          "ans": "D"
+        },
+        {
+          "id": "pg-6",
+          "q": "Hitunglah hasil dari $15 + (-7) - 3$.",
+          "opts": { "A": "-5", "B": "5", "C": "11", "D": "25" },
+          "ans": "B"
+        },
+        {
+          "id": "pg-7",
+          "q": "Tentukan hasil dari $24 \\div (-6) + 10$.",
+          "opts": { "A": "-14", "B": "-6", "C": "6", "D": "14" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-8",
+          "q": "Berapakah hasil dari $(-8) \\times (5 - 12)$?",
+          "opts": { "A": "-56", "B": "-13", "C": "56", "D": "13" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-9",
+          "q": "Jika $a = -4, b = 3, c = -1$, maka nilai dari $a \\times b - c$ adalah...",
+          "opts": { "A": "-13", "B": "-11", "C": "11", "D": "13" },
+          "ans": "B"
+        },
+        {
+          "id": "pg-10",
+          "q": "Sebuah kapal selam berada di kedalaman $80$ meter, lalu naik $30$ meter, kemudian menyelam lagi $20$ meter. Berapakah kedalaman kapal selam sekarang?",
+          "opts": { "A": "30 meter", "B": "70 meter", "C": "90 meter", "D": "130 meter" },
+          "ans": "B"
+        },
+        {
+          "id": "pg-11",
+          "q": "Tentukan nilai $a$ yang memenuhi persamaan $24 \\div (a - 1) = 8$.",
+          "opts": { "A": "2", "B": "3", "C": "4", "D": "5" },
+          "ans": "C"
+        },
+        {
+          "id": "pg-12",
+          "q": "Berapakah hasil dari $168 \\div ((17 - 24) \\times (-19 + 15))$?",
+          "opts": { "A": "-6", "B": "-4", "C": "4", "D": "6" },
+          "ans": "D"
+        }
+      ]
+    },
+    {
+      "type": "PGK",
+      "label": "Pilihan Ganda Kompleks",
+      "pointEach": 6,
+      "instruction": "Pilih SEMUA jawaban yang benar.",
+      "questions": [
+        {
+          "id": "pgk-1",
+          "q": "Manakah dari pernyataan-pernyataan di bawah ini yang bernilai BENAR?",
+          "opts": {
+            "A": "$-8 > -11$",
+            "B": "$-25 > -23$",
+            "C": "Nilai mutlak dari $|-10|$ sama dengan $10$",
+            "D": "Bilangan $-10$ terletak di sebelah kanan $-5$ pada garis bilangan"
+          },
+          "ans": ["A", "C"]
+        },
+        {
+          "id": "pgk-2",
+          "q": "Jika diketahui operasi aritmetika pada bilangan bulat, manakah hasil operasi berikut yang bernilai POSITIF?",
+          "opts": {
+            "A": "$-7 + (-8)$",
+            "B": "$-3 \\times (-8)$",
+            "C": "$48 \\div (-12) \\times 3$",
+            "D": "$(-9) + 5 - (-2) \\times 4$"
+          },
+          "ans": ["B", "D"]
+        },
+        {
+          "id": "pgk-3",
+          "q": "Perhatikan kategori bilangan bulat. Manakah dari himpunan berikut yang semua anggotanya merupakan bilangan bulat ganjil atau prima?",
+          "opts": {
+            "A": "Himpunan bilangan ganjil: $\\{-3, -1, 1, 3, \\dots\\}$",
+            "B": "Himpunan bilangan genap: $\\{-2, 0, 2, 4, \\dots\\}$",
+            "C": "Himpunan bilangan prima: $\\{2, 3, 5, 7, 11, \\dots\\}$",
+            "D": "Himpunan bilangan cacah: $\\{0, 1, 2, 3, \\dots\\}$"
+          },
+          "ans": ["A", "C"]
+        }
+      ]
+    },
+    {
+      "type": "UR",
+      "label": "Uraian Singkat",
+      "pointEach": 6,
+      "instruction": "Jawab singkat dan jelas menggunakan angka atau kata baku.",
+      "questions": [
+        {
+          "id": "ur-1",
+          "q": "Jika suhu udara di sebuah ruangan pendingin adalah $2^\\circ\\text{C}$ lalu diturunkan sebesar $5^\\circ\\text{C}$, berapakah suhu ruangan tersebut sekarang?",
+          "sampleAns": "-3 derajat Celcius",
+          "keywords": ["-3", "negatif tiga"],
+          "synonyms": {
+            "-3": ["-3 C", "-3 derajat", "mines 3", "min 3"]
+          }
+        },
+        {
+          "id": "ur-2",
+          "q": "Jika diketahui aturan kelulusan KKM adalah 70, dan nilai ujian seorang siswa adalah 65, berapa poin kekurangan siswa tersebut untuk mencapai nilai KKM?",
+          "sampleAns": "5 poin",
+          "keywords": ["5", "lima"],
+          "synonyms": {
+            "5": ["5 poin", "kurang 5"]
+          }
+        },
+        {
+          "id": "ur-3",
+          "q": "Suhu di laboratorium mula-mula adalah $20^\\circ\\text{C}$. Karena sebuah eksperimen, AC diturunkan sehingga suhu turun sebesar $4^\\circ\\text{C}$ setiap menit. Berapa menitkah waktu yang dibutuhkan untuk mencapai suhu $-8^\\circ\\text{C}$?",
+          "sampleAns": "7 menit",
+          "keywords": ["7", "tujuh"],
+          "synonyms": {
+            "7": ["7 menit", "7 mnt"]
+          }
+        },
+        {
+          "id": "ur-4",
+          "q": "Ibu memiliki uang Rp 540.000. Setiap hari Ibu menggunakan uang tersebut untuk belanja sebesar Rp 42.000. Berapakah sisa uang Ibu pada hari ke-12?",
+          "sampleAns": "Rp 36.000",
+          "keywords": ["36000", "36.000"],
+          "synonyms": {
+            "36000": ["36 ribu", "tiga puluh enam ribu", "Rp 36000"]
+          }
+        },
+        {
+          "id": "ur-5",
+          "q": "Sebuah gunung memiliki ketinggian 2.000 meter di atas permukaan laut, sedangkan sebuah lembah berada di kedalaman 150 meter di bawah permukaan laut. Berapakah selisih ketinggian antara puncak gunung dan dasar lembah tersebut?",
+          "sampleAns": "2.150 meter",
+          "keywords": ["2150", "2.150"],
+          "synonyms": {
+            "2150": ["2150 meter", "2150m"]
+          }
+        }
+      ]
+    }
+  ]
+}
