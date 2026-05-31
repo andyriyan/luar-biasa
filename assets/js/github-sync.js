@@ -106,8 +106,10 @@ const GitHubSync = (function () {
       // Contoh: https://andyriyan.github.io/luar-biasa/settings-identitas.html
       //   → base = https://andyriyan.github.io/luar-biasa/
       //   → url  = https://andyriyan.github.io/luar-biasa/data/cloud-config.json
-      const base = window.location.href.replace(/\/[^/]*$/, '/').replace(/\/$/, '/');
-      const url  = `${base}${CONFIG_PATH}?t=${Date.now()}`;
+      const href = window.location.href.split('?')[0];
+      const base = href.substring(0, href.lastIndexOf('/') + 1);
+      const url  = base + CONFIG_PATH + '?t=' + Date.now();
+      console.log('[GitHubSync] Fetching config:', url);
       const res  = await fetch(url, { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
