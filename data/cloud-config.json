@@ -1,9 +1,9 @@
 {
   "_comment": "File ini dikelola otomatis oleh Panel Guru. Jangan edit manual.",
   "version": "1.0.0",
-  "passwordHash": "",
+  "passwordHash": "535dbd61c8503f28e696d67f1f682de35bffbb9e10b6f701876233e5b31a2484",
   "appName": "",
   "tagline": "",
   "updatedAt": "",
-  "updatedBy": "init"
+  "updatedBy": "teacher-panel"
 }
