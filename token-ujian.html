@@ -10,6 +10,7 @@
   <script src="./assets/js/github-sync.js" defer></script>
   <script src="./assets/js/exam-token.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     /* ── Login (sama dengan settings-identitas) ── */
@@ -256,6 +257,31 @@
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     .divider { height: 1px; background: var(--border-subtle); margin: var(--space-4) 0; }
+
+    /* ── QR Code ── */
+    .qr-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      padding: var(--space-4) 0 var(--space-2);
+    }
+    .qr-box {
+      background: white; border-radius: var(--radius-md);
+      padding: 12px; box-shadow: var(--shadow-1);
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+    }
+    .qr-box canvas, .qr-box img { display: block !important; }
+    .qr-label {
+      font-size: 0.72rem; color: var(--text-tertiary);
+      margin-top: var(--space-2); text-align: center;
+    }
+    .qr-toggle {
+      background: none; border: none; cursor: pointer;
+      color: var(--accent-primary); font-size: 0.8rem; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 8px; border-radius: var(--radius-full);
+      transition: background 0.2s;
+    }
+    .qr-toggle:active { background: rgba(16,133,63,0.08); }
   </style>
 </head>
 <body>
@@ -374,6 +400,19 @@
                 Salin Link
               </button>
             </div>
+            <!-- QR Code area -->
+            <div style="margin-top:var(--space-3);text-align:center;">
+              <button class="qr-toggle" id="btn-result-qr" type="button">
+                <span class="material-icons" style="font-size:16px;">qr_code</span>
+                Tampilkan QR Code
+              </button>
+              <div id="result-qr-area" style="display:none;">
+                <div class="qr-wrap">
+                  <div class="qr-box" id="result-qr-canvas"></div>
+                  <p class="qr-label">Scan QR ini untuk langsung masuk ujian<br>tanpa perlu ketik kode</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -481,6 +520,39 @@
       });
     }
 
+    // ── QR Code helpers ──
+    function makeQR(containerEl, url) {
+      containerEl.innerHTML = '';
+      if (typeof QRCode === 'undefined') {
+        containerEl.innerHTML = '<p style="font-size:0.8rem;color:var(--text-tertiary);padding:8px;">Library QR tidak tersedia (offline?)</p>';
+        return;
+      }
+      new QRCode(containerEl, {
+        text: url,
+        width: 200,
+        height: 200,
+        colorDark: '#10853F',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }
+
+    // Toggle QR di token card riwayat
+    window.toggleQR = function (btn, slug, display, durasi, validDate) {
+      const area    = btn.closest('div').querySelector('.qr-area');
+      const canvas  = area.querySelector('.qr-canvas-item');
+      const isOpen  = area.style.display !== 'none';
+      if (isOpen) {
+        area.style.display = 'none';
+        btn.innerHTML = '<span class="material-icons" style="font-size:15px;">qr_code</span> QR Code';
+        return;
+      }
+      const link = ExamToken.buildExamLink(slug, display, parseInt(durasi), validDate);
+      makeQR(canvas, link);
+      area.style.display = 'block';
+      btn.innerHTML = '<span class="material-icons" style="font-size:15px;">qr_code_off</span> Tutup QR';
+    };
+
     function showGeneratedResult(session, examTitle) {
       lastGenerated = session;
       const banner = document.getElementById('result-banner');
@@ -546,6 +618,19 @@
               <span class="material-icons" style="font-size:14px;">delete</span>
               Hapus
             </button>
+          </div>
+          <!-- QR toggle per token card -->
+          <div style="margin-top:var(--space-2);text-align:center;">
+            <button class="qr-toggle" onclick="toggleQR(this, '${t.slug}','${t.display}','${t.durasi}','${t.validDate}')">
+              <span class="material-icons" style="font-size:15px;">qr_code</span>
+              QR Code
+            </button>
+            <div class="qr-area" style="display:none;">
+              <div class="qr-wrap">
+                <div class="qr-box qr-canvas-item"></div>
+                <p class="qr-label">Scan untuk langsung masuk ujian</p>
+              </div>
+            </div>
           </div>
         </div>`;
       }).join('');
@@ -703,6 +788,24 @@
         if (!lastGenerated) return;
         const link = ExamToken.buildExamLink(lastGenerated.slug, lastGenerated.display, lastGenerated.durasi, lastGenerated.validDate);
         copyText(link, '✓ Link ujian disalin!');
+      });
+
+      document.getElementById('btn-result-qr').addEventListener('click', () => {
+        if (!lastGenerated) return;
+        const area   = document.getElementById('result-qr-area');
+        const canvas = document.getElementById('result-qr-canvas');
+        const btn    = document.getElementById('btn-result-qr');
+        const isOpen = area.style.display !== 'none';
+        if (isOpen) {
+          area.style.display = 'none';
+          btn.innerHTML = '<span class="material-icons" style="font-size:16px;">qr_code</span> Tampilkan QR Code';
+          return;
+        }
+        const link = ExamToken.buildExamLink(lastGenerated.slug, lastGenerated.display, lastGenerated.durasi, lastGenerated.validDate);
+        makeQR(canvas, link);
+        area.style.display = 'block';
+        btn.innerHTML = '<span class="material-icons" style="font-size:16px;">qr_code_off</span> Tutup QR Code';
+        area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
 
       document.getElementById('btn-generate').addEventListener('click', async () => {
