@@ -7,6 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="./assets/css/main.css">
   <script src="./assets/js/storage.js" defer></script>
+  <script src="./assets/js/github-sync.js" defer></script>
   <script src="./assets/js/exam-token.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
 
@@ -77,6 +78,7 @@
 
     /* ── Panel ── */
     #screen-panel { display: none; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     .panel-header {
       background: linear-gradient(135deg, var(--accent-primary) 0%, #0a5f2c 100%);
@@ -647,21 +649,32 @@
 
       if (isLockedOut()) showLockout();
 
-      btnLogin.addEventListener('click', () => {
+      btnLogin.addEventListener('click', async () => {
         if (isLockedOut()) { showLockout(); return; }
         errorMsg.classList.remove('show');
         pwInput.classList.remove('error');
+        btnLogin.disabled = true;
+        btnLogin.innerHTML = '<span class="material-icons" style="animation:spin 1s linear infinite;">sync</span> Memeriksa…';
 
-        if (pwInput.value === getStoredPw()) {
-          clearAttempts(); openPanel();
-        } else {
-          const a = addAttempt();
-          pwInput.classList.add('error'); pwInput.value = '';
-          if (isLockedOut()) { showLockout(); }
-          else {
-            errorMsg.textContent = `Password salah. Sisa percobaan: ${MAX_ATTEMPT - a}.`;
-            errorMsg.classList.add('show');
+        try {
+          const result = window.GitHubSync
+            ? await GitHubSync.validatePassword(pwInput.value)
+            : { valid: pwInput.value === (localStorage.getItem('edu_app_guru_pw') || '123456'), source: 'legacy' };
+
+          if (result.valid) {
+            clearAttempts(); openPanel();
+          } else {
+            const a = addAttempt();
+            pwInput.classList.add('error'); pwInput.value = '';
+            if (isLockedOut()) { showLockout(); }
+            else {
+              errorMsg.textContent = `Password salah. Sisa percobaan: ${MAX_ATTEMPT - a}.`;
+              errorMsg.classList.add('show');
+            }
           }
+        } finally {
+          btnLogin.disabled = false;
+          btnLogin.innerHTML = '<span class="material-icons">login</span> Masuk';
         }
       });
 

@@ -7,219 +7,191 @@
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="./assets/css/main.css">
   <script src="./assets/js/storage.js" defer></script>
+  <script src="./assets/js/github-sync.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
 
   <style>
-    /* ─── Layar Login ─── */
     #screen-login {
       position: fixed; inset: 0;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      background: var(--bg-surface);
-      z-index: 999;
-      padding: var(--space-6);
+      background: var(--bg-surface); z-index: 999; padding: var(--space-6);
     }
-
     .login-card {
-      width: 100%; max-width: 380px;
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-premium);
-      padding: var(--space-6);
-      text-align: center;
+      width: 100%; max-width: 380px; background: var(--bg-card);
+      border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-premium); padding: var(--space-6); text-align: center;
     }
-
     .login-logo {
-      width: 72px; height: 72px;
-      border-radius: 50%; object-fit: cover;
-      border: 3px solid var(--accent-primary);
-      margin: 0 auto var(--space-4);
-      display: block;
+      width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--accent-primary); margin: 0 auto var(--space-4); display: block;
     }
-
-    .login-title {
-      font-size: 1.25rem; font-weight: 800;
-      color: var(--text-primary); margin-bottom: 4px;
-    }
-
-    .login-sub {
-      font-size: 0.85rem; color: var(--text-secondary);
-      margin-bottom: var(--space-5);
-    }
-
-    .password-field {
-      position: relative; margin-bottom: var(--space-4);
-    }
-
+    .login-title  { font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .login-sub    { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: var(--space-5); }
+    .password-field { position: relative; margin-bottom: var(--space-4); }
     .password-field input {
       width: 100%; padding: var(--space-3) var(--space-10) var(--space-3) var(--space-4);
-      border: 2px solid var(--border-normal);
-      border-radius: var(--radius-sm);
-      background: var(--bg-surface);
-      color: var(--text-primary);
-      font-size: 1.1rem; letter-spacing: 0.2em;
-      font-family: var(--font-mono);
-      outline: none;
-      transition: border-color var(--duration-short);
-      box-sizing: border-box;
+      border: 2px solid var(--border-normal); border-radius: var(--radius-sm);
+      background: var(--bg-surface); color: var(--text-primary);
+      font-size: 1.1rem; letter-spacing: 0.2em; font-family: var(--font-mono);
+      outline: none; transition: border-color var(--duration-short); box-sizing: border-box;
     }
-
     .password-field input:focus { border-color: var(--accent-primary); }
     .password-field input.error { border-color: var(--accent-danger); }
-
     .toggle-pw {
-      position: absolute; right: 12px; top: 50%;
-      transform: translateY(-50%);
-      background: none; border: none; cursor: pointer;
-      color: var(--text-tertiary); padding: 4px;
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--text-tertiary); padding: 4px;
     }
-
     .error-msg {
-      color: var(--accent-danger); font-size: 0.8rem;
-      font-weight: 600; margin-top: -12px;
-      margin-bottom: var(--space-4); display: none;
+      color: var(--accent-danger); font-size: 0.8rem; font-weight: 600;
+      margin-top: -12px; margin-bottom: var(--space-4); display: none;
     }
     .error-msg.show { display: block; }
-
     .btn-login {
-      width: 100%; padding: var(--space-4);
-      background: var(--accent-primary); color: white;
-      border: none; border-radius: var(--radius-full);
-      font-weight: 700; font-size: 1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: all var(--duration-short) var(--ease-standard);
-      box-shadow: var(--shadow-1);
+      width: 100%; padding: var(--space-4); background: var(--accent-primary); color: white;
+      border: none; border-radius: var(--radius-full); font-weight: 700; font-size: 1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all var(--duration-short) var(--ease-standard); box-shadow: var(--shadow-1);
     }
     .btn-login:active { transform: scale(0.98); opacity: 0.9; }
-
     .back-to-settings {
       display: inline-flex; align-items: center; gap: 6px;
-      color: var(--text-tertiary); text-decoration: none;
-      font-size: 0.8rem; margin-top: var(--space-4);
+      color: var(--text-tertiary); text-decoration: none; font-size: 0.8rem; margin-top: var(--space-4);
     }
     .back-to-settings .material-icons { font-size: 16px; }
+    .lockout-msg {
+      color: var(--accent-danger); font-size: 0.8rem; font-weight: 600;
+      text-align: center; margin-top: var(--space-3); display: none;
+    }
+    .lockout-msg.show { display: block; }
 
-    /* ─── Layar Panel Guru ─── */
+    /* ─── Cloud status badge di halaman login ─── */
+    .cloud-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 99px; margin-bottom: var(--space-4);
+    }
+    .cloud-badge.cloud { background: #dcfce7; color: #15803d; }
+    .cloud-badge.local { background: #fef9c3; color: #92400e; }
+    .cloud-badge .material-icons { font-size: 14px; }
+
+    /* ─── Panel ─── */
     #screen-panel { display: none; }
-
     .panel-header {
       background: linear-gradient(135deg, var(--accent-primary) 0%, #0a5f2c 100%);
-      border-radius: var(--radius-lg);
-      padding: var(--space-5);
-      color: white;
-      margin-top: var(--space-4);
-      display: flex; align-items: center; gap: var(--space-3);
+      border-radius: var(--radius-lg); padding: var(--space-5); color: white;
+      margin-top: var(--space-4); display: flex; align-items: center; gap: var(--space-3);
     }
-
-    .panel-header img {
-      width: 48px; height: 48px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.4); object-fit: cover;
-    }
-
+    .panel-header img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); object-fit: cover; }
     .panel-header-text h2 { font-size: 1rem; font-weight: 800; color: white; }
     .panel-header-text p  { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
 
-    .section-card {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-1);
-      overflow: hidden;
-      margin-top: var(--space-4);
+    /* Cloud sync status bar di panel */
+    .sync-bar {
+      display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; margin-top: var(--space-3);
     }
+    .sync-bar.active  { background: #dcfce7; color: #15803d; }
+    .sync-bar.warning { background: #fef9c3; color: #92400e; }
+    .sync-bar .material-icons { font-size: 16px; }
 
+    .section-card {
+      background: var(--bg-card); border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle); box-shadow: var(--shadow-1);
+      overflow: hidden; margin-top: var(--space-4);
+    }
     .section-card-header {
-      padding: var(--space-4);
-      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--space-4); border-bottom: 1px solid var(--border-subtle);
       display: flex; align-items: center; gap: var(--space-3);
     }
     .section-card-header .material-icons { color: var(--accent-primary); }
     .section-card-title { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
 
     .form-item {
-      padding: var(--space-4);
-      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--space-4); border-bottom: 1px solid var(--border-subtle);
       display: flex; flex-direction: column; gap: var(--space-2);
     }
     .form-item:last-child { border-bottom: none; }
-
-    .form-label {
-      font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);
-    }
-
+    .form-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
     .form-input {
       width: 100%; padding: var(--space-3) var(--space-4);
-      border: 1.5px solid var(--border-normal);
-      border-radius: var(--radius-sm);
-      background: var(--bg-surface);
-      color: var(--text-primary);
-      font-family: var(--font-latin);
-      font-size: 1rem; outline: none;
-      transition: border-color var(--duration-short);
-      box-sizing: border-box;
+      border: 1.5px solid var(--border-normal); border-radius: var(--radius-sm);
+      background: var(--bg-surface); color: var(--text-primary);
+      font-family: var(--font-latin); font-size: 1rem; outline: none;
+      transition: border-color var(--duration-short); box-sizing: border-box;
     }
     .form-input:focus { border-color: var(--accent-primary); }
+    .form-input.mono  { font-family: var(--font-mono); letter-spacing: 0.05em; font-size: 0.9rem; }
 
     .identity-preview {
       display: flex; align-items: center; gap: var(--space-3);
-      padding: var(--space-3) var(--space-4);
-      background: var(--bg-surface-alt);
-      border-radius: var(--radius-sm);
+      padding: var(--space-3) var(--space-4); background: var(--bg-surface-alt); border-radius: var(--radius-sm);
     }
-    .identity-preview img {
-      width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
-    }
+    .identity-preview img  { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
     .identity-preview .name { font-weight: 800; font-size: 0.95rem; }
     .identity-preview .tag  { font-size: 0.75rem; color: var(--text-secondary); font-style: italic; }
 
     .btn-save {
-      width: 100%; padding: var(--space-4);
-      background: var(--accent-primary); color: white;
-      border: none; border-radius: var(--radius-full);
-      font-weight: 700; font-size: 1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: all var(--duration-short) var(--ease-standard);
-      box-shadow: var(--shadow-1);
+      width: 100%; padding: var(--space-4); background: var(--accent-primary); color: white;
+      border: none; border-radius: var(--radius-full); font-weight: 700; font-size: 1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all var(--duration-short) var(--ease-standard); box-shadow: var(--shadow-1);
     }
     .btn-save:active { transform: scale(0.98); opacity: 0.9; }
+    .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .btn-secondary {
-      width: 100%; padding: var(--space-4);
-      background: transparent;
-      border: 2px solid var(--border-normal);
-      color: var(--text-secondary);
-      border-radius: var(--radius-full);
-      font-weight: 700; font-size: 1rem; cursor: pointer;
+      width: 100%; padding: var(--space-4); background: transparent;
+      border: 2px solid var(--border-normal); color: var(--text-secondary);
+      border-radius: var(--radius-full); font-weight: 700; font-size: 1rem; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 8px;
       transition: all var(--duration-short); margin-top: var(--space-3);
     }
     .btn-secondary:active { background: var(--bg-surface-alt); }
 
-    .hint {
-      font-size: 0.75rem; color: var(--text-tertiary);
-      margin-top: var(--space-2);
-      display: flex; align-items: center; gap: 4px;
+    .btn-test {
+      padding: var(--space-2) var(--space-4); background: transparent;
+      border: 1.5px solid var(--accent-primary); color: var(--accent-primary);
+      border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+      transition: all var(--duration-short);
     }
-    .hint .material-icons { font-size: 14px; }
+    .btn-test:active { background: rgba(16,133,63,0.08); }
+    .btn-test:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .hint {
+      font-size: 0.75rem; color: var(--text-tertiary); margin-top: var(--space-2);
+      display: flex; align-items: flex-start; gap: 4px; line-height: 1.5;
+    }
+    .hint .material-icons { font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+
+    .test-result {
+      font-size: 0.8rem; font-weight: 600; padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm); margin-top: var(--space-2); display: none;
+    }
+    .test-result.ok  { background: #dcfce7; color: #15803d; }
+    .test-result.err { background: #fee2e2; color: #b91c1c; }
+    .test-result.show { display: block; }
 
     .toast {
       position: fixed; bottom: 40px; left: 50%;
       transform: translateX(-50%) translateY(20px);
       background: var(--accent-primary); color: white;
       padding: 12px 24px; border-radius: var(--radius-full);
-      font-weight: 600; font-size: 0.9rem;
-      opacity: 0; transition: all 0.3s var(--ease-decelerate);
+      font-weight: 600; font-size: 0.9rem; opacity: 0;
+      transition: all 0.3s var(--ease-decelerate);
       z-index: 9999; white-space: nowrap; box-shadow: var(--shadow-premium);
+      max-width: 90vw; text-align: center;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    .lockout-msg {
-      color: var(--accent-danger); font-size: 0.8rem;
-      font-weight: 600; text-align: center;
-      margin-top: var(--space-3); display: none;
+    /* ─── PAT masking ─── */
+    .pat-wrap { position: relative; }
+    .pat-wrap input { padding-right: 44px; }
+    .pat-toggle {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--text-tertiary); padding: 4px;
     }
-    .lockout-msg.show { display: block; }
   </style>
 </head>
 <body>
@@ -230,8 +202,15 @@
   <div id="screen-login">
     <div class="login-card">
       <img src="./assets/logo/logomts.png" alt="Logo MTs Ma'arif Jumo" class="login-logo">
+
+      <!-- Badge sumber password (cloud / lokal) -->
+      <div id="login-source-badge" class="cloud-badge local" style="margin: 0 auto var(--space-4);">
+        <span class="material-icons">schedule</span>
+        <span id="badge-text">Memeriksa sumber password…</span>
+      </div>
+
       <p class="login-title">Panel Guru</p>
-      <p class="login-sub">Masukkan password untuk mengakses pengaturan identitas madrasah.</p>
+      <p class="login-sub">Masukkan password untuk mengakses pengaturan madrasah.</p>
 
       <div class="password-field">
         <input type="password" id="pw-input" placeholder="Password" autocomplete="off" maxlength="32">
@@ -242,7 +221,7 @@
 
       <p class="error-msg" id="error-msg">
         <span class="material-icons" style="font-size:14px;vertical-align:middle;">error_outline</span>
-        Password salah. Coba lagi.
+        <span id="error-text">Password salah. Coba lagi.</span>
       </p>
 
       <button class="btn-login" id="btn-login">
@@ -260,12 +239,12 @@
   </div>
 
   <!-- ══════════════════════════════════════
-       LAYAR 2: PANEL GURU (setelah login)
+       LAYAR 2: PANEL GURU
   ══════════════════════════════════════ -->
   <div id="screen-panel">
     <div class="app-container container">
 
-      <!-- Header panel -->
+      <!-- Header -->
       <div class="panel-header anim-fade-down">
         <img src="./assets/logo/logomts.png" alt="Logo" id="panel-logo">
         <div class="panel-header-text">
@@ -274,17 +253,21 @@
         </div>
       </div>
 
-      <!-- ─── Mode Mengajar Presentasi ─── -->
-      <div class="section-card anim-fade-up" style="background: var(--bg-card); border-left: 4px solid var(--accent-primary);">
+      <!-- Status sinkronisasi cloud -->
+      <div id="sync-bar" class="sync-bar warning anim-fade-in">
+        <span class="material-icons" id="sync-icon">cloud_off</span>
+        <span id="sync-text">GitHub belum dikonfigurasi. Password hanya berlaku di perangkat ini.</span>
+      </div>
+
+      <!-- ─── Mode Presentasi ─── -->
+      <div class="section-card anim-fade-up" style="border-left:4px solid var(--accent-primary);">
         <div class="section-card-header">
-          <span class="material-icons" style="color: var(--accent-primary);">co_present</span>
+          <span class="material-icons" style="color:var(--accent-primary);">co_present</span>
           <span class="section-card-title">Mode Mengajar (Presentasi Kelas)</span>
         </div>
-        <div style="padding: var(--space-4);">
-          <p class="text-caption" style="margin-bottom: var(--space-4);">
-            Buka tampilan slide presentasi khusus proyektor/laptop untuk mengajar di kelas. Mendukung visualisasi step-by-step dan poin penjelasan ringkas yang mudah dipahami murid.
-          </p>
-          <a href="./presentasi.html" class="btn-save" style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">
+        <div style="padding:var(--space-4);">
+          <p class="text-caption" style="margin-bottom:var(--space-4);">Buka tampilan slide presentasi khusus proyektor/laptop untuk mengajar di kelas.</p>
+          <a href="./presentasi.html" class="btn-save" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;">
             <span class="material-icons">present_to_all</span>
             Mulai Presentasi Mengajar
           </a>
@@ -292,15 +275,13 @@
       </div>
 
       <!-- ─── Token Ujian ─── -->
-      <div class="section-card anim-fade-up delay-1" style="border-left: 4px solid #f59e0b;">
+      <div class="section-card anim-fade-up delay-1" style="border-left:4px solid #f59e0b;">
         <div class="section-card-header">
           <span class="material-icons" style="color:#f59e0b;">vpn_key</span>
           <span class="section-card-title">Token Ujian</span>
         </div>
-        <div style="padding: var(--space-4);">
-          <p class="text-caption" style="margin-bottom: var(--space-4);">
-            Buat dan kelola token akses ujian untuk siswa. Token dibutuhkan agar siswa bisa membuka halaman ujian di waktu yang tepat.
-          </p>
+        <div style="padding:var(--space-4);">
+          <p class="text-caption" style="margin-bottom:var(--space-4);">Buat dan kelola token akses ujian untuk siswa.</p>
           <a href="./token-ujian.html" class="btn-save"
              style="text-decoration:none;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;gap:8px;">
             <span class="material-icons">vpn_key</span>
@@ -315,8 +296,6 @@
           <span class="material-icons">school</span>
           <span class="section-card-title">Identitas Madrasah</span>
         </div>
-
-        <!-- Live preview -->
         <div style="padding:var(--space-4) var(--space-4) 0;">
           <div class="identity-preview">
             <img src="./assets/logo/logomts.png" alt="Logo" id="prev-logo">
@@ -326,24 +305,23 @@
             </div>
           </div>
         </div>
-
         <div class="form-item">
           <label class="form-label" for="input-name">Nama Madrasah</label>
-          <input type="text" id="input-name" class="form-input"
-                 placeholder="Contoh: MTs Ma'arif Jumo" maxlength="80">
+          <input type="text" id="input-name" class="form-input" placeholder="Contoh: MTs Ma'arif Jumo" maxlength="80">
         </div>
-
         <div class="form-item">
           <label class="form-label" for="input-tagline">Tagline / Motto</label>
-          <input type="text" id="input-tagline" class="form-input"
-                 placeholder="Contoh: Madrasahe keren, ora ninggal pesantren" maxlength="120">
+          <input type="text" id="input-tagline" class="form-input" placeholder="Contoh: Madrasahe keren, ora ninggal pesantren" maxlength="120">
         </div>
-
         <div style="padding:var(--space-4);">
           <button class="btn-save" id="btn-save-identity">
             <span class="material-icons">save</span>
             Simpan Identitas
           </button>
+          <p class="hint" style="margin-top:var(--space-2);">
+            <span class="material-icons">cloud_sync</span>
+            Jika GitHub terhubung, identitas juga disinkronkan ke semua perangkat.
+          </p>
         </div>
       </div>
 
@@ -353,30 +331,97 @@
           <span class="material-icons">lock</span>
           <span class="section-card-title">Ganti Password</span>
         </div>
-
         <div class="form-item">
           <label class="form-label" for="pw-lama">Password Lama</label>
           <input type="password" id="pw-lama" class="form-input" placeholder="••••••" maxlength="32">
         </div>
-
         <div class="form-item">
           <label class="form-label" for="pw-baru">Password Baru</label>
           <input type="password" id="pw-baru" class="form-input" placeholder="Minimal 4 karakter" maxlength="32">
-          <p class="hint">
-            <span class="material-icons">info_outline</span>
-            Password default: <strong>123456</strong>
-          </p>
+          <p class="hint"><span class="material-icons">info_outline</span>Password default: <strong>123456</strong></p>
         </div>
-
         <div class="form-item">
           <label class="form-label" for="pw-konfirmasi">Konfirmasi Password Baru</label>
           <input type="password" id="pw-konfirmasi" class="form-input" placeholder="Ulangi password baru" maxlength="32">
         </div>
-
         <div style="padding:var(--space-4);">
           <button class="btn-save" id="btn-ganti-pw">
             <span class="material-icons">key</span>
             Ganti Password
+          </button>
+          <p class="hint" style="margin-top:var(--space-2);">
+            <span class="material-icons">cloud_sync</span>
+            Jika GitHub terhubung, password baru langsung berlaku di semua perangkat.
+          </p>
+        </div>
+      </div>
+
+      <!-- ─── Konfigurasi GitHub Sync ─── -->
+      <div class="section-card anim-fade-up delay-3" id="section-github">
+        <div class="section-card-header">
+          <span class="material-icons">cloud_sync</span>
+          <span class="section-card-title">Sinkronisasi Lintas Perangkat (GitHub)</span>
+        </div>
+
+        <div style="padding:var(--space-4) var(--space-4) 0;">
+          <p class="text-caption" style="margin-bottom:var(--space-3);">
+            Hubungkan ke GitHub agar password dan identitas madrasah berlaku di <strong>semua perangkat</strong> secara otomatis. Tidak ada server tambahan — data disimpan langsung di repo GitHub Anda.
+          </p>
+        </div>
+
+        <div class="form-item">
+          <label class="form-label" for="gh-repo">Nama Repo <span style="font-weight:400;color:var(--text-tertiary);">(username/nama-repo)</span></label>
+          <input type="text" id="gh-repo" class="form-input mono"
+                 placeholder="contoh: andyriyan/media-pembelajaran" maxlength="100"
+                 autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+          <p class="hint"><span class="material-icons">info_outline</span>Nama repo tempat aplikasi ini di-host. Format: <code>username/nama-repo</code></p>
+        </div>
+
+        <div class="form-item">
+          <label class="form-label" for="gh-branch">Branch</label>
+          <input type="text" id="gh-branch" class="form-input mono" placeholder="main" maxlength="60"
+                 autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+        </div>
+
+        <div class="form-item">
+          <label class="form-label" for="gh-pat">
+            Personal Access Token (PAT)
+            <a href="https://github.com/settings/tokens/new?scopes=repo&description=MediaPembelajaran" target="_blank" rel="noopener"
+               style="font-size:0.72rem;color:var(--accent-primary);font-weight:400;margin-left:8px;text-decoration:none;">
+              Buat PAT di GitHub →
+            </a>
+          </label>
+          <div class="pat-wrap">
+            <input type="password" id="gh-pat" class="form-input mono"
+                   placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" maxlength="120"
+                   autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+            <button class="pat-toggle" id="toggle-pat" type="button" aria-label="Tampilkan PAT">
+              <span class="material-icons" id="toggle-pat-icon">visibility</span>
+            </button>
+          </div>
+          <p class="hint">
+            <span class="material-icons">security</span>
+            PAT hanya tersimpan di perangkat ini (localStorage). Centang scope <strong>repo</strong> saat membuat PAT.
+            PAT bisa dihapus dari GitHub kapan saja jika tidak diperlukan lagi.
+          </p>
+        </div>
+
+        <div id="test-result" class="test-result" style="margin:0 var(--space-4);"></div>
+
+        <div style="padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
+          <div style="display:flex;gap:var(--space-3);">
+            <button class="btn-test" id="btn-test-gh" style="flex:1;">
+              <span class="material-icons" style="font-size:18px;">wifi</span>
+              Test Koneksi
+            </button>
+            <button class="btn-save" id="btn-save-gh" style="flex:2;">
+              <span class="material-icons">link</span>
+              Hubungkan GitHub
+            </button>
+          </div>
+          <button class="btn-secondary" id="btn-clear-gh" style="margin-top:0;">
+            <span class="material-icons">link_off</span>
+            Putuskan Koneksi GitHub
           </button>
         </div>
       </div>
@@ -398,38 +443,28 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // ══════════════════════════════════════
-    //  KONFIGURASI
-    // ══════════════════════════════════════
-    const PW_KEY     = 'edu_app_guru_pw';
-    const DEFAULT_PW = '123456';
-    const MAX_ATTEMPT = 5;          // maks percobaan sebelum lockout
-    const LOCKOUT_MS  = 3 * 60 * 1000; // 3 menit lockout
+    const MAX_ATTEMPT  = 5;
+    const LOCKOUT_MS   = 3 * 60 * 1000;
+    const SESSION_KEY  = 'guru_session';
 
-    // Sesi login hanya di sessionStorage (hilang saat tab ditutup)
-    const SESSION_KEY = 'guru_session';
-
-    // ══════════════════════════════════════
-    //  HELPERS
-    // ══════════════════════════════════════
-    function getStoredPw() {
-      return localStorage.getItem(PW_KEY) || DEFAULT_PW;
+    // ─── Helpers umum ───
+    function showToast(msg, isError = false) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.background = isError ? 'var(--accent-danger)' : 'var(--accent-primary)';
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
     }
 
     function isLockedOut() {
-      const lockUntil = parseInt(localStorage.getItem('guru_lockout') || '0');
-      return Date.now() < lockUntil;
+      return Date.now() < parseInt(localStorage.getItem('guru_lockout') || '0');
     }
-
     function getLockRemaining() {
-      const lockUntil = parseInt(localStorage.getItem('guru_lockout') || '0');
-      return Math.ceil((lockUntil - Date.now()) / 1000);
+      return Math.ceil((parseInt(localStorage.getItem('guru_lockout') || '0') - Date.now()) / 1000);
     }
-
     function getAttempts() {
       return parseInt(localStorage.getItem('guru_attempts') || '0');
     }
-
     function addAttempt() {
       const a = getAttempts() + 1;
       localStorage.setItem('guru_attempts', a);
@@ -439,92 +474,147 @@
       }
       return a;
     }
-
     function clearAttempts() {
       localStorage.removeItem('guru_attempts');
       localStorage.removeItem('guru_lockout');
     }
 
-    function showToast(msg, isError) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.style.background = isError ? 'var(--accent-danger)' : 'var(--accent-primary)';
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2800);
-    }
-
     function openPanel() {
       sessionStorage.setItem(SESSION_KEY, '1');
       document.getElementById('screen-login').style.display = 'none';
-      document.getElementById('screen-panel').style.display  = 'block';
-      loadIdentityFields();
+      document.getElementById('screen-panel').style.display = 'block';
+      loadPanelData();
     }
 
-    function loadIdentityFields() {
+    function loadPanelData() {
+      // Identitas
       const s = window.Storage ? Storage.getSettings() : {};
-      document.getElementById('input-name').value    = s.appName  || '';
-      document.getElementById('input-tagline').value = s.tagline  || '';
-      document.getElementById('prev-name').textContent = s.appName  || 'Nama Madrasah';
-      document.getElementById('prev-tag').textContent  = s.tagline  || 'Tagline';
+      document.getElementById('input-name').value     = s.appName || '';
+      document.getElementById('input-tagline').value  = s.tagline || '';
+      document.getElementById('prev-name').textContent = s.appName || 'Nama Madrasah';
+      document.getElementById('prev-tag').textContent  = s.tagline || 'Tagline';
+
+      // GitHub config
+      if (window.GitHubSync) {
+        const cfg = GitHubSync.getConfig();
+        document.getElementById('gh-repo').value   = cfg.repo   || '';
+        document.getElementById('gh-branch').value = cfg.branch || 'main';
+        document.getElementById('gh-pat').value    = cfg.pat    || '';
+
+        // Sembunyikan panel GitHub jika sedang di localhost (pakai local server)
+        if (cfg.isLocal) {
+          const ghSection = document.getElementById('section-github');
+          if (ghSection) {
+            ghSection.style.display = 'none';
+          }
+        }
+        updateSyncBar();
+      }
     }
 
-    // ══════════════════════════════════════
-    //  INIT
-    // ══════════════════════════════════════
-    document.addEventListener('DOMContentLoaded', () => {
+    function updateSyncBar() {
+      if (!window.GitHubSync) return;
+      const bar  = document.getElementById('sync-bar');
+      const icon = document.getElementById('sync-icon');
+      const text = document.getElementById('sync-text');
+      const lbl  = GitHubSync.getModeLabel();
+      bar.className    = `sync-bar ${lbl.cls} anim-fade-in`;
+      icon.textContent = lbl.icon;
+      text.textContent = lbl.text;
+    }
 
-      // Jika sudah login di sesi ini, langsung buka panel
-      if (sessionStorage.getItem(SESSION_KEY) === '1') {
-        openPanel();
-        // Jangan return — lanjutkan daftarkan semua event listener
-      }
+    // ─── INIT ───
+    document.addEventListener('DOMContentLoaded', async () => {
 
+      // Badge sumber password di layar login
+      (async () => {
+        const badge    = document.getElementById('login-source-badge');
+        const badgeText = document.getElementById('badge-text');
+        if (!window.GitHubSync) return;
+
+        const mode = GitHubSync.getMode();
+        if (mode === 'local') {
+          // Cek apakah sync-server.py benar-benar jalan
+          try {
+            const cfg = await GitHubSync.fetchConfig();
+            if (cfg && cfg.passwordHash) {
+              badge.className = 'cloud-badge cloud';
+              badge.querySelector('.material-icons').textContent = 'router';
+              badgeText.textContent = 'Password dari server lokal (berlaku di semua HP di kelas)';
+              return;
+            }
+          } catch (e) { /* server belum jalan */ }
+          badge.className = 'cloud-badge local';
+          badge.querySelector('.material-icons').textContent = 'router';
+          badgeText.textContent = 'Server lokal terdeteksi — sync-server.py belum jalan?';
+        } else if (mode === 'github') {
+          try {
+            const cfg = await GitHubSync.fetchConfig();
+            if (cfg && cfg.passwordHash) {
+              badge.className = 'cloud-badge cloud';
+              badge.querySelector('.material-icons').textContent = 'cloud_done';
+              badgeText.textContent = 'Password dari GitHub (berlaku semua perangkat)';
+              return;
+            }
+          } catch (e) { /* fallthrough */ }
+          badge.className = 'cloud-badge local';
+          badge.querySelector('.material-icons').textContent = 'cloud_off';
+          badgeText.textContent = 'GitHub dikonfigurasi tapi tidak bisa dijangkau';
+        } else {
+          badge.className = 'cloud-badge local';
+          badge.querySelector('.material-icons').textContent = 'smartphone';
+          badgeText.textContent = 'Password dari perangkat ini (belum disinkronkan)';
+        }
+      })();
+
+      if (sessionStorage.getItem(SESSION_KEY) === '1') openPanel();
+
+      // ─── Login form ───
       const pwInput    = document.getElementById('pw-input');
       const errorMsg   = document.getElementById('error-msg');
+      const errorText  = document.getElementById('error-text');
       const lockoutMsg = document.getElementById('lockout-msg');
       const btnLogin   = document.getElementById('btn-login');
-      const toggleBtn  = document.getElementById('toggle-pw');
-      const toggleIcon = document.getElementById('toggle-pw-icon');
 
-      // Toggle show/hide password
-      toggleBtn.addEventListener('click', () => {
-        const isHidden = pwInput.type === 'password';
-        pwInput.type   = isHidden ? 'text' : 'password';
-        toggleIcon.textContent = isHidden ? 'visibility_off' : 'visibility';
+      document.getElementById('toggle-pw').addEventListener('click', () => {
+        const h = pwInput.type === 'password';
+        pwInput.type = h ? 'text' : 'password';
+        document.getElementById('toggle-pw-icon').textContent = h ? 'visibility_off' : 'visibility';
       });
+      pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') btnLogin.click(); });
 
-      // Enter to login
-      pwInput.addEventListener('keydown', e => {
-        if (e.key === 'Enter') btnLogin.click();
-      });
+      if (isLockedOut()) showLockout();
 
-      // Cek lockout saat halaman dibuka
-      if (isLockedOut()) {
-        showLockout();
-      }
-
-      // ─── Login ───
-      btnLogin.addEventListener('click', () => {
+      btnLogin.addEventListener('click', async () => {
         if (isLockedOut()) { showLockout(); return; }
-
         const entered = pwInput.value;
         errorMsg.classList.remove('show');
         pwInput.classList.remove('error');
+        btnLogin.disabled = true;
+        btnLogin.innerHTML = '<span class="material-icons" style="animation:spin 1s linear infinite;">sync</span> Memeriksa…';
 
-        if (entered === getStoredPw()) {
-          clearAttempts();
-          openPanel();
-        } else {
-          const attempts = addAttempt();
-          pwInput.classList.add('error');
-          pwInput.value = '';
-          if (isLockedOut()) {
-            showLockout();
+        try {
+          const result = window.GitHubSync
+            ? await GitHubSync.validatePassword(entered)
+            : { valid: entered === (localStorage.getItem('edu_app_guru_pw') || '123456'), source: 'legacy' };
+
+          if (result.valid) {
+            clearAttempts();
+            openPanel();
           } else {
-            const remaining = MAX_ATTEMPT - attempts;
-            errorMsg.textContent = `Password salah. Sisa percobaan: ${remaining}.`;
-            errorMsg.classList.add('show');
+            const attempts = addAttempt();
+            pwInput.classList.add('error');
+            pwInput.value = '';
+            if (isLockedOut()) {
+              showLockout();
+            } else {
+              errorText.textContent = `Password salah. Sisa percobaan: ${MAX_ATTEMPT - attempts}.`;
+              errorMsg.classList.add('show');
+            }
           }
+        } finally {
+          btnLogin.disabled = false;
+          btnLogin.innerHTML = '<span class="material-icons">login</span> Masuk';
         }
       });
 
@@ -537,13 +627,12 @@
             btnLogin.disabled = false;
             lockoutMsg.classList.remove('show');
           } else {
-            lockoutMsg.textContent =
-              `Terlalu banyak percobaan. Coba lagi dalam ${getLockRemaining()} detik.`;
+            lockoutMsg.textContent = `Terlalu banyak percobaan. Coba lagi dalam ${getLockRemaining()} detik.`;
           }
         }, 1000);
       }
 
-      // ─── Panel Guru: Simpan Identitas ───
+      // ─── Panel: Live preview identitas ───
       document.getElementById('input-name').addEventListener('input', e => {
         document.getElementById('prev-name').textContent = e.target.value || 'Nama Madrasah';
       });
@@ -551,40 +640,152 @@
         document.getElementById('prev-tag').textContent = e.target.value || 'Tagline';
       });
 
-      document.getElementById('btn-save-identity').addEventListener('click', () => {
+      // ─── Panel: Simpan Identitas ───
+      document.getElementById('btn-save-identity').addEventListener('click', async () => {
         const name    = document.getElementById('input-name').value.trim();
         const tagline = document.getElementById('input-tagline').value.trim();
         if (!name) { showToast('Nama madrasah tidak boleh kosong!', true); return; }
-        if (window.Storage) {
-          Storage.saveSettings({
-            appName: name || Storage.DEFAULT_SETTINGS.appName,
-            tagline: tagline || Storage.DEFAULT_SETTINGS.tagline
-          });
+
+        const btn = document.getElementById('btn-save-identity');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-icons" style="animation:spin 1s linear infinite;">sync</span> Menyimpan…';
+
+        if (window.Storage) Storage.saveSettings({ appName: name, tagline });
+
+        if (window.GitHubSync && GitHubSync.isConfigured()) {
+          const res = await GitHubSync.pushIdentity(name, tagline);
+          showToast(res.ok ? '✓ Identitas tersimpan & disinkronkan!' : `✓ Tersimpan lokal. ${res.msg}`, !res.ok);
+        } else {
+          showToast('✓ Identitas madrasah disimpan!');
         }
-        showToast('✓ Identitas madrasah disimpan!');
+
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-icons">save</span> Simpan Identitas';
       });
 
-      // ─── Ganti Password ───
-      document.getElementById('btn-ganti-pw').addEventListener('click', () => {
-        const lama     = document.getElementById('pw-lama').value;
-        const baru     = document.getElementById('pw-baru').value;
-        const konfirm  = document.getElementById('pw-konfirmasi').value;
+      // ─── Panel: Ganti Password ───
+      document.getElementById('btn-ganti-pw').addEventListener('click', async () => {
+        const lama    = document.getElementById('pw-lama').value;
+        const baru    = document.getElementById('pw-baru').value;
+        const konfirm = document.getElementById('pw-konfirmasi').value;
 
-        if (lama !== getStoredPw()) {
-          showToast('Password lama salah!', true); return;
-        }
-        if (baru.length < 4) {
-          showToast('Password baru minimal 4 karakter!', true); return;
-        }
-        if (baru !== konfirm) {
-          showToast('Konfirmasi password tidak cocok!', true); return;
+        // Validasi password lama
+        if (window.GitHubSync) {
+          const check = await GitHubSync.validatePassword(lama);
+          if (!check.valid) { showToast('Password lama salah!', true); return; }
+        } else {
+          if (lama !== (localStorage.getItem('edu_app_guru_pw') || '123456')) {
+            showToast('Password lama salah!', true); return;
+          }
         }
 
-        localStorage.setItem(PW_KEY, baru);
+        if (baru.length < 4) { showToast('Password baru minimal 4 karakter!', true); return; }
+        if (baru !== konfirm) { showToast('Konfirmasi password tidak cocok!', true); return; }
+
+        const btn = document.getElementById('btn-ganti-pw');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-icons" style="animation:spin 1s linear infinite;">sync</span> Menyimpan…';
+
+        // Simpan lokal dulu
+        if (window.GitHubSync) await GitHubSync.savePasswordLocal(baru);
+        else localStorage.setItem('edu_app_guru_pw', baru);
+
+        // Push ke GitHub jika terhubung
+        if (window.GitHubSync && GitHubSync.isConfigured()) {
+          const res = await GitHubSync.pushPassword(baru);
+          if (res.ok) {
+            showToast('✓ Password diubah & berlaku di semua perangkat!');
+          } else {
+            showToast(`✓ Password diubah lokal. ${res.msg}`, false);
+          }
+        } else {
+          showToast('✓ Password berhasil diubah (lokal).');
+        }
+
         document.getElementById('pw-lama').value     = '';
         document.getElementById('pw-baru').value     = '';
         document.getElementById('pw-konfirmasi').value = '';
-        showToast('✓ Password berhasil diubah!');
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-icons">key</span> Ganti Password';
+      });
+
+      // ─── GitHub Config: toggle PAT visibility ───
+      document.getElementById('toggle-pat').addEventListener('click', () => {
+        const input = document.getElementById('gh-pat');
+        const h = input.type === 'password';
+        input.type = h ? 'text' : 'password';
+        document.getElementById('toggle-pat-icon').textContent = h ? 'visibility_off' : 'visibility';
+      });
+
+      // ─── GitHub: Test Koneksi ───
+      document.getElementById('btn-test-gh').addEventListener('click', async () => {
+        const btn = document.getElementById('btn-test-gh');
+        const result = document.getElementById('test-result');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-icons" style="font-size:18px;animation:spin 1s linear infinite;">sync</span> Menguji…';
+        result.className = 'test-result';
+
+        // Simpan sementara nilai field untuk test
+        const pat    = document.getElementById('gh-pat').value.trim();
+        const repo   = document.getElementById('gh-repo').value.trim();
+        const branch = document.getElementById('gh-branch').value.trim() || 'main';
+        localStorage.setItem('_tmp_pat', pat);
+        localStorage.setItem('_tmp_repo', repo);
+        localStorage.setItem('_tmp_branch', branch);
+
+        // Sementara set ke GitHubSync untuk test
+        const prev = GitHubSync.getConfig();
+        GitHubSync.saveGitHubConfig(pat, repo, branch).then(res => {
+          result.textContent = res.ok ? `✓ ${res.msg}` : `✗ ${res.msg}`;
+          result.className   = `test-result ${res.ok ? 'ok' : 'err'} show`;
+          if (!res.ok) {
+            // Kembalikan config lama jika gagal
+            GitHubSync.saveGitHubConfig(prev.pat, prev.repo, prev.branch);
+          }
+          btn.disabled = false;
+          btn.innerHTML = '<span class="material-icons" style="font-size:18px;">wifi</span> Test Koneksi';
+        });
+      });
+
+      // ─── GitHub: Simpan & Hubungkan ───
+      document.getElementById('btn-save-gh').addEventListener('click', async () => {
+        const pat    = document.getElementById('gh-pat').value.trim();
+        const repo   = document.getElementById('gh-repo').value.trim();
+        const branch = document.getElementById('gh-branch').value.trim() || 'main';
+        const result = document.getElementById('test-result');
+
+        if (!pat || !repo) { showToast('PAT dan nama repo wajib diisi!', true); return; }
+
+        const btn = document.getElementById('btn-save-gh');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-icons" style="animation:spin 1s linear infinite;">sync</span> Menghubungkan…';
+        result.className = 'test-result';
+
+        const res = await GitHubSync.saveGitHubConfig(pat, repo, branch);
+        result.textContent = res.ok ? `✓ ${res.msg}` : `✗ ${res.msg}`;
+        result.className   = `test-result ${res.ok ? 'ok' : 'err'} show`;
+
+        if (res.ok) {
+          updateSyncBar(true);
+          showToast('✓ GitHub terhubung! Password sekarang berlaku di semua perangkat.');
+        } else {
+          showToast('Gagal menghubungkan GitHub. Periksa PAT & nama repo.', true);
+        }
+
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-icons">link</span> Hubungkan GitHub';
+      });
+
+      // ─── GitHub: Putuskan ───
+      document.getElementById('btn-clear-gh').addEventListener('click', () => {
+        if (!confirm('Putuskan koneksi GitHub? Password akan kembali hanya berlaku di perangkat ini.')) return;
+        GitHubSync.clearConfig();
+        document.getElementById('gh-pat').value    = '';
+        document.getElementById('gh-repo').value   = '';
+        document.getElementById('gh-branch').value = 'main';
+        document.getElementById('test-result').className = 'test-result';
+        updateSyncBar(false);
+        showToast('Koneksi GitHub diputus.');
       });
 
       // ─── Logout ───
@@ -594,5 +795,9 @@
       });
     });
   </script>
+
+  <style>
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  </style>
 </body>
 </html>
