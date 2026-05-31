@@ -766,7 +766,7 @@
         result.className   = `test-result ${res.ok ? 'ok' : 'err'} show`;
 
         if (res.ok) {
-          updateSyncBar(true);
+          updateSyncBar();
           showToast('✓ GitHub terhubung! Password sekarang berlaku di semua perangkat.');
         } else {
           showToast('Gagal menghubungkan GitHub. Periksa PAT & nama repo.', true);
@@ -784,7 +784,7 @@
         document.getElementById('gh-repo').value   = '';
         document.getElementById('gh-branch').value = 'main';
         document.getElementById('test-result').className = 'test-result';
-        updateSyncBar(false);
+        updateSyncBar();
         showToast('Koneksi GitHub diputus.');
       });
 
