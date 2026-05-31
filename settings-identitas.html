@@ -338,7 +338,7 @@
         <div class="form-item">
           <label class="form-label" for="pw-baru">Password Baru</label>
           <input type="password" id="pw-baru" class="form-input" placeholder="Minimal 4 karakter" maxlength="32">
-          <p class="hint"><span class="material-icons">info_outline</span>Password default: <strong>123456</strong></p>
+          <p class="hint"><span class="material-icons">info_outline</span>Password default: <strong>••••••</strong></p>
         </div>
         <div class="form-item">
           <label class="form-label" for="pw-konfirmasi">Konfirmasi Password Baru</label>
@@ -547,7 +547,7 @@
             // File ada tapi passwordHash kosong (belum pernah set password)
             badge.className = 'cloud-badge local';
             badge.querySelector('.material-icons').textContent = 'lock_open';
-            badgeText.textContent = 'Belum ada password tersimpan — gunakan default: 123456';
+            badgeText.textContent = 'Belum ada password tersimpan — gunakan default: ••••••';
           }
         } catch (e) {
           badge.className = 'cloud-badge local';
