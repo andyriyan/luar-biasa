@@ -159,8 +159,47 @@
       </div>
     </section>
 
-    <!-- Reset -->
+    <!-- Export / Import / Reset -->
     <section class="mt-4 anim-fade-up delay-4" style="padding-bottom: var(--space-8);">
+
+      <!-- Card Export & Import -->
+      <div style="background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border-subtle);box-shadow:var(--shadow-1);overflow:hidden;margin-bottom:var(--space-3);">
+        <div style="padding:var(--space-4);border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-3);">
+          <span class="material-icons" style="color:var(--accent-primary);">swap_horiz</span>
+          <div>
+            <p style="font-weight:700;font-size:0.95rem;color:var(--text-primary);">Backup &amp; Pindah Perangkat</p>
+            <p style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;">Simpan atau pulihkan data belajarmu</p>
+          </div>
+        </div>
+        <div style="padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
+
+          <!-- Export -->
+          <button id="btn-export" style="width:100%;padding:var(--space-4);background:var(--accent-primary);color:white;border:none;border-radius:var(--radius-full);font-weight:700;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;">
+            <span class="material-icons">download</span>
+            Export Data Belajar
+          </button>
+          <p style="font-size:0.75rem;color:var(--text-tertiary);display:flex;align-items:flex-start;gap:4px;">
+            <span class="material-icons" style="font-size:14px;margin-top:1px;">info_outline</span>
+            Simpan file .json ke HP/laptop. Gunakan untuk backup atau pindah ke perangkat lain.
+          </p>
+
+          <!-- Import -->
+          <button id="btn-import-trigger" style="width:100%;padding:var(--space-4);background:transparent;border:2px solid var(--accent-primary);color:var(--accent-primary);border-radius:var(--radius-full);font-weight:700;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;">
+            <span class="material-icons">upload</span>
+            Import Data Belajar
+          </button>
+          <input type="file" id="import-file" accept=".json" style="display:none;">
+          <p style="font-size:0.75rem;color:var(--text-tertiary);display:flex;align-items:flex-start;gap:4px;">
+            <span class="material-icons" style="font-size:14px;margin-top:1px;">info_outline</span>
+            Pilih file .json hasil export. Data yang ada akan digabung (merge), bukan dihapus.
+          </p>
+
+          <!-- Import result -->
+          <div id="import-result" style="display:none;padding:var(--space-3);border-radius:var(--radius-sm);font-size:0.85rem;font-weight:600;"></div>
+        </div>
+      </div>
+
+      <!-- Reset -->
       <button class="btn-reset" id="btn-reset-progress">
         <span class="material-icons">delete_outline</span>
         Reset Semua Progress
@@ -231,7 +270,99 @@
         console.error('Error loading progress data', e);
       }
 
-      // Reset button
+      // ─── Export ───
+      document.getElementById('btn-export').addEventListener('click', () => {
+        const progress   = window.Storage ? Storage.getAllProgress()   : {};
+        const quizScores = window.Storage ? Storage.getAllQuizScores() : {};
+        const settings   = window.Storage ? Storage.getSettings()     : {};
+
+        const exportData = {
+          _meta: {
+            exportedAt: new Date().toISOString(),
+            appVersion: '1.1.0',
+            totalMateri: Object.keys(progress).length,
+            totalQuiz: Object.keys(quizScores).length
+          },
+          progress,
+          quizScores,
+          identity: {
+            appName: settings.appName || '',
+            tagline: settings.tagline || ''
+          }
+        };
+
+        const blob     = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const url      = URL.createObjectURL(blob);
+        const dateStr  = new Date().toISOString().slice(0, 10);
+        const a        = document.createElement('a');
+        a.href         = url;
+        a.download     = `progress-belajar-${dateStr}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      // ─── Import ───
+      document.getElementById('btn-import-trigger').addEventListener('click', () => {
+        document.getElementById('import-file').click();
+      });
+
+      document.getElementById('import-file').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const resultEl = document.getElementById('import-result');
+        const reader   = new FileReader();
+
+        reader.onload = (ev) => {
+          try {
+            const data = JSON.parse(ev.target.result);
+
+            // Validasi struktur minimal
+            if (!data.progress && !data.quizScores) {
+              throw new Error('File tidak valid — bukan file export dari aplikasi ini.');
+            }
+
+            // Merge progress (gabung, bukan timpa)
+            if (data.progress && window.Storage) {
+              const existing = Storage.getAllProgress();
+              const merged   = Object.assign({}, data.progress, existing); // existing menang jika ada konflik
+              Storage.save('progress', merged);
+            }
+
+            // Merge quiz scores
+            if (data.quizScores && window.Storage) {
+              const existingQ = Storage.getAllQuizScores();
+              const mergedQ   = Object.assign({}, data.quizScores, existingQ);
+              Storage.save('quiz_scores', mergedQ);
+            }
+
+            const totalP = Object.keys(data.progress  || {}).length;
+            const totalQ = Object.keys(data.quizScores || {}).length;
+            const expDate = data._meta?.exportedAt
+              ? new Date(data._meta.exportedAt).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' })
+              : '?';
+
+            resultEl.style.display  = 'block';
+            resultEl.style.background = '#dcfce7';
+            resultEl.style.color      = '#15803d';
+            resultEl.innerHTML = `✓ Import berhasil! ${totalP} progress materi &amp; ${totalQ} skor quiz dipulihkan.<br><small style="font-weight:400;">Data dari: ${expDate}</small>`;
+
+            // Reload setelah 1.5 detik
+            setTimeout(() => location.reload(), 1500);
+
+          } catch (err) {
+            resultEl.style.display    = 'block';
+            resultEl.style.background = '#fee2e2';
+            resultEl.style.color      = '#b91c1c';
+            resultEl.textContent      = '✗ ' + err.message;
+          }
+          // Reset input agar file yang sama bisa di-import ulang jika perlu
+          e.target.value = '';
+        };
+
+        reader.readAsText(file);
+      });
+
+      // ─── Reset ───
       document.getElementById('btn-reset-progress').addEventListener('click', () => {
         const confirmed = confirm('Yakin ingin menghapus semua data progress? Data tidak bisa dikembalikan.');
         if (confirmed && window.Storage) {
