@@ -532,38 +532,27 @@
         const badgeText = document.getElementById('badge-text');
         if (!window.GitHubSync) return;
 
-        const mode = GitHubSync.getMode();
-        if (mode === 'local') {
-          // Cek apakah sync-server.py benar-benar jalan
-          try {
-            const cfg = await GitHubSync.fetchConfig();
-            if (cfg && cfg.passwordHash) {
-              badge.className = 'cloud-badge cloud';
+        try {
+          const cfg = await GitHubSync.fetchConfig();
+          if (cfg && cfg.passwordHash) {
+            badge.className = 'cloud-badge cloud';
+            if (GitHubSync.isLocalHost()) {
               badge.querySelector('.material-icons').textContent = 'router';
-              badgeText.textContent = 'Password dari server lokal (berlaku di semua HP di kelas)';
-              return;
-            }
-          } catch (e) { /* server belum jalan */ }
-          badge.className = 'cloud-badge local';
-          badge.querySelector('.material-icons').textContent = 'router';
-          badgeText.textContent = 'Server lokal terdeteksi — sync-server.py belum jalan?';
-        } else if (mode === 'github') {
-          try {
-            const cfg = await GitHubSync.fetchConfig();
-            if (cfg && cfg.passwordHash) {
-              badge.className = 'cloud-badge cloud';
+              badgeText.textContent = 'Password dari server lokal (berlaku semua HP di kelas)';
+            } else {
               badge.querySelector('.material-icons').textContent = 'cloud_done';
-              badgeText.textContent = 'Password dari GitHub (berlaku semua perangkat)';
-              return;
+              badgeText.textContent = 'Password dari GitHub — berlaku di semua perangkat';
             }
-          } catch (e) { /* fallthrough */ }
-          badge.className = 'cloud-badge local';
-          badge.querySelector('.material-icons').textContent = 'cloud_off';
-          badgeText.textContent = 'GitHub dikonfigurasi tapi tidak bisa dijangkau';
-        } else {
+          } else {
+            // File ada tapi passwordHash kosong (belum pernah set password)
+            badge.className = 'cloud-badge local';
+            badge.querySelector('.material-icons').textContent = 'lock_open';
+            badgeText.textContent = 'Belum ada password tersimpan — gunakan default: 123456';
+          }
+        } catch (e) {
           badge.className = 'cloud-badge local';
           badge.querySelector('.material-icons').textContent = 'smartphone';
-          badgeText.textContent = 'Password dari perangkat ini (belum disinkronkan)';
+          badgeText.textContent = 'Password dari perangkat ini (offline)';
         }
       })();
 

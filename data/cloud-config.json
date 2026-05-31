@@ -1,6 +1,8 @@
 {
   "_comment": "File ini dikelola otomatis oleh Panel Guru. Jangan edit manual.",
   "version": "1.0.0",
+  "repoId": "",
+  "branch": "main",
   "passwordHash": "",
   "appName": "",
   "tagline": "",

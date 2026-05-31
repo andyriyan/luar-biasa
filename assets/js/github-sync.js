@@ -1,18 +1,28 @@
 /**
- * github-sync.js  v2
- * Sinkronisasi password & identitas madrasah — dual mode:
+ * github-sync.js  v3
  *
- *   MODE A — GitHub Pages  (hostname = *.github.io atau domain publik)
- *     • Baca  : raw.githubusercontent.com/[repo]/[branch]/data/cloud-config.json
- *     • Tulis : GitHub Contents API (butuh PAT)
+ * Perbaikan bug v2: perangkat lain (HP siswa/guru) tidak bisa baca
+ * password dari GitHub karena PAT & repo hanya tersimpan di localStorage
+ * perangkat yang melakukan setup.
  *
- *   MODE B — Local Server  (hostname = localhost / 127.x / 192.168.x / 10.x / 172.x)
- *     • Baca  : GET  [origin]/api/config   (sync-server.py)
- *     • Tulis : POST [origin]/api/config   (sync-server.py)
- *     • Tidak butuh PAT, tidak butuh internet
+ * Solusi: pisahkan dua kebutuhan yang berbeda:
  *
- *   FALLBACK
- *     • localStorage hash  →  default password '123456'
+ *   BACA (login/validasi) — tidak butuh PAT, tidak butuh konfigurasi apapun.
+ *     Setiap perangkat selalu coba fetch data/cloud-config.json dari URL
+ *     relatif aplikasi ini sendiri. File itu ada di repo dan ikut ter-deploy
+ *     ke GitHub Pages, jadi bisa diakses siapa saja.
+ *
+ *   TULIS (ganti password/identitas) — butuh PAT, hanya dari Panel Guru.
+ *     Guru simpan PAT di localStorage-nya sendiri, tidak perlu disebarkan.
+ *
+ * Alur fetch untuk login:
+ *   1. Fetch /data/cloud-config.json via URL relatif (sama di semua perangkat)
+ *   2. Jika ada passwordHash → bandingkan → selesai
+ *   3. Fallback: localStorage hash → default '123456'
+ *
+ * MODE LOCAL SERVER (localhost / IP LAN):
+ *   Fetch ke /api/config di sync-server.py yang serve file yang sama.
+ *   Tulis via POST /api/config — tidak butuh PAT.
  */
 
 const GitHubSync = (function () {
@@ -22,69 +32,102 @@ const GitHubSync = (function () {
   const KEY_REPO   = 'edu_github_repo';
   const KEY_BRANCH = 'edu_github_branch';
   const KEY_SYNCED = 'edu_cloud_synced';
-  const KEY_MODE   = 'edu_sync_mode';     // 'github' | 'local' | ''
   const CONFIG_PATH = 'data/cloud-config.json';
   const LOCAL_API   = '/api/config';
 
-  // ─── Mode Detection ───────────────────────────────────────────────
+  // ─── Helpers ──────────────────────────────────────────────────────
+  function getPAT()    { return localStorage.getItem(KEY_PAT)    || ''; }
+  function getRepo()   { return localStorage.getItem(KEY_REPO)   || ''; }
+  function getBranch() { return localStorage.getItem(KEY_BRANCH) || 'main'; }
 
-  /**
-   * Deteksi apakah halaman ini diakses via jaringan lokal.
-   * localhost, 127.x.x.x, 192.168.x.x, 10.x.x.x, 172.16-31.x.x
-   */
+  function setPAT(v)    { if (v) localStorage.setItem(KEY_PAT, v.trim());  else localStorage.removeItem(KEY_PAT); }
+  function setRepo(v)   { if (v) localStorage.setItem(KEY_REPO, v.trim()); else localStorage.removeItem(KEY_REPO); }
+  function setBranch(v) { localStorage.setItem(KEY_BRANCH, (v || 'main').trim()); }
+
   function isLocalHost() {
     const h = window.location.hostname;
     return (
-      h === 'localhost' ||
-      h === '127.0.0.1' ||
+      h === 'localhost' || h === '127.0.0.1' || h === '' ||
       /^192\.168\./.test(h) ||
       /^10\./.test(h) ||
-      /^172\.(1[6-9]|2\d|3[01])\./.test(h) ||
-      h === ''
+      /^172\.(1[6-9]|2\d|3[01])\./.test(h)
     );
   }
 
-  /**
-   * Mode aktif saat ini.
-   * 'local'  — sync-server.py di LAN
-   * 'github' — GitHub API
-   * ''       — tidak dikonfigurasi (fallback ke localStorage)
-   */
-  function getMode() {
+  // Mode hanya dipakai untuk MENULIS — bukan untuk membaca.
+  function getWriteMode() {
     if (isLocalHost()) return 'local';
     if (getPAT() && getRepo()) return 'github';
     return '';
   }
 
-  // ─── Config Accessors ─────────────────────────────────────────────
-  function getPAT()    { return localStorage.getItem(KEY_PAT)    || ''; }
-  function getRepo()   { return localStorage.getItem(KEY_REPO)   || ''; }
-  function getBranch() { return localStorage.getItem(KEY_BRANCH) || 'main'; }
-
-  function setPAT(v)    { if (v) localStorage.setItem(KEY_PAT, v.trim());    else localStorage.removeItem(KEY_PAT); }
-  function setRepo(v)   { if (v) localStorage.setItem(KEY_REPO, v.trim());   else localStorage.removeItem(KEY_REPO); }
-  function setBranch(v) { localStorage.setItem(KEY_BRANCH, v.trim() || 'main'); }
-
   function isConfigured() {
+    // Untuk keperluan UI: apakah fitur tulis sudah siap?
     return isLocalHost() || !!(getPAT() && getRepo());
   }
 
   // ─── Crypto ───────────────────────────────────────────────────────
-
   async function hashPassword(password) {
     if (!password) return '';
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(password)));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    const buf = await crypto.subtle.digest(
+      'SHA-256', new TextEncoder().encode(String(password))
+    );
+    return Array.from(new Uint8Array(buf))
+      .map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  // ─── MODE B: Local Server (sync-server.py) ────────────────────────
+  // ─── BACA: fetch cloud-config.json ────────────────────────────────
+  /**
+   * Ambil cloud-config.json.
+   * Strategi:
+   *   - Local server → GET /api/config
+   *   - GitHub Pages → fetch /data/cloud-config.json relatif ke origin
+   *   - Fallback     → fetch raw.githubusercontent.com jika repo diketahui
+   *
+   * Fungsi ini TIDAK butuh PAT. Bisa dipanggil dari perangkat manapun.
+   */
+  async function fetchConfig() {
+    // MODE LOCAL: sync-server.py
+    if (isLocalHost()) {
+      try {
+        const res = await fetch(LOCAL_API, { cache: 'no-store' });
+        if (res.ok) return await res.json();
+      } catch (e) {
+        console.warn('[GitHubSync] Local API gagal:', e.message);
+      }
+      return null;
+    }
 
-  async function localFetchConfig() {
-    const res = await fetch(LOCAL_API, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`Local server error ${res.status}`);
-    return res.json();
+    // MODE GITHUB PAGES: fetch file dari origin yang sama (paling andal,
+    // tidak butuh PAT, tidak butuh tahu nama repo)
+    try {
+      const url = `${window.location.origin}/${CONFIG_PATH}?t=${Date.now()}`;
+      const res = await fetch(url, { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.passwordHash !== undefined) return data;
+      }
+    } catch (e) {
+      console.warn('[GitHubSync] Fetch origin gagal:', e.message);
+    }
+
+    // FALLBACK: coba raw.githubusercontent.com jika repo tersimpan
+    const repo   = getRepo();
+    const branch = getBranch();
+    if (repo) {
+      try {
+        const url = `https://raw.githubusercontent.com/${repo}/${branch}/${CONFIG_PATH}?t=${Date.now()}`;
+        const res = await fetch(url);
+        if (res.ok) return await res.json().catch(() => null);
+      } catch (e) {
+        console.warn('[GitHubSync] Raw GitHub gagal:', e.message);
+      }
+    }
+
+    return null;
   }
 
+  // ─── TULIS: update cloud-config.json ──────────────────────────────
   async function localWriteConfig(payload) {
     const res = await fetch(LOCAL_API, {
       method: 'POST',
@@ -93,12 +136,10 @@ const GitHubSync = (function () {
     });
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
-      throw new Error(err.msg || `Local server write error ${res.status}`);
+      throw new Error(err.msg || `Local server error ${res.status}`);
     }
     return res.json();
   }
-
-  // ─── MODE A: GitHub API ───────────────────────────────────────────
 
   async function githubFetchMeta() {
     const url = `https://api.github.com/repos/${getRepo()}/contents/${CONFIG_PATH}?ref=${getBranch()}`;
@@ -145,36 +186,8 @@ const GitHubSync = (function () {
     return res.json();
   }
 
-  /** Baca config via raw URL — cepat, tanpa auth, untuk validasi login */
-  async function githubFetchPublic() {
-    if (!getRepo()) return null;
-    const url = `https://raw.githubusercontent.com/${getRepo()}/${getBranch()}/${CONFIG_PATH}?t=${Date.now()}`;
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    return res.json().catch(() => null);
-  }
-
-  // ─── Unified Read / Write ─────────────────────────────────────────
-
-  /**
-   * Baca config dari sumber yang sesuai mode.
-   * Tidak throws — return null jika gagal.
-   */
-  async function fetchConfig() {
-    try {
-      if (isLocalHost()) return await localFetchConfig();
-      return await githubFetchPublic();
-    } catch (e) {
-      console.warn('[GitHubSync] fetchConfig gagal:', e.message);
-      return null;
-    }
-  }
-
-  /**
-   * Tulis sebagian field ke config (merge, bukan overwrite).
-   */
   async function pushConfig(fields) {
-    const mode = getMode();
+    const mode = getWriteMode();
 
     if (mode === 'local') {
       const result = await localWriteConfig(fields);
@@ -183,27 +196,34 @@ const GitHubSync = (function () {
 
     if (mode === 'github') {
       const { fileSha, content } = await githubFetchMeta();
-      const newContent = { ...content, ...fields, updatedBy: 'teacher-panel' };
+      // Simpan repoId di file agar perangkat lain bisa resolve jika butuh fallback
+      const newContent = {
+        ...content,
+        ...fields,
+        repoId: getRepo(),
+        branch: getBranch(),
+        updatedBy: 'teacher-panel'
+      };
       await githubWriteConfig(newContent, fileSha);
       return { ok: true, msg: 'Disinkronkan ke GitHub.' };
     }
 
-    return { ok: false, msg: 'Sync belum dikonfigurasi.' };
+    return { ok: false, msg: 'Fitur tulis belum dikonfigurasi (butuh PAT).' };
   }
 
-  // ─── Public API ───────────────────────────────────────────────────
+  // ─── PUBLIC API ───────────────────────────────────────────────────
 
   /**
    * Validasi password saat login.
-   * Urutan: config (local/github) → localStorage hash → default '123456'
+   * Tidak butuh konfigurasi apapun di perangkat — fetch otomatis.
    */
   async function validatePassword(plainPassword) {
     const hash = await hashPassword(plainPassword);
 
-    // 1. Coba dari sumber sync (lokal atau GitHub)
+    // 1. Coba ambil dari cloud-config.json (siapapun bisa akses)
     const config = await fetchConfig();
     if (config && config.passwordHash) {
-      // Sync identitas madrasah sekalian jika ada
+      // Bonus: sync identitas madrasah ke localStorage perangkat ini
       if (config.appName && window.Storage) {
         Storage.saveSettings({
           appName: config.appName,
@@ -216,71 +236,39 @@ const GitHubSync = (function () {
       };
     }
 
-    // 2. Fallback: hash tersimpan di localStorage
+    // 2. Fallback: hash di localStorage (perangkat guru sendiri)
     const localHash = localStorage.getItem('edu_pw_hash');
     if (localHash) {
       return { valid: localHash === hash, source: 'local' };
     }
 
-    // 3. Fallback terakhir: default password
+    // 3. Fallback terakhir: default
     const defaultHash = await hashPassword('123456');
     return { valid: hash === defaultHash, source: 'default' };
   }
 
-  /**
-   * Simpan password baru — push ke config + simpan lokal sebagai backup.
-   */
   async function pushPassword(plainPassword) {
     const hash = await hashPassword(plainPassword);
-    // Selalu simpan lokal sebagai backup offline
-    localStorage.setItem('edu_pw_hash', hash);
-
+    localStorage.setItem('edu_pw_hash', hash); // backup lokal selalu
     try {
-      const result = await pushConfig({ passwordHash: hash });
-      return result;
+      return await pushConfig({ passwordHash: hash });
     } catch (e) {
       return { ok: false, msg: e.message };
     }
   }
 
-  /**
-   * Simpan identitas madrasah.
-   */
   async function pushIdentity(appName, tagline) {
     try {
-      const result = await pushConfig({ appName, tagline });
-      return result;
+      return await pushConfig({ appName, tagline });
     } catch (e) {
       return { ok: false, msg: e.message };
     }
   }
 
-  /** Simpan password hanya ke localStorage (offline). */
   async function savePasswordLocal(plainPassword) {
-    const hash = await hashPassword(plainPassword);
-    localStorage.setItem('edu_pw_hash', hash);
+    localStorage.setItem('edu_pw_hash', await hashPassword(plainPassword));
   }
 
-  /**
-   * Test koneksi ke sumber sync yang aktif.
-   */
-  async function testConnection() {
-    try {
-      const config = await fetchConfig();
-      if (config !== null) {
-        const mode = isLocalHost() ? 'Local Server' : 'GitHub';
-        return { ok: true, msg: `Koneksi ke ${mode} berhasil.`, config };
-      }
-      return { ok: false, msg: 'Tidak dapat membaca config. Periksa pengaturan.' };
-    } catch (e) {
-      return { ok: false, msg: e.message };
-    }
-  }
-
-  /**
-   * Simpan konfigurasi GitHub (PAT, repo, branch) dan test.
-   * Hanya relevan untuk mode GitHub (bukan localhost).
-   */
   async function saveGitHubConfig(pat, repo, branch) {
     setPAT(pat);
     setRepo(repo);
@@ -288,49 +276,52 @@ const GitHubSync = (function () {
     return testConnection();
   }
 
-  /** Ambil konfigurasi tersimpan untuk ditampilkan di form. */
+  async function testConnection() {
+    try {
+      const config = await fetchConfig();
+      if (config !== null) {
+        const label = isLocalHost() ? 'Local Server' : 'GitHub Pages';
+        return { ok: true, msg: `Koneksi ke ${label} berhasil.`, config };
+      }
+      return { ok: false, msg: 'Config tidak ditemukan. Periksa pengaturan.' };
+    } catch (e) {
+      return { ok: false, msg: e.message };
+    }
+  }
+
   function getConfig() {
     return {
-      pat:       getPAT(),
-      repo:      getRepo(),
-      branch:    getBranch(),
-      synced:    !!localStorage.getItem(KEY_SYNCED),
-      mode:      getMode(),
-      isLocal:   isLocalHost()
+      pat:     getPAT(),
+      repo:    getRepo(),
+      branch:  getBranch(),
+      synced:  !!localStorage.getItem(KEY_SYNCED),
+      mode:    getWriteMode(),
+      isLocal: isLocalHost()
     };
   }
 
-  /** Hapus konfigurasi GitHub dari perangkat ini. */
   function clearConfig() {
-    localStorage.removeItem(KEY_PAT);
-    localStorage.removeItem(KEY_REPO);
-    localStorage.removeItem(KEY_BRANCH);
-    localStorage.removeItem(KEY_SYNCED);
+    [KEY_PAT, KEY_REPO, KEY_BRANCH, KEY_SYNCED].forEach(k => localStorage.removeItem(k));
   }
 
-  /** Kembalikan deskripsi mode aktif untuk ditampilkan di UI. */
   function getModeLabel() {
-    const mode = getMode();
-    if (mode === 'local')  return { icon: 'router',     text: 'Local Server aktif — sinkron via jaringan lokal',        cls: 'active' };
-    if (mode === 'github') return { icon: 'cloud_done', text: 'GitHub terhubung — sinkron ke semua perangkat via internet', cls: 'active' };
-    return { icon: 'cloud_off', text: 'Belum dikonfigurasi — password hanya berlaku di perangkat ini', cls: 'warning' };
+    const mode = getWriteMode();
+    if (mode === 'local')  return { icon: 'router',     text: 'Local Server aktif — sinkron via jaringan lokal', cls: 'active' };
+    if (mode === 'github') return { icon: 'cloud_done', text: 'GitHub terhubung — password berlaku di semua perangkat', cls: 'active' };
+    return {
+      icon: 'cloud_upload',
+      text: 'Baca otomatis dari GitHub — hubungkan PAT untuk bisa mengubah password',
+      cls: 'warning'
+    };
   }
 
   return {
-    isConfigured,
-    isLocalHost,
-    getMode,
-    getModeLabel,
-    hashPassword,
-    saveGitHubConfig,
-    testConnection,
-    pushPassword,
-    pushIdentity,
-    validatePassword,
-    savePasswordLocal,
-    fetchConfig,
-    getConfig,
-    clearConfig
+    isConfigured, isLocalHost, getWriteMode,
+    getModeLabel, hashPassword,
+    saveGitHubConfig, testConnection,
+    pushPassword, pushIdentity,
+    validatePassword, savePasswordLocal,
+    fetchConfig, getConfig, clearConfig
   };
 })();
 
