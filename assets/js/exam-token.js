@@ -372,3 +372,114 @@ const ExamToken = (function () {
 window.ExamToken = ExamToken;
 window.validateExamToken = (input, examSlug, options) => ExamToken.validateAccess(examSlug, { ...options, input });
 window.generateRoomCode = (slug, kelas, validDate, durasi) => ExamToken.generateRoomCode(slug, kelas, validDate, durasi);
+
+/**
+ * Auto-inject tombol "Scan QR" ke layar token ujian.
+ * Dipanggil otomatis saat DOM siap — berlaku di SEMUA halaman ujian
+ * yang memuat exam-token.js, termasuk ujian baru yang digenerate.
+ *
+ * Syarat: halaman harus punya elemen #btn-validasi-token dan #token-input.
+ * qr-scanner.js tidak wajib ada — jika tidak ada, tombol tidak muncul.
+ */
+function _injectQRScanButton() {
+  // Jangan inject jika sudah ada
+  if (document.getElementById('btn-scan-qr-injected')) return;
+
+  const btnToken  = document.getElementById('btn-validasi-token');
+  const tokenInput = document.getElementById('token-input');
+  if (!btnToken || !tokenInput) return;
+
+  // Buat wrapper tombol scan
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'margin-top:10px;';
+
+  const btn = document.createElement('button');
+  btn.id    = 'btn-scan-qr-injected';
+  btn.type  = 'button';
+  btn.innerHTML = '<span class="material-icons" style="font-size:18px;vertical-align:middle;margin-right:6px;">qr_code_scanner</span>Scan QR Code';
+  btn.style.cssText = [
+    'width:100%', 'padding:12px 16px', 'border-radius:99px',
+    'background:transparent', 'border:2px solid var(--accent-primary,#10853F)',
+    'color:var(--accent-primary,#10853F)', 'font-weight:700', 'font-size:0.9rem',
+    'cursor:pointer', 'display:flex', 'align-items:center', 'justify-content:center',
+    'transition:opacity .2s', 'box-sizing:border-box'
+  ].join(';');
+
+  const scanArea = document.createElement('div');
+  scanArea.id    = 'qr-scan-area-injected';
+  scanArea.style.cssText = 'display:none;margin-top:10px;';
+
+  wrap.appendChild(btn);
+  wrap.appendChild(scanArea);
+
+  // Sisipkan tepat setelah btn-validasi-token
+  btnToken.insertAdjacentElement('afterend', wrap);
+
+  let scannerOpen = false;
+
+  btn.addEventListener('click', async () => {
+    // Butuh qr-scanner.js
+    if (typeof QRScanner === 'undefined') {
+      // Coba load qr-scanner.js secara dinamis
+      await new Promise((resolve) => {
+        // Cari path relatif ke root aplikasi
+        const depth = (window.location.pathname.match(/\//g) || []).length - 1;
+        const prefix = depth <= 1 ? './' : '../'.repeat(depth - 1);
+        const s = document.createElement('script');
+        s.src = prefix + 'assets/js/qr-scanner.js';
+        s.onload  = resolve;
+        s.onerror = resolve; // tetap lanjut meski gagal
+        document.head.appendChild(s);
+      });
+    }
+
+    if (typeof QRScanner === 'undefined') {
+      alert('Scanner tidak tersedia. Coba refresh halaman.');
+      return;
+    }
+
+    if (scannerOpen) {
+      QRScanner.stop();
+      scanArea.style.display = 'none';
+      scanArea.innerHTML     = '';
+      btn.innerHTML = '<span class="material-icons" style="font-size:18px;vertical-align:middle;margin-right:6px;">qr_code_scanner</span>Scan QR Code';
+      scannerOpen = false;
+      return;
+    }
+
+    scannerOpen = true;
+    scanArea.style.display = 'block';
+    btn.innerHTML = '<span class="material-icons" style="font-size:18px;vertical-align:middle;margin-right:6px;">close</span>Tutup Scanner';
+
+    await QRScanner.mountInline(scanArea, (text) => {
+      scannerOpen = false;
+      scanArea.style.display = 'none';
+      scanArea.innerHTML     = '';
+      btn.innerHTML = '<span class="material-icons" style="font-size:18px;vertical-align:middle;margin-right:6px;">qr_code_scanner</span>Scan QR Code';
+
+      // Ekstrak ticket/kode dari URL, atau pakai sebagai kode langsung
+      try {
+        const url    = new URL(text);
+        const ticket = url.searchParams.get('ticket');
+        const kode   = url.searchParams.get('k');
+        if (ticket || kode) { window.location.href = text; return; }
+      } catch (e) { /* bukan URL */ }
+
+      // Coba sebagai kode ruangan langsung
+      tokenInput.value = text.trim().toUpperCase();
+      tokenInput.dispatchEvent(new Event('input'));
+      // Panggil doValidateToken jika ada
+      if (typeof doValidateToken === 'function') doValidateToken();
+    });
+  });
+}
+
+// Jalankan setelah DOM siap
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _injectQRScanButton);
+} else {
+  // DOM sudah siap (script di-load defer/async setelah DOMContentLoaded)
+  _injectQRScanButton();
+  // Fallback: tunggu sedikit agar elemen ujian selesai dirender
+  setTimeout(_injectQRScanButton, 300);
+}
