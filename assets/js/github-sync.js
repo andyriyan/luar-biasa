@@ -98,17 +98,23 @@ const GitHubSync = (function () {
       return null;
     }
 
-    // MODE GITHUB PAGES: fetch file dari origin yang sama (paling andal,
-    // tidak butuh PAT, tidak butuh tahu nama repo)
+    // MODE GITHUB PAGES: fetch file dari path relatif aplikasi ini.
+    // Menggunakan URL relatif agar otomatis benar di subdirektori apapun
+    // (GitHub Pages: /luar-biasa/, root domain, custom domain, dll.)
     try {
-      const url = `${window.location.origin}/${CONFIG_PATH}?t=${Date.now()}`;
-      const res = await fetch(url, { cache: 'no-store' });
+      // Ambil base path dari lokasi halaman saat ini, lalu navigasi ke root app
+      // Contoh: https://andyriyan.github.io/luar-biasa/settings-identitas.html
+      //   → base = https://andyriyan.github.io/luar-biasa/
+      //   → url  = https://andyriyan.github.io/luar-biasa/data/cloud-config.json
+      const base = window.location.href.replace(/\/[^/]*$/, '/').replace(/\/$/, '/');
+      const url  = `${base}${CONFIG_PATH}?t=${Date.now()}`;
+      const res  = await fetch(url, { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         if (data && data.passwordHash !== undefined) return data;
       }
     } catch (e) {
-      console.warn('[GitHubSync] Fetch origin gagal:', e.message);
+      console.warn('[GitHubSync] Fetch relatif gagal:', e.message);
     }
 
     // FALLBACK: coba raw.githubusercontent.com jika repo tersimpan
