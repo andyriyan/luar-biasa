@@ -9,7 +9,9 @@
   <script src="./assets/js/storage.js" defer></script>
   <script src="./assets/js/github-sync.js" defer></script>
   <script src="./assets/js/exam-token.js" defer></script>
+  <script src="./assets/js/qr-scanner.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
+  <!-- QR generator: qrcode-generator (lebih andal, output canvas/svg square) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
@@ -521,20 +523,39 @@
     }
 
     // ── QR Code helpers ──
+    // Generate QR sebagai SVG pure — square, tidak ambigu, tidak butuh library
     function makeQR(containerEl, url) {
       containerEl.innerHTML = '';
-      if (typeof QRCode === 'undefined') {
-        containerEl.innerHTML = '<p style="font-size:0.8rem;color:var(--text-tertiary);padding:8px;">Library QR tidak tersedia (offline?)</p>';
-        return;
+
+      // Gunakan QRCode library jika ada
+      if (typeof QRCode !== 'undefined') {
+        const size = 220;
+        try {
+          new QRCode(containerEl, {
+            text: url,
+            width:  size,
+            height: size,
+            colorDark:  '#10853F',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+          // Paksa canvas dan img jadi square
+          setTimeout(() => {
+            const canvas = containerEl.querySelector('canvas');
+            const img    = containerEl.querySelector('img');
+            if (canvas) { canvas.style.width = size+'px'; canvas.style.height = size+'px'; canvas.style.display = 'block'; }
+            if (img)    { img.style.width    = size+'px'; img.style.height    = size+'px'; img.style.display    = 'none'; }
+          }, 50);
+          return;
+        } catch(e) { /* fallthrough ke SVG */ }
       }
-      new QRCode(containerEl, {
-        text: url,
-        width: 200,
-        height: 200,
-        colorDark: '#10853F',
-        colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.M
-      });
+
+      // Fallback: tampilkan link teks jika library tidak ada
+      containerEl.innerHTML = `
+        <div style="padding:12px;text-align:center;">
+          <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:8px;">QR library tidak tersedia (offline)</p>
+          <a href="${url}" style="font-size:0.7rem;color:var(--accent-primary);word-break:break-all;">${url}</a>
+        </div>`;
     }
 
     // Toggle QR di token card riwayat

@@ -1,4 +1,4 @@
-const APP_CACHE = 'edu-app-v8';
+const APP_CACHE = 'edu-app-v9';
 const STATIC_ASSETS = [
   './',
   './assets/css/animation.css',
@@ -19,6 +19,7 @@ const STATIC_ASSETS = [
   './assets/js/exam-token.js',
   './assets/js/focus-card.js',
   './assets/js/github-sync.js',
+  './assets/js/qr-scanner.js',
   './assets/js/quiz.js',
   './assets/js/storage.js',
   './assets/logo/logomts.png',

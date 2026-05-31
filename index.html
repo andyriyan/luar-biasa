@@ -15,6 +15,7 @@
 
   <!-- Scripts -->
   <script src="./assets/js/storage.js" defer></script>
+  <script src="./assets/js/qr-scanner.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
 
   <style>
@@ -204,9 +205,52 @@
   <!-- Bottom Nav -->
   <div data-component="bottom-nav"></div>
 
+  <!-- FAB: Scanner QR Global -->
+  <button id="fab-qr-scan" aria-label="Scan QR Code ujian" style="
+    position:fixed;bottom:80px;right:20px;z-index:1000;
+    width:56px;height:56px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent-primary),#0a5f2c);
+    color:white;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 16px rgba(16,133,63,0.45);
+    transition:transform 0.2s,box-shadow 0.2s;
+  ">
+    <span class="material-icons" style="font-size:26px;">qr_code_scanner</span>
+  </button>
+
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      // ─── Update greeting sesuai waktu ───
+      // ─── FAB QR Scanner global ───
+      const fab = document.getElementById('fab-qr-scan');
+      if (fab && window.QRScanner) {
+        fab.addEventListener('click', () => {
+          QRScanner.openModal((text) => {
+            // Cek apakah hasil scan adalah URL dengan ticket/kode
+            try {
+              const url    = new URL(text);
+              const ticket = url.searchParams.get('ticket');
+              const kode   = url.searchParams.get('k');
+              if (ticket || kode) {
+                window.location.href = text;
+                return;
+              }
+              // URL tanpa parameter yang dikenal — coba navigasi saja
+              if (url.hostname === window.location.hostname) {
+                window.location.href = text;
+                return;
+              }
+            } catch (e) { /* bukan URL valid */ }
+
+            // Bukan URL — tampilkan ke user
+            alert('QR terbaca: ' + text + '\n\nBukan link ujian yang dikenali. Minta guru untuk bagikan QR yang benar.');
+          }, {
+            title: 'Scan QR Ujian',
+            hint: 'Arahkan ke QR Code dari guru untuk langsung masuk ujian'
+          });
+        });
+        fab.addEventListener('mouseenter', () => { fab.style.transform = 'scale(1.1)'; });
+        fab.addEventListener('mouseleave', () => { fab.style.transform = 'scale(1)'; });
+      }
       const hour = new Date().getHours();
       const greetEl = document.getElementById('hero-greeting');
       if (greetEl) {

@@ -406,7 +406,20 @@
     <button class="btn-primary" id="btn-validasi-token">
       <span class="material-icons">lock_open</span> Masuk dengan Kode
     </button>
-    <p class="token-hint">Paling mudah: buka <strong>link dari grup WA</strong> guru.<br>Atau ketik kode ruangan di atas. Kode berlaku hari ujian saja.</p>
+    <!-- Scanner QR inline -->
+    <div style="margin-top:12px;">
+      <button id="btn-scan-inline" type="button" style="
+        width:100%;padding:12px;border-radius:99px;
+        background:transparent;border:2px solid var(--accent-primary);
+        color:var(--accent-primary);font-weight:700;font-size:0.9rem;
+        cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+        transition:all 0.2s;
+      ">
+        <span class="material-icons">qr_code_scanner</span> Scan QR Code
+      </button>
+      <div id="inline-scanner-area" style="display:none;margin-top:12px;"></div>
+    </div>
+    <p class="token-hint">Paling mudah: buka <strong>link dari grup WA</strong> guru.<br>Atau scan QR Code di atas. Atau ketik kode ruangan. Kode berlaku hari ujian saja.</p>
   </div>
 </div>
 
@@ -563,6 +576,7 @@
 <div class="toast" id="toast"></div>
 
 <script src="../../assets/js/exam-token.js"></script>
+<script src="../../assets/js/qr-scanner.js"></script>
 <script>
 // ══════════════════════════════════════════════
 //  DATA SOAL — dimuat dari soal.json (satu index.html untuk semua ujian)
@@ -1133,6 +1147,56 @@ function fmtTgl(iso) {
 
 document.getElementById('btn-validasi-token').disabled = true;
 bootExamApp();
+
+// ── Scanner inline di bawah input token ──
+document.addEventListener('DOMContentLoaded', () => {
+  const btnScan   = document.getElementById('btn-scan-inline');
+  const scanArea  = document.getElementById('inline-scanner-area');
+  let scannerOpen = false;
+
+  if (btnScan) {
+    btnScan.addEventListener('click', async () => {
+      if (scannerOpen) {
+        // Tutup
+        QRScanner.stop();
+        scanArea.style.display = 'none';
+        scanArea.innerHTML     = '';
+        btnScan.innerHTML = '<span class="material-icons">qr_code_scanner</span> Scan QR Code';
+        scannerOpen = false;
+        return;
+      }
+      // Buka
+      scannerOpen = true;
+      scanArea.style.display = 'block';
+      btnScan.innerHTML = '<span class="material-icons">close</span> Tutup Scanner';
+
+      await QRScanner.mountInline(scanArea, (text) => {
+        scannerOpen = false;
+        scanArea.style.display = 'none';
+        btnScan.innerHTML = '<span class="material-icons">qr_code_scanner</span> Scan QR Code';
+
+        // Coba ekstrak ticket/kode dari URL hasil scan
+        try {
+          const url    = new URL(text);
+          const ticket = url.searchParams.get('ticket');
+          const kode   = url.searchParams.get('k');
+          if (ticket || kode) {
+            // Redirect ke URL ujian dengan parameter yang sudah ada
+            window.location.href = text;
+            return;
+          }
+        } catch (e) { /* bukan URL, coba sebagai kode langsung */ }
+
+        // Teks langsung: coba sebagai kode ruangan
+        const tokenInput = document.getElementById('token-input');
+        if (tokenInput) {
+          tokenInput.value = text.trim().toUpperCase();
+          doValidateToken();
+        }
+      });
+    });
+  }
+});
 </script>
 </body>
 </html>
