@@ -1,4 +1,4 @@
-const APP_CACHE = 'edu-app-v9';
+const APP_CACHE = 'edu-app-v10';
 const STATIC_ASSETS = [
   './',
   './assets/css/animation.css',

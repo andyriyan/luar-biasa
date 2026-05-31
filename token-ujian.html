@@ -523,53 +523,53 @@
     }
 
     // ── QR Code helpers ──
-    // Generate QR sebagai SVG pure — square, tidak ambigu, tidak butuh library
-    function makeQR(containerEl, url) {
+    // QR hanya encode KODE PENDEK (misal "7A-1234"), BUKAN full URL.
+    // Kode pendek = QR jauh lebih sederhana, mudah discan.
+    // Siswa yang scan akan redirect ke halaman ujian via scanner,
+    // yang kemudian memasukkan kode ini ke input token.
+    function makeQR(containerEl, kodeDisplay) {
       containerEl.innerHTML = '';
+      const size = 220;
 
-      // Gunakan QRCode library jika ada
       if (typeof QRCode !== 'undefined') {
-        const size = 220;
         try {
           new QRCode(containerEl, {
-            text: url,
+            text: kodeDisplay,          // << hanya kode pendek, misal "7A-1234"
             width:  size,
             height: size,
             colorDark:  '#10853F',
             colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.M
+            correctLevel: QRCode.CorrectLevel.L  // L = paling sederhana, paling mudah scan
           });
-          // Paksa canvas dan img jadi square
           setTimeout(() => {
             const canvas = containerEl.querySelector('canvas');
             const img    = containerEl.querySelector('img');
-            if (canvas) { canvas.style.width = size+'px'; canvas.style.height = size+'px'; canvas.style.display = 'block'; }
-            if (img)    { img.style.width    = size+'px'; img.style.height    = size+'px'; img.style.display    = 'none'; }
-          }, 50);
+            if (canvas) { canvas.style.cssText = `width:${size}px;height:${size}px;display:block;`; }
+            if (img)    { img.style.display = 'none'; }
+          }, 60);
           return;
-        } catch(e) { /* fallthrough ke SVG */ }
+        } catch(e) { /* fallthrough */ }
       }
 
-      // Fallback: tampilkan link teks jika library tidak ada
+      // Fallback teks
       containerEl.innerHTML = `
-        <div style="padding:12px;text-align:center;">
-          <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:8px;">QR library tidak tersedia (offline)</p>
-          <a href="${url}" style="font-size:0.7rem;color:var(--accent-primary);word-break:break-all;">${url}</a>
+        <div style="padding:16px;text-align:center;">
+          <p style="font-size:2rem;font-weight:900;color:#10853F;letter-spacing:0.1em;">${kodeDisplay}</p>
+          <p style="font-size:0.72rem;color:var(--text-tertiary);">Ketik kode ini di halaman ujian</p>
         </div>`;
     }
 
     // Toggle QR di token card riwayat
     window.toggleQR = function (btn, slug, display, durasi, validDate) {
-      const area    = btn.closest('div').querySelector('.qr-area');
-      const canvas  = area.querySelector('.qr-canvas-item');
-      const isOpen  = area.style.display !== 'none';
+      const area   = btn.closest('div').querySelector('.qr-area');
+      const canvas = area.querySelector('.qr-canvas-item');
+      const isOpen = area.style.display !== 'none';
       if (isOpen) {
         area.style.display = 'none';
         btn.innerHTML = '<span class="material-icons" style="font-size:15px;">qr_code</span> QR Code';
         return;
       }
-      const link = ExamToken.buildExamLink(slug, display, parseInt(durasi), validDate);
-      makeQR(canvas, link);
+      makeQR(canvas, display);   // << kirim kode pendek, bukan link
       area.style.display = 'block';
       btn.innerHTML = '<span class="material-icons" style="font-size:15px;">qr_code_off</span> Tutup QR';
     };
@@ -822,8 +822,7 @@
           btn.innerHTML = '<span class="material-icons" style="font-size:16px;">qr_code</span> Tampilkan QR Code';
           return;
         }
-        const link = ExamToken.buildExamLink(lastGenerated.slug, lastGenerated.display, lastGenerated.durasi, lastGenerated.validDate);
-        makeQR(canvas, link);
+        makeQR(canvas, lastGenerated.display);   // << kode pendek saja
         area.style.display = 'block';
         btn.innerHTML = '<span class="material-icons" style="font-size:16px;">qr_code_off</span> Tutup QR Code';
         area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

@@ -463,13 +463,15 @@ function _injectQRScanButton() {
         const ticket = url.searchParams.get('ticket');
         const kode   = url.searchParams.get('k');
         if (ticket || kode) { window.location.href = text; return; }
-      } catch (e) { /* bukan URL */ }
+      } catch (e) { /* bukan URL — kemungkinan kode pendek seperti 7A-1234 */ }
 
-      // Coba sebagai kode ruangan langsung
-      tokenInput.value = text.trim().toUpperCase();
+      // Kode pendek langsung — masukkan ke input dan validasi
+      const cleaned = text.trim().toUpperCase().replace(/\s/g, '');
+      tokenInput.value = cleaned;
       tokenInput.dispatchEvent(new Event('input'));
-      // Panggil doValidateToken jika ada
-      if (typeof doValidateToken === 'function') doValidateToken();
+      if (typeof doValidateToken === 'function') {
+        setTimeout(doValidateToken, 100); // sedikit delay agar animasi tutup scanner selesai
+      }
     });
   });
 }
